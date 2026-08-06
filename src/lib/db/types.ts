@@ -95,3 +95,83 @@ export type AuditLogEntity = {
   justification?: string;
   createdAt: string;
 };
+
+export type ArticleEntity = {
+  id: string;
+  slug: string;
+  title: string;
+  summary: string;
+  contentMd: string;
+  category: string;
+  author: string;
+  readingTimeMin: number;
+  impactAnalysis?: string;
+  whoIsAffected?: string;
+  officialDocuments?: { title: string; url: string }[];
+  institutionId?: string;
+  publishedAt: string;
+  updatedAt: string;
+  status: "Draft" | "Review" | "Approved" | "Published" | "Archived";
+};
+
+export type LegislativeChangeEntity = {
+  id: string;
+  slug: string;
+  title: string;
+  actType: "OUG" | "HG" | "Lege" | "Ordin";
+  actNumber: string;
+  publicationDate: string;
+  effectiveDate: string;
+  summary: string;
+  fullTextMd: string;
+  affectedSectors: string[];
+  officialSourceUrl: string;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type AncpiReportEntity = {
+  id: string;
+  reportMonth: string;
+  countyCode: string;
+  countyName: string;
+  individualUnitsTransacted: number;
+  landPlotsTransacted: number;
+  totalTransactions: number;
+  avgPriceSqmRon?: number;
+  createdAt: string;
+};
+
+export type GlossaryTermEntity = {
+  id: string;
+  slug: string;
+  term: string;
+  definition: string;
+  example?: string;
+  category: string;
+  relatedLegislation?: string[];
+  createdAt: string;
+};
+
+export type DownloadableResourceEntity = {
+  id: string;
+  slug: string;
+  title: string;
+  description: string;
+  category: string;
+  fileFormat: string;
+  fileSizeMb: number;
+  downloadUrl: string;
+  createdAt: string;
+};
+
+export type IngestionQueueItemEntity = {
+  id: string;
+  sourceAuthority: string;
+  itemType: "Programme" | "Legislation" | "Document";
+  rawTitle: string;
+  sourceUrl: string;
+  detectedChanges: Record<string, unknown>;
+  status: "Pending Approval" | "Approved" | "Rejected";
+  createdAt: string;
+};

@@ -1,8 +1,9 @@
 import { validateProgram } from "@/lib/utils/validation";
-import { programs } from "@/lib/funding-data";
+import { getProgramsFromDb } from "@/lib/db/repository";
 import type { LifecycleStatus } from "@/lib/db/types";
 
-export default function ValidationQueuePage() {
+export default async function AdminValidation() {
+  const programs = await getProgramsFromDb();
   const checkResults = programs.map((p) => {
     const statusMap: Record<string, LifecycleStatus> = {
       Deschis: "Applications Open",

@@ -1,6 +1,6 @@
 "use client";
 
-import { isBookmarked, toggleBookmark, useBookmarks } from "@/lib/bookmarks";
+import { toggleBookmark, useBookmarks } from "@/lib/bookmarks";
 
 export function BookmarkButton({ slug, className = "" }: { slug: string; className?: string }) {
   const bookmarks = useBookmarks();

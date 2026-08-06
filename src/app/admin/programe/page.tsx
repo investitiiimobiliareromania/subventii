@@ -1,14 +1,22 @@
-"use client";
-
 import Link from "next/link";
-import { useState } from "react";
-import { programs, formatCurrencyRon } from "@/lib/funding-data";
+import { formatCurrencyRon } from "@/lib/funding-data";
+import { getProgramsFromDb } from "@/lib/db/repository";
 
-export default function AdminProgramsPage() {
-  const [filterStatus, setFilterStatus] = useState("All");
+export default async function AdminProgramsPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ q?: string; status?: string }>;
+}) {
+  const resolvedParams = await searchParams;
+  const query = resolvedParams?.q || "";
+  const filterStatus = resolvedParams?.status || "All";
+
+  const programs = await getProgramsFromDb();
 
   const filtered = programs.filter(
-    (p) => filterStatus === "All" || p.status === filterStatus
+    (p) =>
+      (filterStatus === "All" || p.status === filterStatus) &&
+      (!query || p.title.toLowerCase().includes(query.toLowerCase()))
   );
 
   return (
@@ -24,9 +32,9 @@ export default function AdminProgramsPage() {
       <div className="flex items-center gap-3 bg-white p-3 rounded-lg border border-slate-200">
         <span className="text-xs font-semibold text-slate-600">Filtrează după Status:</span>
         {["All", "Deschis", "În curând", "Închis"].map((st) => (
-          <button
+          <Link
             key={st}
-            onClick={() => setFilterStatus(st)}
+            href={`/admin/programe?status=${st}`}
             className={`px-3 py-1 text-xs font-semibold rounded-md ${
               filterStatus === st
                 ? "bg-slate-900 text-white"
@@ -34,7 +42,7 @@ export default function AdminProgramsPage() {
             }`}
           >
             {st}
-          </button>
+          </Link>
         ))}
       </div>
 

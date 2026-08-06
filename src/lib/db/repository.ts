@@ -1,11 +1,12 @@
 import { supabase } from "@/lib/db/client";
 import type {
-  FundingProgramEntity,
-  ProgramCallEntity,
-  InstitutionEntity,
   AuditLogEntity,
-  CaenCodeEntity,
-  OfficialDocumentEntity,
+  ArticleEntity,
+  LegislativeChangeEntity,
+  AncpiReportEntity,
+  GlossaryTermEntity,
+  DownloadableResourceEntity,
+  IngestionQueueItemEntity,
 } from "@/lib/db/types";
 import { type FundingProgram } from "@/lib/funding-data";
 
@@ -23,12 +24,12 @@ export async function getProgramsFromDb(): Promise<FundingProgram[]> {
       .is("deleted_at", null);
 
     if (error || !dbPrograms || dbPrograms.length === 0) {
-      return getFallbackSeedPrograms();
+      return [];
     }
 
     return dbPrograms.map((row) => mapDbRowToFundingProgram(row));
   } catch {
-    return getFallbackSeedPrograms();
+    return [];
   }
 }
 
@@ -44,13 +45,13 @@ export async function getAuditLogsFromDb(): Promise<AuditLogEntity[]> {
       .select("*")
       .order("created_at", { ascending: false });
 
-    if (error || !data || data.length === 0) {
-      return getFallbackAuditLogs();
+    if (error || !data) {
+      return [];
     }
 
     return data as AuditLogEntity[];
   } catch {
-    return getFallbackAuditLogs();
+    return [];
   }
 }
 
@@ -78,7 +79,92 @@ export async function createAuditLogDb(
   }
 }
 
-// Data Mapper & Verified Seed Data Fallback Layer
+export async function getArticlesFromDb(): Promise<ArticleEntity[]> {
+  try {
+    const { data, error } = await supabase
+      .from("articles")
+      .select("*")
+      .eq("status", "Published")
+      .order("published_at", { ascending: false });
+
+    if (error || !data) return [];
+    return data as ArticleEntity[];
+  } catch {
+    return [];
+  }
+}
+
+export async function getLegislativeChangesFromDb(): Promise<LegislativeChangeEntity[]> {
+  try {
+    const { data, error } = await supabase
+      .from("legislative_changes")
+      .select("*")
+      .order("effective_date", { ascending: false });
+
+    if (error || !data) return [];
+    return data as LegislativeChangeEntity[];
+  } catch {
+    return [];
+  }
+}
+
+export async function getAncpiReportsFromDb(): Promise<AncpiReportEntity[]> {
+  try {
+    const { data, error } = await supabase
+      .from("ancpi_monthly_reports")
+      .select("*")
+      .order("report_month", { ascending: false });
+
+    if (error || !data) return [];
+    return data as AncpiReportEntity[];
+  } catch {
+    return [];
+  }
+}
+
+export async function getGlossaryTermsFromDb(): Promise<GlossaryTermEntity[]> {
+  try {
+    const { data, error } = await supabase
+      .from("glossary_terms")
+      .select("*")
+      .order("term", { ascending: true });
+
+    if (error || !data) return [];
+    return data as GlossaryTermEntity[];
+  } catch {
+    return [];
+  }
+}
+
+export async function getDownloadableResourcesFromDb(): Promise<DownloadableResourceEntity[]> {
+  try {
+    const { data, error } = await supabase
+      .from("downloadable_resources")
+      .select("*")
+      .order("created_at", { ascending: false });
+
+    if (error || !data) return [];
+    return data as DownloadableResourceEntity[];
+  } catch {
+    return [];
+  }
+}
+
+export async function getIngestionQueueFromDb(): Promise<IngestionQueueItemEntity[]> {
+  try {
+    const { data, error } = await supabase
+      .from("ingestion_queue")
+      .select("*")
+      .order("created_at", { ascending: false });
+
+    if (error || !data) return [];
+    return data as IngestionQueueItemEntity[];
+  } catch {
+    return [];
+  }
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function mapDbRowToFundingProgram(row: any): FundingProgram {
   const call = row.program_calls?.[0] || {};
   return {
@@ -91,7 +177,7 @@ function mapDbRowToFundingProgram(row: any): FundingProgram {
     maxFundingEur: call.max_funding_eur ? Number(call.max_funding_eur) : 50000,
     minFundingRon: call.min_funding_ron ? Number(call.min_funding_ron) : 50000,
     source: row.institutions?.name || "Ministerul Economiei",
-    sourceCategory: (row.institutions?.acronym || "Minister") as any,
+    sourceCategory: ((row.institutions as Record<string, string>)?.acronym || "Minister") as FundingProgram["sourceCategory"],
     businessTypes: ["SRL", "PFA"],
     industries: ["IT & digital", "Servicii"],
     counties: row.national_coverage ? ["Național"] : ["Cluj", "București"],
@@ -122,7 +208,7 @@ function mapDbRowToFundingProgram(row: any): FundingProgram {
   };
 }
 
-function mapDbStatusToFrontend(status: string): any {
+function mapDbStatusToFrontend(status: string): FundingProgram["status"] {
   switch (status) {
     case "Applications Open":
       return "Deschis";
@@ -135,255 +221,4 @@ function mapDbStatusToFrontend(status: string): any {
     default:
       return "Suspendat";
   }
-}
-
-function getFallbackSeedPrograms(): FundingProgram[] {
-  return [
-    {
-      slug: "start-up-nation-2025",
-      title: "Start-Up Nation România — Ediția 2025/2026",
-      summary: "Sprijin financiar nerambursabil pentru înființarea și dezvoltarea de întreprinderi noi prin investiții în echipamente, digitalizare și crearea de noi locuri de muncă.",
-      status: "Deschis",
-      deadline: "2026-08-14",
-      maxFundingRon: 250000,
-      maxFundingEur: 50000,
-      minFundingRon: 50000,
-      source: "Ministerul Economiei, Antreprenoriatului și Turismului",
-      sourceCategory: "Minister",
-      businessTypes: ["SRL"],
-      industries: ["Servicii", "Producție", "IT & digital"],
-      counties: ["Național"],
-      companyAge: "Nou înființată",
-      companySize: "Microîntreprindere",
-      eligibility: [
-        "Persoana fizică solicitantă trebuie să fi absolvit cursurile de antreprenoriat organizate prin program.",
-        "Societatea trebuie înființată după absolvirea cursului de către persoana eligibilă.",
-        "Sediul social și locul de implementare trebuie să fie pe teritoriul României.",
-        "Crearea și menținerea a minimum 2 locuri de muncă cu normă întreagă pe o perioadă de cel puțin 24 luni."
-      ],
-      documents: [
-        "Cerere de finanțare completată pe platforma oficială",
-        "Plan de afaceri detaliat",
-        "Certificat de absolvire curs antreprenoriat",
-        "Act constitutiv și Certificat de Înregistrare ONRC"
-      ],
-      cofinancing: "Minimum 10% cofinanțare proprie din valoarea cheltuielilor eligibile.",
-      officialUrl: "https://economie.gov.ro/",
-      timeline: [
-        { label: "Depunere proiecte pe platformă", date: "15 iulie – 14 august 2026" },
-        { label: "Evaluare tehnică și financiară", date: "August – Septembrie 2026" }
-      ],
-      faqs: [
-        {
-          question: "Cine se poate înscrie în program?",
-          answer: "Persoanele fizice din grupul țintă care parcurg cursurile de formare antreprenorială și înființează o firmă nouă de tip SRL."
-        }
-      ]
-    },
-    {
-      slug: "pnrr-c9-digitalizare-imm",
-      title: "PNRR C9: Digitalizarea IMM-urilor din România",
-      summary: "Granturi nerambursabile destinate adoptării tehnologiilor avansate (cloud, securitate cibernetică, automatizări, IoT) de către IMM-uri non-IT.",
-      status: "Deschis",
-      deadline: "2026-08-28",
-      maxFundingRon: 500000,
-      maxFundingEur: 100000,
-      minFundingRon: 100000,
-      source: "Ministerul Investițiilor și Proiectelor Europene (MIPE)",
-      sourceCategory: "PNRR",
-      businessTypes: ["SRL", "SA"],
-      industries: ["IT & digital", "Producție", "Servicii", "Construcții", "Turism"],
-      counties: ["Național"],
-      companyAge: "Peste 1 an",
-      companySize: "IMM",
-      eligibility: [
-        "Persoană juridică înregistrată în România de cel puțin 1 an fiscal încheiat.",
-        "Să nu fi înregistrat profit operațional negativ în ultimul exercițiu financiar.",
-        "Obligația de a atinge minimum 6 din cele 12 criterii de intensitate digitală DESI la finalul proiectului."
-      ],
-      documents: [
-        "Raport de audit de maturitate digitală inițial și final",
-        "Situații financiare anuale auditate",
-        "Propunere tehnică de implementare hardware/software"
-      ],
-      cofinancing: "10% cofinanțare privată pentru microîntreprinderi și companii mici.",
-      officialUrl: "https://mfe.gov.ro/",
-      timeline: [
-        { label: "Apel deschis pentru depunere", date: "1 Iulie – 28 August 2026" }
-      ],
-      faqs: [
-        {
-          question: "Ce cheltuieli sunt eligibile?",
-          answer: "Achiziția de hardware IT, licențe software, servicii cloud, training digital pentru angajați și audit de securitate cibernetică."
-        }
-      ]
-    },
-    {
-      slug: "adr-nord-vest-digitalizare-si-inovare",
-      title: "ADR Nord-Vest: Inovare și Digitalizare în Microîntreprinderi",
-      summary: "Sprijin financiar nerambursabil pentru întreprinderile mici din regiunea Nord-Vest în vederea automatizării proceselor interne și scalării comerțului online.",
-      status: "Deschis",
-      deadline: "2026-09-15",
-      maxFundingRon: 350000,
-      maxFundingEur: 70000,
-      minFundingRon: 40000,
-      source: "Agenția de Dezvoltare Regională Nord-Vest (ADR NV)",
-      sourceCategory: "ADR",
-      businessTypes: ["SRL", "PFA"],
-      industries: ["IT & digital", "Servicii", "Producție"],
-      counties: ["Cluj", "Bihor", "Bistrița-Năsăud", "Maramureș", "Satu Mare", "Sălaj"],
-      companyAge: "Peste 1 an",
-      companySize: "Microîntreprindere",
-      eligibility: [
-        "Microîntreprindere cu sediul social sau punct de lucru înregistrat în Regiunea Nord-Vest.",
-        "Număr mediu de salariați de cel puțin 1 în anul anterior depunerii."
-      ],
-      documents: [
-        "Certificat constatator ONRC generat recent",
-        "Plan de achiziție echipamente IT și soluții software"
-      ],
-      cofinancing: "15% din valoarea totală a cheltuielilor eligibile.",
-      officialUrl: "https://www.nord-vest.ro/",
-      timeline: [
-        { label: "Termen limită depunere", date: "15 Septembrie 2026" }
-      ],
-      faqs: [
-        {
-          question: "Care sunt județele eligibile?",
-          answer: "Cluj, Bihor, Bistrița-Năsăud, Maramureș, Satu Mare și Sălaj."
-        }
-      ]
-    },
-    {
-      slug: "afir-investitii-ferme-agricole",
-      title: "AFIR: Modernizarea și Tehnologizarea Exploatațiilor Agricole",
-      summary: "Sprijin nerambursabil alocat fermierilor pentru achiziția de utilaje agricole moderne, sisteme de irigații și spații de depozitare climatizate.",
-      status: "În curând",
-      deadline: "2026-10-30",
-      maxFundingRon: 1500000,
-      maxFundingEur: 300000,
-      minFundingRon: 150000,
-      source: "Agenția pentru Finanțarea Investițiilor Rurale (AFIR)",
-      sourceCategory: "AFIR",
-      businessTypes: ["SRL", "PFA", "II", "Fermă"],
-      industries: ["Agricultură"],
-      counties: ["Național"],
-      companyAge: "Orice vechime",
-      companySize: "Toate mărimile",
-      eligibility: [
-        "Fermieri înregistrați la APIA / ANSVSA cu exploatație agricolă viabilă.",
-        "Investiție amplasată exclusiv în mediul rural sau zone periurbane eligibile."
-      ],
-      documents: [
-        "Studiu de Fezabilitate / Memoriu Tehnic",
-        "Dovada proprietății sau terenului agricol în arendă pe min. 10 ani"
-      ],
-      cofinancing: "35% - 50% în funcție de vârsta fermierului și zona de munte.",
-      officialUrl: "https://www.afir.ro/",
-      timeline: [
-        { label: "Deschidere sesiune depunere", date: "1 Octombrie 2026" }
-      ],
-      faqs: [
-        {
-          question: "Se pot cumpăra tractoare?",
-          answer: "Da, dacă achiziția este justificată de dimensiunea terenului și inclusă în planul de afaceri."
-        }
-      ]
-    },
-    {
-      slug: "afm-parcuri-fotovoltaice-imm",
-      title: "AFM: Eficiență Energetică și Producție Energie Verde pentru Companii",
-      summary: "Finanțare nerambursabilă pentru instalarea sistemelor de panouri fotovoltaice și stocare de energie în vederea autoconsumului industrial.",
-      status: "În curând",
-      deadline: "2026-11-15",
-      maxFundingRon: 1000000,
-      maxFundingEur: 200000,
-      minFundingRon: 200000,
-      source: "Administrația Fondului pentru Mediu (AFM)",
-      sourceCategory: "AFM",
-      businessTypes: ["SRL", "SA"],
-      industries: ["Producție", "Servicii", "Turism", "Construcții"],
-      counties: ["Național"],
-      companyAge: "Peste 1 an",
-      companySize: "IMM",
-      eligibility: [
-        "Companii active cu consum dovedit de energie electrică pe ultimele 12 luni.",
-        "Amplasament propriu intabulat fără sarcini inhibitoare."
-      ],
-      documents: [
-        "Audit energetic recent efectuat de auditor autorizat",
-        "Aviz tehnic de racordare (ATR)"
-      ],
-      cofinancing: "20% cofinanțare privată.",
-      officialUrl: "https://www.afm.ro/",
-      timeline: [
-        { label: "Depunere proiecte", date: "Noiembrie 2026" }
-      ],
-      faqs: [
-        {
-          question: "Este obligatorie bateria de stocare?",
-          answer: "Da, ghidul actualizat impune o capacitate minimă de stocare de 20% din puterea instalată."
-        }
-      ]
-    },
-    {
-      slug: "adr-centru-microintreprinderi-turism-servicii",
-      title: "ADR Centru: Scalarea Microîntreprinderilor din Turism și Servicii",
-      summary: "Sprijin nerambursabil pentru achiziția de dotări, echipamente și modernizarea spațiilor de cazare și alimentație publică din Regiunea Centru.",
-      status: "Deschis",
-      deadline: "2026-09-30",
-      maxFundingRon: 450000,
-      maxFundingEur: 90000,
-      minFundingRon: 50000,
-      source: "Agenția de Dezvoltare Regională Centru (ADR Centru)",
-      sourceCategory: "ADR",
-      businessTypes: ["SRL", "PFA"],
-      industries: ["Turism", "Servicii"],
-      counties: ["Alba", "Brașov", "Covasna", "Harghita", "Mureș", "Sibiu"],
-      companyAge: "Peste 2 ani",
-      companySize: "Microîntreprindere",
-      eligibility: [
-        "Sediul social sau punct de lucru funcțional în județele Alba, Brașov, Covasna, Harghita, Mureș sau Sibiu.",
-        "Minimum 1 angajat cu normă întreagă în ultimul an fiscal."
-      ],
-      documents: [
-        "Certificat de clasificare structură turistică",
-        "Situații financiare 2024 și 2025"
-      ],
-      cofinancing: "10% din cheltuielile eligibile.",
-      officialUrl: "https://www.regio-adrcentru.ro/",
-      timeline: [
-        { label: "Termen limită", date: "30 Septembrie 2026" }
-      ],
-      faqs: [
-        {
-          question: "Se pot finanța lucrări de renovare?",
-          answer: "Da, în limita a 40% din bugetul eligibil al proiectului."
-        }
-      ]
-    }
-  ];
-}
-
-function getFallbackAuditLogs(): AuditLogEntity[] {
-  return [
-    {
-      id: "log-101",
-      programId: "start-up-nation-2025",
-      adminUserId: "alex.popescu@subventii.ro",
-      action: "UPDATE_DEADLINE",
-      changes: { field: "deadline", old: "2026-07-31", new: "2026-08-14" },
-      justification: "Prelungire termen conform Ordin MEAT nr. 402/2026",
-      createdAt: "2026-07-23T18:30:00Z",
-    },
-    {
-      id: "log-102",
-      programId: "pnrr-c9-digitalizare-imm",
-      adminUserId: "maria.ionescu@subventii.ro",
-      action: "UPDATE_STATUS",
-      changes: { field: "status", old: "Opening Soon", new: "Applications Open" },
-      justification: "Actualizare status la Sesiune Deschisa conform MIPE",
-      createdAt: "2026-07-23T14:15:00Z",
-    },
-  ];
 }

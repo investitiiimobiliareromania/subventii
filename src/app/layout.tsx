@@ -60,8 +60,47 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://subventii.ro/#website",
+        "url": "https://subventii.ro",
+        "name": "Subvenții.ro",
+        "description": "Căutare și Descoperire Fonduri Nerambursabile",
+        "potentialAction": [
+          {
+            "@type": "SearchAction",
+            "target": {
+              "@type": "EntryPoint",
+              "urlTemplate": "https://subventii.ro/programes?q={search_term_string}"
+            },
+            "query-input": "required name=search_term_string"
+          }
+        ]
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://subventii.ro/#organization",
+        "name": "Subvenții.ro",
+        "url": "https://subventii.ro",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://subventii.ro/favicon.ico"
+        }
+      }
+    ]
+  };
+
   return (
     <html lang="ro">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body className="antialiased text-slate-900 bg-white min-h-screen">
         {children}
       </body>

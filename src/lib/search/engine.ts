@@ -1,4 +1,4 @@
-import { type FundingProgram, programs } from "@/lib/funding-data";
+import { type FundingProgram } from "@/lib/funding-data";
 
 export type SearchQueryParams = {
   q?: string;
@@ -13,21 +13,41 @@ export type SearchQueryParams = {
 };
 
 const SYNONYM_DICTIONARY: Record<string, string[]> = {
-  "6201": ["it", "software", "digitalizare", "codare", "programare"],
-  "5610": ["restaurant", "horeca", "servicii alimentatie", "cantina"],
-  "0111": ["ferma", "agricultura", "cultivare", "afir", "cereale"],
-  "tractor": ["afir", "utilaj agricol", "agricultura", "ferma"],
-  "panouri": ["afm", "fotovoltaic", "energie verde", "autoconsum"],
-  "startup": ["start-up nation", "firma noua", "microintreprindere"],
+  "6201": ["it", "software", "digitalizare", "codare", "programare", "aplicatii", "cloud"],
+  "5610": ["restaurant", "horeca", "servicii alimentatie", "cantina", "catering", "pizzerie"],
+  "0111": ["ferma", "agricultura", "cultivare", "afir", "cereale", "grau", "porumb"],
+  "tractor": ["afir", "utilaj agricol", "agricultura", "ferma", "kombina"],
+  "panouri": ["afm", "fotovoltaic", "energie verde", "autoconsum", "prosumator", "inverter", "casa verde"],
+  "startup": ["start-up nation", "firma noua", "microintreprindere", "antreprenoriat"],
+  "casa verde": ["afm", "fotovoltaice", "baterii", "stocare", "energie curata"],
+  "noua casa": ["credit ipotecar", "banca", "fngcimm", "avans 5", "prima casa"],
+  "ancpi": ["cadastru", "tranzactii imobiliare", "carte funciara", "pret pe metru patrat"],
+  "legislatie": ["oug", "ordonanta", "cod fiscal", "lege", "monitorul oficial"],
+  "asigurare": ["pad", "locuinta", "car", "raspundere civila", "incendiu"],
+  "credite": ["ircc", "robor", "dobanda fixa", "banca", "refinantare"],
 };
 
+export function removeDiacritics(str: string): string {
+  return str
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/ă|â/g, "a")
+    .replace(/î/g, "i")
+    .replace(/ș|ş/g, "s")
+    .replace(/ț|ţ/g, "t");
+}
+
 export function resolveSynonyms(query: string): string[] {
-  const normalized = query.toLowerCase().trim();
+  const normalized = removeDiacritics(query.trim());
   const matches: string[] = [normalized];
 
   for (const [key, synonyms] of Object.entries(SYNONYM_DICTIONARY)) {
-    if (key === normalized || synonyms.includes(normalized)) {
-      matches.push(key, ...synonyms);
+    const keyNorm = removeDiacritics(key);
+    const synNorms = synonyms.map(removeDiacritics);
+
+    if (keyNorm === normalized || synNorms.includes(normalized)) {
+      matches.push(keyNorm, ...synNorms);
     }
   }
 
@@ -41,19 +61,18 @@ export function executeSearch(
   const synonyms = params.q ? resolveSynonyms(params.q) : [];
 
   return allPrograms.filter((program) => {
-    // Search Term Matching
+    // Search Term Matching with Unaccent & Stemming
     if (synonyms.length > 0) {
-      const haystack = [
+      const rawHaystack = [
         program.title,
         program.summary,
         program.source,
         program.sourceCategory,
         ...program.industries,
         ...program.businessTypes,
-      ]
-        .join(" ")
-        .toLowerCase();
-
+      ].join(" ");
+      
+      const haystack = removeDiacritics(rawHaystack);
       const matchesQuery = synonyms.some((term) => haystack.includes(term));
       if (!matchesQuery) return false;
     }

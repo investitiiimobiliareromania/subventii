@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { executeSearch } from "@/lib/search/engine";
-import { programs } from "@/lib/funding-data";
+import { getProgramsFromDb } from "@/lib/db/repository";
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -14,6 +14,8 @@ export async function GET(request: Request) {
   const companyAge = searchParams.get("companyAge") || undefined;
   const companySize = searchParams.get("companySize") || undefined;
   const sourceCategory = searchParams.get("sourceCategory") || undefined;
+
+  const programs = await getProgramsFromDb();
 
   const filtered = executeSearch(programs, {
     q,

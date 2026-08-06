@@ -5,10 +5,31 @@ import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { FundingCard } from "@/components/funding-explorer";
 import { useBookmarks } from "@/lib/bookmarks";
-import { programs } from "@/lib/funding-data";
+import { useEffect, useState } from "react";
+import { type FundingProgram } from "@/lib/funding-data";
 
 export default function BookmarksPage() {
   const bookmarks = useBookmarks();
+  const [programs, setPrograms] = useState<FundingProgram[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function loadPrograms() {
+      try {
+        const res = await fetch('/api/v1/programs');
+        const json = await res.json();
+        if (json.success) {
+          setPrograms(json.data);
+        }
+      } catch (err) {
+        console.error("Failed to load programs for bookmarks", err);
+      } finally {
+        setLoading(false);
+      }
+    }
+    loadPrograms();
+  }, []);
+
   const savedPrograms = programs.filter((program) => bookmarks.includes(program.slug));
 
   return (
@@ -22,14 +43,16 @@ export default function BookmarksPage() {
               Stocate doar local în browserul tău
             </span>
             <h1 className="text-2xl font-extrabold text-slate-900 sm:text-3xl">
-              Programe Salvate ({savedPrograms.length})
+              Programe Salvate ({loading ? '...' : savedPrograms.length})
             </h1>
             <p className="text-xs text-slate-500 mt-1">
               Aceste finanțări sunt salvate pe dispozitivul tău fără cont și fără autentificare.
             </p>
           </div>
 
-          {savedPrograms.length > 0 ? (
+          {loading ? (
+            <div className="flex justify-center py-20 text-slate-500">Se încarcă programele...</div>
+          ) : savedPrograms.length > 0 ? (
             <div className="card-grid">
               {savedPrograms.map((program) => (
                 <FundingCard key={program.slug} program={program} />
