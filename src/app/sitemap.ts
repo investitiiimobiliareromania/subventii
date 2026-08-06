@@ -35,6 +35,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/politica-de-confidentialitate",
   ];
 
+  const priorityCaens = ["6201", "0111", "5610", "4120", "1011"].map((caen) => `/cod-caen/${caen}`);
+  const prioritySectors = ["agricultura", "it", "productie", "constructii", "horeca"].map((sec) => `/sectoare/${sec}`);
+  const priorityMatrix = [
+    "/subventii/cluj/it",
+    "/subventii/timis/agricultura",
+    "/subventii/brasov/turism",
+    "/subventii/bucuresti/it",
+  ];
+
   const govProgramRoutes = Object.keys(governmentProgramsCatalog).map(
     (slug) => `/programe-guvernamentale/${slug}`
   );
@@ -45,6 +54,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const allPaths = [
     ...staticHubs,
+    ...priorityCaens,
+    ...prioritySectors,
+    ...priorityMatrix,
     ...govProgramRoutes,
     ...articleRoutes,
     ...dynamicProgramRoutes,
