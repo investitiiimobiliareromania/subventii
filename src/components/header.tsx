@@ -14,11 +14,14 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200/80 transition-all">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex h-16 items-center justify-between gap-4">
-          {/* Logo */}
-          <Link href="https://subventii.cristianvaduva.com/" className="brand-logo flex-shrink-0 text-sm font-extrabold tracking-tight text-slate-900" aria-label="Subvenții.cristianvaduva.com - AiX Educational Intelligence - Pagina principală" title="Subvenții.cristianvaduva.com">
-            Subvenții.cristianvaduva.com
-          </Link>
+        <div className="flex min-h-16 items-start justify-between gap-4">
+          {/* Left brand stack */}
+          <div className="flex flex-col min-w-0 flex-1">
+            <Link href="https://subventii.cristianvaduva.com/" className="brand-logo flex-shrink min-w-0 overflow-hidden text-ellipsis whitespace-nowrap text-sm font-extrabold tracking-tight text-slate-900" aria-label="Subvenții.cristianvaduva.com - AiX Educational Intelligence - Pagina principală" title="Subvenții.cristianvaduva.com">
+              Subvenții.cristianvaduva.com
+            </Link>
+            <EcosystemNav />
+          </div>
 
           {/* Desktop Nav Links */}
           <nav className="hidden lg:flex items-center gap-6 text-xs font-semibold text-slate-700">
@@ -58,8 +61,8 @@ export function Header() {
           </nav>
 
           {/* Right Action Pill & Ecosystem */}
-          <div className="flex items-center gap-2 sm:gap-3">
-            <EcosystemNav />
+          <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
+
             <Link href="/bookmark-uri" className="bookmark-pill text-xs">
               <svg className="h-4 w-4 fill-none stroke-current" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
