@@ -33,6 +33,39 @@ export async function getProgramsFromDb(): Promise<FundingProgram[]> {
   }
 }
 
+export async function getActiveProgramsCount(): Promise<number> {
+  const programs = await getProgramsFromDb();
+  return programs.length;
+}
+
+export async function getOpenCallsCount(): Promise<number> {
+  const programs = await getProgramsFromDb();
+  return programs.filter((p) => p.status === "Deschis").length;
+}
+
+export async function getInstitutionsCount(): Promise<number> {
+  try {
+    const { count, error } = await supabase
+      .from("institutions")
+      .select("*", { count: "exact", head: true });
+    if (!error && typeof count === "number" && count > 0) {
+      return count;
+    }
+  } catch {
+    // fallback to static catalog length
+  }
+  return 6; // Official institutions monitored (MIPE, ADR, AFIR, AFM, MEAT, ANCPI)
+}
+
+export async function getCountiesCovered(): Promise<number> {
+  return 41; // All 41 counties of Romania + Bucharest
+}
+
+export async function getProgramsUpdatedRecently(): Promise<number> {
+  const programs = await getProgramsFromDb();
+  return programs.filter((p) => p.status === "Deschis" || p.status === "În curând").length;
+}
+
 export async function getProgramBySlugFromDb(slug: string): Promise<FundingProgram | null> {
   const all = await getProgramsFromDb();
   return all.find((p) => p.slug === slug) || null;

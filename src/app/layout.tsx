@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { VisitorTracker } from "@/components/visitor-tracker";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -102,6 +103,7 @@ export default function RootLayout({
         />
       </head>
       <body className="antialiased text-slate-900 bg-white min-h-screen">
+        <VisitorTracker />
         {children}
       </body>
     </html>

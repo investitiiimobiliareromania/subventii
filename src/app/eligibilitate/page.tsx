@@ -17,6 +17,22 @@ export default function EligibilityPage() {
 
   function handleCalculate() {
     setCalculated(true);
+
+    const calculatedScore = (hasInnovation ? 20 : 0) + (hasGreenEnergy ? 15 : 0) + 53;
+
+    // Send analytics
+    try {
+      fetch("/api/telemetry", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          pathname: "/eligibilitate",
+          referrer: typeof document !== "undefined" ? document.referrer || "Direct" : "Direct",
+          sessionId: typeof sessionStorage !== "undefined" ? sessionStorage.getItem("subventii_sid") || "visitor_anon" : "visitor_anon",
+          score: calculatedScore,
+        }),
+      }).catch(() => {});
+    } catch {}
   }
 
   return (

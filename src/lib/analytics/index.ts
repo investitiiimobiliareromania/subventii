@@ -1,10 +1,13 @@
-export type AnalyticsEvent = 
+export type AnalyticsEvent =
   | { type: "SEARCH_PERFORMED"; query: string; filtersCount: number; resultsCount: number }
   | { type: "PROGRAM_VIEWED"; slug: string; category: string }
   | { type: "AI_QUESTION_ASKED"; question: string; category: string }
   | { type: "ELIGIBILITY_STARTED" }
-  | { type: "ELIGIBILITY_COMPLETED"; score: number }
-  | { type: "CONTACT_SUBMITTED"; programInterest?: string };
+  | { type: "ELIGIBILITY_COMPLETED"; score: number; county?: string; industry?: string }
+  | { type: "CONTACT_SUBMITTED"; programInterest?: string }
+  | { type: "ALERT_CREATED"; email: string; county?: string }
+  | { type: "RESOURCE_DOWNLOADED"; resourceTitle: string }
+  | { type: "PAGE_VIEWED"; pathname: string; category: string };
 
 type GtagFn = (...args: unknown[]) => void;
 

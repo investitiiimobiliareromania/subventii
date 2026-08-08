@@ -99,6 +99,19 @@ export default function DesprePage() {
             </div>
           </div>
 
+          {/* Founder & Direct Contact */}
+          <div className="mb-12 rounded-xl border border-emerald-200 bg-emerald-50/40 p-6 text-xs text-slate-700 leading-relaxed">
+            <h2 className="text-sm font-bold text-slate-900 mb-2">Platformă Integrată de Cristian Văduva</h2>
+            <p className="mb-3">
+              Subvenții.ro face parte din rețeaua de inteligență financiară și imobiliară dezvoltată de Cristian Văduva. Ne asigurăm că fiecare antreprenor primește sprijin clar și acces nemijlocit la fondurile publice.
+            </p>
+            <div className="flex flex-wrap gap-4 font-semibold text-emerald-800">
+              <a href="/contact" className="hover:underline">Formular Contact & Consultanță →</a>
+              <a href="https://wa.me/436509536345" target="_blank" rel="noopener noreferrer" className="hover:underline">WhatsApp (+43 650 953 6345) →</a>
+              <a href="tel:+40767110439" className="hover:underline">Telefon RO (0767 110 439) →</a>
+            </div>
+          </div>
+
           <div className="text-center pt-4">
             <Link
               href="/programes"

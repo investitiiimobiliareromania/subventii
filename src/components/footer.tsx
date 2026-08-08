@@ -1,10 +1,11 @@
 import Link from "next/link";
+import { CONTACT_CONFIG } from "@/lib/contact/config";
 
 export function Footer() {
   return (
     <footer className="border-t border-slate-200 bg-slate-900 text-slate-400 text-xs py-12">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-2 gap-8 md:grid-cols-5 mb-10">
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-5 mb-10">
           <div>
             <span className="block font-bold text-white uppercase tracking-wider mb-3 text-[11px]">
               Platformă Finanțări
@@ -49,36 +50,116 @@ export function Footer() {
 
           <div>
             <span className="block font-bold text-white uppercase tracking-wider mb-3 text-[11px]">
-              Județe & Sectorial
+              Contact Direct
             </span>
             <ul className="space-y-2">
-              <li><Link href="/judete/cluj" className="hover:text-white transition-colors">Finanțări Cluj</Link></li>
-              <li><Link href="/judete/bucuresti" className="hover:text-white transition-colors">Finanțări București</Link></li>
-              <li><Link href="/judete/timis" className="hover:text-white transition-colors">Finanțări Timiș</Link></li>
-              <li><Link href="/cod-caen/6201" className="hover:text-white transition-colors">Cod CAEN 6201 - IT</Link></li>
-              <li><Link href="/cod-caen/0111" className="hover:text-white transition-colors">Cod CAEN 0111 - Agricultură</Link></li>
+              <li className="text-white font-semibold">{CONTACT_CONFIG.name}</li>
+              <li>
+                <a href={CONTACT_CONFIG.links.email} className="hover:text-white transition-colors">
+                  {CONTACT_CONFIG.email}
+                </a>
+              </li>
+              <li>
+                <a href={CONTACT_CONFIG.links.telRo} className="hover:text-white transition-colors">
+                  📞 RO: {CONTACT_CONFIG.phoneRoDisplay}
+                </a>
+              </li>
+              <li>
+                <a href={CONTACT_CONFIG.links.whatsapp} target="_blank" rel="noopener noreferrer" className="hover:text-emerald-400 transition-colors">
+                  💬 WA: {CONTACT_CONFIG.phoneWaDisplay}
+                </a>
+              </li>
+              <li className="text-slate-500">📍 {CONTACT_CONFIG.office}</li>
             </ul>
           </div>
 
           <div>
             <span className="block font-bold text-white uppercase tracking-wider mb-3 text-[11px]">
-              Informații Legale
+              Canale Sociale & Media
             </span>
-            <ul className="space-y-2">
-              <li><Link href="/despre" className="hover:text-white transition-colors">Despre Subvenții.ro</Link></li>
-              <li><Link href="/contact" className="hover:text-white transition-colors">Contact & Consultanță</Link></li>
-              <li><Link href="/politica-de-confidentialitate" className="hover:text-white transition-colors">Confidențialitate & GDPR</Link></li>
-              <li><Link href="/admin" className="hover:text-white transition-colors">Portal Administrare CMS</Link></li>
-            </ul>
+            <div className="flex flex-wrap gap-2 text-xs">
+              <a
+                href={CONTACT_CONFIG.socialUrls.whatsapp}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="WhatsApp Cristian Văduva"
+                className="px-2.5 py-1.5 rounded bg-emerald-950/80 border border-emerald-800/60 text-emerald-400 font-medium hover:bg-emerald-900 transition-colors"
+              >
+                WhatsApp
+              </a>
+              <a
+                href={CONTACT_CONFIG.socialUrls.telegram}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Telegram Cristian Văduva"
+                className="px-2.5 py-1.5 rounded bg-sky-950/80 border border-sky-800/60 text-sky-400 font-medium hover:bg-sky-900 transition-colors"
+              >
+                Telegram
+              </a>
+              <a
+                href={CONTACT_CONFIG.socialUrls.telegramChannel}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Canal Telegram Capital Invest"
+                className="px-2.5 py-1.5 rounded bg-sky-950/80 border border-sky-800/60 text-sky-400 font-medium hover:bg-sky-900 transition-colors"
+              >
+                Canal Telegram
+              </a>
+              <a
+                href={CONTACT_CONFIG.socialUrls.linktree}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Linktree Cristian Văduva"
+                className="px-2.5 py-1.5 rounded bg-emerald-950/80 border border-emerald-800/60 text-emerald-300 font-medium hover:bg-emerald-900 transition-colors"
+              >
+                Linktree
+              </a>
+              <a
+                href={CONTACT_CONFIG.socialUrls.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram Cristian Văduva"
+                className="px-2.5 py-1.5 rounded bg-pink-950/80 border border-pink-800/60 text-pink-400 font-medium hover:bg-pink-900 transition-colors"
+              >
+                Instagram
+              </a>
+              <a
+                href={CONTACT_CONFIG.socialUrls.facebook}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Facebook Cristian Văduva"
+                className="px-2.5 py-1.5 rounded bg-blue-950/80 border border-blue-800/60 text-blue-400 font-medium hover:bg-blue-900 transition-colors"
+              >
+                Facebook
+              </a>
+              <a
+                href={CONTACT_CONFIG.socialUrls.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn Cristian Văduva"
+                className="px-2.5 py-1.5 rounded bg-blue-950/80 border border-blue-800/60 text-blue-300 font-medium hover:bg-blue-900 transition-colors"
+              >
+                LinkedIn
+              </a>
+              <a
+                href={CONTACT_CONFIG.socialUrls.youtube}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="YouTube Cristian Văduva"
+                className="px-2.5 py-1.5 rounded bg-red-950/80 border border-red-800/60 text-red-400 font-medium hover:bg-red-900 transition-colors"
+              >
+                YouTube
+              </a>
+            </div>
           </div>
         </div>
 
         <div className="border-t border-slate-800 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-slate-500">
-          <p>© {new Date().getFullYear()} Subvenții.ro — Platforma Națională de Inteligență Financiară și Fonduri Publice.</p>
+          <p>© {new Date().getFullYear()} Subvenții.ro — Platforma Națională de Inteligență Financiară și Fonduri Publice. Cristian Văduva.</p>
           <div className="flex items-center gap-4">
             <span className="inline-flex items-center gap-1.5 text-emerald-400 font-semibold">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-              Sistem Conectat MIPE & BNR
+              Sistem Conectat Telegram & MIPE
             </span>
           </div>
         </div>

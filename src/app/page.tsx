@@ -1,11 +1,20 @@
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { FundingExplorer } from "@/components/funding-explorer";
-import { getProgramsFromDb } from "@/lib/db/repository";
+import {
+  getProgramsFromDb,
+  getActiveProgramsCount,
+  getOpenCallsCount,
+  getInstitutionsCount,
+  getCountiesCovered,
+} from "@/lib/db/repository";
 
 export default async function Home() {
   const programs = await getProgramsFromDb();
-  const openCount = programs.filter((p) => p.status === "Deschis").length;
+  const activeCount = await getActiveProgramsCount();
+  const openCount = await getOpenCallsCount();
+  const instCount = await getInstitutionsCount();
+  const countiesCount = await getCountiesCovered();
 
   return (
     <div className="min-h-screen flex flex-col bg-white">
@@ -26,22 +35,26 @@ export default async function Home() {
             </p>
 
             {/* Platform Metrics */}
-            <div className="mx-auto grid max-w-3xl grid-cols-2 gap-4 rounded-xl border border-slate-200 bg-white p-4 text-center shadow-xs sm:grid-cols-4">
+            <div className="mx-auto grid max-w-4xl grid-cols-2 gap-4 rounded-xl border border-slate-200 bg-white p-4 text-center shadow-xs sm:grid-cols-4">
               <div>
-                <span className="block text-2xl font-black text-slate-900">{programs.length}</span>
+                <span className="block text-2xl font-black text-slate-900">
+                  {activeCount > 0 ? activeCount : "În curs de actualizare"}
+                </span>
                 <span className="text-[11px] font-medium text-slate-500">Programe monitorizate</span>
               </div>
               <div>
-                <span className="block text-2xl font-black text-emerald-800">{openCount}</span>
+                <span className="block text-2xl font-black text-emerald-800">
+                  {openCount > 0 ? openCount : "În curs de actualizare"}
+                </span>
                 <span className="text-[11px] font-medium text-slate-500">Apeluri deschise</span>
               </div>
               <div>
-                <span className="block text-2xl font-black text-slate-900">100%</span>
-                <span className="text-[11px] font-medium text-slate-500">Gratuit, fără cont</span>
+                <span className="block text-2xl font-black text-slate-900">{countiesCount}</span>
+                <span className="text-[11px] font-medium text-slate-500">Județe acoperite</span>
               </div>
               <div>
-                <span className="block text-2xl font-black text-slate-900">Oficial</span>
-                <span className="text-[11px] font-medium text-slate-500">MIPE, ADR, AFIR, AFM</span>
+                <span className="block text-2xl font-black text-slate-900">{instCount}</span>
+                <span className="text-[11px] font-medium text-slate-500">Instituții monitorizate</span>
               </div>
             </div>
           </div>
