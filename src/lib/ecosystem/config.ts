@@ -1,7 +1,7 @@
 export type EcosystemCategory =
   | "INTELLIGENCE"
-  | "BUSINESS_FINANCE"
-  | "REAL_ESTATE_LUXURY"
+  | "FINANCE"
+  | "REAL_ESTATE"
   | "MEDIA"
   | "PERSONAL";
 
@@ -11,146 +11,160 @@ export interface EcosystemNode {
   category: EcosystemCategory;
   categoryLabel: string;
   description: string;
-  url: string;
-  isExternal: boolean;
+  href: string;
+  external: true;
   badge?: string;
   cta: string;
 }
 
 export const AIX_ECOSYSTEM: EcosystemNode[] = [
-  // INTELLIGENCE
+  // AI / INTELLIGENCE
   {
-    id: "subventii-ro",
-    name: "Subvenții.ro",
-    category: "INTELLIGENCE",
-    categoryLabel: "Inteligență Financiară & Fonduri",
-    description: "Platforma Națională de Căutare și Indexare a Fondurilor Europene, PNRR și Guvernamentale.",
-    url: "/",
-    isExternal: false,
-    badge: "Oficial",
-    cta: "Explorează Finanțări",
-  },
-  {
-    id: "aix-os",
+    id: "os",
     name: "AiX OS",
     category: "INTELLIGENCE",
-    categoryLabel: "Sistem Operativ Antreprenorial",
-    description: "Sistem integrat de automatizare, date sintetice și decizii strategice pentru afaceri.",
-    url: "/admin",
-    isExternal: false,
+    categoryLabel: "AI / Intelligence",
+    description: "Sistem operativ integrat de automatizare, date sintetice și decizii strategice.",
+    href: "https://os.cristianvaduva.com",
+    external: true,
     badge: "Enterprise",
-    cta: "Acces Portal OS",
+    cta: "Explore OS →",
+  },
+  {
+    id: "health",
+    name: "AiX Health",
+    category: "INTELLIGENCE",
+    categoryLabel: "AI / Intelligence",
+    description: "Digital health intelligence, protocoale personalizate și medicina viitorului.",
+    href: "https://health.cristianvaduva.com",
+    external: true,
+    badge: "Health",
+    cta: "Explore Health →",
+  },
+  {
+    id: "subventii",
+    name: "Subvenții.ro",
+    category: "INTELLIGENCE",
+    categoryLabel: "AI / Intelligence",
+    description: "Platforma națională de căutare și indexare a fondurilor nerambursabile.",
+    href: "https://subventii.cristianvaduva.com",
+    external: true,
+    badge: "Oficial",
+    cta: "Explore Subvenții →",
   },
   {
     id: "market-pulse",
     name: "Market Pulse",
     category: "INTELLIGENCE",
-    categoryLabel: "Indexul Imobiliar & Macro-Data",
-    description: "Analiza evoluției prețurilor, tranzacțiilor ANCPI și indicilor financiari din România.",
-    url: "/piata-imobiliara",
-    isExternal: false,
-    badge: "Live Index",
-    cta: "Vezi Market Pulse",
+    categoryLabel: "Market Intelligence",
+    description: "Analiza evoluției prețurilor, tranzacțiilor ANCPI și indicilor macroeconomici.",
+    href: "https://cristianvaduva.com/market-pulse",
+    external: true,
+    badge: "Live Data",
+    cta: "Explore Market Pulse →",
   },
 
-  // BUSINESS & FINANCE
+  // FINANCE
   {
-    id: "aix-credit",
-    name: "AiX Credit",
-    category: "BUSINESS_FINANCE",
-    categoryLabel: "Finanțare Bănci & IRCC",
-    description: "Calculator dobânzi IRCC, soluții de creditare IMM, refinanțări și împrumuturi corporative.",
-    url: "/credite",
-    isExternal: false,
+    id: "credite",
+    name: "Credite",
+    category: "FINANCE",
+    categoryLabel: "Finance",
+    description: "Calculator dobânzi IRCC, soluții de creditare IMM, refinanțări și structurare.",
+    href: "https://credite.cristianvaduva.com",
+    external: true,
     badge: "BNR Sync",
-    cta: "Calculează Credite",
+    cta: "Explore Credits →",
   },
   {
-    id: "aix-insurance",
-    name: "AiX Insurance",
-    category: "BUSINESS_FINANCE",
-    categoryLabel: "Protecție Riscuri & Asigurări",
-    description: "Managementul riscului, asigurări de proprietate, răspundere profesională și garanții IMM.",
-    url: "/asigurari",
-    isExternal: false,
-    badge: "Protecție IMM",
-    cta: "Evaluează Asigurarea",
-  },
-  {
-    id: "aix-health",
-    name: "AiX Health",
-    category: "BUSINESS_FINANCE",
-    categoryLabel: "Asigurări Medicale & Bien-être",
-    description: "Protecție de sănătate privată, abonamente medicale corporate și acoperire internațională.",
-    url: "https://cristianvaduva.com",
-    isExternal: true,
-    badge: "Sănătate",
-    cta: "Soluții Medicale",
+    id: "insurance",
+    name: "Insurance",
+    category: "FINANCE",
+    categoryLabel: "Insurance",
+    description: "Managementul riscului, asigurări de proprietate, răspundere și garanții IMM.",
+    href: "https://insurance.cristianvaduva.com",
+    external: true,
+    badge: "Protecție",
+    cta: "Explore Insurance →",
   },
 
-  // REAL ESTATE & LUXURY
+  // REAL ESTATE
   {
     id: "homefind",
     name: "HomeFind",
-    category: "REAL_ESTATE_LUXURY",
-    categoryLabel: "Proprietăți & Căutare Inteligente",
-    description: "Căutare proactivă și potrivire algoritmică pentru investiții imobiliare în România.",
-    url: "https://homefind.cristianvaduva.com",
-    isExternal: true,
+    category: "REAL_ESTATE",
+    categoryLabel: "Real Estate",
+    description: "Căutare proactivă și potrivire algoritmică pentru investiții imobiliare.",
+    href: "https://homefind.cristianvaduva.com",
+    external: true,
     badge: "PropTech",
-    cta: "Vizitează HomeFind",
+    cta: "Explore HomeFind →",
   },
   {
-    id: "aix-luxury",
+    id: "aixluxury",
     name: "AiXLuxury",
-    category: "REAL_ESTATE_LUXURY",
-    categoryLabel: "Portofoliu Premium & Iahting",
-    description: "Proprietăți exclusiviste, ambarcațiuni de lux și active imobiliare de mare valoare.",
-    url: "https://linktr.ee/cristianvaduvarealestate",
-    isExternal: true,
+    category: "REAL_ESTATE",
+    categoryLabel: "Real Estate",
+    description: "Proprietăți exclusiviste, active imobiliare de mare valoare și ambarcațiuni.",
+    href: "https://aixluxury.com",
+    external: true,
     badge: "Luxury",
-    cta: "Portofoliu Exclusive",
+    cta: "Explore AiX Luxury →",
   },
 
   // MEDIA
   {
-    id: "aix-media",
+    id: "aixmedia",
     name: "AiX Media",
     category: "MEDIA",
-    categoryLabel: "Publicații Video & Educație",
-    description: "Analize video, interviuri imobiliare, podcasturi financiare și rapoarte de piață.",
-    url: "https://youtube.com/@CristianVaduvaCV",
-    isExternal: true,
-    badge: "Media",
-    cta: "Urmărește Emisiunile",
+    categoryLabel: "Media & Intelligence",
+    description: "Platformă de jurnalism de afaceri, emisiuni video, analiză financiară și radio.",
+    href: "https://aixmedia.cristianvaduva.com",
+    external: true,
+    badge: "Media Hub",
+    cta: "Explore AiX Media →",
   },
 
   // PERSONAL
   {
-    id: "cristian-vaduva",
+    id: "cristianvaduva",
     name: "Cristian Văduva",
     category: "PERSONAL",
-    categoryLabel: "Fondator & Private Advisory",
+    categoryLabel: "Personal Brand",
     description: "Consultant de investiții, structurarea tranzacțiilor și reprezentare exclusivă.",
-    url: "https://cristianvaduva.com",
-    isExternal: true,
-    badge: "Private",
-    cta: "Profil & Contact",
+    href: "https://cristianvaduva.com",
+    external: true,
+    badge: "Advisory",
+    cta: "Visit Cristian Văduva →",
   },
 ];
 
-export function getEcosystemByCategory() {
-  const categories: Record<EcosystemCategory, { label: string; items: EcosystemNode[] }> = {
-    INTELLIGENCE: { label: "Inteligență & Date", items: [] },
-    BUSINESS_FINANCE: { label: "Finanțe & Protecție", items: [] },
-    REAL_ESTATE_LUXURY: { label: "Imobiliare & Luxury", items: [] },
-    MEDIA: { label: "Media & Conținut", items: [] },
-    PERSONAL: { label: "Private Advisory", items: [] },
+export function getEcosystemByCategory(): Record<
+  EcosystemCategory,
+  { label: string; items: EcosystemNode[] }
+> {
+  return {
+    INTELLIGENCE: {
+      label: "AI / Intelligence",
+      items: AIX_ECOSYSTEM.filter((n) => n.category === "INTELLIGENCE"),
+    },
+    FINANCE: {
+      label: "Finance",
+      items: AIX_ECOSYSTEM.filter((n) => n.category === "FINANCE"),
+    },
+    REAL_ESTATE: {
+      label: "Real Estate",
+      items: AIX_ECOSYSTEM.filter((n) => n.category === "REAL_ESTATE"),
+    },
+    MEDIA: {
+      label: "Media",
+      items: AIX_ECOSYSTEM.filter((n) => n.category === "MEDIA"),
+    },
+    PERSONAL: {
+      label: "Personal",
+      items: AIX_ECOSYSTEM.filter((n) => n.category === "PERSONAL"),
+    },
   };
-
-  for (const item of AIX_ECOSYSTEM) {
-    categories[item.category].items.push(item);
-  }
-
-  return categories;
 }
+
+export const getEcosystemCategorized = getEcosystemByCategory;

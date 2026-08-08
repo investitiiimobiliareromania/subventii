@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import Link from "next/link";
 import { getEcosystemByCategory } from "@/lib/ecosystem/config";
 
 export function EcosystemNav() {
@@ -15,9 +14,22 @@ export function EcosystemNav() {
         setIsOpen(false);
       }
     }
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
+
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        setIsOpen(false);
+      }
+    }
+
+    if (isOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+      document.addEventListener("keydown", handleKeyDown);
+    }
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isOpen]);
 
   const handleTrackClick = (serviceName: string, destinationUrl: string) => {
     setIsOpen(false);
@@ -40,11 +52,11 @@ export function EcosystemNav() {
     <div className="relative inline-block text-left" ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="inline-flex items-center gap-1.5 rounded-full bg-slate-900 px-3 py-1 text-xs font-bold text-emerald-400 hover:bg-slate-800 transition-colors cursor-pointer border border-slate-700/60 shadow-xs"
+        className="inline-flex items-center gap-1.5 rounded-full bg-slate-900 px-3 py-1 text-xs font-bold text-emerald-400 hover:bg-slate-800 transition-colors cursor-pointer border border-slate-700/60 shadow-xs min-h-[32px]"
         aria-expanded={isOpen}
         aria-label="Deschide rețeaua AiX Ecosystem"
       >
-        <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
         <span>AiX Ecosystem</span>
         <svg
           className={`h-3 w-3 text-slate-400 transition-transform ${isOpen ? "rotate-180" : ""}`}
@@ -57,16 +69,16 @@ export function EcosystemNav() {
       </button>
 
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-80 sm:w-96 rounded-2xl bg-slate-900 border border-slate-800 p-4 shadow-2xl z-50 animate-in fade-in-50 zoom-in-95">
+        <div className="absolute right-0 mt-2 w-80 sm:w-96 max-w-[calc(100vw-2rem)] rounded-2xl bg-slate-900 border border-slate-800 p-4 shadow-2xl z-50 animate-in fade-in-50 zoom-in-95 box-border">
           <div className="border-b border-slate-800 pb-3 mb-3 flex items-center justify-between">
             <div>
               <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-emerald-400">
                 Cristian Văduva / AiX Intelligence Network
               </span>
-              <h4 className="text-xs font-bold text-white">Rețeaua de Inteligență Financiară & Imobiliară</h4>
+              <h4 className="text-xs font-bold text-white">Rețeaua de Inteligență Financiară &amp; Imobiliară</h4>
             </div>
-            <span className="rounded bg-emerald-950 px-2 py-0.5 text-[10px] font-bold text-emerald-400 border border-emerald-800/40">
-              10 Node-uri
+            <span className="rounded bg-emerald-950 px-2 py-0.5 text-[10px] font-bold text-emerald-400 border border-emerald-800/40 shrink-0">
+              10 Platforms
             </span>
           </div>
 
@@ -78,57 +90,31 @@ export function EcosystemNav() {
                 </span>
                 <div className="grid grid-cols-1 gap-1">
                   {catGroup.items.map((item) => (
-                    item.isExternal ? (
-                      <a
-                        key={item.id}
-                        href={item.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={() => handleTrackClick(item.name, item.url)}
-                        className="group flex items-center justify-between p-2 rounded-lg hover:bg-slate-800/80 transition-colors"
-                      >
-                        <div>
-                          <div className="flex items-center gap-1.5">
-                            <span className="text-xs font-bold text-white group-hover:text-emerald-400 transition-colors">
-                              {item.name}
+                    <a
+                      key={item.id}
+                      href={item.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => handleTrackClick(item.name, item.href)}
+                      className="group flex items-center justify-between p-2 rounded-lg hover:bg-slate-800/80 transition-colors gap-2 min-w-0"
+                    >
+                      <div className="min-w-0 flex-1">
+                        <div className="flex items-center gap-1.5">
+                          <span className="text-xs font-bold text-white group-hover:text-emerald-400 transition-colors truncate">
+                            {item.name}
+                          </span>
+                          {item.badge && (
+                            <span className="text-[9px] font-mono px-1.5 py-0.2 rounded bg-slate-800 text-slate-300 border border-slate-700 shrink-0">
+                              {item.badge}
                             </span>
-                            {item.badge && (
-                              <span className="text-[9px] font-mono px-1.5 py-0.2 rounded bg-slate-800 text-slate-300 border border-slate-700">
-                                {item.badge}
-                              </span>
-                            )}
-                          </div>
-                          <p className="text-[11px] text-slate-400 line-clamp-1">{item.description}</p>
+                          )}
                         </div>
-                        <span className="text-xs text-slate-500 group-hover:text-emerald-400 transition-colors pl-2">
-                          ↗
-                        </span>
-                      </a>
-                    ) : (
-                      <Link
-                        key={item.id}
-                        href={item.url}
-                        onClick={() => handleTrackClick(item.name, item.url)}
-                        className="group flex items-center justify-between p-2 rounded-lg hover:bg-slate-800/80 transition-colors"
-                      >
-                        <div>
-                          <div className="flex items-center gap-1.5">
-                            <span className="text-xs font-bold text-white group-hover:text-emerald-400 transition-colors">
-                              {item.name}
-                            </span>
-                            {item.badge && (
-                              <span className="text-[9px] font-mono px-1.5 py-0.2 rounded bg-slate-800 text-slate-300 border border-slate-700">
-                                {item.badge}
-                              </span>
-                            )}
-                          </div>
-                          <p className="text-[11px] text-slate-400 line-clamp-1">{item.description}</p>
-                        </div>
-                        <span className="text-xs text-slate-500 group-hover:text-emerald-400 transition-colors pl-2">
-                          →
-                        </span>
-                      </Link>
-                    )
+                        <p className="text-[11px] text-slate-400 line-clamp-1">{item.description}</p>
+                      </div>
+                      <span className="text-xs text-slate-500 group-hover:text-emerald-400 transition-colors shrink-0">
+                        ↗
+                      </span>
+                    </a>
                   ))}
                 </div>
               </div>
