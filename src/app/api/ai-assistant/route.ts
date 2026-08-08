@@ -23,8 +23,8 @@ export async function POST(req: Request) {
       citations.push("FNGCIMM - Procedură Noua Casă 2026");
       citations.push("Ministerul Finanțelor - Legea 172/2026");
     } else {
-      answer = `Pe baza bazei de date oficiale a Subvenții.ro, programele guvernamentale active în 2026 oferă sprijin pentru digitalizare PNRR, eficiență energetică și investiții industriale. Te rugăm să specifici domeniul de interes (ex: IMM, Agricultură, Locuințe).`;
-      citations.push("Portalul Oficial MIPE & Guvernul României");
+      answer = `Pe baza informațiilor publice sintetizate de AiX Educational Intelligence, programele prezentate oferă sprijin general pentru digitalizare, eficiență energetică și investiții industriale. Te rugăm să specifici domeniul de interes (ex: IMM, Agricultură, Locuințe). Materialele au caracter exclusiv educațional.`;
+      citations.push("Informații Publice Agregate din Surse Deschise");
     }
 
     return NextResponse.json({

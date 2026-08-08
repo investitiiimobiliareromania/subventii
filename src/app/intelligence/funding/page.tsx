@@ -9,7 +9,7 @@ import { formatCurrencyRon } from "@/lib/funding-data";
 export const metadata: Metadata = {
   title: "Inteligență Finanțări: Analiză Granturi & Bugete Alocate 2026",
   description: "Monitorizarea completă a apelurilor de proiecte, plafoanelor de grant și condițiilor de finanțare nerambursabilă în România.",
-  alternates: { canonical: "https://subventii.ro/intelligence/funding" },
+  alternates: { canonical: "https://subventii.cristianvaduva.com/intelligence/funding" },
 };
 
 export default async function IntelligenceFundingPage() {

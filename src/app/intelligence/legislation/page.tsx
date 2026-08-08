@@ -8,7 +8,7 @@ import { getLegislativeChangesFromDb } from "@/lib/db/repository";
 export const metadata: Metadata = {
   title: "Monitor Legislație: Ordonanțe, Legi și Decizii 2026",
   description: "Urmărirea actelor normative, codului fiscal și reglementărilor guvernamentale cu impact asupra fondurilor nerambursabile.",
-  alternates: { canonical: "https://subventii.ro/intelligence/legislation" },
+  alternates: { canonical: "https://subventii.cristianvaduva.com/intelligence/legislation" },
 };
 
 export default async function IntelligenceLegislationPage() {

@@ -8,7 +8,7 @@ import { countyProfilesCatalog } from "@/lib/county-data";
 export const metadata: Metadata = {
   title: "Inteligență Regională: Analiză pe Județe & ADR 2026",
   description: "Indicatori economici, distribuția fondurilor structurale și raportările cadastrale ANCPI pentru toate cele 41 de județe și Municipiul București.",
-  alternates: { canonical: "https://subventii.ro/intelligence/regions" },
+  alternates: { canonical: "https://subventii.cristianvaduva.com/intelligence/regions" },
 };
 
 export default function IntelligenceRegionsPage() {

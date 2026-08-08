@@ -8,15 +8,15 @@ import { glossaryCatalog } from "@/lib/glossary-data";
 export const metadata: Metadata = {
   title: "Glosar de Finanțări, Fonduri Europene și Termeni Bancari",
   description: "Dicționarul explicativ al termenilor utilizați în ghidurile de finanțare nerambursabilă: de minimis, cofinanțare, IRCC, ROBOR, RLS, PAD.",
-  alternates: { canonical: "https://subventii.ro/glosar" },
+  alternates: { canonical: "https://subventii.cristianvaduva.com/glosar" },
 };
 
 export default function GlossaryPage() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "DefinedTermSet",
-    "name": "Glosar Subvenții.ro",
-    "url": "https://subventii.ro/glosar",
+    "name": "Glosar AiX Educational Intelligence",
+    "url": "https://subventii.cristianvaduva.com/glosar",
   };
 
   return (

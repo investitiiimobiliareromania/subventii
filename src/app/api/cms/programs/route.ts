@@ -25,7 +25,7 @@ export async function POST(request: Request) {
     // Record audit log entry
     await createAuditLogDb(
       program?.slug || "new-program",
-      adminUserId || "admin@subventii.ro",
+      adminUserId || "admin@cristianvaduva.com",
       "CREATE_PROGRAM",
       { program, call },
       justification || "Program creat din Admin CMS"

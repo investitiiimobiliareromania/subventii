@@ -8,15 +8,15 @@ import { downloadableResourcesCatalog } from "@/lib/resources-data";
 export const metadata: Metadata = {
   title: "Centrul de Resurse: Ghiduri PDF, Șabloane și Cereri Tip",
   description: "Descarcă gratuit ghidurile solicitantului în format PDF, modele editabile de plan de afaceri, machete de calcul financiar și declarații tipizate.",
-  alternates: { canonical: "https://subventii.ro/resurse" },
+  alternates: { canonical: "https://subventii.cristianvaduva.com/resurse" },
 };
 
 export default function ResourcesPage() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    "name": "Centrul de Resurse Subvenții.ro",
-    "url": "https://subventii.ro/resurse",
+    "name": "Centrul de Resurse AiX Educational Intelligence",
+    "url": "https://subventii.cristianvaduva.com/resurse",
   };
 
   return (

@@ -3,7 +3,7 @@ import { Footer } from "@/components/footer";
 
 export const metadata = {
   title: "Politica de Confidențialitate",
-  description: "Politica de prelucrare a datelor cu caracter personal pentru Subvenții.ro.",
+  description: "Politica de prelucrare a datelor cu caracter personal pentru platforma privată AiX Educational Intelligence.",
 };
 
 export default function PrivacyPolicyPage() {
@@ -15,7 +15,7 @@ export default function PrivacyPolicyPage() {
           <h1 className="text-3xl font-extrabold text-slate-900 mb-8">Politica de Confidențialitate</h1>
           <div className="prose prose-emerald max-w-none text-slate-600">
             <p>
-              Această politică de confidențialitate descrie modul în care colectăm, utilizăm și protejăm datele dvs. cu caracter personal pe platforma <strong>Subvenții.ro</strong>, în conformitate cu Regulamentul General privind Protecția Datelor (GDPR).
+              Această politică de confidențialitate descrie modul în care colectăm, utilizăm și protejăm datele dvs. cu caracter personal pe platforma privată <strong>AiX Educational Intelligence</strong> (subventii.cristianvaduva.com), în conformitate cu Regulamentul General privind Protecția Datelor (GDPR).
             </p>
             
             <h2>1. Date Colectate</h2>

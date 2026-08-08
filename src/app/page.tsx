@@ -26,13 +26,13 @@ export default async function Home() {
         <section className="border-b border-slate-200/80 bg-slate-50/50 py-12 md:py-16">
           <div className="mx-auto max-w-5xl px-4 text-center sm:px-6">
             <span className="mb-3 inline-block rounded-full bg-emerald-100 px-3.5 py-1 text-xs font-bold text-emerald-900">
-              Sursă oficială de informații publice
+              Platformă privată de educație și informare
             </span>
             <h1 className="mb-4 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-5xl">
-              Finanțări nerambursabile pentru afaceri din România
+              Înțelege mai bine finanțarea, programele și economia
             </h1>
             <p className="mx-auto mb-8 max-w-2xl text-sm leading-relaxed text-slate-600 sm:text-base">
-              Identifică rapid fondurile structurale, programele naționale și apelurile PNRR destinate IMM-urilor, start-up-urilor și fermierilor.
+              O platformă privată de educație și informare care organizează și explică informații publice despre finanțări, antreprenoriat, legislație și economie.
             </p>
 
             {/* Platform Metrics */}
@@ -71,19 +71,19 @@ export default async function Home() {
           <div className="mx-auto max-w-5xl px-4 sm:px-6">
             <div className="mb-8 text-center">
               <h2 className="text-xl font-bold text-slate-900 sm:text-2xl">
-                Principii de Funcționare Subvenții.ro
+                Principii de Funcționare AiX Educational Intelligence
               </h2>
               <p className="text-xs text-slate-500">
-                Organizăm informațiile oficiale într-o experiență de utilizare simplă și rapidă.
+                Centralizăm și explicăm informații publice disponibile din surse accesibile publicului.
               </p>
             </div>
 
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
               <div className="rounded-xl border border-slate-200 bg-white p-5">
                 <span className="mb-2 block font-mono text-xs font-bold text-emerald-800">01</span>
-                <h3 className="mb-1 text-sm font-bold text-slate-900">Surse Verificate</h3>
+                <h3 className="mb-1 text-sm font-bold text-slate-900">Surse Publice Deschise</h3>
                 <p className="text-xs text-slate-600 leading-relaxed">
-                  Datele provin exclusiv din ghidurile solicitantului și publicațiile oficiale ale ministerelor și agențiilor regionale.
+                  Datele sunt structurate din publicațiile și ghidurile accesibile public pe site-urile instituțiilor emitente.
                 </p>
               </div>
 

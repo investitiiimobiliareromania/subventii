@@ -8,7 +8,7 @@ import { realEstateCityReports } from "@/lib/piata-imobiliara-data";
 export const metadata: Metadata = {
   title: "Piața Imobiliară România 2026: Prețuri, Indici & Tendințe",
   description: "Rapoarte de prețuri pe metru pătrat, indici de creștere imobiliară pe marile orașe și evoluția tranzacțiilor rezidențiale și comerciale.",
-  alternates: { canonical: "https://subventii.ro/piata-imobiliara" },
+  alternates: { canonical: "https://subventii.cristianvaduva.com/piata-imobiliara" },
 };
 
 export default function RealEstatePage() {
@@ -16,7 +16,7 @@ export default function RealEstatePage() {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
     "name": "Piața Imobiliară România 2026",
-    "url": "https://subventii.ro/piata-imobiliara",
+    "url": "https://subventii.cristianvaduva.com/piata-imobiliara",
   };
 
   return (

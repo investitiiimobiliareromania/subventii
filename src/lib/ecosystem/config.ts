@@ -43,13 +43,13 @@ export const AIX_ECOSYSTEM: EcosystemNode[] = [
   },
   {
     id: "subventii",
-    name: "Subvenții.ro",
+    name: "AiX Subvenții",
     category: "INTELLIGENCE",
     categoryLabel: "AI / Intelligence",
-    description: "Platforma națională de căutare și indexare a fondurilor nerambursabile.",
+    description: "Platformă privată de educație și informare privind fondurile publice și finanțările.",
     href: "https://subventii.cristianvaduva.com",
     external: true,
-    badge: "Oficial",
+    badge: "Educațional",
     cta: "Explore Subvenții →",
   },
   {

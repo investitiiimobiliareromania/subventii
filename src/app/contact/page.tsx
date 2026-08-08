@@ -55,13 +55,13 @@ export default function ContactPage() {
         <div className="mx-auto max-w-5xl px-4 sm:px-6">
           <div className="text-center mb-10">
             <span className="text-xs font-bold uppercase tracking-wider text-emerald-800">
-              Consultanță & Suport Direct
+              Informații &amp; Suport Direct
             </span>
             <h1 className="text-3xl font-extrabold text-slate-900 sm:text-4xl mt-1">
-              Contact & Consultanță Proiecte Subvenții.ro
+              Trimite o solicitare către echipa AiX
             </h1>
             <p className="mt-3 text-sm text-slate-600 max-w-2xl mx-auto leading-relaxed">
-              Discută direct cu echipa noastră și Cristian Văduva pentru analizarea eligibilității și pregătirea dosarelor de finanțare.
+              Discută direct cu echipa noastră privată și Cristian Văduva pentru clarificarea informațiilor educaționale și a oportunităților de informare.
             </p>
           </div>
 

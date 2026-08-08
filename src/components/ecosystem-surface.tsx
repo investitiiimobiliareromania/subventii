@@ -6,13 +6,13 @@ export function EcosystemSurface() {
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="mb-10 text-center">
           <span className="mb-2 inline-block font-mono text-[11px] font-bold uppercase tracking-wider text-emerald-400">
-            Rețeaua Oficială de Inteligență &amp; Servicii
+            Rețeaua Privat de Servicii &amp; Educație
           </span>
           <h2 className="text-2xl font-extrabold text-white sm:text-3xl tracking-tight">
             THE AiX ECOSYSTEM
           </h2>
           <p className="mx-auto mt-2 max-w-2xl text-xs leading-relaxed text-slate-400">
-            Subvenții.ro este nodul de inteligență pentru fonduri nerambursabile din cadrul rețelei de soluții financiare, imobiliare, tehnologice și educaționale Cristian Văduva.
+            AiX Educational Intelligence este nodul educațional pentru finanțări și legislație din cadrul rețelei de soluții financiare, imobiliare, tehnologice și educaționale Cristian Văduva.
           </p>
         </div>
 

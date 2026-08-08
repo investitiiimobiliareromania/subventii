@@ -12,7 +12,7 @@ function getHeaderForEvent(event: TelegramEventType): string {
     case "CONTACT_REQUEST":
     case "LEAD_SUBMISSION":
     case "FORM_SUBMISSION":
-      return "📩 <b>NEW SUBVENȚII.RO LEAD</b>";
+      return "📩 <b>NEW AiX EDUCATIONAL LEAD</b>";
     case "ELIGIBILITY_COMPLETED":
       return "📊 <b>ELIGIBILITY CALCULATED</b>";
     case "ALERT_CREATED":
@@ -22,13 +22,13 @@ function getHeaderForEvent(event: TelegramEventType): string {
     case "AI_HIGH_INTENT":
       return "🔥 <b>HIGH INTENT VISITOR</b>";
     case "VISITOR_PAGE_VIEW":
-      return "👁 <b>Subvenții.ro Visitor</b>";
+      return "👁 <b>AiX Visitor</b>";
     case "VISITOR_SEARCH":
       return "🔍 <b>Visitor Search</b>";
     case "VISITOR_PROGRAM_VIEW":
       return "📋 <b>Program Viewed</b>";
     default:
-      return "⚡ <b>SUBVENȚII.RO INTELLIGENCE</b>";
+      return "⚡ <b>AiX EDUCATIONAL INTELLIGENCE</b>";
   }
 }
 

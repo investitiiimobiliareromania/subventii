@@ -25,9 +25,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const program = await getProgramBySlugFromDb(slug);
   if (!program) return {};
 
-  const title = `${program.title} | Subvenții.ro`;
+  const title = `${program.title} | AiX Educational Intelligence`;
   const description = program.summary;
-  const canonicalUrl = `https://subventii.ro/finantari/${program.slug}`;
+  const canonicalUrl = `https://subventii.cristianvaduva.com/finantari/${program.slug}`;
 
   return {
     title,
@@ -69,7 +69,7 @@ export default async function ProgramDetailPage({ params }: Props) {
       "@type": "GovernmentOrganization",
       "name": program.source,
     },
-    "url": `https://subventii.ro/finantari/${program.slug}`,
+    "url": `https://subventii.cristianvaduva.com/finantari/${program.slug}`,
     "sameAs": program.officialUrl,
     "validUntil": program.deadline,
     "amount": {

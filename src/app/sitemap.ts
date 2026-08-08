@@ -4,7 +4,7 @@ import { newsroomArticles } from "@/lib/newsroom-data";
 import { governmentProgramsCatalog } from "@/lib/programe-guvernamentale-data";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const base = "https://subventii.ro";
+  const base = "https://subventii.cristianvaduva.com";
   const programs = await getProgramsFromDb();
 
   const staticHubs = [

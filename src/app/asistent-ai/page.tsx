@@ -11,7 +11,7 @@ export default function AiAssistantPage() {
   const [messages, setMessages] = useState<{ sender: "user" | "ai"; text: string; citations?: string[] }[]>([
     {
       sender: "ai",
-      text: "Bunogă! Sunt Asistentul AI Oficial Subvenții.ro. Răspund exclusiv pe baza ghidurilor solicitantului, legislației și fondurilor verificate. Cu ce te pot ajuta?",
+      text: "Salut! Sunt Asistentul AI Educațional AiX. Îți ofer sinteze și informații din surse publice deschise privind finanțările și legislația. Cu ce te pot ajuta?",
     },
   ]);
 
@@ -40,7 +40,7 @@ export default function AiAssistantPage() {
       } else {
         setMessages((prev) => [
           ...prev,
-          { sender: "ai", text: "Nu am găsit informații în ghidurile oficiale pentru această întrebare." },
+          { sender: "ai", text: "Nu am găsit informații în publicațiile deschise pentru această întrebare." },
         ]);
       }
     } catch {
@@ -62,16 +62,16 @@ export default function AiAssistantPage() {
           <nav className="mb-6 flex items-center gap-2 text-xs text-slate-500">
             <Link href="/" className="hover:text-emerald-800">Acasă</Link>
             <span>/</span>
-            <span className="font-semibold text-slate-800">Asistent AI Oficial</span>
+            <span className="font-semibold text-slate-800">Asistent AI Educațional</span>
           </nav>
 
           <div className="mb-8 border-b border-slate-200 pb-6">
-            <span className="text-xs font-bold uppercase tracking-wider text-emerald-800">Motor RAG Fără Halucinații</span>
+            <span className="text-xs font-bold uppercase tracking-wider text-emerald-800">Platformă Privată de Educație &amp; Informare</span>
             <h1 className="mt-1 text-3xl font-extrabold text-slate-900 sm:text-4xl">
-              Asistentul Inteligent pentru Fonduri Nerambursabile
+              Asistent AI Educațional pentru Finanțări și Legislație
             </h1>
             <p className="mt-2 text-sm text-slate-600 max-w-2xl leading-relaxed">
-              Adresează orice întrebare privind ghidul Start-Up Nation, Noua Casă, Casa Verde sau apelurile PNRR. Răspunsurile includ citate din documentele oficiale.
+              Sintetizează și explică informațiile publice deschise despre finanțări, programe, legislație și antreprenoriat. Materialele au scop exclusiv informativ și educațional.
             </p>
           </div>
 
@@ -79,9 +79,9 @@ export default function AiAssistantPage() {
             <div className="flex items-center justify-between border-b border-slate-200 bg-slate-900 px-5 py-4 text-white">
               <div className="flex items-center gap-2">
                 <span className="flex h-3 w-3 rounded-full bg-emerald-400"></span>
-                <span className="text-xs font-bold">Consultanță AI în Timp Real</span>
+                <span className="text-xs font-bold">Asistent AI Educațional</span>
               </div>
-              <span className="text-[11px] text-slate-400">Baza de Date Conectată</span>
+              <span className="text-[11px] text-slate-400">Surse Publice Agregate</span>
             </div>
 
             <div className="flex-1 overflow-y-auto p-5 space-y-4 text-xs">
@@ -103,7 +103,7 @@ export default function AiAssistantPage() {
               ))}
               {loading && (
                 <div className="text-xs text-slate-400 font-medium">
-                  Se interoghează baza de date oficială...
+                  Se interoghează sursele publice...
                 </div>
               )}
             </div>

@@ -8,15 +8,15 @@ import { newsroomArticles } from "@/lib/newsroom-data";
 export const metadata: Metadata = {
   title: "Știri & Newsroom Fonduri Nerambursabile 2026",
   description: "Ultimele noutăți oficiale despre ghiduri de finanțare, granturi PNRR, facilități fiscale, OUG și modificări legislative din România.",
-  alternates: { canonical: "https://subventii.ro/stiri" },
+  alternates: { canonical: "https://subventii.cristianvaduva.com/stiri" },
 };
 
 export default function NewsroomPage() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    "name": "Newsroom Subvenții.ro",
-    "url": "https://subventii.ro/stiri",
+    "name": "Newsroom AiX Educational Intelligence",
+    "url": "https://subventii.cristianvaduva.com/stiri",
     "description": "Noutăți și analize oficiale pe fonduri europene și programe guvernamentale.",
   };
 

@@ -10,7 +10,7 @@ export function AiAssistantDrawer() {
   const [messages, setMessages] = useState<{ sender: "user" | "ai"; text: string; citations?: string[] }[]>([
     {
       sender: "ai",
-      text: "Bunogă! Sunt Asistentul AI Oficial Subvenții.ro. Răspund exclusiv pe baza ghidurilor solicitantului, legislației și fondurilor verificate. Cu ce te pot ajuta?",
+      text: "Salut! Sunt Asistentul AI Educațional AiX. Îți ofer sinteze și informații sintetizate din surse publice deschise privind finanțările și legislația. Cu ce te pot ajuta?",
     },
   ]);
 
@@ -39,7 +39,7 @@ export function AiAssistantDrawer() {
       } else {
         setMessages((prev) => [
           ...prev,
-          { sender: "ai", text: "Nu am găsit informații în ghidurile oficiale pentru această întrebare." },
+          { sender: "ai", text: "Nu am găsit informații în publicațiile deschise pentru această întrebare." },
         ]);
       }
     } catch {
@@ -64,7 +64,7 @@ export function AiAssistantDrawer() {
           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
           <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-400"></span>
         </span>
-        <span>Asistent AI Oficial</span>
+        <span>Asistent AI Educațional</span>
       </button>
 
       {/* Floating Drawer Modal */}
@@ -77,8 +77,8 @@ export function AiAssistantDrawer() {
                 AI
               </div>
               <div>
-                <h3 className="text-sm font-bold">Asistent Inteligență Fonduri</h3>
-                <span className="text-[10px] text-slate-400">Fără halucinații • Surse verificate</span>
+                <h3 className="text-sm font-bold">Asistent AI Educațional</h3>
+                <span className="text-[10px] text-slate-400">Informații publice sintetizate în scop educațional</span>
               </div>
             </div>
             <button
@@ -121,7 +121,7 @@ export function AiAssistantDrawer() {
                 <span className="h-2 w-2 rounded-full bg-emerald-700 animate-bounce"></span>
                 <span className="h-2 w-2 rounded-full bg-emerald-700 animate-bounce delay-100"></span>
                 <span className="h-2 w-2 rounded-full bg-emerald-700 animate-bounce delay-200"></span>
-                <span>Se analizează baza de date oficială...</span>
+                <span>Se analizează sursele publice...</span>
               </div>
             )}
           </div>

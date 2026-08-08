@@ -8,7 +8,7 @@ import { institutionsCatalog, type PublicInstitution } from "@/lib/institutii-da
 export const metadata: Metadata = {
   title: "Director Instituțional: Ministere & Agenții de Finanțare 2026",
   description: "Maparea instituțiilor publice responsabile de acordarea subvențiilor, gestionarea apelurilor PNRR și auditul fondurilor structurale.",
-  alternates: { canonical: "https://subventii.ro/intelligence/institutions" },
+  alternates: { canonical: "https://subventii.cristianvaduva.com/intelligence/institutions" },
 };
 
 export default function IntelligenceInstitutionsPage() {

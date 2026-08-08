@@ -6,9 +6,9 @@ import { AiAssistantDrawer } from "@/components/ai-assistant-drawer";
 import { getProgramsFromDb, getLegislativeChangesFromDb, getAncpiReportsFromDb } from "@/lib/db/repository";
 
 export const metadata: Metadata = {
-  title: "Centrul Național de Inteligență Economică & Fonduri",
-  description: "Platformă integrată de analiza datelor despre granturi europene, legislație financiară, rapoarte ANCPI și instituții publice din România.",
-  alternates: { canonical: "https://subventii.ro/intelligence" },
+  title: "AiX — Educational Intelligence Platform",
+  description: "Platformă privată de analiză educațională a datelor despre oportunități de finanțare, legislație financiară și informații economice.",
+  alternates: { canonical: "https://subventii.cristianvaduva.com/intelligence" },
 };
 
 export default async function IntelligenceHubPage() {
@@ -20,10 +20,10 @@ export default async function IntelligenceHubPage() {
 
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "GovernmentService",
-    "name": "Subvenții.ro Intelligence Platform",
-    "url": "https://subventii.ro/intelligence",
-    "serviceType": "Financial & Grant Intelligence",
+    "@type": "WebPage",
+    "name": "AiX — Educational Intelligence Platform",
+    "url": "https://subventii.cristianvaduva.com/intelligence",
+    "description": "Platformă privată de analiză educațională privind finanțările și economiei",
   };
 
   return (

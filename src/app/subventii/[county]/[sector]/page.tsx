@@ -18,9 +18,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const sectorUpper = sector.toUpperCase();
 
   return {
-    title: `Subvenții ${sectorUpper} Județul ${countyName} 2026`,
-    description: `Ghidul fondurilor nerambursabile și granturilor de dezvoltare pentru sectorul ${sectorUpper} în Județul ${countyName}.`,
-    alternates: { canonical: `https://subventii.ro/subventii/${countyKey}/${sector}` },
+    title: `Finanțări ${sectorUpper} Județul ${countyName} 2026`,
+    description: `Sinteză educațională a fondurilor și oportunităților de dezvoltare pentru sectorul ${sectorUpper} în Județul ${countyName}.`,
+    alternates: { canonical: `https://subventii.cristianvaduva.com/subventii/${countyKey}/${sector}` },
   };
 }
 
@@ -39,10 +39,9 @@ export default async function CountySectorMatrixPage({ params }: Props) {
 
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "GovernmentService",
-    "name": `Granturi ${sector.toUpperCase()} Județul ${profile.name}`,
-    "areaServed": profile.name,
-    "url": `https://subventii.ro/subventii/${countyKey}/${sector}`,
+    "@type": "CollectionPage",
+    "name": `Oportunități ${sector.toUpperCase()} Județul ${profile.name}`,
+    "url": `https://subventii.cristianvaduva.com/subventii/${countyKey}/${sector}`,
   };
 
   return (

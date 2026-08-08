@@ -16,7 +16,7 @@ export function Header() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between gap-4">
           {/* Logo */}
-          <Link href="/" className="brand-logo flex-shrink-0" aria-label="Subvenții.ro - Pagina principală">
+          <Link href="/" className="brand-logo flex-shrink-0" aria-label="AiX Educational Intelligence - Pagina principală">
             subvenții<span>.ro</span>
           </Link>
 

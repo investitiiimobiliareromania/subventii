@@ -4,10 +4,10 @@ import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 
 export const metadata: Metadata = {
-  title: "Despre Subvenții.ro și Surse Oficiale",
-  description: "Descoperă modul în care Subvenții.ro colectează și organizează datele oficiale de finanțare din România.",
+  title: "Despre AiX — Educational Intelligence",
+  description: "Descoperă scopul educațional al platformei private AiX Educational Intelligence.",
   alternates: {
-    canonical: "https://subventii.ro/despre",
+    canonical: "https://subventii.cristianvaduva.com/despre",
   },
 };
 
@@ -48,28 +48,28 @@ export default function DesprePage() {
         <div className="mx-auto max-w-4xl px-4 sm:px-6">
           <div className="mb-10 text-center">
             <span className="text-xs font-bold uppercase tracking-wider text-emerald-800">
-              Transparență și Date Publice
+              Platformă Privată de Educație &amp; Informare
             </span>
             <h1 className="mt-2 text-3xl font-extrabold text-slate-900 sm:text-4xl">
-              Despre Subvenții.ro
+              Despre AiX — Educational Intelligence
             </h1>
             <p className="mt-3 text-sm text-slate-600 max-w-2xl mx-auto leading-relaxed">
-              Subvenții.ro este un portal independent conceput pentru a oferi antreprenorilor din România acces rapid, gratuit și nefiltrat la oportunitățile de finanțare nerambursabilă.
+              O platformă privată de educație și informare concepută pentru a ajuta antreprenorii și profesioniștii să înțeleagă mai ușor informațiile publice privind finanțarea, programele economice și dezvoltarea afacerilor.
             </p>
           </div>
 
-          {/* Key Commitments */}
+          {/* Key Commitments & Legal Disclaimer */}
           <div className="mb-12 grid grid-cols-1 gap-6 sm:grid-cols-2">
             <div className="rounded-xl border border-slate-200 bg-slate-50/50 p-6">
-              <h2 className="text-base font-bold text-slate-900 mb-2">Fără Cont sau Abonament</h2>
+              <h2 className="text-base font-bold text-slate-900 mb-2">Platformă Privată și Independentă</h2>
               <p className="text-xs text-slate-600 leading-relaxed">
-                Platforma este și va rămâne 100% gratuită în versiunea sa actuală. Nu colectăm date personale și nu condiționăm accesul de crearea unui cont.
+                AiX nu este o instituție publică și nu este afiliat, administrat, sponsorizat sau aprobat de o autoritate guvernamentală, minister sau bancă de stat.
               </p>
             </div>
             <div className="rounded-xl border border-slate-200 bg-slate-50/50 p-6">
-              <h2 className="text-base font-bold text-slate-900 mb-2">Exclusiv Date Oficiale</h2>
+              <h2 className="text-base font-bold text-slate-900 mb-2">Conținut Informativ și Educațional</h2>
               <p className="text-xs text-slate-600 leading-relaxed">
-                Fiecare program listat pe Subvenții.ro conține doar informații extrase din documentele publice ale autorităților finanțatoare.
+                Centralizăm și explicăm informații publice din surse deschise. Materialele au caracter general și nu reprezintă consultanță juridică sau fiscală.
               </p>
             </div>
           </div>
@@ -103,7 +103,7 @@ export default function DesprePage() {
           <div className="mb-12 rounded-xl border border-emerald-200 bg-emerald-50/40 p-6 text-xs text-slate-700 leading-relaxed">
             <h2 className="text-sm font-bold text-slate-900 mb-2">Platformă Integrată de Cristian Văduva</h2>
             <p className="mb-3">
-              Subvenții.ro face parte din rețeaua de inteligență financiară și imobiliară dezvoltată de Cristian Văduva. Ne asigurăm că fiecare antreprenor primește sprijin clar și acces nemijlocit la fondurile publice.
+              AiX Educational Intelligence face parte din ecosistemul privat de soluții tehnologice, financiare și imobiliare dezvoltate de Cristian Văduva.
             </p>
             <div className="flex flex-wrap gap-4 font-semibold text-emerald-800">
               <a href="/contact" className="hover:underline">Formular Contact & Consultanță →</a>

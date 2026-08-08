@@ -3,25 +3,23 @@ import { VisitorTracker } from "@/components/visitor-tracker";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://subventii.ro"),
+  metadataBase: new URL("https://subventii.cristianvaduva.com"),
   title: {
-    default: "Subvenții.ro — Căutare și Descoperire Fonduri Nerambursabile",
-    template: "%s | Subvenții.ro",
+    default: "AiX — Educational Intelligence | Educație și Informare Finanțări",
+    template: "%s | AiX Educational Intelligence",
   },
   description:
-    "Cea mai rapidă și clară platformă din România pentru căutarea subvențiilor, granturilor PNRR, Start-Up Nation și sprijinului pentru IMM-uri.",
+    "Platformă privată de educație și informare care organizează și explică informații publice despre finanțări, antreprenoriat, legislație și economie.",
   keywords: [
-    "subventii",
-    "fonduri europene",
-    "granturi IMM",
-    "PNRR",
-    "Start-Up Nation",
-    "AFIR",
-    "AFM",
-    "ADR",
-    "finantari nerambursabile",
+    "AiX Educational Intelligence",
+    "educatie financiara",
+    "informatii publice",
+    "finantari si granturi",
+    "concepte economice",
+    "legislatie imm",
+    "antreprenoriat",
   ],
-  authors: [{ name: "Subvenții.ro" }],
+  authors: [{ name: "AiX — Educational Intelligence" }],
   robots: {
     index: true,
     follow: true,
@@ -36,17 +34,17 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "ro_RO",
-    url: "https://subventii.ro",
-    siteName: "Subvenții.ro",
-    title: "Subvenții.ro — Căutare și Descoperire Fonduri Nerambursabile",
+    url: "https://subventii.cristianvaduva.com",
+    siteName: "AiX — Educational Intelligence",
+    title: "AiX — Educational Intelligence | Platformă Privată de Informare",
     description:
-      "Găsește rapid programe de finanțare publică pentru afacerea ta din surse oficiale verificate.",
+      "Platformă privată de educație și informare care centralizează și explică informații publice din surse deschise.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Subvenții.ro — Căutare Fonduri Nerambursabile",
+    title: "AiX — Educational Intelligence",
     description:
-      "Platformă rapidă și gratuită pentru descoperirea subvențiilor și granturilor în România.",
+      "Platformă privată de educație și informare privind finanțările, programele și economia.",
   },
 };
 
@@ -66,16 +64,16 @@ export default function RootLayout({
     "@graph": [
       {
         "@type": "WebSite",
-        "@id": "https://subventii.ro/#website",
-        "url": "https://subventii.ro",
-        "name": "Subvenții.ro",
-        "description": "Căutare și Descoperire Fonduri Nerambursabile",
+        "@id": "https://subventii.cristianvaduva.com/#website",
+        "url": "https://subventii.cristianvaduva.com",
+        "name": "AiX — Educational Intelligence",
+        "description": "Platformă privată de educație și informare privind finanțările și legislația",
         "potentialAction": [
           {
             "@type": "SearchAction",
             "target": {
               "@type": "EntryPoint",
-              "urlTemplate": "https://subventii.ro/programes?q={search_term_string}"
+              "urlTemplate": "https://subventii.cristianvaduva.com/programes?q={search_term_string}"
             },
             "query-input": "required name=search_term_string"
           }
@@ -83,12 +81,12 @@ export default function RootLayout({
       },
       {
         "@type": "Organization",
-        "@id": "https://subventii.ro/#organization",
-        "name": "Subvenții.ro",
-        "url": "https://subventii.ro",
+        "@id": "https://subventii.cristianvaduva.com/#organization",
+        "name": "AiX — Educational Intelligence",
+        "url": "https://subventii.cristianvaduva.com",
         "logo": {
           "@type": "ImageObject",
-          "url": "https://subventii.ro/favicon.ico"
+          "url": "https://subventii.cristianvaduva.com/favicon.ico"
         }
       }
     ]

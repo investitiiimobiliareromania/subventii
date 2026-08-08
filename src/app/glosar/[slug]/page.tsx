@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `Ce înseamnă ${item.term}? Definiție & Exemple`,
     description: item.definition,
-    alternates: { canonical: `https://subventii.ro/glosar/${slug}` },
+    alternates: { canonical: `https://subventii.cristianvaduva.com/glosar/${slug}` },
   };
 }
 
@@ -32,7 +32,7 @@ export default async function GlossaryDetailPage({ params }: Props) {
     "@type": "DefinedTerm",
     "name": item.term,
     "description": item.definition,
-    "inDefinedTermSet": "https://subventii.ro/glosar",
+    "inDefinedTermSet": "https://subventii.cristianvaduva.com/glosar",
   };
 
   return (

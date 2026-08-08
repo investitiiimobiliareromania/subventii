@@ -5,10 +5,10 @@ import { FundingExplorer } from "@/components/funding-explorer";
 import { getProgramsFromDb } from "@/lib/db/repository";
 
 export const metadata: Metadata = {
-  title: "Catalog Finanțări și Subvenții 2026 | Subvenții.ro",
+  title: "Catalog Finanțări și Subvenții 2026 | AiX Educational Intelligence",
   description: "Căutare și filtrare avansată pentru fonduri nerambursabile, PNRR, Start-Up Nation și sprijin IMM din România.",
   alternates: {
-    canonical: "https://subventii.ro/programes",
+    canonical: "https://subventii.cristianvaduva.com/programes",
   },
 };
 

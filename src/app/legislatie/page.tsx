@@ -8,7 +8,7 @@ import { legislationCatalog } from "@/lib/legislatie-data";
 export const metadata: Metadata = {
   title: "Legislație Fiscală & IMM România 2026",
   description: "Centralizatorul oficial al modificărilor legislative, OUG, HG, Legi și Ordine de ministru cu impact pe fonduri, firme și investiții.",
-  alternates: { canonical: "https://subventii.ro/legislatie" },
+  alternates: { canonical: "https://subventii.cristianvaduva.com/legislatie" },
 };
 
 export default function LegislationPage() {
@@ -16,7 +16,7 @@ export default function LegislationPage() {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
     "name": "Legislație Finanțări & IMM",
-    "url": "https://subventii.ro/legislatie",
+    "url": "https://subventii.cristianvaduva.com/legislatie",
   };
 
   return (

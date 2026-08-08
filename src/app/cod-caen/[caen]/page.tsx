@@ -23,9 +23,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const info = CAEN_TITLES[caen] || { title: `Activități economice Clasa ${caen}`, desc: `Granturi și sprijin nerambursabil pentru codul CAEN ${caen}.`, sector: "general" };
 
   return {
-    title: `Subvenții & Granturi Cod CAEN ${caen} — ${info.title} 2026`,
-    description: `Ghidul complet de finanțare nerambursabilă pentru Codul CAEN ${caen} (${info.title}). Vezi ghidul solicitantului și granturile active.`,
-    alternates: { canonical: `https://subventii.ro/cod-caen/${caen}` },
+    title: `Finanțări & Ghiduri Cod CAEN ${caen} — ${info.title} 2026`,
+    description: `Ghid și sinteză de informare pentru Codul CAEN ${caen} (${info.title}). Vezi programele publice de finanțare.`,
+    alternates: { canonical: `https://subventii.cristianvaduva.com/cod-caen/${caen}` },
   };
 }
 
@@ -46,10 +46,10 @@ export default async function CaenSeoPage({ params }: Props) {
 
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "GovernmentService",
-    "name": `Finanțări Nerambursabile Cod CAEN ${caen}`,
+    "@type": "DefinedTerm",
+    "name": `Cod CAEN ${caen} - ${info.title}`,
     "description": info.desc,
-    "url": `https://subventii.ro/cod-caen/${caen}`,
+    "url": `https://subventii.cristianvaduva.com/cod-caen/${caen}`,
   };
 
   return (

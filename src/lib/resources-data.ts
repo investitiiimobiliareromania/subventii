@@ -48,6 +48,6 @@ export const downloadableResourcesCatalog: DownloadResource[] = [
     category: "Cerere Tip",
     fileFormat: "XLSX",
     fileSizeMb: 1.1,
-    downloadUrl: "https://subventii.ro/resources/macheta_buget.xlsx",
+    downloadUrl: "https://subventii.cristianvaduva.com/resources/macheta_buget.xlsx",
   },
 ];

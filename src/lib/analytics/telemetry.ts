@@ -17,7 +17,7 @@ export type PageCategory =
 
 export function classifyRoute(pathname: string): { category: PageCategory; label: string } {
   if (pathname === "/" || pathname === "") {
-    return { category: "HOME", label: "Homepage — Subvenții.ro" };
+    return { category: "HOME", label: "Homepage — AiX Educational Intelligence" };
   }
 
   if (pathname.startsWith("/subventii/")) {
@@ -48,7 +48,7 @@ export function classifyRoute(pathname: string): { category: PageCategory; label
   if (pathname.startsWith("/intelligence")) {
     if (pathname.includes("/funding")) return { category: "FUNDING", label: "Intelligence — Funding Matrix" };
     if (pathname.includes("/legislation")) return { category: "LEGISLATION", label: "Intelligence — Legislation Matrix" };
-    return { category: "INTELLIGENCE", label: "Subvenții.ro Intelligence Platform" };
+    return { category: "INTELLIGENCE", label: "AiX Educational Intelligence Platform" };
   }
 
   if (pathname.startsWith("/finantari") || pathname.startsWith("/programes") || pathname.startsWith("/programe-guvernamentale")) {
@@ -80,7 +80,7 @@ export function classifyRoute(pathname: string): { category: PageCategory; label
   }
 
   if (pathname.startsWith("/asistent-ai")) {
-    return { category: "AI_ASSISTANT", label: "Asistent AI Oficial" };
+    return { category: "AI_ASSISTANT", label: "Asistent AI Educațional" };
   }
 
   return { category: "OTHER", label: pathname };

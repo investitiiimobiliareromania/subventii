@@ -8,15 +8,15 @@ import { institutionsCatalog } from "@/lib/institutii-data";
 export const metadata: Metadata = {
   title: "Director Instituții Publice & Autorități de Management",
   description: "Directorul complet al ministerelor, agențiilor de management și administrațiilor publice responsabile cu fondurile nerambursabile.",
-  alternates: { canonical: "https://subventii.ro/institutii" },
+  alternates: { canonical: "https://subventii.cristianvaduva.com/institutii" },
 };
 
 export default function InstitutionsDirectoryPage() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    "name": "Instituții Publice Subvenții.ro",
-    "url": "https://subventii.ro/institutii",
+    "name": "Instituții Publice AiX Educational Intelligence",
+    "url": "https://subventii.cristianvaduva.com/institutii",
   };
 
   return (

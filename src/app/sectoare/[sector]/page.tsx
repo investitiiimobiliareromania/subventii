@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `Finanțări Nerambursabile Sectorul ${info.name} 2026`,
     description: info.desc,
-    alternates: { canonical: `https://subventii.ro/sectoare/${sector}` },
+    alternates: { canonical: `https://subventii.cristianvaduva.com/sectoare/${sector}` },
   };
 }
 
@@ -48,7 +48,7 @@ export default async function SectorFundingPage({ params }: Props) {
     "@type": "CollectionPage",
     "name": `Finanțări Sectorul ${info.name}`,
     "description": info.desc,
-    "url": `https://subventii.ro/sectoare/${key}`,
+    "url": `https://subventii.cristianvaduva.com/sectoare/${key}`,
   };
 
   return (

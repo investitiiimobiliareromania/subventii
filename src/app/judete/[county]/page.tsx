@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `Finanțări Nerambursabile & Oportunități Județul ${name} 2026`,
     description: `Ghidul fondurilor europene, granturilor locale, facilităților fiscale și datelor ANCPI pentru firmele din Județul ${name}.`,
-    alternates: { canonical: `https://subventii.ro/judete/${key}` },
+    alternates: { canonical: `https://subventii.cristianvaduva.com/judete/${key}` },
   };
 }
 
@@ -42,7 +42,7 @@ export default async function CountyIntelligencePage({ params }: Props) {
     "@context": "https://schema.org",
     "@type": "AdministrativeArea",
     "name": `Județul ${profile.name}`,
-    "url": `https://subventii.ro/judete/${key}`,
+    "url": `https://subventii.cristianvaduva.com/judete/${key}`,
   };
 
   return (

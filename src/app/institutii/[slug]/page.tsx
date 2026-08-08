@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${inst.name} (${inst.acronym}) | Profil Oficial`,
     description: inst.summary,
-    alternates: { canonical: `https://subventii.ro/institutii/${slug}` },
+    alternates: { canonical: `https://subventii.cristianvaduva.com/institutii/${slug}` },
   };
 }
 
@@ -103,7 +103,7 @@ export default async function InstitutionDetailPage({ params }: Props) {
             <aside className="space-y-6">
               <div className="rounded-xl border border-slate-200 bg-white p-5">
                 <h3 className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-3">Programe Monitorizate</h3>
-                <p className="text-xs text-slate-600 mb-4">Această instituție administrează {inst.activeProgramsCount} de apeluri în catalogul Subvenții.ro.</p>
+                <p className="text-xs text-slate-600 mb-4">Această instituție administrează {inst.activeProgramsCount} de apeluri în catalogul AiX Educational Intelligence.</p>
                 <Link href="/programes" className="block text-center rounded-lg bg-emerald-800 py-2 text-xs font-bold text-white hover:bg-emerald-900">
                   Vezi Toate Finanțările →
                 </Link>

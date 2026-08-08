@@ -14,7 +14,7 @@ export function Footer() {
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-b border-slate-800 pb-4 mb-5">
             <div>
               <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-emerald-400">
-                Rețeaua Oficială de Servicii &amp; Inteligență
+                Rețeaua Privat de Servicii &amp; Educație
               </span>
               <h3 className="text-sm font-bold text-white mt-0.5">AiX ECOSYSTEM • Cristian Văduva Network</h3>
             </div>
@@ -93,7 +93,7 @@ export function Footer() {
               <li><Link href="/institutii" className="hover:text-white transition-colors">Instituții Publice</Link></li>
               <li><Link href="/resurse" className="hover:text-white transition-colors">Ghiduri PDF &amp; Formulare</Link></li>
               <li><Link href="/glosar" className="hover:text-white transition-colors">Glosar Finanțări</Link></li>
-              <li><Link href="/asistent-ai" className="hover:text-white transition-colors">Asistent AI Oficial</Link></li>
+              <li><Link href="/asistent-ai" className="hover:text-white transition-colors">Asistent AI Educațional</Link></li>
               <li><Link href="/alerte" className="hover:text-white transition-colors">Alerte Programe Noi</Link></li>
             </ul>
           </div>
@@ -205,11 +205,16 @@ export function Footer() {
         </div>
 
         <div className="border-t border-slate-800 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-slate-500">
-          <p>© {new Date().getFullYear()} Subvenții.ro — Platforma Națională de Inteligență Financiară și Fonduri Publice. Cristian Văduva Ecosystem.</p>
-          <div className="flex items-center gap-4">
+          <div>
+            <p>© {new Date().getFullYear()} AiX — Educational Intelligence. Platformă privată de educație și informare. Cristian Văduva Ecosystem.</p>
+            <p className="mt-1 text-[11px] text-slate-400 max-w-4xl">
+              Platformă privată de educație și informare. Informațiile prezentate au caracter general și educațional și nu reprezintă comunicări oficiale ale autorităților publice și nu constituie consultanță juridică, fiscală sau financiară. Pentru informații oficiale și condițiile aplicabile unui program, consultați documentele și pagina instituției emitente.
+            </p>
+          </div>
+          <div className="flex items-center gap-4 flex-shrink-0">
             <span className="inline-flex items-center gap-1.5 text-emerald-400 font-semibold">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-              Sistem Conectat AiX Ecosystem &amp; MIPE
+              Parte din ecosistemul privat AiX
             </span>
           </div>
         </div>

@@ -16,9 +16,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!program) return { title: "Program Negăsit" };
 
   return {
-    title: `${program.title} | Ghid Oficial 2026`,
+    title: `${program.title} | Sinteză Educațională 2026`,
     description: program.subtitle,
-    alternates: { canonical: `https://subventii.ro/programe-guvernamentale/${slug}` },
+    alternates: { canonical: `https://subventii.cristianvaduva.com/programe-guvernamentale/${slug}` },
     openGraph: {
       title: program.title,
       description: program.subtitle,
@@ -36,11 +36,15 @@ export default async function GovernmentProgramDetailPage({ params }: Props) {
     "@context": "https://schema.org",
     "@graph": [
       {
-        "@type": "GovernmentService",
-        "name": program.title,
+        "@type": "Article",
+        "headline": program.title,
         "description": program.overview,
-        "provider": { "@type": "GovernmentOrganization", "name": "Guvernul României" },
-        "url": `https://subventii.ro/programe-guvernamentale/${slug}`,
+        "url": `https://subventii.cristianvaduva.com/programe-guvernamentale/${slug}`,
+        "publisher": {
+          "@type": "Organization",
+          "name": "AiX — Educational Intelligence",
+          "url": "https://subventii.cristianvaduva.com"
+        }
       },
       {
         "@type": "FAQPage",
@@ -53,9 +57,9 @@ export default async function GovernmentProgramDetailPage({ params }: Props) {
       {
         "@type": "BreadcrumbList",
         "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "Acasă", "item": "https://subventii.ro" },
-          { "@type": "ListItem", "position": 2, "name": "Programe Guvernamentale", "item": "https://subventii.ro/programe-guvernamentale" },
-          { "@type": "ListItem", "position": 3, "name": program.title, "item": `https://subventii.ro/programe-guvernamentale/${slug}` },
+          { "@type": "ListItem", "position": 1, "name": "Acasă", "item": "https://subventii.cristianvaduva.com" },
+          { "@type": "ListItem", "position": 2, "name": "Programe Guvernamentale", "item": "https://subventii.cristianvaduva.com/programe-guvernamentale" },
+          { "@type": "ListItem", "position": 3, "name": program.title, "item": `https://subventii.cristianvaduva.com/programe-guvernamentale/${slug}` },
         ],
       },
     ],

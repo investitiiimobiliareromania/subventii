@@ -8,7 +8,7 @@ import { governmentProgramsCatalog } from "@/lib/programe-guvernamentale-data";
 export const metadata: Metadata = {
   title: "Ghidul Complet al Programelor Guvernamentale din România 2026",
   description: "Toate programele naționale și locale pentru locuințe, eficiență energetică, investiții și facilități fiscale, actualizate permanent.",
-  alternates: { canonical: "https://subventii.ro/programe-guvernamentale" },
+  alternates: { canonical: "https://subventii.cristianvaduva.com/programe-guvernamentale" },
 };
 
 export default function ProgrameGuvernamentalePage() {
@@ -16,7 +16,7 @@ export default function ProgrameGuvernamentalePage() {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
     "name": "Programe Guvernamentale România 2026",
-    "url": "https://subventii.ro/programe-guvernamentale",
+    "url": "https://subventii.cristianvaduva.com/programe-guvernamentale",
     "description": "Toate programele naționale și locale pentru locuințe, eficiență energetică și investiții.",
   };
 

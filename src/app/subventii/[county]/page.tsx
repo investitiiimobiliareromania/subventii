@@ -17,9 +17,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const name = profile ? profile.name : county.toUpperCase();
 
   return {
-    title: `Subvenții & Fonduri Nerambursabile Județul ${name} 2026`,
-    description: `Descoperă toate finanțările nerambursabile, granturile ADR și ajutoarele de stat disponibile pentru firmele și persoanele din județul ${name}.`,
-    alternates: { canonical: `https://subventii.ro/subventii/${key}` },
+    title: `Finanțări & Informații Educaționale Județul ${name} 2026`,
+    description: `Sinteză de informare privind oportunitățile de finanțare, granturile regionale și programele economice pentru județul ${name}.`,
+    alternates: { canonical: `https://subventii.cristianvaduva.com/subventii/${key}` },
   };
 }
 
@@ -46,14 +46,10 @@ export default async function CountySubventiiPage({ params }: Props) {
 
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "GovernmentService",
-    "name": `Programul de Subvenții și Granturi Județul ${profile.name}`,
-    "provider": {
-      "@type": "GovernmentOrganization",
-      "name": profile.adrName,
-    },
-    "areaServed": profile.name,
-    "url": `https://subventii.ro/subventii/${key}`,
+    "@type": "CollectionPage",
+    "name": `Catalog Finanțări și Informații Județul ${profile.name}`,
+    "description": `Informații educaționale privind programele disponibile în județul ${profile.name}`,
+    "url": `https://subventii.cristianvaduva.com/subventii/${key}`,
   };
 
   return (

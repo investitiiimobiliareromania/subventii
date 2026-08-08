@@ -8,7 +8,7 @@ import { insuranceCatalog } from "@/lib/asigurari-data";
 export const metadata: Metadata = {
   title: "Asigurări Obligatorii și Facultative 2026",
   description: "Ghidul complet al polițelor PAD, asigurărilor facultative de locuință, clădiri IMM, risc de șantier (CAR) și răspundere profesională.",
-  alternates: { canonical: "https://subventii.ro/asigurari" },
+  alternates: { canonical: "https://subventii.cristianvaduva.com/asigurari" },
 };
 
 export default function AsigurariPage() {
@@ -16,7 +16,7 @@ export default function AsigurariPage() {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
     "name": "Asigurări Locuințe & Afaceri",
-    "url": "https://subventii.ro/asigurari",
+    "url": "https://subventii.cristianvaduva.com/asigurari",
   };
 
   return (

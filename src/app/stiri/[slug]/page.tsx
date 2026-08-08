@@ -16,9 +16,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!article) return { title: "Articol negăsit" };
 
   return {
-    title: `${article.headline} | Subvenții.ro`,
+    title: `${article.headline} | AiX Educational Intelligence`,
     description: article.summary,
-    alternates: { canonical: `https://subventii.ro/stiri/${slug}` },
+    alternates: { canonical: `https://subventii.cristianvaduva.com/stiri/${slug}` },
     openGraph: {
       title: article.headline,
       description: article.summary,
@@ -41,7 +41,7 @@ export default async function NewsArticlePage({ params }: Props) {
     "datePublished": article.publishedAt,
     "dateModified": article.updatedAt,
     "author": { "@type": "Person", "name": article.author },
-    "publisher": { "@type": "Organization", "name": "Subvenții.ro" },
+    "publisher": { "@type": "Organization", "name": "AiX Educational Intelligence" },
   };
 
   return (
