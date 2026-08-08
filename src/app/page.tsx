@@ -1,6 +1,7 @@
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { FundingExplorer } from "@/components/funding-explorer";
+import { EcosystemSurface } from "@/components/ecosystem-surface";
 import {
   getProgramsFromDb,
   getActiveProgramsCount,
@@ -104,6 +105,9 @@ export default async function Home() {
             </div>
           </div>
         </section>
+
+        {/* AiX Ecosystem Surface */}
+        <EcosystemSurface />
       </main>
 
       <Footer />
