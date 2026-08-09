@@ -49,7 +49,7 @@ export function EcosystemNav() {
   };
 
   return (
-    <div className="relative inline-block text-left" ref={dropdownRef}>
+    <div className="relative inline-block text-left self-start" ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="inline-flex items-center gap-1.5 rounded-full bg-slate-900 px-3 py-1 text-xs font-bold text-emerald-400 hover:bg-slate-800 transition-colors cursor-pointer border border-slate-700/60 shadow-xs min-h-[32px]"
