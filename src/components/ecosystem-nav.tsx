@@ -69,7 +69,7 @@ export function EcosystemNav() {
       </button>
 
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-80 sm:w-96 max-w-[calc(100vw-2rem)] rounded-2xl bg-slate-900 border border-slate-800 p-4 shadow-2xl z-50 animate-in fade-in-50 zoom-in-95 box-border">
+        <div className="absolute left-0 lg:right-0 mt-2 w-80 sm:w-96 max-w-[calc(100vw-2rem)] rounded-2xl bg-slate-900 border border-slate-800 p-4 shadow-2xl z-50 animate-in fade-in-50 zoom-in-95 box-border">
           <div className="border-b border-slate-800 pb-3 mb-3 flex items-center justify-between">
             <div>
               <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-emerald-400">
