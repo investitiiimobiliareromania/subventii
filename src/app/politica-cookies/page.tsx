@@ -31,7 +31,7 @@ export default function CookiePolicyPage() {
               Politica privind Modulele Cookie
             </h1>
             <p className="mt-2 text-xs text-slate-600">
-              Ultima actualizare: Septembrie 2026
+              Ultima actualizare: Septembrie 2026 • Politica descrie comportamentul tehnic identificat la momentul auditului.
             </p>
           </header>
 

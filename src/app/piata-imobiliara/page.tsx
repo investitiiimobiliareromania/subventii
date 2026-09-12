@@ -81,7 +81,7 @@ export default function RealEstatePage() {
           <section className="mb-10">
             <div className="mb-6">
               <h2 className="text-xl font-bold text-slate-900">
-                Imobile Vândute pe Centre Urbane și Județe Majore (ANCPI Iunie 2026)
+                Imobile Vândute pe Județe Majore și București (ANCPI Iunie 2026)
               </h2>
               <p className="text-xs text-slate-600 mt-1">
                 Date oficiale provenite din registrul cadastral ANCPI (Tabelul 1 — Iunie 2026).

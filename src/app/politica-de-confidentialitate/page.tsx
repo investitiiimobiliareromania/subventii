@@ -31,7 +31,7 @@ export default function PrivacyPolicyPage() {
               Politica de Confidențialitate
             </h1>
             <p className="mt-2 text-xs text-slate-600">
-              Ultima actualizare: Septembrie 2026 • Conform Regulamentului (UE) 2016/679
+              Ultima actualizare: Septembrie 2026 • Conform Regulamentului (UE) 2016/679 • Politica descrie comportamentul tehnic identificat la momentul auditului.
             </p>
           </header>
 
