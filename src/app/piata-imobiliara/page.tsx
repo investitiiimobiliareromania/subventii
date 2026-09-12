@@ -6,8 +6,8 @@ import { AiAssistantDrawer } from "@/components/ai-assistant-drawer";
 import { realEstateCityReports, realEstateMarketMacro } from "@/lib/piata-imobiliara-data";
 
 export const metadata: Metadata = {
-  title: "Piața Imobiliară România 2026: Prețuri, Indici & Tendințe",
-  description: "Rapoarte de prețuri pe metru pătrat, indici de creștere imobiliară pe marile orașe și evoluția tranzacțiilor rezidențiale și comerciale.",
+  title: "Piața Imobiliară România 2026: Date Oficiale ANCPI & Cadrul Macro",
+  description: "Rapoarte oficiale de tranzacții și imobile vândute pe marile centre urbane, indici macroeconomici BNR (IRCC) și legislație fiscală TVA.",
   alternates: { canonical: "https://subventii.cristianvaduva.com/piata-imobiliara" },
 };
 
@@ -35,20 +35,20 @@ export default function RealEstatePage() {
           <div className="mb-8 border-b border-slate-200 pb-6">
             <div className="flex flex-wrap items-center gap-2 mb-2">
               <span className="text-xs font-bold uppercase tracking-wider text-emerald-800">
-                INTELIGENȚĂ IMOBILIARĂ &amp; INDICI DE PIAȚĂ
+                INTELIGENȚĂ IMOBILIARĂ &amp; DATE OFICIALE
               </span>
               <span className="rounded bg-slate-100 px-2 py-0.5 text-[10px] font-bold text-slate-700 border border-slate-200">
-                SURSE: IMOBILIARE.RO / ANCPI / BNR
+                SURSA: ANCPI / BNR / MF
               </span>
               <span className="rounded bg-emerald-50 px-2 py-0.5 text-[10px] font-bold text-emerald-800 border border-emerald-200">
                 SEPTEMBRIE 2026
               </span>
             </div>
             <h1 className="mt-1 text-3xl font-extrabold text-slate-900 sm:text-4xl">
-              Raportul Pieței Imobiliare pe Marile Orașe 2026
+              Raportul Pieței Imobiliare pe Marile Centre Urbane 2026
             </h1>
             <p className="mt-2 text-sm text-slate-700 max-w-3xl leading-relaxed">
-              Analiză consolidată a prețurilor medii cerute pe metru pătrat util (asking price), volumului de tranzacții oficiale înregistrate la ANCPI și randamentelor brute din închiriere.
+              Analiză consolidată a volumului oficial de imobile vândute înregistrate la ANCPI (Iunie 2026), indicatorilor de creditare BNR și regimului fiscal aplicabil locuințelor.
             </p>
           </div>
 
@@ -81,44 +81,32 @@ export default function RealEstatePage() {
           <section className="mb-10">
             <div className="mb-6">
               <h2 className="text-xl font-bold text-slate-900">
-                Comparație Prețuri &amp; Indicatori pe Centre Urbane Majore
+                Imobile Vândute pe Centre Urbane și Județe Majore (ANCPI Iunie 2026)
               </h2>
               <p className="text-xs text-slate-600 mt-1">
-                Date sintetizate pentru apartamente rezidențiale (noi vs. vechi) și randamente estimate.
+                Date oficiale provenite din registrul cadastral ANCPI (Tabelul 1 — Iunie 2026).
               </p>
             </div>
 
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
               {realEstateCityReports.map((c) => (
-                <div key={c.city} className="rounded-2xl border border-slate-200 bg-white p-6 shadow-xs flex flex-col justify-between">
+                <div key={c.city} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-xs flex flex-col justify-between">
                   <div>
-                    <div className="flex items-center justify-between mb-3">
-                      <h3 className="text-xl font-extrabold text-slate-900">{c.city}</h3>
-                      <span className="rounded font-bold text-emerald-800 bg-emerald-50 border border-emerald-200 px-2 py-0.5 text-xs">
-                        +{c.yoyAskingPriceGrowthPct}% YoY
-                      </span>
+                    <div className="flex items-center justify-between mb-2">
+                      <h3 className="text-lg font-extrabold text-slate-900">{c.city}</h3>
                     </div>
+                    <span className="inline-block text-[10px] font-bold text-emerald-800 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded mb-3">
+                      {c.nationalRankNote}
+                    </span>
 
-                    <div className="space-y-2.5 text-xs border-y border-slate-100 py-3.5 mb-3">
-                      <div className="flex justify-between">
-                        <span className="text-slate-600">Preț Mediu Cerut (MP util):</span>
-                        <strong className="text-slate-900 text-sm">{c.avgAskingPriceSqm} EUR</strong>
+                    <div className="space-y-2 text-xs border-y border-slate-100 py-3 mb-3">
+                      <div className="flex justify-between items-center">
+                        <span className="text-slate-600">Imobile vândute:</span>
+                        <strong className="text-base font-black text-slate-900">{c.ancpiJune2026Transactions.toLocaleString("ro-RO")}</strong>
                       </div>
-                      <div className="flex justify-between">
-                        <span className="text-slate-600">Blocuri Noi (MP util):</span>
-                        <strong className="text-slate-800">{c.newBuildingsAskingPriceSqm} EUR</strong>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-slate-600">Blocuri Vechi (MP util):</span>
-                        <strong className="text-slate-800">{c.oldBuildingsAskingPriceSqm} EUR</strong>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-slate-600">Randament Mediu Brut Chirie:</span>
-                        <strong className="text-emerald-800">{c.estimatedGrossRentalYieldPct}% / an</strong>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-slate-600">Imobile Vândute ANCPI (Iunie 2026):</span>
-                        <strong className="text-slate-800">{c.ancpiJune2026Transactions.toLocaleString("ro-RO")}</strong>
+                      <div className="flex justify-between items-center text-[11px]">
+                        <span className="text-slate-500">Lună de referință:</span>
+                        <span className="font-semibold text-slate-700">Iunie 2026</span>
                       </div>
                     </div>
 
@@ -132,11 +120,11 @@ export default function RealEstatePage() {
                       Sursă: {c.sourceAttribution}
                     </div>
                     <Link
-                      href={`/judete/${c.county.toLowerCase()}`}
+                      href={`/judete/${c.county.toLowerCase().replace(/[^a-z0-9]/g, "")}`}
                       className="block text-center rounded-lg border border-slate-300 py-2 text-xs font-bold text-slate-800 hover:bg-slate-50 transition-colors"
                       aria-label={`Vezi raportul detaliat pentru județul ${c.county}`}
                     >
-                      Vezi Date Județul {c.county} →
+                      Vezi Date Județene →
                     </Link>
                   </div>
                 </div>
@@ -147,13 +135,13 @@ export default function RealEstatePage() {
           {/* METHODOLOGY & TRANSPARENCY */}
           <section className="rounded-2xl border border-slate-200 bg-slate-50 p-6 shadow-xs">
             <h2 className="text-sm font-bold uppercase tracking-wider text-slate-800 mb-2">
-              Metodologie de Calcul &amp; Proveniență Date
+              Metodologie &amp; Proveniență Date
             </h2>
             <p className="text-xs text-slate-700 leading-relaxed mb-3">
               {realEstateMarketMacro.methodologyNote}
             </p>
             <p className="text-[11px] text-slate-600">
-              AiX Educational Intelligence nu oferă consultanță financiară sau recomandări de investiții imobiliare. Pentru decizii de achiziție, se recomandă evaluarea individuală a proprietății de către un evaluator autorizat ANEVAR și consultarea datelor cadastrale oficiale.
+              AiX Educational Intelligence nu oferă consultanță financiară sau recomandări speculative de investiții. Pentru decizii de achiziție, se recomandă evaluarea individuală a proprietății și consultarea datelor cadastrale oficiale.
             </p>
           </section>
         </div>
