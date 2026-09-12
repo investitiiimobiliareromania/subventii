@@ -87,7 +87,7 @@ export default function AncpiReportsPage() {
               </div>
               <div className="bg-white/80 rounded-xl p-4 border border-amber-200/80">
                 <span className="block font-bold text-amber-900 mb-1">Statistici Tranzacții August 2026</span>
-                <p>Statisticile oficiale ANCPI pentru luna <strong>august 2026</strong> <em>nu sunt încă publicate</em>.</p>
+                <p>La data auditului, 12 septembrie 2026, statisticile oficiale ANCPI pentru luna <strong>august 2026</strong> <em>nu sunt afișate/publicate pe portalul oficial verificat</em>.</p>
               </div>
             </div>
             <p className="text-[11px] text-slate-600 italic">

@@ -43,7 +43,7 @@ export const ancpiReportSummary = {
     requestsRegistered: 329476,
     requestsSolved: 279242,
     currentStatus: "Funcționalitatea 'Link de plată' din cadrul sistemului informatic e-Terra a fost reactivată pe 20 August 2026. În perioada 11–19 august 2026 au fost recepționate 329.476 de cereri și soluționate 279.242 de dosare. Celelalte platforme și servicii online ANCPI urmează a fi repuse în funcțiune etapizat.",
-    augustStatisticsStatus: "Statisticile oficiale ANCPI pentru luna august 2026 nu sunt încă publicate.",
+    augustStatisticsStatus: "La data auditului, 12 septembrie 2026, statisticile oficiale ANCPI pentru luna august 2026 nu sunt afișate/publicate pe portalul oficial verificat.",
     officialSourceDoc: "Comunicat Oficial ANCPI — 20 August 2026"
   }
 };

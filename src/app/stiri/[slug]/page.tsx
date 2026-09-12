@@ -126,7 +126,7 @@ export default async function NewsArticlePage({ params }: Props) {
             <aside className="space-y-6">
               <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-xs">
                 <h2 className="text-xs font-bold uppercase tracking-wider text-slate-600 mb-3">
-                  Documente &amp; Portal Oficial
+                  Sursă Oficială &amp; Documente
                 </h2>
                 <ul className="space-y-2 text-xs">
                   {article.officialDocuments.map((doc, i) => (
@@ -146,12 +146,15 @@ export default async function NewsArticlePage({ params }: Props) {
               </div>
 
               <div className="rounded-xl border border-emerald-200 bg-emerald-50/60 p-5">
-                <h2 className="text-xs font-bold text-emerald-900 mb-2">Sursă Instituțională</h2>
+                <h2 className="text-xs font-bold text-emerald-900 mb-1">Instituție Emitentă</h2>
                 <p className="text-xs text-emerald-800 font-semibold">{article.institution}</p>
+                <div className="mt-3 pt-3 border-t border-emerald-200/60 text-[11px] text-slate-600">
+                  <span className="font-semibold text-slate-800">Sinteză editorială Subvenții:</span> Acest articol constituie o sinteză structurată a informațiilor publice oficiale comunicate de autoritatea emitentă.
+                </div>
                 <Link
                   href="/contact"
                   className="mt-4 inline-block w-full text-center rounded-lg bg-emerald-800 px-4 py-2 text-xs font-bold text-white hover:bg-emerald-900 transition-colors"
-                  aria-label="Solicită consultanță și asistență"
+                  aria-label="Solicită asistență"
                 >
                   Solicită Asistență →
                 </Link>
