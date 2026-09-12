@@ -120,7 +120,7 @@ export default function RealEstatePage() {
                       Sursă: {c.sourceAttribution}
                     </div>
                     <Link
-                      href={`/judete/${c.county.toLowerCase().replace(/[^a-z0-9]/g, "")}`}
+                      href={`/judete/${c.county.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]/g, "")}`}
                       className="block text-center rounded-lg border border-slate-300 py-2 text-xs font-bold text-slate-800 hover:bg-slate-50 transition-colors"
                       aria-label={`Vezi raportul detaliat pentru județul ${c.county}`}
                     >

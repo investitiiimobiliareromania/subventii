@@ -14,7 +14,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { county, sector } = await params;
   const countyKey = county.toLowerCase();
   const profile = countyProfilesCatalog[countyKey];
-  const countyName = profile ? profile.name : county.toUpperCase();
+  const countyName = profile.name;
   const sectorUpper = sector.toUpperCase();
 
   return {
