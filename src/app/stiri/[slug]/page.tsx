@@ -10,6 +10,12 @@ type Props = {
   params: Promise<{ slug: string }>;
 };
 
+export async function generateStaticParams() {
+  return newsroomArticles.map((article) => ({
+    slug: article.slug,
+  }));
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const article = newsroomArticles.find((a) => a.slug === slug);
@@ -51,26 +57,32 @@ export default async function NewsArticlePage({ params }: Props) {
 
       <main className="flex-1 py-10">
         <div className="mx-auto max-w-4xl px-4 sm:px-6">
-          <nav className="mb-6 flex items-center gap-2 text-xs text-slate-500">
-            <Link href="/" className="hover:text-emerald-800">Acasă</Link>
-            <span>/</span>
-            <Link href="/stiri" className="hover:text-emerald-800">Știri</Link>
-            <span>/</span>
-            <span className="font-semibold text-slate-800 line-clamp-1">{article.headline}</span>
+          <nav aria-label="Navigare pe pagină" className="mb-6 flex items-center gap-2 text-xs text-slate-600">
+            <Link href="/" className="hover:text-emerald-800 transition-colors">Acasă</Link>
+            <span aria-hidden="true">/</span>
+            <Link href="/stiri" className="hover:text-emerald-800 transition-colors">Știri</Link>
+            <span aria-hidden="true">/</span>
+            <span className="font-semibold text-slate-900 line-clamp-1">{article.headline}</span>
           </nav>
 
           <header className="mb-8 border-b border-slate-200 pb-6">
-            <div className="mb-3 flex items-center gap-3">
+            <div className="mb-3 flex flex-wrap items-center gap-3">
               <span className="rounded-md bg-emerald-100 px-2.5 py-0.5 text-xs font-bold text-emerald-900">
                 {article.category}
               </span>
-              <span className="text-xs text-slate-500">Publicat: {article.publishedAt}</span>
-              <span className="text-xs text-slate-500">• {article.readingTimeMin} min lectură</span>
+              <span className="text-xs text-slate-600">Publicat: {article.publishedAt}</span>
+              <span className="text-xs text-slate-600">• Actualizat: {article.updatedAt}</span>
+              <span className="text-xs text-slate-600">• {article.readingTimeMin} min lectură</span>
+              {article.verified && (
+                <span className="rounded bg-emerald-50 px-2 py-0.5 text-[10px] font-bold text-emerald-800 border border-emerald-200">
+                  ✓ Sursă Oficială Verificată
+                </span>
+              )}
             </div>
             <h1 className="text-2xl font-extrabold text-slate-900 sm:text-4xl leading-tight">
               {article.headline}
             </h1>
-            <p className="mt-4 text-base font-medium text-slate-600 leading-relaxed">
+            <p className="mt-4 text-base font-medium text-slate-700 leading-relaxed">
               {article.summary}
             </p>
           </header>
@@ -78,11 +90,11 @@ export default async function NewsArticlePage({ params }: Props) {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="md:col-span-2 space-y-6 text-sm text-slate-800 leading-relaxed">
               <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
-                <h3 className="text-xs font-bold uppercase tracking-wider text-slate-600 mb-2">
+                <h2 className="text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
                   ⚡ Analiză de Impact Direct
-                </h3>
-                <p className="text-xs text-slate-700">{article.impactAnalysis}</p>
-                <div className="mt-3 pt-3 border-t border-slate-200 text-xs">
+                </h2>
+                <p className="text-xs text-slate-700 leading-relaxed">{article.impactAnalysis}</p>
+                <div className="mt-3 pt-3 border-t border-slate-200 text-xs text-slate-800">
                   <strong>Cine este afectat:</strong> {article.whoIsAffected}
                 </div>
               </div>
@@ -95,12 +107,12 @@ export default async function NewsArticlePage({ params }: Props) {
 
               {article.faqs.length > 0 && (
                 <div className="mt-8 border-t border-slate-200 pt-6">
-                  <h3 className="text-lg font-bold text-slate-900 mb-4">Întrebări Frecvente (FAQ)</h3>
+                  <h2 className="text-lg font-bold text-slate-900 mb-4">Întrebări Frecvente (FAQ)</h2>
                   <div className="space-y-4">
                     {article.faqs.map((faq, i) => (
                       <div key={i} className="rounded-lg border border-slate-200 p-4 bg-slate-50">
-                        <h4 className="font-bold text-slate-900 text-xs mb-1">{faq.question}</h4>
-                        <p className="text-xs text-slate-600">{faq.answer}</p>
+                        <h3 className="font-bold text-slate-900 text-xs mb-1">{faq.question}</h3>
+                        <p className="text-xs text-slate-700">{faq.answer}</p>
                       </div>
                     ))}
                   </div>
@@ -110,14 +122,20 @@ export default async function NewsArticlePage({ params }: Props) {
 
             <aside className="space-y-6">
               <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-xs">
-                <h3 className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-3">
-                  Documente Oficiale
-                </h3>
+                <h2 className="text-xs font-bold uppercase tracking-wider text-slate-600 mb-3">
+                  Documente &amp; Portal Oficial
+                </h2>
                 <ul className="space-y-2 text-xs">
                   {article.officialDocuments.map((doc, i) => (
                     <li key={i}>
-                      <a href={doc.url} target="_blank" rel="noreferrer" className="text-emerald-800 hover:underline font-semibold block">
-                        📄 {doc.title}
+                      <a
+                        href={doc.url}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-emerald-800 hover:underline font-semibold block"
+                        aria-label={`Deschide documentul oficial: ${doc.title}`}
+                      >
+                        📄 {doc.title} ↗
                       </a>
                     </li>
                   ))}
@@ -125,10 +143,14 @@ export default async function NewsArticlePage({ params }: Props) {
               </div>
 
               <div className="rounded-xl border border-emerald-200 bg-emerald-50/60 p-5">
-                <h3 className="text-xs font-bold text-emerald-900 mb-2">Sursă Instituțională</h3>
+                <h2 className="text-xs font-bold text-emerald-900 mb-2">Sursă Instituțională</h2>
                 <p className="text-xs text-emerald-800 font-semibold">{article.institution}</p>
-                <Link href="/contact" className="mt-4 inline-block w-full text-center rounded-lg bg-emerald-800 px-4 py-2 text-xs font-bold text-white hover:bg-emerald-900">
-                  Solicită Consultanță →
+                <Link
+                  href="/contact"
+                  className="mt-4 inline-block w-full text-center rounded-lg bg-emerald-800 px-4 py-2 text-xs font-bold text-white hover:bg-emerald-900 transition-colors"
+                  aria-label="Solicită consultanță și asistență"
+                >
+                  Solicită Asistență →
                 </Link>
               </div>
             </aside>

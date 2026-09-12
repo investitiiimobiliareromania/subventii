@@ -48,20 +48,24 @@ export default function CreditePage() {
           {/* Reference Indices Bar */}
           <div className="mb-10 grid grid-cols-2 gap-4 rounded-2xl border border-slate-200 bg-slate-50 p-5 sm:grid-cols-4 text-center">
             <div>
-              <span className="block text-[11px] font-semibold text-slate-500">IRCC Trimestrial</span>
-              <span className="text-xl font-black text-emerald-800">{referenceIndicesHistory.currentIrcc}%</span>
+              <span className="block text-[11px] font-semibold text-slate-500">IRCC (Aplicabil T3 2026)</span>
+              <span className="text-xl font-black text-emerald-800">{referenceIndicesHistory.currentIrcc.toString().replace(".", ",")}%</span>
+              <span className="block text-[10px] text-slate-500 mt-0.5">Media T1 2026 / BNR</span>
             </div>
             <div>
               <span className="block text-[11px] font-semibold text-slate-500">ROBOR 3M</span>
-              <span className="text-xl font-black text-slate-900">{referenceIndicesHistory.currentRobor3m}%</span>
+              <span className="text-xl font-black text-slate-900">{referenceIndicesHistory.currentRobor3m.toString().replace(".", ",")}%</span>
+              <span className="block text-[10px] text-slate-500 mt-0.5">Cotație BNR: 11.09.2026</span>
             </div>
             <div>
               <span className="block text-[11px] font-semibold text-slate-500">ROBOR 6M</span>
-              <span className="text-xl font-black text-slate-900">{referenceIndicesHistory.currentRobor6m}%</span>
+              <span className="text-xl font-black text-slate-900">{referenceIndicesHistory.currentRobor6m.toString().replace(".", ",")}%</span>
+              <span className="block text-[10px] text-slate-500 mt-0.5">Cotație BNR: 11.09.2026</span>
             </div>
             <div>
-              <span className="block text-[11px] font-semibold text-slate-500">Actualizare</span>
-              <span className="text-xs font-bold text-slate-700">{referenceIndicesHistory.lastUpdated}</span>
+              <span className="block text-[11px] font-semibold text-slate-500">Sursă Oficială</span>
+              <span className="text-xs font-bold text-slate-700 block mt-1">BNR Piața Monetară</span>
+              <span className="block text-[10px] text-slate-500 mt-0.5">Verificat: 12.09.2026</span>
             </div>
           </div>
 

@@ -9,11 +9,12 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
   },
 });
 
-export async function isDatabaseConnected(): Promise<boolean> {
-  try {
-    const { error } = await supabase.from("funding_programs").select("id").limit(1);
-    return !error;
-  } catch {
-    return false;
-  }
+export function isDatabaseConfigured(): boolean {
+  return Boolean(
+    process.env.NEXT_PUBLIC_SUPABASE_URL &&
+      !process.env.NEXT_PUBLIC_SUPABASE_URL.includes("placeholder") &&
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY &&
+      !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY.includes("placeholder")
+  );
 }
+

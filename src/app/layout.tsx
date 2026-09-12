@@ -2,14 +2,20 @@ import type { Metadata, Viewport } from "next";
 import { VisitorTracker } from "@/components/visitor-tracker";
 import "./globals.css";
 
+const siteTitle = "AiX — Educational Intelligence | Educație și Informare Finanțări";
+const siteDescription =
+  "Platformă privată de educație și informare care organizează și explică informații publice despre finanțări, antreprenoriat, legislație și economie.";
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://subventii.cristianvaduva.com"),
   title: {
-    default: "AiX — Educational Intelligence | Educație și Informare Finanțări",
+    default: siteTitle,
     template: "%s | AiX Educational Intelligence",
   },
-  description:
-    "Platformă privată de educație și informare care organizează și explică informații publice despre finanțări, antreprenoriat, legislație și economie.",
+  description: siteDescription,
+  alternates: {
+    canonical: "https://subventii.cristianvaduva.com/",
+  },
   keywords: [
     "AiX Educational Intelligence",
     "educatie financiara",
@@ -36,15 +42,22 @@ export const metadata: Metadata = {
     locale: "ro_RO",
     url: "https://subventii.cristianvaduva.com",
     siteName: "AiX — Educational Intelligence",
-    title: "AiX — Educational Intelligence | Platformă Privată de Informare",
-    description:
-      "Platformă privată de educație și informare care centralizează și explică informații publice din surse deschise.",
+    title: siteTitle,
+    description: siteDescription,
+    images: [
+      {
+        url: "https://subventii.cristianvaduva.com/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: siteTitle,
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "AiX — Educational Intelligence",
-    description:
-      "Platformă privată de educație și informare privind finanțările, programele și economia.",
+    title: siteTitle,
+    description: siteDescription,
+    images: ["https://subventii.cristianvaduva.com/og-image.png"],
   },
 };
 

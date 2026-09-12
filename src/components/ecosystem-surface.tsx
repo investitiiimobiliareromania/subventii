@@ -2,16 +2,16 @@ import { AIX_ECOSYSTEM } from "@/lib/ecosystem/config";
 
 export function EcosystemSurface() {
   return (
-    <section className="border-t border-slate-200/80 bg-slate-900 text-white py-14">
+    <section aria-label="AiX Ecosystem Directory" className="border-t border-slate-200/80 bg-slate-900 text-white py-14">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="mb-10 text-center">
           <span className="mb-2 inline-block font-mono text-[11px] font-bold uppercase tracking-wider text-emerald-400">
-            Rețeaua Privat de Servicii &amp; Educație
+            Rețeaua Privată de Servicii &amp; Educație
           </span>
           <h2 className="text-2xl font-extrabold text-white sm:text-3xl tracking-tight">
             THE AiX ECOSYSTEM
           </h2>
-          <p className="mx-auto mt-2 max-w-2xl text-xs leading-relaxed text-slate-400">
+          <p className="mx-auto mt-2 max-w-2xl text-xs leading-relaxed text-slate-300">
             AiX Educational Intelligence este nodul educațional pentru finanțări și legislație din cadrul rețelei de soluții financiare, imobiliare, tehnologice și educaționale Cristian Văduva.
           </p>
         </div>
@@ -37,7 +37,7 @@ export function EcosystemSurface() {
                 <h3 className="text-base font-bold text-white group-hover:text-emerald-400 transition-colors">
                   {node.name}
                 </h3>
-                <p className="mt-1 text-xs leading-relaxed text-slate-400">
+                <p className="mt-1 text-xs leading-relaxed text-slate-300">
                   {node.description}
                 </p>
               </div>
@@ -47,13 +47,13 @@ export function EcosystemSurface() {
                   href={node.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label={`Accesează ${node.name}`}
-                  className="inline-flex items-center gap-1.5 font-bold text-emerald-400 hover:text-emerald-300 transition-colors cursor-pointer"
+                  aria-label={`Accesează serviciul ${node.name} (${node.cta})`}
+                  className="inline-flex items-center gap-1.5 font-bold text-emerald-400 hover:text-emerald-300 transition-colors cursor-pointer focus-visible:outline-emerald-400"
                 >
                   <span>{node.cta}</span>
-                  <span>↗</span>
+                  <span aria-hidden="true">↗</span>
                 </a>
-                <span className="text-[10px] font-mono text-slate-500">
+                <span className="text-[10px] font-mono text-slate-400">
                   {new URL(node.href).hostname}
                 </span>
               </div>

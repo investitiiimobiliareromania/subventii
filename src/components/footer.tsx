@@ -6,7 +6,7 @@ export function Footer() {
   const categorized = getEcosystemByCategory();
 
   return (
-    <footer className="border-t border-slate-200 bg-slate-900 text-slate-400 text-xs py-12">
+    <footer className="border-t border-slate-800 bg-slate-900 text-slate-300 text-xs py-12">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         
         {/* AiX Ecosystem Directory Section */}
@@ -14,7 +14,7 @@ export function Footer() {
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-b border-slate-800 pb-4 mb-5">
             <div>
               <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-emerald-400">
-                Rețeaua Privat de Servicii &amp; Educație
+                Rețeaua Privată de Servicii &amp; Educație
               </span>
               <h3 className="text-sm font-bold text-white mt-0.5">AiX ECOSYSTEM • Cristian Văduva Network</h3>
             </div>
@@ -23,6 +23,7 @@ export function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               className="text-xs font-semibold text-emerald-400 hover:underline"
+              aria-label="Vizitează portalul principal cristianvaduva.com"
             >
               cristianvaduva.com ↗
             </a>
@@ -31,21 +32,21 @@ export function Footer() {
           <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-5">
             {Object.entries(categorized).map(([catKey, catGroup]) => (
               <div key={catKey}>
-                <span className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-2">
+                <span className="block text-[10px] font-bold text-slate-300 uppercase tracking-wider mb-2">
                   {catGroup.label}
                 </span>
-                <ul className="space-y-1.5 text-[11px]">
+                <ul className="space-y-2 text-[11px]">
                   {catGroup.items.map((item) => (
                     <li key={item.id}>
                       <a
                         href={item.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        aria-label={`Accesează ${item.name}`}
-                        className="hover:text-emerald-400 transition-colors font-medium inline-flex items-center gap-1"
+                        aria-label={`Accesează serviciul ${item.name}`}
+                        className="text-slate-300 hover:text-emerald-400 transition-colors font-medium inline-flex items-center gap-1 py-1 min-h-[24px]"
                       >
                         <span>{item.name}</span>
-                        <span className="text-[9px] text-slate-500">↗</span>
+                        <span className="text-[9px] text-slate-400" aria-hidden="true">↗</span>
                       </a>
                     </li>
                   ))}
@@ -60,13 +61,13 @@ export function Footer() {
             <span className="block font-bold text-white uppercase tracking-wider mb-3 text-[11px]">
               Platformă Finanțări
             </span>
-            <ul className="space-y-2">
-              <li><Link href="/programes" className="hover:text-white transition-colors">Căutare Finanțări</Link></li>
-              <li><Link href="/programe-guvernamentale" className="hover:text-white transition-colors">Programe Guvernamentale</Link></li>
-              <li><Link href="/programe-guvernamentale/noua-casa" className="hover:text-white transition-colors">Noua Casă 2026</Link></li>
-              <li><Link href="/programe-guvernamentale/casa-verde" className="hover:text-white transition-colors">Casa Verde Fotovoltaice</Link></li>
-              <li><Link href="/calendar" className="hover:text-white transition-colors">Calendar Finanțări</Link></li>
-              <li><Link href="/eligibilitate" className="hover:text-white transition-colors">Calculator Eligibilitate</Link></li>
+            <ul className="space-y-2 text-slate-300">
+              <li><Link href="/programes" className="hover:text-white transition-colors py-0.5 inline-block min-h-[24px]">Căutare Finanțări</Link></li>
+              <li><Link href="/programe-guvernamentale" className="hover:text-white transition-colors py-0.5 inline-block min-h-[24px]">Programe Guvernamentale</Link></li>
+              <li><Link href="/programe-guvernamentale/noua-casa" className="hover:text-white transition-colors py-0.5 inline-block min-h-[24px]">Noua Casă 2026</Link></li>
+              <li><Link href="/programe-guvernamentale/casa-verde" className="hover:text-white transition-colors py-0.5 inline-block min-h-[24px]">Casa Verde Fotovoltaice</Link></li>
+              <li><Link href="/calendar" className="hover:text-white transition-colors py-0.5 inline-block min-h-[24px]">Calendar Finanțări</Link></li>
+              <li><Link href="/eligibilitate" className="hover:text-white transition-colors py-0.5 inline-block min-h-[24px]">Calculator Eligibilitate</Link></li>
             </ul>
           </div>
 
@@ -74,13 +75,13 @@ export function Footer() {
             <span className="block font-bold text-white uppercase tracking-wider mb-3 text-[11px]">
               Inteligență Financiară
             </span>
-            <ul className="space-y-2">
-              <li><Link href="/legislatie" className="hover:text-white transition-colors">Legislație Fiscală &amp; IMM</Link></li>
-              <li><Link href="/credite" className="hover:text-white transition-colors">Credite &amp; Calculator IRCC</Link></li>
-              <li><Link href="/piata-imobiliara" className="hover:text-white transition-colors">Piața Imobiliară</Link></li>
-              <li><Link href="/asigurari" className="hover:text-white transition-colors">Asigurări PAD &amp; IMM</Link></li>
-              <li><Link href="/rapoarte-ancpi" className="hover:text-white transition-colors">Rapoarte Tranzacții ANCPI</Link></li>
-              <li><Link href="/compara" className="hover:text-white transition-colors">Comparator Programe</Link></li>
+            <ul className="space-y-2 text-slate-300">
+              <li><Link href="/legislatie" className="hover:text-white transition-colors py-0.5 inline-block min-h-[24px]">Legislație Fiscală &amp; IMM</Link></li>
+              <li><Link href="/credite" className="hover:text-white transition-colors py-0.5 inline-block min-h-[24px]">Credite &amp; Calculator IRCC</Link></li>
+              <li><Link href="/piata-imobiliara" className="hover:text-white transition-colors py-0.5 inline-block min-h-[24px]">Piața Imobiliară</Link></li>
+              <li><Link href="/asigurari" className="hover:text-white transition-colors py-0.5 inline-block min-h-[24px]">Asigurări PAD &amp; IMM</Link></li>
+              <li><Link href="/rapoarte-ancpi" className="hover:text-white transition-colors py-0.5 inline-block min-h-[24px]">Rapoarte Tranzacții ANCPI</Link></li>
+              <li><Link href="/compara" className="hover:text-white transition-colors py-0.5 inline-block min-h-[24px]">Comparator Programe</Link></li>
             </ul>
           </div>
 
@@ -88,13 +89,26 @@ export function Footer() {
             <span className="block font-bold text-white uppercase tracking-wider mb-3 text-[11px]">
               Director &amp; Resurse
             </span>
-            <ul className="space-y-2">
-              <li><Link href="/stiri" className="hover:text-white transition-colors">Știri &amp; Newsroom</Link></li>
-              <li><Link href="/institutii" className="hover:text-white transition-colors">Instituții Publice</Link></li>
-              <li><Link href="/resurse" className="hover:text-white transition-colors">Ghiduri PDF &amp; Formulare</Link></li>
-              <li><Link href="/glosar" className="hover:text-white transition-colors">Glosar Finanțări</Link></li>
-              <li><Link href="/asistent-ai" className="hover:text-white transition-colors">Asistent AI Educațional</Link></li>
-              <li><Link href="/alerte" className="hover:text-white transition-colors">Alerte Programe Noi</Link></li>
+            <ul className="space-y-2 text-slate-300">
+              <li><Link href="/stiri" className="hover:text-white transition-colors py-0.5 inline-block min-h-[24px]">Știri &amp; Newsroom</Link></li>
+              <li><Link href="/institutii" className="hover:text-white transition-colors py-0.5 inline-block min-h-[24px]">Instituții Publice</Link></li>
+              <li><Link href="/resurse" className="hover:text-white transition-colors py-0.5 inline-block min-h-[24px]">Ghiduri PDF &amp; Formulare</Link></li>
+              <li><Link href="/glosar" className="hover:text-white transition-colors py-0.5 inline-block min-h-[24px]">Glosar Finanțări</Link></li>
+              <li><Link href="/asistent-ai" className="hover:text-white transition-colors py-0.5 inline-block min-h-[24px]">Asistent AI Educațional</Link></li>
+              <li><Link href="/alerte" className="hover:text-white transition-colors py-0.5 inline-block min-h-[24px]">Alerte Programe Noi</Link></li>
+            </ul>
+          </div>
+
+          <div>
+            <span className="block font-bold text-white uppercase tracking-wider mb-3 text-[11px]">
+              Legal &amp; Conformitate
+            </span>
+            <ul className="space-y-2 text-slate-300">
+              <li><Link href="/termeni-si-conditii" className="hover:text-white transition-colors py-0.5 inline-block min-h-[24px]">Termeni și Condiții</Link></li>
+              <li><Link href="/politica-de-confidentialitate" className="hover:text-white transition-colors py-0.5 inline-block min-h-[24px]">Politica de Confidențialitate</Link></li>
+              <li><Link href="/politica-cookies" className="hover:text-white transition-colors py-0.5 inline-block min-h-[24px]">Politica privind Cookie-urile</Link></li>
+              <li><Link href="/disclaimer" className="hover:text-white transition-colors py-0.5 inline-block min-h-[24px]">Disclaimer &amp; Statut</Link></li>
+              <li><Link href="/contact" className="hover:text-white transition-colors py-0.5 inline-block min-h-[24px]">Formular Contact Direct</Link></li>
             </ul>
           </div>
 
@@ -102,24 +116,23 @@ export function Footer() {
             <span className="block font-bold text-white uppercase tracking-wider mb-3 text-[11px]">
               Contact Direct
             </span>
-            <ul className="space-y-2">
+            <ul className="space-y-2 text-slate-300 mb-4">
               <li className="text-white font-semibold">{CONTACT_CONFIG.name}</li>
               <li>
-                <a href={CONTACT_CONFIG.links.email} className="hover:text-white transition-colors">
+                <a href={CONTACT_CONFIG.links.email} className="hover:text-white transition-colors py-0.5 inline-block min-h-[24px]" aria-label={`Email: ${CONTACT_CONFIG.email}`}>
                   {CONTACT_CONFIG.email}
                 </a>
               </li>
               <li>
-                <a href={CONTACT_CONFIG.links.telRo} className="hover:text-white transition-colors">
+                <a href={CONTACT_CONFIG.links.telRo} className="hover:text-white transition-colors py-0.5 inline-block min-h-[24px]" aria-label={`Telefon RO: ${CONTACT_CONFIG.phoneRoDisplay}`}>
                   📞 RO: {CONTACT_CONFIG.phoneRoDisplay}
                 </a>
               </li>
               <li>
-                <a href={CONTACT_CONFIG.links.whatsapp} target="_blank" rel="noopener noreferrer" className="hover:text-emerald-400 transition-colors">
+                <a href={CONTACT_CONFIG.links.whatsapp} target="_blank" rel="noopener noreferrer" className="hover:text-emerald-400 transition-colors py-0.5 inline-block min-h-[24px]">
                   💬 WA: {CONTACT_CONFIG.phoneWaDisplay}
                 </a>
               </li>
-              <li className="text-slate-500">📍 {CONTACT_CONFIG.office}</li>
             </ul>
           </div>
 
@@ -204,16 +217,16 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-slate-800 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-slate-500">
+        <div className="border-t border-slate-800 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-slate-400">
           <div>
             <p>© {new Date().getFullYear()} AiX — Educational Intelligence. Platformă privată de educație și informare. Cristian Văduva Ecosystem.</p>
-            <p className="mt-1 text-[11px] text-slate-400 max-w-4xl">
+            <p className="mt-1 text-[11px] text-slate-300 max-w-4xl">
               Platformă privată de educație și informare. Informațiile prezentate au caracter general și educațional și nu reprezintă comunicări oficiale ale autorităților publice și nu constituie consultanță juridică, fiscală sau financiară. Pentru informații oficiale și condițiile aplicabile unui program, consultați documentele și pagina instituției emitente.
             </p>
           </div>
           <div className="flex items-center gap-4 flex-shrink-0">
             <span className="inline-flex items-center gap-1.5 text-emerald-400 font-semibold">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" aria-hidden="true"></span>
               Parte din ecosistemul privat AiX
             </span>
           </div>

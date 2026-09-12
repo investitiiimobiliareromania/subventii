@@ -53,8 +53,17 @@ export const creditProducts: CreditProduct[] = [
 ];
 
 export const referenceIndicesHistory = {
-  currentIrcc: 5.86,
-  currentRobor3m: 5.95,
-  currentRobor6m: 6.05,
-  lastUpdated: "2026-08-01",
+  currentIrcc: 5.56,
+  irccFormatted: "IRCC — 5,56%, aplicabil în T3 2026",
+  calculationPeriod: "Media zilnică a tranzacțiilor interbancare din T1 2026",
+  applicablePeriod: "T3 2026 (iulie – septembrie 2026)",
+  officialBnrSource: "Banca Națională a României (BNR) — Indicele de referință pentru creditele consumatorilor (IRCC) conform OUG 19/2019",
+  officialUrl: "https://www.bnr.ro/Indicele-de-referinta-pentru-creditele-consumatorilor-(IRCC)-22285.aspx",
+  lastVerifiedDate: "2026-09-12",
+  currentRobor3m: 5.84,
+  currentRobor6m: 5.92,
+  robor3mFormatted: "ROBOR 3M — 5,84% — ultima cotație disponibilă: 11.09.2026",
+  robor6mFormatted: "ROBOR 6M — 5,92% — ultima cotație disponibilă: 11.09.2026",
+  roborQuotationDate: "11.09.2026 (zi bancară lucrătoare BNR)",
+  lastUpdated: "2026-09-12",
 };

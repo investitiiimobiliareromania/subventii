@@ -98,15 +98,16 @@ export function FundingExplorer({ programs }: { programs: FundingProgram[] }) {
       {/* Search Input Bar */}
       <div className="relative mb-6">
         <label htmlFor="search-input" className="sr-only">
-          Caută finanțări
+          Caută finanțări după denumire, domeniu sau instituție
         </label>
         <div className="relative flex items-center">
           <svg
-            className="absolute left-4 h-5 w-5 text-slate-400"
+            className="absolute left-4 h-5 w-5 text-slate-500 pointer-events-none"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
             strokeWidth="2"
+            aria-hidden="true"
           >
             <path
               strokeLinecap="round"
@@ -116,18 +117,18 @@ export function FundingExplorer({ programs }: { programs: FundingProgram[] }) {
           </svg>
           <input
             id="search-input"
-            type="text"
+            type="search"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Caută după denumire program, domeniu sau instituție s..."
-            className="w-full rounded-xl border border-slate-300 bg-white py-3.5 pl-12 pr-10 text-sm text-slate-900 placeholder-slate-400 shadow-xs transition-colors focus:border-emerald-700 focus:outline-none focus:ring-1 focus:ring-emerald-700"
+            placeholder="Caută după denumire program, domeniu sau instituție..."
+            className="w-full rounded-xl border border-slate-300 bg-white py-3.5 pl-12 pr-10 text-sm text-slate-900 placeholder-slate-500 shadow-xs transition-colors focus:border-emerald-700 focus:outline-none focus:ring-1 focus:ring-emerald-700"
           />
           {query && (
             <button
               type="button"
               onClick={() => setQuery("")}
-              className="absolute right-3 rounded-md p-1 text-slate-400 hover:text-slate-600"
-              aria-label="Șterge căutarea"
+              className="absolute right-3 rounded-md p-1 text-slate-500 hover:text-slate-800 focus-visible:outline-emerald-700"
+              aria-label="Șterge textul de căutare"
             >
               ✕
             </button>
@@ -138,14 +139,15 @@ export function FundingExplorer({ programs }: { programs: FundingProgram[] }) {
       {/* Advanced Filters Matrix */}
       <div className="mb-8 rounded-2xl border border-slate-200 bg-slate-50/70 p-5">
         <div className="mb-4 flex items-center justify-between">
-          <h2 className="text-xs font-bold uppercase tracking-wider text-slate-500">
+          <h2 className="text-xs font-bold uppercase tracking-wider text-slate-700">
             Filtrare Avansată Programe
           </h2>
           {activeFilterCount > 0 && (
             <button
               type="button"
               onClick={resetFilters}
-              className="text-xs font-semibold text-emerald-800 hover:underline"
+              className="text-xs font-bold text-emerald-800 hover:underline focus-visible:outline-emerald-700"
+              aria-label={`Resetează toate filtrele (${activeFilterCount} active)`}
             >
               Resetează filtrele ({activeFilterCount})
             </button>
@@ -155,13 +157,14 @@ export function FundingExplorer({ programs }: { programs: FundingProgram[] }) {
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {/* Tip Firmă */}
           <div>
-            <label className="mb-1 block text-[11px] font-semibold text-slate-600">
+            <label htmlFor="filter-business" className="mb-1 block text-[11px] font-semibold text-slate-700">
               Formă Juridică
             </label>
             <select
+              id="filter-business"
               value={business}
               onChange={(e) => setBusiness(e.target.value)}
-              className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs text-slate-800 focus:border-emerald-700 focus:outline-none"
+              className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs text-slate-900 focus:border-emerald-700 focus:outline-none"
             >
               {filterOptions.business.map((opt) => (
                 <option key={opt} value={opt}>
@@ -173,13 +176,14 @@ export function FundingExplorer({ programs }: { programs: FundingProgram[] }) {
 
           {/* Domeniu */}
           <div>
-            <label className="mb-1 block text-[11px] font-semibold text-slate-600">
+            <label htmlFor="filter-industry" className="mb-1 block text-[11px] font-semibold text-slate-700">
               Domeniu de Activitate
             </label>
             <select
+              id="filter-industry"
               value={industry}
               onChange={(e) => setIndustry(e.target.value)}
-              className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs text-slate-800 focus:border-emerald-700 focus:outline-none"
+              className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs text-slate-900 focus:border-emerald-700 focus:outline-none"
             >
               {filterOptions.industry.map((opt) => (
                 <option key={opt} value={opt}>
@@ -191,13 +195,14 @@ export function FundingExplorer({ programs }: { programs: FundingProgram[] }) {
 
           {/* Județ */}
           <div>
-            <label className="mb-1 block text-[11px] font-semibold text-slate-600">
+            <label htmlFor="filter-county" className="mb-1 block text-[11px] font-semibold text-slate-700">
               Județ / Regiune
             </label>
             <select
+              id="filter-county"
               value={county}
               onChange={(e) => setCounty(e.target.value)}
-              className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs text-slate-800 focus:border-emerald-700 focus:outline-none"
+              className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs text-slate-900 focus:border-emerald-700 focus:outline-none"
             >
               {filterOptions.county.map((opt) => (
                 <option key={opt} value={opt}>
@@ -209,13 +214,14 @@ export function FundingExplorer({ programs }: { programs: FundingProgram[] }) {
 
           {/* Status */}
           <div>
-            <label className="mb-1 block text-[11px] font-semibold text-slate-600">
+            <label htmlFor="filter-status" className="mb-1 block text-[11px] font-semibold text-slate-700">
               Status Apel
             </label>
             <select
+              id="filter-status"
               value={status}
               onChange={(e) => setStatus(e.target.value)}
-              className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs text-slate-800 focus:border-emerald-700 focus:outline-none"
+              className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs text-slate-900 focus:border-emerald-700 focus:outline-none"
             >
               {filterOptions.status.map((opt) => (
                 <option key={opt} value={opt}>
@@ -227,13 +233,14 @@ export function FundingExplorer({ programs }: { programs: FundingProgram[] }) {
 
           {/* Vârstă Firmă */}
           <div>
-            <label className="mb-1 block text-[11px] font-semibold text-slate-600">
+            <label htmlFor="filter-company-age" className="mb-1 block text-[11px] font-semibold text-slate-700">
               Vârstă Companie
             </label>
             <select
+              id="filter-company-age"
               value={companyAge}
               onChange={(e) => setCompanyAge(e.target.value)}
-              className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs text-slate-800 focus:border-emerald-700 focus:outline-none"
+              className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs text-slate-900 focus:border-emerald-700 focus:outline-none"
             >
               {filterOptions.companyAge.map((opt) => (
                 <option key={opt} value={opt}>
@@ -245,13 +252,14 @@ export function FundingExplorer({ programs }: { programs: FundingProgram[] }) {
 
           {/* Dimensiune */}
           <div>
-            <label className="mb-1 block text-[11px] font-semibold text-slate-600">
+            <label htmlFor="filter-company-size" className="mb-1 block text-[11px] font-semibold text-slate-700">
               Mărime Companie
             </label>
             <select
+              id="filter-company-size"
               value={companySize}
               onChange={(e) => setCompanySize(e.target.value)}
-              className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs text-slate-800 focus:border-emerald-700 focus:outline-none"
+              className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs text-slate-900 focus:border-emerald-700 focus:outline-none"
             >
               {filterOptions.companySize.map((opt) => (
                 <option key={opt} value={opt}>
@@ -263,13 +271,14 @@ export function FundingExplorer({ programs }: { programs: FundingProgram[] }) {
 
           {/* Sursă */}
           <div>
-            <label className="mb-1 block text-[11px] font-semibold text-slate-600">
+            <label htmlFor="filter-source-category" className="mb-1 block text-[11px] font-semibold text-slate-700">
               Sursă Finanțare
             </label>
             <select
+              id="filter-source-category"
               value={sourceCategory}
               onChange={(e) => setSourceCategory(e.target.value)}
-              className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs text-slate-800 focus:border-emerald-700 focus:outline-none"
+              className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs text-slate-900 focus:border-emerald-700 focus:outline-none"
             >
               {filterOptions.sourceCategory.map((opt) => (
                 <option key={opt} value={opt}>
@@ -283,11 +292,11 @@ export function FundingExplorer({ programs }: { programs: FundingProgram[] }) {
 
       {/* Results Header Summary */}
       <div className="mb-6 flex items-center justify-between border-b border-slate-200 pb-3">
-        <p className="text-sm font-medium text-slate-600">
+        <p className="text-sm font-medium text-slate-700">
           Rezultate: <strong className="text-slate-900">{filteredPrograms.length}</strong>{" "}
           {filteredPrograms.length === 1 ? "program disponibil" : "programe disponibile"}
         </p>
-        <span className="text-xs text-slate-400">Actualizate din surse publice oficiale</span>
+        <span className="text-xs text-slate-600">Actualizate din surse publice oficiale</span>
       </div>
 
       {/* Cards Grid */}
@@ -302,13 +311,14 @@ export function FundingExplorer({ programs }: { programs: FundingProgram[] }) {
           <p className="mb-2 text-base font-semibold text-slate-800">
             Nu a fost găsit niciun program conform criteriilor selectate.
           </p>
-          <p className="mb-4 text-xs text-slate-500">
+          <p className="mb-4 text-xs text-slate-600">
             Încearcă să elimini din filtre sau să cauți alt termen.
           </p>
           <button
             type="button"
             onClick={resetFilters}
-            className="rounded-lg bg-emerald-800 px-4 py-2 text-xs font-semibold text-white hover:bg-emerald-900"
+            className="rounded-lg bg-emerald-800 px-4 py-2 text-xs font-semibold text-white hover:bg-emerald-900 transition-colors focus-visible:outline-emerald-700"
+            aria-label="Șterge toate filtrele active"
           >
             Șterge toate filtrele
           </button>
@@ -340,7 +350,7 @@ export function FundingCard({ program }: { program: FundingProgram }) {
         {/* Top Header */}
         <div className="mb-3 flex items-center justify-between">
           <span className={getStatusBadge(program.status)}>{program.status}</span>
-          <span className="rounded-md bg-slate-100 px-2 py-0.5 text-[11px] font-medium text-slate-600">
+          <span className="rounded-md bg-slate-100 px-2 py-0.5 text-[11px] font-medium text-slate-700 border border-slate-200">
             {program.sourceCategory}
           </span>
         </div>
@@ -351,7 +361,7 @@ export function FundingCard({ program }: { program: FundingProgram }) {
         </h3>
 
         {/* Summary */}
-        <p className="mb-4 line-clamp-3 text-xs leading-relaxed text-slate-600">
+        <p className="mb-4 line-clamp-3 text-xs leading-relaxed text-slate-700">
           {program.summary}
         </p>
       </div>
@@ -360,21 +370,21 @@ export function FundingCard({ program }: { program: FundingProgram }) {
         {/* Key Metrics */}
         <div className="mb-4 grid grid-cols-2 gap-2 border-y border-slate-100 py-3 text-xs">
           <div>
-            <span className="block text-[10px] font-semibold uppercase text-slate-400">
+            <span className="block text-[10px] font-semibold uppercase text-slate-600">
               Finanțare maximă
             </span>
             <span className="font-bold text-slate-900">
               {formatCurrencyRon(program.maxFundingRon)}
             </span>
             {program.maxFundingEur && (
-              <span className="block text-[11px] text-slate-500">
+              <span className="block text-[11px] text-slate-600">
                 (~{formatCurrencyEur(program.maxFundingEur)})
               </span>
             )}
           </div>
 
           <div>
-            <span className="block text-[10px] font-semibold uppercase text-slate-400">
+            <span className="block text-[10px] font-semibold uppercase text-slate-600">
               Termen depunere
             </span>
             <span className="font-semibold text-slate-800">
@@ -385,7 +395,7 @@ export function FundingCard({ program }: { program: FundingProgram }) {
               }).format(new Date(`${program.deadline}T12:00:00`))}
             </span>
             {program.status === "Deschis" && (
-              <span className="block text-[11px] font-bold text-amber-700">
+              <span className="block text-[11px] font-bold text-amber-800">
                 {daysLeft > 0 ? `${daysLeft} zile rămase` : "Ultima zi"}
               </span>
             )}
@@ -398,9 +408,10 @@ export function FundingCard({ program }: { program: FundingProgram }) {
           <Link
             href={`/finantari/${program.slug}`}
             className="inline-flex items-center gap-1 text-xs font-bold text-emerald-800 hover:underline"
+            aria-label={`Vezi detalii complete despre programul: ${program.title}`}
           >
             <span>Detalii complete</span>
-            <span>→</span>
+            <span aria-hidden="true">→</span>
           </Link>
         </div>
       </div>

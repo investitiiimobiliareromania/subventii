@@ -27,45 +27,61 @@ export default function NewsroomPage() {
 
       <main className="flex-1 py-10">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
-          <nav className="mb-6 flex items-center gap-2 text-xs text-slate-500">
-            <Link href="/" className="hover:text-emerald-800">Acasă</Link>
-            <span>/</span>
-            <span className="font-semibold text-slate-800">Newsroom & Știri</span>
+          <nav aria-label="Navigare pe pagină" className="mb-6 flex items-center gap-2 text-xs text-slate-600">
+            <Link href="/" className="hover:text-emerald-800 transition-colors">Acasă</Link>
+            <span aria-hidden="true">/</span>
+            <span className="font-semibold text-slate-900">Newsroom &amp; Știri</span>
           </nav>
 
           <div className="mb-10 border-b border-slate-200 pb-6">
-            <span className="text-xs font-bold uppercase tracking-wider text-emerald-800">Editorial & Analiză de Impact</span>
+            <div className="flex flex-wrap items-center gap-2 mb-2">
+              <span className="text-xs font-bold uppercase tracking-wider text-emerald-800">
+                EDITORIAL &amp; MONITORIZARE OFICIALĂ
+              </span>
+              <span className="rounded bg-slate-100 px-2 py-0.5 text-[10px] font-bold text-slate-700 border border-slate-200">
+                DATE VERIFICATE
+              </span>
+              <span className="rounded bg-emerald-50 px-2 py-0.5 text-[10px] font-bold text-emerald-800 border border-emerald-200">
+                SEPTEMBRIE 2026
+              </span>
+            </div>
             <h1 className="mt-1 text-3xl font-extrabold text-slate-900 sm:text-4xl">
               Noutăți Fonduri, Legislație și Programe Guvernamentale
             </h1>
-            <p className="mt-2 text-sm text-slate-600 max-w-3xl leading-relaxed">
-              Analize detaliate ale ghidurilor solicitantului, ordonanțelor de urgență și oportunităților de granturi actualizate permanent din surse ministeriale.
+            <p className="mt-2 text-sm text-slate-700 max-w-3xl leading-relaxed">
+              Analize structurate ale ghidurilor solicitantului, ordonanțelor de urgență, programelor europene și deciziilor instituționale din România.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             {newsroomArticles.map((art) => (
-              <article key={art.slug} className="grant-card">
+              <article key={art.slug} className="grant-card flex flex-col justify-between">
                 <div>
                   <div className="mb-3 flex items-center justify-between">
                     <span className="rounded-md bg-emerald-100 px-2.5 py-0.5 text-[11px] font-bold text-emerald-900">
                       {art.category}
                     </span>
-                    <span className="text-[11px] font-medium text-slate-500">{art.readingTimeMin} min lectură</span>
+                    <span className="text-[11px] font-medium text-slate-600">{art.readingTimeMin} min lectură</span>
                   </div>
 
                   <h2 className="mb-2 text-lg font-bold text-slate-900 hover:text-emerald-800 leading-snug">
                     <Link href={`/stiri/${art.slug}`}>{art.headline}</Link>
                   </h2>
 
-                  <p className="mb-4 text-xs leading-relaxed text-slate-600 line-clamp-3">
+                  <p className="mb-4 text-xs leading-relaxed text-slate-700 line-clamp-3">
                     {art.summary}
                   </p>
                 </div>
 
                 <div className="border-t border-slate-100 pt-3 flex items-center justify-between text-xs">
-                  <span className="font-semibold text-slate-500">{art.institution}</span>
-                  <Link href={`/stiri/${art.slug}`} className="font-bold text-emerald-800 hover:underline">
+                  <span className="font-semibold text-slate-600 truncate max-w-[180px]" title={art.institution}>
+                    {art.institution}
+                  </span>
+                  <Link
+                    href={`/stiri/${art.slug}`}
+                    className="font-bold text-emerald-800 hover:underline shrink-0"
+                    aria-label={`Citește articolul complet: ${art.headline}`}
+                  >
                     Citește articol →
                   </Link>
                 </div>

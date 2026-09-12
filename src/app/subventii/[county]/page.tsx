@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { AiAssistantDrawer } from "@/components/ai-assistant-drawer";
-import { countyProfilesCatalog } from "@/lib/county-data";
+import { getCountyProfile } from "@/lib/county-data";
 import { getProgramsFromDb } from "@/lib/db/repository";
 
 type Props = {
@@ -12,32 +12,18 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { county } = await params;
-  const key = county.toLowerCase();
-  const profile = countyProfilesCatalog[key];
-  const name = profile ? profile.name : county.toUpperCase();
+  const profile = getCountyProfile(county);
 
   return {
-    title: `Finanțări & Informații Educaționale Județul ${name} 2026`,
-    description: `Sinteză de informare privind oportunitățile de finanțare, granturile regionale și programele economice pentru județul ${name}.`,
-    alternates: { canonical: `https://subventii.cristianvaduva.com/subventii/${key}` },
+    title: `Subvenții & Finanțări Nerambursabile — Județul ${profile.name} 2026`,
+    description: `Sinteză de informare privind oportunitățile de finanțare, granturile regionale și programele economice pentru Județul ${profile.name}.`,
+    alternates: { canonical: `https://subventii.cristianvaduva.com/subventii/${encodeURIComponent(county.toLowerCase())}` },
   };
 }
 
 export default async function CountySubventiiPage({ params }: Props) {
   const { county } = await params;
-  const key = county.toLowerCase();
-  const profile = countyProfilesCatalog[key] || {
-    code: county.substring(0, 2).toUpperCase(),
-    name: county.charAt(0).toUpperCase() + county.slice(1),
-    region: "Național",
-    capital: "Capitală de Județ",
-    population: "Sute de mii de locuitori",
-    activeImmCount: "Zeci de mii de firme",
-    adrName: "Agenția pentru Dezvoltare Regională",
-    topIndustries: ["Servicii", "Comerț", "Producție"],
-    keyIncentives: ["Granturi regionale", "Start-Up Nation"],
-    ancpiMonthlyAvg: "Peste 1.000 tranzacții",
-  };
+  const profile = getCountyProfile(county);
 
   const programs = await getProgramsFromDb();
   const regionalPrograms = programs.filter(
@@ -47,9 +33,9 @@ export default async function CountySubventiiPage({ params }: Props) {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    "name": `Catalog Finanțări și Informații Județul ${profile.name}`,
-    "description": `Informații educaționale privind programele disponibile în județul ${profile.name}`,
-    "url": `https://subventii.cristianvaduva.com/subventii/${key}`,
+    "name": `Catalog Finanțări și Informații — Județul ${profile.name}`,
+    "description": `Informații educaționale privind programele disponibile în Județul ${profile.name}`,
+    "url": `https://subventii.cristianvaduva.com/subventii/${encodeURIComponent(county.toLowerCase())}`,
   };
 
   return (
@@ -59,12 +45,12 @@ export default async function CountySubventiiPage({ params }: Props) {
 
       <main className="flex-1 py-10">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
-          <nav className="mb-6 flex items-center gap-2 text-xs text-slate-500">
+          <nav aria-label="Navigare pe pagină" className="mb-6 flex items-center gap-2 text-xs text-slate-600">
             <Link href="/" className="hover:text-emerald-800">Acasă</Link>
-            <span>/</span>
+            <span aria-hidden="true">/</span>
             <Link href="/intelligence/regions" className="hover:text-emerald-800">Regiuni</Link>
-            <span>/</span>
-            <span className="font-semibold text-slate-800">Subvenții {profile.name}</span>
+            <span aria-hidden="true">/</span>
+            <span className="font-semibold text-slate-900">Subvenții {profile.name}</span>
           </nav>
 
           <header className="mb-10 rounded-2xl border border-slate-200 bg-slate-900 p-6 md:p-8 text-white">
@@ -72,7 +58,7 @@ export default async function CountySubventiiPage({ params }: Props) {
               JUDEȚUL {profile.name.toUpperCase()} ({profile.code})
             </span>
             <h1 className="mt-3 text-3xl font-extrabold sm:text-4xl leading-tight">
-              Subvenții și Granturi Deschise în Județul {profile.name}
+              Subvenții și Granturi Deschise — Județul {profile.name}
             </h1>
             <p className="mt-2 text-xs text-slate-300 max-w-3xl leading-relaxed">
               Platformă programatică de indexare a fondurilor europene și locale administrate prin {profile.adrName}.

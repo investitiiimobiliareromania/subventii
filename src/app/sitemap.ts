@@ -32,7 +32,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/intelligence/regions",
     "/despre",
     "/contact",
+    "/termeni-si-conditii",
     "/politica-de-confidentialitate",
+    "/politica-cookies",
+    "/disclaimer",
   ];
 
   const priorityCaens = ["6201", "0111", "5610", "4120", "1011"].map((caen) => `/cod-caen/${caen}`);

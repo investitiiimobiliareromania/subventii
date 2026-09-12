@@ -24,10 +24,26 @@ export const ancpiMonthlyDataset: AncpiCountyStat[] = [
 
 export const ancpiReportSummary = {
   reportMonth: "Iunie 2026",
+  referencePeriod: "Iunie 2026 (Ultimul buletin statistic oficial publicat)",
+  officialMetric: "Număr de imobile tranzacționate (înstrăinate) înregistrate în cartea funciară",
   totalNationalTransactions: 51808,
   totalNationalTransactions2025: 49193,
-  topActiveCounty: "București (10.398 tranzacții)",
+  topActiveCounty: "București (10.398 imobile tranzacționate)",
   nationalMomGrowth: "+5,3%",
-  lastUpdated: "2026-06-30",
+  lastUpdated: "2026-09-12",
+  sourceName: "Agenția Națională de Cadastru și Publicitate Imobiliară (ANCPI)",
+  sourceDocument: "BUCUREȘTI, 03.07.2026 – STATISTICĂ TRANZACȚII IMOBILIARE LUNA IUNIE 2026",
+  sourceTable: "Tabelul 1: Numărul de imobile tranzacționate la nivel național și pe județe — Iunie 2026",
+  sourceUrl: "https://www.ancpi.ro/statistici-imobiliare/",
+  operationalStatus2026: {
+    systemName: "e-Terra / ANCPI",
+    event: "Întrerupere operațională temporară și reluarea funcționalității",
+    reactivationDate: "20 August 2026",
+    periodImpacted: "11–19 August 2026",
+    requestsRegistered: 329476,
+    requestsSolved: 279242,
+    currentStatus: "Platforma informatică e-Terra funcționează normal. Cererile acumulate în intervalul de mentenanță neprogramată au fost procesate etapizat.",
+    augustStatisticsStatus: "August 2026 — statisticile oficiale ANCPI privind tranzacțiile sunt în așteptarea publicării.",
+    officialSourceDoc: "Comunicat Oficial ANCPI — 20 August 2026"
+  }
 };
-
