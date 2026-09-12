@@ -117,7 +117,7 @@ export default function RealEstatePage() {
                         <strong className="text-emerald-800">{c.estimatedGrossRentalYieldPct}% / an</strong>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-slate-600">Imobile Tranzacționate ANCPI (Iunie):</span>
+                        <span className="text-slate-600">Imobile Vândute ANCPI (Iunie 2026):</span>
                         <strong className="text-slate-800">{c.ancpiJune2026Transactions.toLocaleString("ro-RO")}</strong>
                       </div>
                     </div>

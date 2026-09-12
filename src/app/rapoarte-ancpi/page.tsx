@@ -78,20 +78,20 @@ export default function AncpiReportsPage() {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4 text-xs text-slate-800">
               <div className="bg-white/80 rounded-xl p-4 border border-amber-200/80">
-                <span className="block font-bold text-amber-900 mb-1">Reactivare Platformă</span>
-                <p>Funcționalitatea sistemului <strong>e-Terra</strong> a fost reluată pe <strong>20 August 2026</strong>, după o indisponibilitate tehnică temporară.</p>
+                <span className="block font-bold text-amber-900 mb-1">Reactivare Funcționalitate</span>
+                <p>Funcționalitatea <strong>„Link de plată”</strong> din cadrul sistemului <strong>e-Terra</strong> a fost reactivată pe <strong>20 August 2026</strong>. Celelalte servicii online urmează a fi repuse în funcțiune etapizat.</p>
               </div>
               <div className="bg-white/80 rounded-xl p-4 border border-amber-200/80">
                 <span className="block font-bold text-amber-900 mb-1">Prelucrare Cereri Acumulate</span>
-                <p>În intervalul 11–19 august 2026 au fost înregistrate <strong>329.476 de cereri</strong> la oficiile de cadastru, din care <strong>279.242 au fost soluționate</strong>.</p>
+                <p>În intervalul 11–19 august 2026 au fost recepționate <strong>329.476 de cereri</strong> la oficiile de cadastru, din care <strong>279.242 au fost soluționate</strong>.</p>
               </div>
               <div className="bg-white/80 rounded-xl p-4 border border-amber-200/80">
                 <span className="block font-bold text-amber-900 mb-1">Statistici Tranzacții August 2026</span>
-                <p>Datele statistice complete privind tranzacțiile din luna <strong>august 2026</strong> sunt <em>în curs de centralizare și publicare oficială</em> de către ANCPI.</p>
+                <p>Statisticile oficiale ANCPI pentru luna <strong>august 2026</strong> <em>nu sunt încă publicate</em>.</p>
               </div>
             </div>
             <p className="text-[11px] text-slate-600 italic">
-              * Sursă oficială: Comunicat de presă ANCPI (20 August 2026). Setul de date detaliat de mai jos reprezintă cel mai recent raport lunar complet validat (Iunie 2026 / Semestrul I 2026).
+              * Sursă oficială: Comunicat de presă ANCPI (20 August 2026). Setul de date detaliat de mai jos reprezintă cel mai recent raport lunar complet publicat de ANCPI (Iunie 2026).
             </p>
           </section>
 
