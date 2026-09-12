@@ -58,9 +58,14 @@ export default function NewsroomPage() {
               <article key={art.slug} className="grant-card flex flex-col justify-between">
                 <div>
                   <div className="mb-3 flex items-center justify-between">
-                    <span className="rounded-md bg-emerald-100 px-2.5 py-0.5 text-[11px] font-bold text-emerald-900">
-                      {art.category}
-                    </span>
+                    <div className="flex items-center gap-2">
+                      <span className="rounded-md bg-emerald-100 px-2.5 py-0.5 text-[11px] font-bold text-emerald-900">
+                        {art.category}
+                      </span>
+                      <span className="rounded bg-slate-100 px-1.5 py-0.5 text-[9px] font-bold text-slate-600 border border-slate-200">
+                        Sinteză editorială
+                      </span>
+                    </div>
                     <span className="text-[11px] font-medium text-slate-600">{art.readingTimeMin} min lectură</span>
                   </div>
 

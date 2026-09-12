@@ -57,11 +57,11 @@ Programul național **Start-Up Nation** alocă sprijin financiar nerambursabil p
     whoIsAffected: "Persoane fizice eligibile pentru formare antreprenorială și viitori fondatori de societăți cu răspundere limitată (SRL).",
     relatedProgrammes: ["start-up-nation-2025", "pnrr-c9-digitalizare-imm"],
     officialDocuments: [
-      { title: "Ordonanța de Urgență a Guvernului privind Start-Up Nation", url: "https://economie.gov.ro/" },
-      { title: "Ghidul Solicitantului — Modulul de Formare și Criterii", url: "https://economie.gov.ro/" },
+      { title: "Ordonanța de Urgență a Guvernului privind Start-Up Nation", url: "https://economie.gov.ro/programe-imm" },
+      { title: "Ghidul Solicitantului — Modulul de Formare și Criterii", url: "https://economie.gov.ro/programe-imm" },
     ],
     institution: "Ministerul Economiei, Antreprenoriatului și Turismului (MEAT)",
-    sourceUrl: "https://economie.gov.ro/",
+    sourceUrl: "https://economie.gov.ro/programe-imm",
     publishedAt: "2026-08-15",
     updatedAt: "2026-09-12",
     author: "AiX Editorial Desk",
@@ -128,17 +128,17 @@ Programul național de instalare a sistemelor fotovoltaice gestionat de AFM aduc
 ## Principalele Prevederi Tehnice:
 - **Stocare integrată**: Sistemul fotovoltaic finanțat trebuie să includă acumulatori de energie electrică dimensionați conform ghidului.
 - **Autoconsum casnic**: Dimensionarea instalației vizează acoperirea necesarului de consum al locuinței solicitantului.
-- **Calendar sesiuni**: Etapele de înscriere pentru solicitanți și validarea instalatorilor autorizați sunt comunicate pe portalul oficial AFM.
+- **Calendar sesiuni**: Etapele de înscriere pentru solicitanți și validarea instalatorilor autorizați sunt comunicate pe portalul oficial AFM. Sesiunea 2026 nu este confirmată oficial / calendarul nu este publicat.
     `,
     category: "Energy",
     impactAnalysis: "Optimizarea autoconsumului casnic și prevenirea supraîncărcării rețelelor electrice de joasă tensiune prin integrarea acumulatorilor.",
     whoIsAffected: "Proprietari de locuințe individuale pe teritoriul României.",
     relatedProgrammes: ["afm-parcuri-fotovoltaice-imm"],
     officialDocuments: [
-      { title: "Ghidul de Finanțare Casa Verde Fotovoltaice", url: "https://www.afm.ro" },
+      { title: "Ghidul de Finanțare Casa Verde Fotovoltaice", url: "https://www.afm.ro/casa_verde_fotovoltaice.php" },
     ],
     institution: "Administrația Fondului pentru Mediu (AFM)",
-    sourceUrl: "https://www.afm.ro",
+    sourceUrl: "https://www.afm.ro/casa_verde_fotovoltaice.php",
     publishedAt: "2026-07-30",
     updatedAt: "2026-09-12",
     author: "AiX Editorial Desk",
@@ -163,17 +163,17 @@ Programul național de instalare a sistemelor fotovoltaice gestionat de AFM aduc
 ## Bilanțul Prelucrării Dosarelor:
 - În intervalul 11–19 august 2026 au fost recepționate **329.476 de cereri** la nivelul oficiilor de cadastru și birourilor de carte funciară.
 - Până la data reactivării platformei, personalul ANCPI a soluționat **279.242 de dosare**, fluxul operațional intrând în regim de normalizare etapizată.
-- Datele statistice oficiale privind tranzacțiile din luna august sunt în curs de centralizare și publicare de către ANCPI.
+- Datele statistice oficiale privind tranzacțiile din luna august sunt în așteptarea publicării de către ANCPI.
     `,
     category: "Real Estate",
     impactAnalysis: "Deblocarea tranzacțiilor imobiliare rezidențiale și comerciale, a contractelor de ipotecă bancară și a operațiunilor notariale.",
     whoIsAffected: "Cumpărători, vânzători, dezvoltatori imobiliari, notari publici și bănci creditoare.",
     relatedProgrammes: [],
     officialDocuments: [
-      { title: "Comunicat Oficial ANCPI privind Reactivarea e-Terra", url: "https://www.ancpi.ro" },
+      { title: "Comunicat Oficial ANCPI privind Reactivarea e-Terra", url: "https://www.ancpi.ro/statistici-imobiliare/" },
     ],
     institution: "Agenția Națională de Cadastru și Publicitate Imobiliară (ANCPI)",
-    sourceUrl: "https://www.ancpi.ro",
+    sourceUrl: "https://www.ancpi.ro/statistici-imobiliare/",
     publishedAt: "2026-08-20",
     updatedAt: "2026-09-12",
     author: "AiX Editorial Desk",
@@ -199,7 +199,7 @@ Fermierii activi pot accesa sprijin financiar nerambursabil prin intervențiile 
 - Achiziție de utilaje agricole moderne și tehnologii de precizie.
 - Sisteme de irigații la nivel de fermă și soluții de eficiență energetică.
 - Spații climatizate de depozitare a produselor agricole.
-- Deschiderile sesiunilor de depunere se realizează conform calendarelor oficiale publicate de AFIR și MADR.
+- Deschiderile sesiunilor de depunere se realizează conform calendarelor oficiale publicate de AFIR și MADR. În prezent: Închis — nu există în prezent o sesiune nouă cu calendar oficial publicat.
     `,
     category: "Agriculture",
     impactAnalysis: "Creșterea productivității agricole și adaptarea culturilor la fenomenele climatice extreme.",

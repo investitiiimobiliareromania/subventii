@@ -73,6 +73,9 @@ export default async function NewsArticlePage({ params }: Props) {
               <span className="text-xs text-slate-600">Publicat: {article.publishedAt}</span>
               <span className="text-xs text-slate-600">• Actualizat: {article.updatedAt}</span>
               <span className="text-xs text-slate-600">• {article.readingTimeMin} min lectură</span>
+              <span className="rounded bg-slate-100 px-2 py-0.5 text-[10px] font-bold text-slate-700 border border-slate-200">
+                Sinteză editorială Subvenții
+              </span>
               {article.verified && (
                 <span className="rounded bg-emerald-50 px-2 py-0.5 text-[10px] font-bold text-emerald-800 border border-emerald-200">
                   ✓ Sursă Oficială Verificată
