@@ -5,6 +5,7 @@ import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { AiAssistantDrawer } from "@/components/ai-assistant-drawer";
 import { newsroomArticles } from "@/lib/newsroom-data";
+import { FUNDING_PROGRAMS } from "@/lib/funding-data";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -22,7 +23,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!article) return { title: "Articol negăsit" };
 
   return {
-    title: `${article.headline} | AiX Educational Intelligence`,
+    title: `${article.headline} — Subvenții & Legislație 2026`,
     description: article.summary,
     alternates: { canonical: `https://subventii.cristianvaduva.com/stiri/${slug}` },
     openGraph: {
@@ -39,6 +40,10 @@ export default async function NewsArticlePage({ params }: Props) {
   const article = newsroomArticles.find((a) => a.slug === slug);
   if (!article) notFound();
 
+  const relatedProgs = FUNDING_PROGRAMS.filter((p) =>
+    article.relatedProgrammes.includes(p.slug)
+  );
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "NewsArticle",
@@ -47,7 +52,7 @@ export default async function NewsArticlePage({ params }: Props) {
     "datePublished": article.publishedAt,
     "dateModified": article.updatedAt,
     "author": { "@type": "Person", "name": article.author },
-    "publisher": { "@type": "Organization", "name": "AiX Educational Intelligence" },
+    "publisher": { "@type": "Organization", "name": "Subvenții — Platformă Națională" },
   };
 
   return (
@@ -56,7 +61,7 @@ export default async function NewsArticlePage({ params }: Props) {
       <Header />
 
       <main className="flex-1 py-10">
-        <div className="mx-auto max-w-4xl px-4 sm:px-6">
+        <div className="mx-auto max-w-5xl px-4 sm:px-6">
           <nav aria-label="Navigare pe pagină" className="mb-6 flex items-center gap-2 text-xs text-slate-600">
             <Link href="/" className="hover:text-emerald-800 transition-colors">Acasă</Link>
             <span aria-hidden="true">/</span>
@@ -65,57 +70,73 @@ export default async function NewsArticlePage({ params }: Props) {
             <span className="font-semibold text-slate-900 line-clamp-1">{article.headline}</span>
           </nav>
 
-          <header className="mb-8 border-b border-slate-200 pb-6">
-            <div className="mb-3 flex flex-wrap items-center gap-3">
-              <span className="rounded-md bg-emerald-100 px-2.5 py-0.5 text-xs font-bold text-emerald-900">
+          <header className="mb-8 rounded-2xl border border-slate-200 bg-slate-900 p-6 md:p-8 text-white">
+            <div className="mb-3 flex flex-wrap items-center gap-2">
+              <span className="rounded-md bg-emerald-800 px-2.5 py-0.5 text-xs font-bold font-mono text-white">
                 {article.category}
               </span>
-              <span className="text-xs text-slate-600">Publicat: {article.publishedAt}</span>
-              <span className="text-xs text-slate-600">• Actualizat: {article.updatedAt}</span>
-              <span className="text-xs text-slate-600">• {article.readingTimeMin} min lectură</span>
-              <span className="rounded bg-slate-100 px-2 py-0.5 text-[10px] font-bold text-slate-700 border border-slate-200">
-                Sinteză editorială Subvenții
+              <span className="text-xs text-slate-300">Publicat: {article.publishedAt}</span>
+              <span className="text-xs text-slate-400">• {article.readingTimeMin} min lectură</span>
+              <span className="rounded bg-emerald-950 px-2 py-0.5 text-[10px] font-bold text-emerald-400 border border-emerald-800 font-mono">
+                ✓ Sursă Oficială Verificată
               </span>
-              {article.verified && (
-                <span className="rounded bg-emerald-50 px-2 py-0.5 text-[10px] font-bold text-emerald-800 border border-emerald-200">
-                  ✓ Sursă Oficială Verificată
-                </span>
-              )}
             </div>
-            <h1 className="text-2xl font-extrabold text-slate-900 sm:text-4xl leading-tight">
+            <h1 className="text-2xl font-black text-white sm:text-3xl md:text-4xl leading-tight">
               {article.headline}
             </h1>
-            <p className="mt-4 text-base font-medium text-slate-700 leading-relaxed">
+            <p className="mt-4 text-sm font-medium text-slate-300 leading-relaxed max-w-3xl">
               {article.summary}
             </p>
           </header>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="md:col-span-2 space-y-6 text-sm text-slate-800 leading-relaxed">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div className="lg:col-span-2 space-y-6 text-xs sm:text-sm text-slate-800 leading-relaxed">
               <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
-                <h2 className="text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
+                <h2 className="text-xs font-bold uppercase tracking-wider text-emerald-800 mb-2">
                   ⚡ Analiză de Impact Direct
                 </h2>
-                <p className="text-xs text-slate-700 leading-relaxed">{article.impactAnalysis}</p>
-                <div className="mt-3 pt-3 border-t border-slate-200 text-xs text-slate-800">
+                <p className="text-xs text-slate-700 leading-relaxed mb-2">{article.impactAnalysis}</p>
+                <div className="pt-2 border-t border-slate-200 text-xs text-slate-800">
                   <strong>Cine este afectat:</strong> {article.whoIsAffected}
                 </div>
               </div>
 
-              <div className="prose max-w-none space-y-4">
+              <div className="space-y-4 text-slate-800">
                 {article.content.split("\n\n").map((p, idx) => (
-                  <p key={idx}>{p}</p>
+                  <p key={idx} className="leading-relaxed">{p}</p>
                 ))}
               </div>
 
-              {article.faqs.length > 0 && (
+              {/* Related Programs Section */}
+              {relatedProgs.length > 0 && (
                 <div className="mt-8 border-t border-slate-200 pt-6">
-                  <h2 className="text-lg font-bold text-slate-900 mb-4">Întrebări Frecvente (FAQ)</h2>
-                  <div className="space-y-4">
+                  <h2 className="text-base font-bold text-slate-900 mb-3">
+                    Programe &amp; Intervenții Asociate Acestui Comunicat
+                  </h2>
+                  <div className="space-y-3">
+                    {relatedProgs.map((p) => (
+                      <div key={p.slug} className="rounded-xl border border-slate-200 bg-white p-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 text-xs">
+                        <div>
+                          <strong className="text-slate-900 block font-bold">{p.title}</strong>
+                          <span className="text-slate-500">{p.sourceCategory} • Status: {p.status}</span>
+                        </div>
+                        <Link href={`/finantari/${p.slug}`} className="rounded-lg bg-emerald-800 px-3 py-1.5 text-white font-bold hover:bg-emerald-900 shrink-0 text-xs">
+                          Vezi Fișa Completă →
+                        </Link>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {article.faqs && article.faqs.length > 0 && (
+                <div className="mt-8 border-t border-slate-200 pt-6">
+                  <h2 className="text-base font-bold text-slate-900 mb-3">Întrebări Frecvente (FAQ)</h2>
+                  <div className="space-y-3">
                     {article.faqs.map((faq, i) => (
-                      <div key={i} className="rounded-lg border border-slate-200 p-4 bg-slate-50">
+                      <div key={i} className="rounded-xl border border-slate-200 p-4 bg-slate-50">
                         <h3 className="font-bold text-slate-900 text-xs mb-1">{faq.question}</h3>
-                        <p className="text-xs text-slate-700">{faq.answer}</p>
+                        <p className="text-xs text-slate-700 leading-relaxed">{faq.answer}</p>
                       </div>
                     ))}
                   </div>
@@ -124,8 +145,8 @@ export default async function NewsArticlePage({ params }: Props) {
             </div>
 
             <aside className="space-y-6">
-              <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-xs">
-                <h2 className="text-xs font-bold uppercase tracking-wider text-slate-600 mb-3">
+              <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-xs">
+                <h2 className="text-xs font-bold uppercase tracking-wider text-slate-700 mb-3">
                   Sursă Oficială &amp; Documente
                 </h2>
                 <ul className="space-y-2 text-xs">
@@ -145,19 +166,17 @@ export default async function NewsArticlePage({ params }: Props) {
                 </ul>
               </div>
 
-              <div className="rounded-xl border border-emerald-200 bg-emerald-50/60 p-5">
-                <h2 className="text-xs font-bold text-emerald-900 mb-1">Instituție Emitentă</h2>
-                <p className="text-xs text-emerald-800 font-semibold">{article.institution}</p>
-                <div className="mt-3 pt-3 border-t border-emerald-200/60 text-[11px] text-slate-600">
-                  <span className="font-semibold text-slate-800">Sinteză editorială Subvenții:</span> Acest articol constituie o sinteză structurată a informațiilor publice oficiale comunicate de autoritatea emitentă.
-                </div>
-                <Link
-                  href="/contact"
-                  className="mt-4 inline-block w-full text-center rounded-lg bg-emerald-800 px-4 py-2 text-xs font-bold text-white hover:bg-emerald-900 transition-colors"
-                  aria-label="Solicită asistență"
+              <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5 text-xs">
+                <h2 className="font-bold text-slate-900 mb-1">Instituție Emitentă</h2>
+                <p className="text-slate-700 font-semibold mb-3">{article.institution}</p>
+                <a
+                  href={article.sourceUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-block text-emerald-800 font-bold hover:underline"
                 >
-                  Solicită Asistență →
-                </Link>
+                  Vezi comunicatul pe portalul oficial ↗
+                </a>
               </div>
             </aside>
           </div>

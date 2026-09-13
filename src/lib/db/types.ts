@@ -118,7 +118,7 @@ export type LegislativeChangeEntity = {
   id: string;
   slug: string;
   title: string;
-  actType: "OUG" | "HG" | "Lege" | "Ordin";
+  actType: "OUG" | "HG" | "Lege" | "Ordin" | "Ordin MADR" | "Regulament UE";
   actNumber: string;
   publicationDate: string;
   effectiveDate: string;

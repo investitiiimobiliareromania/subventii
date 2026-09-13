@@ -10,13 +10,19 @@ type Props = {
   params: Promise<{ slug: string }>;
 };
 
+export async function generateStaticParams() {
+  return institutionsCatalog.map((inst) => ({
+    slug: inst.slug,
+  }));
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const inst = institutionsCatalog.find((i) => i.slug === slug);
   if (!inst) return { title: "Instituție Negăsită" };
 
   return {
-    title: `${inst.name} (${inst.acronym}) | Profil Oficial`,
+    title: `${inst.name} (${inst.acronym}) | Profil Oficial Subvenții & Fonduri`,
     description: inst.summary,
     alternates: { canonical: `https://subventii.cristianvaduva.com/institutii/${slug}` },
   };
@@ -103,8 +109,8 @@ export default async function InstitutionDetailPage({ params }: Props) {
             <aside className="space-y-6">
               <div className="rounded-xl border border-slate-200 bg-white p-5">
                 <h3 className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-3">Programe Monitorizate</h3>
-                <p className="text-xs text-slate-600 mb-4">Această instituție administrează {inst.activeProgramsCount} de apeluri în catalogul AiX Educational Intelligence.</p>
-                <Link href="/programes" className="block text-center rounded-lg bg-emerald-800 py-2 text-xs font-bold text-white hover:bg-emerald-900">
+                <p className="text-xs text-slate-600 mb-4">Această instituție administrează {inst.activeProgramsCount} de apeluri în catalogul SUBVENȚII România.</p>
+                <Link href="/finantari" className="block text-center rounded-lg bg-emerald-800 py-2 text-xs font-bold text-white hover:bg-emerald-900">
                   Vezi Toate Finanțările →
                 </Link>
               </div>

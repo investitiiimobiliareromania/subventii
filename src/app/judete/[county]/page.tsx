@@ -3,19 +3,25 @@ import Link from "next/link";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { AiAssistantDrawer } from "@/components/ai-assistant-drawer";
-import { getCountyProfile } from "@/lib/county-data";
+import { getCountyProfile, countyProfilesCatalog } from "@/lib/county-data";
 
 type Props = {
   params: Promise<{ county: string }>;
 };
+
+export async function generateStaticParams() {
+  return Object.keys(countyProfilesCatalog).map((countyKey) => ({
+    county: countyKey,
+  }));
+}
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { county } = await params;
   const profile = getCountyProfile(county);
 
   return {
-    title: `Finanțări Nerambursabile & Oportunități — Județul ${profile.name} 2026`,
-    description: `Ghidul fondurilor europene, granturilor locale, facilităților fiscale și datelor ANCPI pentru firmele din Județul ${profile.name}.`,
+    title: `Subvenții Agricole & Fonduri Nerambursabile — Județul ${profile.name} 2026`,
+    description: `Ghidul complet al subvențiilor APIA, fondurilor AFIR, datelor Centrului Județean APIA ${profile.name} și oportunităților pentru fermieri.`,
     alternates: { canonical: `https://subventii.cristianvaduva.com/judete/${encodeURIComponent(county.toLowerCase())}` },
   };
 }
@@ -41,7 +47,7 @@ export default async function CountyIntelligencePage({ params }: Props) {
           <nav aria-label="Navigare pe pagină" className="mb-6 flex items-center gap-2 text-xs text-slate-600">
             <Link href="/" className="hover:text-emerald-800">Acasă</Link>
             <span aria-hidden="true">/</span>
-            <Link href="/programes" className="hover:text-emerald-800">Județe</Link>
+            <Link href={`/subventii/${county.toLowerCase()}`} className="hover:text-emerald-800">Portal Subvenții {profile.name}</Link>
             <span aria-hidden="true">/</span>
             <span className="font-semibold text-slate-900">Județul {profile.name}</span>
           </nav>
@@ -57,7 +63,7 @@ export default async function CountyIntelligencePage({ params }: Props) {
               Inteligență Economică &amp; Subvenții — Județul {profile.name}
             </h1>
             <p className="mt-3 text-xs text-slate-300 max-w-3xl leading-relaxed">
-              Oportunități de finanțare nerambursabilă, ajutoare regionale alocate de {profile.adrName} și indicatori imobiliari ANCPI.
+              Oportunități de finanțare nerambursabilă, subvenții APIA / AFIR și ajutoare regionale alocate de {profile.adrName}.
             </p>
 
             <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-4 border-t border-slate-800 pt-6 text-center text-xs">
@@ -66,16 +72,16 @@ export default async function CountyIntelligencePage({ params }: Props) {
                 <span className="font-bold text-white mt-1 block">{profile.capital}</span>
               </div>
               <div>
-                <span className="block text-slate-400">Populație</span>
-                <span className="font-bold text-white mt-1 block">{profile.population}</span>
+                <span className="block text-slate-400">Suprafață Agricolă</span>
+                <span className="font-bold text-emerald-400 mt-1 block">{profile.agriculturalSurfaceHa || "N/A"}</span>
               </div>
               <div>
                 <span className="block text-slate-400">Firme Active</span>
-                <span className="font-bold text-emerald-400 mt-1 block">{profile.activeImmCount}</span>
+                <span className="font-bold text-white mt-1 block">{profile.activeImmCount}</span>
               </div>
               <div>
-                <span className="block text-slate-400">Tranzacții ANCPI</span>
-                <span className="font-bold text-white mt-1 block">{profile.ancpiMonthlyAvg}</span>
+                <span className="block text-slate-400">Centru Județean APIA</span>
+                <span className="font-bold text-white mt-1 block truncate">{profile.apiaCenter || profile.capital}</span>
               </div>
             </div>
           </header>
@@ -83,18 +89,23 @@ export default async function CountyIntelligencePage({ params }: Props) {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="md:col-span-2 space-y-6">
               <section className="rounded-xl border border-slate-200 p-6 bg-slate-50">
-                <h2 className="text-lg font-bold text-slate-900 mb-3">Domenii Economice Cheie în {profile.name}</h2>
+                <h2 className="text-lg font-bold text-slate-900 mb-3">Domenii Agricole &amp; Economice Cheie în {profile.name}</h2>
                 <div className="flex flex-wrap gap-2">
                   {profile.topIndustries.map((ind, i) => (
                     <span key={i} className="rounded-lg bg-white border border-slate-200 px-3 py-1.5 text-xs font-semibold text-slate-800">
                       🏢 {ind}
                     </span>
                   ))}
+                  {profile.topCrops?.map((crop, i) => (
+                    <span key={`crop-${i}`} className="rounded-lg bg-emerald-50 border border-emerald-200 px-3 py-1.5 text-xs font-semibold text-emerald-900">
+                      🌾 {crop}
+                    </span>
+                  ))}
                 </div>
               </section>
 
               <section className="rounded-xl border border-slate-200 p-6 bg-white space-y-3">
-                <h2 className="text-lg font-bold text-slate-900 mb-2">Facilități & Oportunități Regionale</h2>
+                <h2 className="text-lg font-bold text-slate-900 mb-2">Facilități &amp; Oportunități Regionale</h2>
                 {profile.keyIncentives.map((inc, i) => (
                   <div key={i} className="flex items-start gap-2 text-xs text-slate-700">
                     <span className="text-emerald-700 font-bold">✓</span>
@@ -105,11 +116,19 @@ export default async function CountyIntelligencePage({ params }: Props) {
             </div>
 
             <aside className="space-y-6">
-              <div className="rounded-xl border border-slate-200 bg-emerald-50/70 p-5">
-                <h3 className="text-xs font-bold text-emerald-900 mb-2">Căutare Programe după Județ</h3>
-                <p className="text-xs text-emerald-800 mb-4">Filtrează toate granturile deschise pentru IMM-urile din județul {profile.name}.</p>
-                <Link href={`/programes?county=${profile.name}`} className="block text-center rounded-lg bg-emerald-800 py-2.5 text-xs font-bold text-white hover:bg-emerald-900">
-                  Filtrează Programe {profile.name} →
+              <div className="rounded-xl border border-emerald-200 bg-emerald-50/70 p-5">
+                <h3 className="text-xs font-bold text-emerald-900 mb-2">Portalul Agricol Dedicat</h3>
+                <p className="text-xs text-emerald-800 mb-4">Accesează portalul complet de subvenții APIA &amp; AFIR dedicat județului {profile.name}.</p>
+                <Link href={`/subventii/${county.toLowerCase()}`} className="block text-center rounded-lg bg-emerald-800 py-2.5 text-xs font-bold text-white hover:bg-emerald-900">
+                  Deschide Portal Subvenții {profile.name} →
+                </Link>
+              </div>
+
+              <div className="rounded-xl border border-slate-200 bg-white p-5">
+                <h3 className="text-xs font-bold text-slate-900 mb-2">Programe Deschise</h3>
+                <p className="text-xs text-slate-600 mb-4">Filtrează toate schemele de plată eligibile pentru {profile.name}.</p>
+                <Link href={`/finantari?county=${encodeURIComponent(profile.name)}`} className="block text-center rounded-lg border border-slate-300 py-2 text-xs font-bold text-slate-800 hover:bg-slate-50">
+                  Vezi Finanțări Disponibile →
                 </Link>
               </div>
             </aside>

@@ -17,7 +17,7 @@ export function Header() {
             <Link
               href="https://subventii.cristianvaduva.com/"
               className="brand-logo flex-shrink-0 text-sm font-extrabold tracking-tight text-slate-900 focus-visible:outline-emerald-700"
-              aria-label="Subvenții - AiX Educational Intelligence - Pagina principală"
+              aria-label="Subvenții - Platformă Națională de Informare - Pagina principală"
               title="Subvenții"
             >
               Subvenții
@@ -55,22 +55,21 @@ export function Header() {
             <Link
               href="https://subventii.cristianvaduva.com/"
               className="brand-logo flex-shrink-0 text-sm font-extrabold tracking-tight text-slate-900 focus-visible:outline-emerald-700"
-              aria-label="Subvenții - AiX Educational Intelligence - Pagina principală"
+              aria-label="Subvenții - Platformă Națională de Informare - Pagina principală"
               title="Subvenții"
             >
               Subvenții
             </Link>
-            <nav aria-label="Meniu principal desktop" className="flex items-center gap-6 text-xs font-semibold text-slate-800">
-              <Link href="/programes" className="hover:text-emerald-800 transition-colors focus-visible:outline-emerald-700 rounded px-1">Finanțări</Link>
-              <Link href="/programe-guvernamentale" className="hover:text-emerald-800 transition-colors focus-visible:outline-emerald-700 rounded px-1">Programe Guvernamentale</Link>
-              <Link href="/stiri" className="hover:text-emerald-800 transition-colors focus-visible:outline-emerald-700 rounded px-1">Știri</Link>
+            <nav aria-label="Meniu principal desktop" className="flex items-center gap-5 text-xs font-semibold text-slate-800">
+              <Link href="/programes" className="hover:text-emerald-800 transition-colors focus-visible:outline-emerald-700 rounded px-1">Subvenții &amp; Finanțări</Link>
+              <Link href="/calendar" className="hover:text-emerald-800 transition-colors focus-visible:outline-emerald-700 rounded px-1">Calendar &amp; Termene</Link>
+              <Link href="/intelligence/regions" className="hover:text-emerald-800 transition-colors focus-visible:outline-emerald-700 rounded px-1">Județe (41)</Link>
+              <Link href="/stiri" className="hover:text-emerald-800 transition-colors focus-visible:outline-emerald-700 rounded px-1">Știri APIA &amp; AFIR</Link>
               <Link href="/legislatie" className="hover:text-emerald-800 transition-colors focus-visible:outline-emerald-700 rounded px-1">Legislație</Link>
-              <Link href="/credite" className="hover:text-emerald-800 transition-colors focus-visible:outline-emerald-700 rounded px-1">Credite</Link>
-              <Link href="/piata-imobiliara" className="hover:text-emerald-800 transition-colors focus-visible:outline-emerald-700 rounded px-1">Piața Imobiliară</Link>
-              <Link href="/asigurari" className="hover:text-emerald-800 transition-colors focus-visible:outline-emerald-700 rounded px-1">Asigurări</Link>
-              <Link href="/rapoarte-ancpi" className="hover:text-emerald-800 transition-colors focus-visible:outline-emerald-700 rounded px-1">Rapoarte ANCPI</Link>
+              <Link href="/resurse" className="hover:text-emerald-800 transition-colors focus-visible:outline-emerald-700 rounded px-1">Ghiduri &amp; Cereri</Link>
+              <Link href="/programe-guvernamentale" className="hover:text-emerald-800 transition-colors focus-visible:outline-emerald-700 rounded px-1">Programe Guvern</Link>
               <Link href="/institutii" className="hover:text-emerald-800 transition-colors focus-visible:outline-emerald-700 rounded px-1">Instituții</Link>
-              <Link href="/despre" className="hover:text-emerald-800 transition-colors focus-visible:outline-emerald-700 rounded px-1">Despre</Link>
+              <Link href="/glosar" className="hover:text-emerald-800 transition-colors focus-visible:outline-emerald-700 rounded px-1">Glosar</Link>
               <Link href="/contact" className="hover:text-emerald-800 transition-colors focus-visible:outline-emerald-700 rounded px-1">Contact</Link>
             </nav>
             <EcosystemNav />
@@ -80,27 +79,23 @@ export function Header() {
         {/* Mobile Drawer Menu */}
         {mobileMenuOpen && (
           <nav aria-label="Meniu navigare mobil" className="lg:hidden border-b border-slate-200 bg-white px-4 pt-3 pb-6 space-y-3 text-sm font-medium text-slate-900 animate-in slide-in-from-top-2">
-            <Link onClick={() => setMobileMenuOpen(false)} href="/programes" className="block py-1.5 hover:text-emerald-800">Finanțări Nerambursabile</Link>
+            <Link onClick={() => setMobileMenuOpen(false)} href="/programes" className="block py-1.5 hover:text-emerald-800">Subvenții &amp; Finanțări Nerambursabile</Link>
+            <Link onClick={() => setMobileMenuOpen(false)} href="/calendar" className="block py-1.5 hover:text-emerald-800">Calendar Campanii &amp; Termene</Link>
+            <Link onClick={() => setMobileMenuOpen(false)} href="/intelligence/regions" className="block py-1.5 hover:text-emerald-800">Ghid Județe (Toate cele 41 Județe)</Link>
+            <Link onClick={() => setMobileMenuOpen(false)} href="/stiri" className="block py-1.5 hover:text-emerald-800">Știri &amp; Noutăți Oficiale</Link>
+            <Link onClick={() => setMobileMenuOpen(false)} href="/legislatie" className="block py-1.5 hover:text-emerald-800">Legislație &amp; Ordine MADR</Link>
+            <Link onClick={() => setMobileMenuOpen(false)} href="/resurse" className="block py-1.5 hover:text-emerald-800">Ghiduri PDF &amp; Documente Tipizate</Link>
             <Link onClick={() => setMobileMenuOpen(false)} href="/programe-guvernamentale" className="block py-1.5 hover:text-emerald-800">Programe Guvernamentale</Link>
-            <Link onClick={() => setMobileMenuOpen(false)} href="/stiri" className="block py-1.5 hover:text-emerald-800">Știri &amp; Noutăți Editorial</Link>
-            <Link onClick={() => setMobileMenuOpen(false)} href="/legislatie" className="block py-1.5 hover:text-emerald-800">Legislație</Link>
-            <Link onClick={() => setMobileMenuOpen(false)} href="/credite" className="block py-1.5 hover:text-emerald-800">Credite &amp; Dobânzi</Link>
-            <Link onClick={() => setMobileMenuOpen(false)} href="/piata-imobiliara" className="block py-1.5 hover:text-emerald-800">Piața Imobiliară</Link>
-            <Link onClick={() => setMobileMenuOpen(false)} href="/asigurari" className="block py-1.5 hover:text-emerald-800">Asigurări</Link>
-            <Link onClick={() => setMobileMenuOpen(false)} href="/rapoarte-ancpi" className="block py-1.5 hover:text-emerald-800">Rapoarte ANCPI</Link>
-            <Link onClick={() => setMobileMenuOpen(false)} href="/institutii" className="block py-1.5 hover:text-emerald-800">Instituții Publice</Link>
+            <Link onClick={() => setMobileMenuOpen(false)} href="/institutii" className="block py-1.5 hover:text-emerald-800">Instituții Publice (APIA, AFIR, MADR)</Link>
             <div className="pt-2 border-t border-slate-100 flex flex-wrap gap-2 text-xs">
-              <Link onClick={() => setMobileMenuOpen(false)} href="/calendar" className="px-3 py-1.5 rounded-md bg-slate-100 font-semibold text-slate-900 hover:bg-slate-200">Calendar</Link>
               <Link onClick={() => setMobileMenuOpen(false)} href="/eligibilitate" className="px-3 py-1.5 rounded-md bg-slate-100 font-semibold text-slate-900 hover:bg-slate-200">Eligibilitate</Link>
               <Link onClick={() => setMobileMenuOpen(false)} href="/compara" className="px-3 py-1.5 rounded-md bg-slate-100 font-semibold text-slate-900 hover:bg-slate-200">Comparare</Link>
-              <Link onClick={() => setMobileMenuOpen(false)} href="/alerte" className="px-3 py-1.5 rounded-md bg-slate-100 font-semibold text-slate-900 hover:bg-slate-200">Alerte</Link>
-              <Link onClick={() => setMobileMenuOpen(false)} href="/resurse" className="px-3 py-1.5 rounded-md bg-slate-100 font-semibold text-slate-900 hover:bg-slate-200">Resurse</Link>
-              <Link onClick={() => setMobileMenuOpen(false)} href="/glosar" className="px-3 py-1.5 rounded-md bg-slate-100 font-semibold text-slate-900 hover:bg-slate-200">Glosar</Link>
+              <Link onClick={() => setMobileMenuOpen(false)} href="/glosar" className="px-3 py-1.5 rounded-md bg-slate-100 font-semibold text-slate-900 hover:bg-slate-200">Glosar PAC</Link>
               <Link onClick={() => setMobileMenuOpen(false)} href="/asistent-ai" className="px-3 py-1.5 rounded-md bg-emerald-100 text-emerald-950 font-bold hover:bg-emerald-200">Asistent AI</Link>
             </div>
             <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-xs text-slate-600">
               <Link onClick={() => setMobileMenuOpen(false)} href="/despre" className="hover:text-emerald-800">Despre Platformă</Link>
-              <Link onClick={() => setMobileMenuOpen(false)} href="/contact" className="hover:text-emerald-800">Contact &amp; Asistență</Link>
+              <Link onClick={() => setMobileMenuOpen(false)} href="/contact" className="hover:text-emerald-800">Contact Direct</Link>
             </div>
           </nav>
         )}

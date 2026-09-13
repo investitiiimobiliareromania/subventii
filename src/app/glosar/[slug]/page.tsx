@@ -10,6 +10,12 @@ type Props = {
   params: Promise<{ slug: string }>;
 };
 
+export async function generateStaticParams() {
+  return glossaryCatalog.map((item) => ({
+    slug: item.slug,
+  }));
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const item = glossaryCatalog.find((g) => g.slug === slug);
@@ -72,7 +78,7 @@ export default async function GlossaryDetailPage({ params }: Props) {
               </section>
             )}
 
-            {item.relatedLegislation.length > 0 && (
+            {item.relatedLegislation && item.relatedLegislation.length > 0 && (
               <section>
                 <h2 className="text-base font-bold text-slate-900 mb-2">Bază Legală și Reglementare</h2>
                 <ul className="space-y-1 text-xs text-slate-600">

@@ -6,8 +6,8 @@ import { AiAssistantDrawer } from "@/components/ai-assistant-drawer";
 import { glossaryCatalog } from "@/lib/glossary-data";
 
 export const metadata: Metadata = {
-  title: "Glosar de Finanțări, Fonduri Europene și Termeni Bancari",
-  description: "Dicționarul explicativ al termenilor utilizați în ghidurile de finanțare nerambursabilă: de minimis, cofinanțare, IRCC, ROBOR, RLS, PAD.",
+  title: "Glosar Subvenții Agricole, Termeni APIA, AFIR și Fonduri Europene",
+  description: "Dicționarul explicativ complet al termenilor agricoli și de finanțare: BISS, CRISS, eco-scheme, sprijin cuplat, Standard Output (SO), UVM, BGAO, IACS și IPA Online.",
   alternates: { canonical: "https://subventii.cristianvaduva.com/glosar" },
 };
 
@@ -15,7 +15,7 @@ export default function GlossaryPage() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "DefinedTermSet",
-    "name": "Glosar AiX Educational Intelligence",
+    "name": "Glosar Agricol SUBVENȚII România",
     "url": "https://subventii.cristianvaduva.com/glosar",
   };
 

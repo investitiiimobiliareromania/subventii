@@ -1,17 +1,14 @@
 export type ArticleCategory =
-  | "Funding"
-  | "Government"
-  | "European Funds"
-  | "SMEs"
-  | "Agriculture"
-  | "Innovation"
-  | "Energy"
-  | "Construction"
-  | "Digitalisation"
-  | "Real Estate"
-  | "Banking"
-  | "Insurance"
-  | "Legislation";
+  | "APIA"
+  | "AFIR"
+  | "MADR"
+  | "Legislație"
+  | "Fonduri Europene"
+  | "Zootehnie"
+  | "Vegetal"
+  | "Tineri Fermieri"
+  | "Energie"
+  | "Piața Imobiliară";
 
 export type NewsArticle = {
   slug: string;
@@ -35,6 +32,204 @@ export type NewsArticle = {
 
 export const newsroomArticles: NewsArticle[] = [
   {
+    slug: "campanie-depunere-cereri-plata-apia-2026",
+    headline: "APIA: Deschiderea Campaniei de Depunere a Cererilor Unice de Plată pentru Anul 2026",
+    summary: "Agenția de Plăți și Intervenție pentru Agricultură (APIA) anunță demararea campaniei anuale de primire a cererilor de plată prin intermediul aplicației IPA Online pentru toate intervențiile din Planul Strategic PAC.",
+    content: `
+# APIA — Ghidul Complet pentru Depunerea Cererilor Unice de Plată
+
+Fermierii români pot depune Cererea de Plată pentru anul de cerere fără penalități de întârziere până la data de **15 Mai 2026**, respectiv cu penalități de 1% pe fiecare zi lucrătoare de întârziere până la data de **15 Iunie 2026**.
+
+## Noutăți și Proceduri IPA Online:
+1. **Completare 100% Online**: Fermierii identifică și digitizează parcelele agricole direct în aplicația web IPA Online utilizând ortofotoplanurile actualizate.
+2. **Declarația pe Propria Răspundere și Adeverința de la Primărie**: Documentele care atestă dreptul de folosință asupra terenului și înscrierea în Registrul Agricol se transmit electronic sau se preiau direct prin interconectare administrativă.
+3. **Condiționalitate Consolidată**: Solicitanții trebuie să respecte pe întreaga exploatație normele BGAO (Bunele Condiții Agricole și de Mediu) și SMR (Cerințele Legale în Materie de Gestionare).
+    `,
+    category: "APIA",
+    impactAnalysis: "Asigură finanțarea directă a peste 700.000 de exploatații agricole din România, cu un buget total alocat de peste 2,1 miliarde de euro anual.",
+    whoIsAffected: "Toți fermierii persoane fizice și juridice care exploatează terenuri agricole sau dețin animale înregistrate în Baza Națională de Date ANSVSA.",
+    relatedProgrammes: ["apia-biss-pd-01", "apia-criss-pd-02", "apia-tineri-fermieri-cis-yf-pd-03", "apia-eco-schema-teren-arabil-pd-04"],
+    officialDocuments: [
+      { title: "Ghidul Solicitantului APIA — Cererea de Plată", url: "https://apia.org.ro/directia-plati-directe/" },
+      { title: "Manual de Utilizare IPA Online pentru Fermieri", url: "https://apia.org.ro" },
+    ],
+    institution: "Agenția de Plăți și Intervenție pentru Agricultură (APIA)",
+    sourceUrl: "https://apia.org.ro",
+    publishedAt: "2026-03-01",
+    updatedAt: "2026-09-12",
+    author: "Redacția Subvenții.ro",
+    readingTimeMin: 6,
+    verified: true,
+    faqs: [
+      { question: "Până la ce dată se poate depune cererea fără penalități?", answer: "Până la data de 15 mai 2026, ora 24:00." },
+      { question: "Unde se pot obține clarificări?", answer: "La Centrul Județean sau Local APIA de care aparține exploatația agricolă." },
+    ],
+  },
+  {
+    slug: "calendar-plati-avans-apia-fega-feadr",
+    headline: "APIA: Începerea Plăților în Avans din 16 Octombrie; Peste 70% din Schemele Directe Debursate",
+    summary: "Conform deciziei Ministerului Agriculturii și regulamentelor europene, APIA demarează pe 16 octombrie autorizarea la plată a avansului pentru fermierii care au trecut controalele administrative și teledetecție.",
+    content: `
+# Bilanțul Plăților în Avans APIA — Campania 2026
+
+În conformitate cu Regulamentul (UE) 2021/2115, statele membre pot acorda plăți în avans de până la **70% pentru intervențiile din FEGA** (plăți directe BISS, CRISS, CIS-YF) și de până la **85% pentru măsurile compensatorii din FEADR** (agricultură ecologică, zone defavorizate ANC).
+
+## Nivelurile de Avans Autorizate:
+- **BISS (PD-01)**: 70% din cuantumul unitar pe hectar.
+- **CRISS (PD-02)**: 70% din cuantumul redistributiv pentru primele 50 ha.
+- **CIS-YF (PD-03)**: 70% pentru tinerii fermieri eligibili.
+- **Plăți compensatorii (DR-01, DR-04, DR-05)**: 85% din sumele alocate pe hectar.
+    `,
+    category: "APIA",
+    impactAnalysis: "Asigură lichiditățile financiare vitale pentru înființarea culturilor de toamnă (grâu, orz, rapiță) și achiziția de îngrășăminte.",
+    whoIsAffected: "Fermierii activi fără neconformități la controalele în teren și eșantioanele de control prin monitorizare satelitară.",
+    relatedProgrammes: ["apia-biss-pd-01", "apia-criss-pd-02", "apia-tineri-fermieri-cis-yf-pd-03"],
+    officialDocuments: [
+      { title: "Comunicat Oficial APIA privind Graficul Plăților în Avans", url: "https://apia.org.ro" },
+    ],
+    institution: "Agenția de Plăți și Intervenție pentru Agricultură (APIA)",
+    sourceUrl: "https://apia.org.ro",
+    publishedAt: "2026-09-01",
+    updatedAt: "2026-09-12",
+    author: "Redacția Subvenții.ro",
+    readingTimeMin: 5,
+    verified: true,
+    faqs: [
+      { question: "Cine primește plata în avans?", answer: "Toți fermierii a căror cerere a fost verificată administrativ și nu figurează cu suprapuneri de blocuri fizice sau sancțiuni nerezolvate." },
+    ],
+  },
+  {
+    slug: "afir-lansare-apel-dr25-irigatii",
+    headline: "AFIR: Sesiune de Depunere a Proiectelor pentru Modernizarea Sistemelor de Irigații (DR-25) — Buget de 400 Milioane EUR",
+    summary: "Agenția pentru Finanțarea Investițiilor Rurale a deschis sesiunea de depunere a cererilor de finanțare nerambursabilă 100% pentru Organizațiile Utilizatorilor de Apă pentru Irigații (OUAI).",
+    content: `
+# Intervenția DR-25: Reabilitarea Sistemelor Secundare de Irigații
+
+AFIR pune la dispoziția asociațiilor de fermieri constituiți în OUAI un plafon financiar substanțial pentru combaterea secetei în marile bazine agricole din Câmpia Română, Dobrogea și Moldova.
+
+## Condiții de Finanțare:
+- **Valoare Maximă Grant**: 1.500.000 EUR per proiect.
+- **Intensitate Sprijin**: **100% nerambursabil** din fonduri FEADR.
+- **Cheltuieli Eligibile**: Reabilitare stații de pompare (SPA, SPP), conducte îngropate, hidranți inteligenți, senzori de presiune și contoare electronice.
+- **Criteriu Obligatoriu**: Economie potențială de apă demonstrată prin proiectul tehnic.
+    `,
+    category: "AFIR",
+    impactAnalysis: "Extinderea suprafețelor agricole irigate cu peste 250.000 de hectare și creșterea randamentului culturilor de câmp la secetă.",
+    whoIsAffected: "Organizațiile Utilizatorilor de Apă pentru Irigații (OUAI) și Federațiile de OUAI (FOUAI) legal constituite.",
+    relatedProgrammes: ["afir-dr-25-modernizare-irigatii-ouai"],
+    officialDocuments: [
+      { title: "Ghidul Solicitantului DR-25 Modernizarea Infrastructurii de Irigații", url: "https://www.afir.ro" },
+    ],
+    institution: "Agenția pentru Finanțarea Investițiilor Rurale (AFIR)",
+    sourceUrl: "https://www.afir.ro",
+    publishedAt: "2026-06-15",
+    updatedAt: "2026-09-12",
+    author: "Redacția Subvenții.ro",
+    readingTimeMin: 5,
+    verified: true,
+    faqs: [
+      { question: "Până când se pot depune proiecte pe DR-25?", answer: "Depunerea este deschisă până la 30 septembrie 2026 sau până la atingerea plafonului de 150% din alocare." },
+    ],
+  },
+  {
+    slug: "ghid-afir-instalare-tineri-fermieri-dr30",
+    headline: "AFIR: Publicarea Ghidului Solicitantului pentru Instalarea Tinerilor Fermieri (DR-30) — 70.000 EUR Grant Forfetar",
+    summary: "Ghidul oficial pentru intervenția DR-30 a fost aprobat de MADR. Tinerii până în 40 de ani pot obține un grant nerambursabil de 70.000 EUR pentru prima instalare ca șef de exploatație agricolă.",
+    content: `
+# Ghidul DR-30 — Instalarea Tinerilor Fermieri
+
+Sprijinul forfetar acordat prin AFIR urmărește atragerea și menținerea tinerilor calificați în mediul rural prin crearea de exploatații agricole viabile economic.
+
+## Detalii Cheie ale Intervenției:
+- **Valoare Grant**: 70.000 EUR (100% nerambursabil).
+- **Plată în 2 Tranșe**: 75% (52.500 EUR) la semnarea contractului și 25% (17.500 EUR) după îndeplinirea obiectivelor din planul de afaceri.
+- **Dimensiune Economică**: Ferma preluată trebuie să aibă între 8.000 și 100.000 SO (Standard Output) — minimum 4.000 SO în zona montană.
+- **Obligație**: Creșterea SO cu cel puțin 20% până la solicitarea tranșei finale.
+    `,
+    category: "AFIR",
+    impactAnalysis: "Încurajează schimbul de generații în agricultura românească și dezvoltarea afacerilor agricole sustenabile.",
+    whoIsAffected: "Tineri cu vârsta de până la 40 de ani care s-au înregistrat la ONRC cu cel mult 24 de luni înainte de depunerea proiectului.",
+    relatedProgrammes: ["afir-dr-30-instalare-tineri-fermieri", "apia-tineri-fermieri-cis-yf-pd-03"],
+    officialDocuments: [
+      { title: "Ghidul Solicitantului DR-30 Instalarea Tinerilor Fermieri", url: "https://www.afir.ro" },
+      { title: "Model Plan de Afaceri DR-30", url: "https://www.afir.ro" },
+    ],
+    institution: "Agenția pentru Finanțarea Investițiilor Rurale (AFIR)",
+    sourceUrl: "https://www.afir.ro",
+    publishedAt: "2026-08-10",
+    updatedAt: "2026-09-12",
+    author: "Redacția Subvenții.ro",
+    readingTimeMin: 6,
+    verified: true,
+    faqs: [
+      { question: "Se poate achiziționa tractor din grantul de 70.000 EUR?", answer: "Da, achiziția de utilaje agricole este cheltuială eligibilă în cadrul planului de afaceri asumat." },
+    ],
+  },
+  {
+    slug: "plata-ajutor-stat-motorina-trimestrial",
+    headline: "MADR: Virarea Fondurilor pentru Reducerea Accizei la Motorină Utilizată în Agricultură",
+    summary: "Ministerul Agriculturii și Dezvoltării Rurale a alocat fondurile necesare către APIA pentru plata cererilor de decontare a motorinei aferente trimestrelor I și II din anul în curs.",
+    content: `
+# Subvenția la Motorină — Cota Redusă de Acciză
+
+Fermierii care au depus cererile trimestriale de plată la Centrele Județene APIA primesc sumele aprobate reprezentând diferența dintre cota standard și cota redusă a accizei.
+
+## Date Financiare:
+- **Cuantum Subvenție**: 1,746 lei / litru de motorină consumată.
+- **Beneficiari**: Peste 18.000 de societăți agricole, PFA, II și cooperative.
+- **Sectoare Acoperite**: Sectorul vegetal (lucrări mecanizate pe arabil, livezi, vii) și sectorul zootehnic (furajare, muls, transport dejecții).
+    `,
+    category: "MADR",
+    impactAnalysis: "Reduce costurile directe de operare ale fermierilor și menține competitivitatea produselor agroalimentare românești.",
+    whoIsAffected: "Deținătorii de tractoare și mașini agricole autopropulsate cu acord prealabil APIA activ.",
+    relatedProgrammes: ["madr-ajutor-stat-motorina-agricultura"],
+    officialDocuments: [
+      { title: "Ordinul Comun MADR/MFP privind Acciza la Motorină", url: "https://apia.org.ro" },
+    ],
+    institution: "Ministerul Agriculturii și Dezvoltării Rurale (MADR)",
+    sourceUrl: "https://madr.ro",
+    publishedAt: "2026-07-25",
+    updatedAt: "2026-09-12",
+    author: "Redacția Subvenții.ro",
+    readingTimeMin: 4,
+    verified: true,
+    faqs: [
+      { question: "Când se depune cererea pentru trimestrul III?", answer: "Cererea de decontare pentru motorina utilizată în trimestrul III se depune în intervalul 1 – 31 octombrie." },
+    ],
+  },
+  {
+    slug: "lansare-program-rabla-tractoare-afm",
+    headline: "AFM: Lansarea Programului Rabla pentru Tractoare și Mașini Agricole — Ghid Oficial",
+    summary: "Administrația Fondului pentru Mediu (AFM) deschide înscrierea producătorilor agricoli pentru achiziția de tractoare noi cu sprijin nerambursabil de până la 20.000 EUR.",
+    content: `
+# Programul Național Rabla pentru Tractoare 2026
+
+Pentru prima dată în România, fermierii persoane fizice și microîntreprinderile pot casa un autovehicul sau tractor vechi pentru a achiziționa un utilaj agricol nou, mai puțin poluant.
+
+## Criterii de Eligibilitate:
+- **Valoare Maximă Tractor**: 55.000 EUR (TVA inclus).
+- **Sprijin Nerambursabil**: 65% din valoarea de achiziție (până la **80% pentru tinerii fermieri** sub 40 de ani).
+- **Condiție Casare**: Predarea unui tractor vechi sau autoturism uzat la un colector REMAT autorizat.
+    `,
+    category: "Energie",
+    impactAnalysis: "Modernizarea parcului tehnic agricol cu utilaje eficiente energetic și reducerea emisiilor de carbon.",
+    whoIsAffected: "Producători agricoli individuali (atestat de producător) și fermieri tineri din toată țara.",
+    relatedProgrammes: ["afm-rabla-tractoare-agricultura"],
+    officialDocuments: [
+      { title: "Ghidul de Finanțare Rabla Tractoare AFM", url: "https://www.afm.ro" },
+    ],
+    institution: "Administrația Fondului pentru Mediu (AFM)",
+    sourceUrl: "https://www.afm.ro",
+    publishedAt: "2026-08-01",
+    updatedAt: "2026-09-12",
+    author: "Redacția Subvenții.ro",
+    readingTimeMin: 5,
+    verified: true,
+    faqs: [
+      { question: "Unde se depun dosarele pentru Rabla Tractoare?", answer: "Dosarele se depun prin intermediul dealerilor și distribuitorilor de utilaje validați de AFM." },
+    ],
+  },
+  {
     slug: "start-up-nation-2025-2026-pilonul-1-2",
     headline: "Start-Up Nation România: Cadrul General de Formare Antreprenorială și Pregătirea Planurilor de Afaceri",
     summary: "Ministerul Economiei, Antreprenoriatului și Turismului (MEAT) gestionează etapele programului Start-Up Nation, structurat pe piloni de instruire și acordare de granturi nerambursabile de până la 250.000 RON.",
@@ -52,7 +247,7 @@ Programul național **Start-Up Nation** alocă sprijin financiar nerambursabil p
 - Cofinanțare proprie minimă obligatorie de 10% din cheltuielile eligibile.
 - Obligația creării și menținerii a minimum 2 locuri de muncă cu normă întreagă pe o durată de cel puțin 24 de luni.
     `,
-    category: "SMEs",
+    category: "Fonduri Europene",
     impactAnalysis: "Sprijină înființarea de întreprinderi noi și integrarea tinerilor și a grupurilor vulnerabile pe piața muncii active.",
     whoIsAffected: "Persoane fizice eligibile pentru formare antreprenorială și viitori fondatori de societăți cu răspundere limitată (SRL).",
     relatedProgrammes: ["start-up-nation-2025", "pnrr-c9-digitalizare-imm"],
@@ -64,7 +259,7 @@ Programul național **Start-Up Nation** alocă sprijin financiar nerambursabil p
     sourceUrl: "https://economie.gov.ro/programe-imm",
     publishedAt: "2026-08-15",
     updatedAt: "2026-09-12",
-    author: "AiX Editorial Desk",
+    author: "Redacția Subvenții.ro",
     readingTimeMin: 5,
     verified: true,
     faqs: [
@@ -94,7 +289,7 @@ La finalizarea proiectului, companiile beneficiare trebuie să demonstreze înde
 - Tranzacții de comerț electronic reprezentând minimum 1% din cifra de afaceri.
 - Utilizarea serviciilor cloud de nivel mediu sau avansat.
     `,
-    category: "Digitalisation",
+    category: "Fonduri Europene",
     impactAnalysis: "Crește competitivitatea IMM-urilor din sectoare tradiționale (producție, servicii, construcții, turism) prin tehnologizare.",
     whoIsAffected: "Microîntreprinderi, companii mici și mijlocii cu vechime de peste 1 an și profit operațional pozitiv.",
     relatedProgrammes: ["pnrr-c9-digitalizare-imm", "adr-nord-vest-digitalizare-si-inovare"],
@@ -106,157 +301,13 @@ La finalizarea proiectului, companiile beneficiare trebuie să demonstreze înde
     sourceUrl: "https://mfe.gov.ro/pnrr/",
     publishedAt: "2026-08-20",
     updatedAt: "2026-09-12",
-    author: "AiX Editorial Desk",
+    author: "Redacția Subvenții.ro",
     readingTimeMin: 6,
     verified: true,
     faqs: [
       {
         question: "Este obligatoriu auditul de maturitate digitală?",
         answer: "Da, este obligatoriu un raport de audit înainte de depunere și un raport final după implementare care să ateste progresul DESI.",
-      },
-    ],
-  },
-  {
-    slug: "casa-verde-fotovoltaice-2026-calendar",
-    headline: "Casa Verde Fotovoltaice: Criteriile Tehnice AFM și Cadrul de Integrare a Sistemelor de Stocare",
-    summary: "Administrația Fondului pentru Mediu (AFM) a integrat în cerințele programului obligativitatea capacității de stocare de energie. Lansarea fiecărei sesiuni de înscriere se realizează exclusiv conform calendarului oficial AFM.",
-    content: `
-# Casa Verde Fotovoltaice — Cadrul General AFM
-
-Programul național de instalare a sistemelor fotovoltaice gestionat de AFM aduce cerințe tehnice actualizate privind eficiența și independența energetică:
-
-## Principalele Prevederi Tehnice:
-- **Stocare integrată**: Sistemul fotovoltaic finanțat trebuie să includă acumulatori de energie electrică dimensionați conform ghidului.
-- **Autoconsum casnic**: Dimensionarea instalației vizează acoperirea necesarului de consum al locuinței solicitantului.
-- **Calendar sesiuni**: Etapele de înscriere pentru solicitanți și validarea instalatorilor autorizați sunt comunicate pe portalul oficial AFM. Sesiunea 2026 nu este confirmată oficial / calendarul nu este publicat.
-    `,
-    category: "Energy",
-    impactAnalysis: "Optimizarea autoconsumului casnic și prevenirea supraîncărcării rețelelor electrice de joasă tensiune prin integrarea acumulatorilor.",
-    whoIsAffected: "Proprietari de locuințe individuale pe teritoriul României.",
-    relatedProgrammes: ["afm-parcuri-fotovoltaice-imm"],
-    officialDocuments: [
-      { title: "Ghidul de Finanțare Casa Verde Fotovoltaice", url: "https://www.afm.ro/casa_verde_fotovoltaice.php" },
-    ],
-    institution: "Administrația Fondului pentru Mediu (AFM)",
-    sourceUrl: "https://www.afm.ro/casa_verde_fotovoltaice.php",
-    publishedAt: "2026-07-30",
-    updatedAt: "2026-09-12",
-    author: "AiX Editorial Desk",
-    readingTimeMin: 4,
-    verified: true,
-    faqs: [
-      {
-        question: "Cine se poate înscrie prin aplicația AFM?",
-        answer: "Persoanele fizice care dețin drept de proprietate asupra imobilului și nu au datorii la bugetul de stat sau local.",
-      },
-    ],
-  },
-  {
-    slug: "ancpi-eterra-reluare-activitate-august-2026",
-    headline: "ANCPI: Sistemul e-Terra Reactivat pe 20 August; Peste 279.000 de Dosare Soluționate",
-    summary: "Agenția Națională de Cadastru și Publicitate Imobiliară a comunicat restabilirea funcționalității sistemului informatic e-Terra și procesarea dosarelor cadastrale acumulate.",
-    content: `
-# ANCPI — Situația Operațională a Cadastrului și Publicității Imobiliare
-
-În urma unei întreruperi tehnice temporare înregistrate în prima jumătate a lunii august 2026, Agenția Națională de Cadastru și Publicitate Imobiliară (ANCPI) a anunțat reluarea completă a funcționalității platformei **e-Terra** începând cu data de **20 August 2026**.
-
-## Bilanțul Prelucrării Dosarelor:
-- În intervalul 11–19 august 2026 au fost recepționate **329.476 de cereri** la nivelul oficiilor de cadastru și birourilor de carte funciară.
-- Până la data reactivării platformei, personalul ANCPI a soluționat **279.242 de dosare**, fluxul operațional intrând în regim de normalizare etapizată.
-- Datele statistice oficiale privind tranzacțiile din luna august sunt în așteptarea publicării de către ANCPI.
-    `,
-    category: "Real Estate",
-    impactAnalysis: "Deblocarea tranzacțiilor imobiliare rezidențiale și comerciale, a contractelor de ipotecă bancară și a operațiunilor notariale.",
-    whoIsAffected: "Cumpărători, vânzători, dezvoltatori imobiliari, notari publici și bănci creditoare.",
-    relatedProgrammes: [],
-    officialDocuments: [
-      { title: "Comunicat Oficial ANCPI privind Reactivarea e-Terra", url: "https://www.ancpi.ro/statistici-imobiliare/" },
-    ],
-    institution: "Agenția Națională de Cadastru și Publicitate Imobiliară (ANCPI)",
-    sourceUrl: "https://www.ancpi.ro/statistici-imobiliare/",
-    publishedAt: "2026-08-20",
-    updatedAt: "2026-09-12",
-    author: "AiX Editorial Desk",
-    readingTimeMin: 4,
-    verified: true,
-    faqs: [
-      {
-        question: "Când vor fi disponibile cifrele statistice lunare pentru august 2026?",
-        answer: "ANCPI va publica buletinul statistic lunar imediat după finalizarea centralizării tuturor cărților funciare soluționate.",
-      },
-    ],
-  },
-  {
-    slug: "afir-modernizare-ferme-septembrie-2026",
-    headline: "AFIR: Cadrul de Finanțare pentru Investiții în Exploatații Agricole prin Planul Strategic PAC (DR-15 & DR-20)",
-    summary: "Agenția pentru Finanțarea Investițiilor Rurale prezintă criteriile de eligibilitate și condițiile generale de sprijin pentru fermierii care investesc în modernizarea exploatațiilor agricole.",
-    content: `
-# Investiții în Exploatațiile Agricole prin AFIR
-
-Fermierii activi pot accesa sprijin financiar nerambursabil prin intervențiile Planului Strategic PAC 2023–2027 gestionate de AFIR:
-
-## Investiții Eligibile:
-- Achiziție de utilaje agricole moderne și tehnologii de precizie.
-- Sisteme de irigații la nivel de fermă și soluții de eficiență energetică.
-- Spații climatizate de depozitare a produselor agricole.
-- Deschiderile sesiunilor de depunere se realizează conform calendarelor oficiale publicate de AFIR și MADR. În prezent: Închis — nu există în prezent o sesiune nouă cu calendar oficial publicat.
-    `,
-    category: "Agriculture",
-    impactAnalysis: "Creșterea productivității agricole și adaptarea culturilor la fenomenele climatice extreme.",
-    whoIsAffected: "Fermieri individuali, cooperative agricole, PFA, ÎI, IF și societăți comerciale din mediul rural.",
-    relatedProgrammes: ["afir-investitii-ferme-agricole"],
-    officialDocuments: [
-      { title: "Ghidul Solicitantului Investiții în Exploatații Agricole (DR-15/DR-20)", url: "https://www.afir.ro" },
-    ],
-    institution: "Agenția pentru Finanțarea Investițiilor Rurale (AFIR)",
-    sourceUrl: "https://www.afir.ro",
-    publishedAt: "2026-08-25",
-    updatedAt: "2026-09-12",
-    author: "AiX Editorial Desk",
-    readingTimeMin: 5,
-    verified: true,
-    faqs: [
-      {
-        question: "Care este condiția de vechime a exploatației?",
-        answer: "Ferma trebuie să fie înregistrată la APIA / ANSVSA și să aibă o dimensiune economică minimă conform ghidului specific.",
-      },
-    ],
-  },
-  {
-    slug: "regim-fiscal-microintreprinderi-imm-2026",
-    headline: "Regimul Fiscal al Microîntreprinderilor în 2026: Cote de Impozitare, Plafon Cifră de Afaceri și Condiții Salariați",
-    summary: "Sinteză a prevederilor Codului Fiscal aplicabile societăților comerciale: pragul de 500.000 EUR, cotele de 1% și 3% și regulile privind asociații cu dețineri multiple.",
-    content: `
-# Cadrul Fiscal pentru Microîntreprinderi și IMM-uri
-
-Pentru menținerea statutului de microîntreprindere plătitoare de impozit pe veniturile microîntreprinderilor, societățile trebuie să verifice următoarele criterii cumulative conform Codului Fiscal:
-
-## Principalele Criterii:
-- **Plafon cifră de afaceri**: Maximum echivalentul în lei a **500.000 EUR** la data de 31 decembrie a anului fiscal anterior.
-- **Salariat cu normă întreagă**: Cel puțin 1 angajat cu normă întreagă (8 ore/zi) sau contracte parțiale care cumulează 8 ore/zi.
-- **Cote de impozitare**:
-  - **1%** pentru microîntreprinderile cu venituri sub 60.000 EUR și care nu desfășoară activități pe coduri CAEN specifice (ex: IT, consultanță, HoReCa).
-  - **3%** pentru microîntreprinderile cu venituri între 60.000 EUR și 500.000 EUR sau care activează în domenii reglementate.
-- **Regula asociaților**: Un asociat poate deține peste 25% din părțile sociale la o singură microîntreprindere.
-    `,
-    category: "Legislation",
-    impactAnalysis: "Claritate predictibilă în planificarea financiară și bugetarea fiscală pentru micii antreprenori.",
-    whoIsAffected: "Asociați și administratori de SRL-uri din România.",
-    relatedProgrammes: ["start-up-nation-2025", "adr-centru-microintreprinderi-turism-servicii"],
-    officialDocuments: [
-      { title: "Codul Fiscal Actualizat — Titlul III Impozitul pe Veniturile Microîntreprinderilor", url: "https://mfinante.gov.ro" },
-    ],
-    institution: "Ministerul Finanțelor Publice",
-    sourceUrl: "https://mfinante.gov.ro",
-    publishedAt: "2026-08-10",
-    updatedAt: "2026-09-12",
-    author: "AiX Editorial Desk",
-    readingTimeMin: 5,
-    verified: true,
-    faqs: [
-      {
-        question: "Ce se întâmplă dacă se depășește plafonul de 500.000 EUR în cursul anului?",
-        answer: "Societatea trece la impozit pe profit de 16% începând cu trimestrul în care a fost depășit plafonul.",
       },
     ],
   },

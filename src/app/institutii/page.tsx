@@ -6,8 +6,8 @@ import { AiAssistantDrawer } from "@/components/ai-assistant-drawer";
 import { institutionsCatalog } from "@/lib/institutii-data";
 
 export const metadata: Metadata = {
-  title: "Director Instituții Publice & Autorități de Management",
-  description: "Directorul complet al ministerelor, agențiilor de management și administrațiilor publice responsabile cu fondurile nerambursabile.",
+  title: "Director Instituții Publice: APIA, AFIR, MADR, AFM, MIPE",
+  description: "Directorul complet al ministerelor, agențiilor de plăți și autorităților de management responsabile cu subvențiile și fondurile europene nerambursabile din România.",
   alternates: { canonical: "https://subventii.cristianvaduva.com/institutii" },
 };
 
@@ -15,7 +15,7 @@ export default function InstitutionsDirectoryPage() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    "name": "Instituții Publice AiX Educational Intelligence",
+    "name": "Instituții Publice SUBVENȚII România",
     "url": "https://subventii.cristianvaduva.com/institutii",
   };
 
