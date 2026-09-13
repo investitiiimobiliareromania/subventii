@@ -317,13 +317,13 @@ export const SECTORS_CATALOG: Record<string, SectorInfo> = {
     slug: "utilaje-agricole",
     name: "Utilaje Agricole, Tractoare & Mecanizare",
     category: "Investiții & Infrastructură",
-    shortDesc: "Programul Rabla pentru Tractoare (AFM), intervenția DR-14 și DR-15 AFIR pentru achiziții de combine, semănători no-till și tehnologii de precizie.",
+    shortDesc: "Programul Rabla pentru Tractoare (AFM), intervenția DR-14 (ferme mici) și DR-15 AFIR pentru achiziții de tractoare, combine, semănători no-till și tehnologii de precizie.",
     fullDesc: "Modernizarea parcului tehnic agricol este susținută atât prin fonduri europene FEADR gestionate de AFIR, cât și prin programele de stat derulate de AFM (Programul de stimulare a înnoirii parcului de tractoare și mașini agricole autopropulsate). Se pune un accent deosebit pe utilajele destinate agriculturii conservative (No-Till / Strip-Till) și agriculturii de precizie GPS.",
-    estimatedSupport: "Până la 20.000 EUR grant Rabla Tractoare AFM (65%–80%) | Până la 300.000–1.000.000 EUR prin AFIR DR-14/DR-15",
+    estimatedSupport: "Până la 20.000 EUR grant Rabla Tractoare AFM (65%–75%) | Până la 50.000 EUR prin AFIR DR-14 (85%) / până la 2.000.000 EUR prin DR-15 (65%)",
     keyInterventions: [
       "Programul Rabla pentru Tractoare și Mașini Agricole (AFM)",
-      "DR-14 — Investiții în fermele de familie și achiziții de utilaje agricole",
-      "DR-15 — Investiții în exploatații agricole (componenta dotare tehnică)",
+      "DR-14 — Investiții în fermele de mici dimensiuni (grant max. 50.000 EUR, 85%)",
+      "DR-15 — Investiții în exploatațiile agricole din sectorul vegetal",
       "DR-27 — Achiziția de utilaje specializate pentru gestionarea și împrăștierea gunoiului de grajd",
     ],
     eligibilityHighlights: [

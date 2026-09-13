@@ -42,7 +42,7 @@ export const institutionsCatalog: PublicInstitution[] = [
     address: "Str. Știrbei Vodă nr. 43, Sector 1, București",
     summary: "Agenția națională responsabilă cu derularea fondurilor europene de investiții în agricultură și dezvoltare rurală prin Fondul European Agricol pentru Dezvoltare Rurală (FEADR) și Planul Strategic PAC 2023–2027.",
     responsibilities: [
-      "Finanțarea fermierilor, tinerilor fermieri (DR-30) și a fermelor de familie (DR-14).",
+      "Finanțarea fermierilor, tinerilor fermieri (DR-30) și a fermelor de mici dimensiuni (DR-14).",
       "Subvenționarea investițiilor în exploatații vegetale (DR-15), pomicole (DR-16) și zootehnice (DR-20).",
       "Finanțarea infrastructurii secundare de irigații (DR-25) și a unităților de procesare (DR-22).",
       "Evaluarea, contractarea, monitorizarea și autorizarea plăților pentru proiectele de investiții FEADR.",
@@ -50,7 +50,7 @@ export const institutionsCatalog: PublicInstitution[] = [
     activeProgramsCount: 12,
     faqs: [
       { question: "Unde se depun proiectele AFIR?", answer: "Proiectele se depun exclusiv online prin portalul electronic www.afir.ro în cadrul sesiunilor deschise oficial." },
-      { question: "Care este intensitatea sprijinului nerambursabil AFIR?", answer: "Variază între 50% și 100% în funcție de intervenție (100% pentru tineri fermieri DR-30 și irigații OUAI DR-25; 65%-85% pentru ferme de familie DR-14)." },
+      { question: "Care este intensitatea sprijinului nerambursabil AFIR?", answer: "Variază între 50% și 100% în funcție de intervenție (100% pentru tineri fermieri DR-30 și irigații OUAI DR-25; până la 85% pentru ferme de mici dimensiuni DR-14)." },
     ],
   },
   {
