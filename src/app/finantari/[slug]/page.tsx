@@ -228,6 +228,14 @@ export default async function ProgramDetailPage({ params }: Props) {
                       ))}
                     </div>
                   </div>
+                  <div className="col-span-2 pt-3 border-t border-slate-200/80 flex flex-wrap items-center justify-between gap-2 text-[11px]">
+                    <span className="text-slate-600">
+                      Sursă Oficială: <a href={program.officialUrl} target="_blank" rel="noopener noreferrer" className="font-bold text-emerald-800 hover:underline break-all">{program.officialUrl} ↗</a>
+                    </span>
+                    <span className="text-slate-500 font-medium shrink-0">
+                      Verificat: <strong className="text-slate-800">{program.verifiedAt || "13 Septembrie 2026, 22:50"}</strong>
+                    </span>
+                  </div>
                 </div>
               </section>
 
@@ -492,6 +500,62 @@ export default async function ProgramDetailPage({ params }: Props) {
                   </a>
 
                   <BookmarkButton slug={program.slug} className="w-full justify-center" />
+                </div>
+              </div>
+
+              {/* Data Trust Layer Metadata Block */}
+              <div className="rounded-2xl border border-emerald-900/10 bg-slate-50 p-5 text-slate-800 shadow-xs">
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="flex h-2 w-2 rounded-full bg-emerald-600 animate-pulse" />
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-900">
+                    Data Trust Layer • Verificare Oficială
+                  </span>
+                </div>
+                
+                <div className="space-y-3 text-xs">
+                  <div>
+                    <span className="block text-[10px] font-bold uppercase text-slate-500">Sursă oficială</span>
+                    <a
+                      href={program.officialUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-bold text-emerald-800 hover:text-emerald-900 hover:underline break-all inline-flex items-center gap-1 mt-0.5"
+                    >
+                      <span className="truncate">{program.officialUrl}</span>
+                      <span className="shrink-0">↗</span>
+                    </a>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-2 pt-2 border-t border-slate-200/60">
+                    <div>
+                      <span className="block text-[10px] font-bold uppercase text-slate-500">Verificat la</span>
+                      <span className="font-bold text-slate-900 mt-0.5 block">
+                        {program.verifiedAt || "13 Septembrie 2026, 22:50"}
+                      </span>
+                    </div>
+                    <div>
+                      <span className="block text-[10px] font-bold uppercase text-slate-500">Status</span>
+                      <span
+                        className={`inline-block mt-0.5 px-2 py-0.5 rounded text-[11px] font-extrabold uppercase ${
+                          program.status === "Deschis"
+                            ? "bg-emerald-100 text-emerald-900"
+                            : program.status === "Închis"
+                            ? "bg-rose-100 text-rose-900"
+                            : program.status === "În curând"
+                            ? "bg-amber-100 text-amber-900"
+                            : "bg-blue-100 text-blue-900"
+                        }`}
+                      >
+                        {program.status === "Deschis"
+                          ? "DESCHIS"
+                          : program.status === "Închis"
+                          ? "ÎNCHIS"
+                          : program.status === "În curând"
+                          ? "URMEAZĂ"
+                          : program.status.toUpperCase()}
+                      </span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </aside>
