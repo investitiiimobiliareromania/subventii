@@ -33,7 +33,7 @@ export const sampleIngestionQueue: IngestionQueueItem[] = [
     sourceAuthority: "MIPE",
     itemType: "Programme",
     rawTitle: "Corrigendum 2 la Ghidul Solicitantului - PNRR C9 Digitalizare IMM",
-    sourceUrl: "https://mfe.gov.ro/pnrr-c9-corrigendum2.pdf",
+    sourceUrl: "https://mfe.gov.ro/pnrr/",
     detectedChanges: {
       changeType: "Deadline Extended",
       details: "Termenul limită de depunere a fost prelungit de la 15 august 2026 la 15 septembrie 2026.",
@@ -46,7 +46,7 @@ export const sampleIngestionQueue: IngestionQueueItem[] = [
     sourceAuthority: "AFM",
     itemType: "Document",
     rawTitle: "Lista Actualizată a Instalatorilor Autorizați Casa Verde 2026",
-    sourceUrl: "https://afm.ro/instalatori_august_2026.pdf",
+    sourceUrl: "https://www.afm.ro/casa_verde_fotovoltaice.php",
     detectedChanges: {
       changeType: "Guide Revised",
       details: "S-au adăugat 45 de noi firme de montaj fotovoltaic acreditate.",

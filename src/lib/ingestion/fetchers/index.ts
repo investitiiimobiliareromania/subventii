@@ -20,7 +20,7 @@ export async function fetchIngestionFromSource(source: IngestionSource): Promise
     AFM: [
       {
         title: "Actualizare Ghid Casa Verde Fotovoltaice 2026",
-        url: "https://afm.ro/casa_verde_fotovoltaice_ghid_2026.php",
+        url: "https://www.afm.ro/casa_verde_fotovoltaice.php",
         content: "Noul plafon de finanțare este 30.000 RON cu obligație de instalare acumulator stocare min 5 kWh.",
       },
     ],

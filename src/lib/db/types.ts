@@ -160,7 +160,7 @@ export type DownloadableResourceEntity = {
   description: string;
   category: string;
   fileFormat: string;
-  fileSizeMb: number;
+  fileSizeMb?: number;
   downloadUrl: string;
   createdAt: string;
 };
