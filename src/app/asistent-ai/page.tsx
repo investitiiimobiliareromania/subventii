@@ -11,7 +11,7 @@ export default function AiAssistantPage() {
   const [messages, setMessages] = useState<{ sender: "user" | "ai"; text: string; citations?: string[] }[]>([
     {
       sender: "ai",
-      text: "Salut! Sunt Asistentul AI Educațional AiX. Îți ofer sinteze și informații din surse publice deschise privind finanțările și legislația. Cu ce te pot ajuta?",
+      text: "Salut! Sunt Asistentul AI SUBVENȚII. Îți ofer sinteze și informații din surse oficiale deschise privind subvențiile agricole, intervențiile APIA & AFIR și legislația. Cu ce te pot ajuta?",
     },
   ]);
 

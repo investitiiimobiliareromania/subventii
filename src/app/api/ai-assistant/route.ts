@@ -23,7 +23,7 @@ export async function POST(req: Request) {
       citations.push("FNGCIMM - Procedură Noua Casă 2026");
       citations.push("Ministerul Finanțelor - Legea 172/2026");
     } else {
-      answer = `Pe baza informațiilor publice sintetizate de AiX Educational Intelligence, programele prezentate oferă sprijin general pentru digitalizare, eficiență energetică și investiții industriale. Te rugăm să specifici domeniul de interes (ex: IMM, Agricultură, Locuințe). Materialele au caracter exclusiv educațional.`;
+      answer = `Pe baza informațiilor oficiale sintetizate de SUBVENȚII România, schemele prezentate oferă sprijin direct pe suprafață (BISS, CRISS), eco-scheme, sprijin cuplat în zootehnie și investiții rurale prin AFIR (DR-14, DR-20, DR-30). Te rugăm să specifici sectorul tău de activitate (ex: Teren arabil, Bovine, Ovine, Pomicultură, Solarii). Informațiile au caracter orientativ bazat pe ghidurile oficiale.`;
       citations.push("Informații Publice Agregate din Surse Deschise");
     }
 

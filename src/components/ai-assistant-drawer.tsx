@@ -10,7 +10,7 @@ export function AiAssistantDrawer() {
   const [messages, setMessages] = useState<{ sender: "user" | "ai"; text: string; citations?: string[] }[]>([
     {
       sender: "ai",
-      text: "Salut! Sunt Asistentul AI Educațional AiX. Îți ofer sinteze și informații structurate din surse publice deschise privind finanțările și legislația. Cu ce te pot ajuta?",
+      text: "Salut! Sunt Asistentul AI SUBVENȚII. Îți ofer sinteze și informații structurate din surse oficiale deschise privind subvențiile agricole, intervențiile APIA & AFIR și legislația de profil. Cu ce te pot ajuta?",
     },
   ]);
 

@@ -2,30 +2,33 @@ import type { Metadata, Viewport } from "next";
 import { VisitorTracker } from "@/components/visitor-tracker";
 import "./globals.css";
 
-const siteTitle = "AiX — Educational Intelligence | Educație și Informare Finanțări";
+const siteTitle = "SUBVENȚII România — Platforma Națională de Informare Subvenții Agricole, APIA & AFIR";
 const siteDescription =
-  "Platformă privată de educație și informare care organizează și explică informații publice despre finanțări, antreprenoriat, legislație și economie.";
+  "Ghidul complet al subvențiilor agricole APIA, fondurilor nerambursabile AFIR, intervențiilor MADR, legislației oficiale și oportunităților de finanțare pentru toate cele 41 de județe din România.";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://subventii.cristianvaduva.com"),
   title: {
     default: siteTitle,
-    template: "%s | AiX Educational Intelligence",
+    template: "%s | SUBVENȚII România",
   },
   description: siteDescription,
   alternates: {
     canonical: "https://subventii.cristianvaduva.com/",
   },
   keywords: [
-    "AiX Educational Intelligence",
-    "educatie financiara",
-    "informatii publice",
-    "finantari si granturi",
-    "concepte economice",
-    "legislatie imm",
-    "antreprenoriat",
+    "subventii agricole",
+    "APIA",
+    "AFIR",
+    "MADR",
+    "plati directe",
+    "eco-scheme",
+    "tineri fermieri",
+    "fonduri europene agricultura",
+    "legislatie agricola",
+    "subventii judete romania",
   ],
-  authors: [{ name: "AiX — Educational Intelligence" }],
+  authors: [{ name: "SUBVENȚII România" }],
   robots: {
     index: true,
     follow: true,
@@ -41,7 +44,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "ro_RO",
     url: "https://subventii.cristianvaduva.com",
-    siteName: "AiX — Educational Intelligence",
+    siteName: "SUBVENȚII România",
     title: siteTitle,
     description: siteDescription,
     images: [
@@ -79,14 +82,14 @@ export default function RootLayout({
         "@type": "WebSite",
         "@id": "https://subventii.cristianvaduva.com/#website",
         "url": "https://subventii.cristianvaduva.com",
-        "name": "AiX — Educational Intelligence",
-        "description": "Platformă privată de educație și informare privind finanțările și legislația",
+        "name": "SUBVENȚII România",
+        "description": "Platformă națională de informare privind subvențiile agricole, fondurile europene și legislația de profil",
         "potentialAction": [
           {
             "@type": "SearchAction",
             "target": {
               "@type": "EntryPoint",
-              "urlTemplate": "https://subventii.cristianvaduva.com/programes?q={search_term_string}"
+              "urlTemplate": "https://subventii.cristianvaduva.com/finantari?q={search_term_string}"
             },
             "query-input": "required name=search_term_string"
           }
@@ -95,7 +98,7 @@ export default function RootLayout({
       {
         "@type": "Organization",
         "@id": "https://subventii.cristianvaduva.com/#organization",
-        "name": "AiX — Educational Intelligence",
+        "name": "SUBVENȚII România",
         "url": "https://subventii.cristianvaduva.com",
         "logo": {
           "@type": "ImageObject",

@@ -5,14 +5,22 @@ import { Footer } from "@/components/footer";
 import { CONTACT_CONFIG } from "@/lib/contact/config";
 
 export const metadata: Metadata = {
-  title: "Politica privind Modulele Cookie | AiX Educational Intelligence",
-  description: "Informații transparente privind utilizarea tehnologiilor de stocare locală și a modulelor cookie pe platforma AiX Educational Intelligence.",
+  title: "Politica privind Modulele Cookie | SUBVENȚII România",
+  description: "Informații transparente privind utilizarea tehnologiilor de stocare locală și a modulelor cookie pe platforma SUBVENȚII România.",
   alternates: { canonical: "https://subventii.cristianvaduva.com/politica-cookies" },
 };
 
-export default function CookiePolicyPage() {
+export default function CookiesPolicyPage() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Politica privind Modulele Cookie SUBVENȚII România",
+    "url": "https://subventii.cristianvaduva.com/politica-cookies",
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-white">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Header />
 
       <main className="flex-1 py-12 md:py-16">
@@ -24,39 +32,38 @@ export default function CookiePolicyPage() {
           </nav>
 
           <header className="mb-8 border-b border-slate-200 pb-6">
-            <span className="text-xs font-bold uppercase tracking-wider text-emerald-800">
-              TRANSPARENȚĂ &amp; CONFIDENȚIALITATE DIGITALĂ
+            <span className="text-xs font-bold uppercase tracking-wider text-emerald-800 bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded">
+              TRANSPARENȚĂ &amp; TEHNOLOGIE
             </span>
-            <h1 className="mt-2 text-3xl font-extrabold text-slate-900 sm:text-4xl">
-              Politica privind Modulele Cookie
+            <h1 className="mt-3 text-3xl font-extrabold text-slate-900 sm:text-4xl">
+              Politica privind Modulele Cookie &amp; Stocarea Locală
             </h1>
             <p className="mt-2 text-xs text-slate-600">
-              Ultima actualizare: Septembrie 2026 • Politica descrie comportamentul tehnic identificat la momentul auditului.
+              Ultima actualizare: 1 iulie 2026
             </p>
           </header>
 
           <div className="space-y-8 text-sm text-slate-700 leading-relaxed">
-            <section className="rounded-xl border border-slate-200 bg-slate-50 p-5">
-              <h2 className="text-base font-bold text-slate-900 mb-2">
-                1. Ce Sunt Modulele Cookie și Tehnologiile de Stocare Locală?
+            <section>
+              <h2 className="text-lg font-bold text-slate-900 mb-3">
+                1. Ce Sunt Cookie-urile și Tehnologiile Similare?
               </h2>
               <p>
-                Un modul cookie este un fișier text de mici dimensiuni salvat pe dispozitivul dumneavoastră (computer, tabletă, telefon) la accesarea unui site web. Pe lângă cookie-uri tradiționale, platformele moderne utilizează <strong>stocarea locală (localStorage)</strong> a browserului pentru a asigura funcționalități rapide și private, fără a transmite date pe server.
+                Un modul cookie este un fișier text de mici dimensiuni pe care un site îl salvează pe computerul sau dispozitivul dumneavoastră mobil atunci când îl vizitați. Acest fișier permite site-ului să vă rețină acțiunile și preferințele (cum ar fi județul selectat, filtrele aplicate sau starea barelor de navigare) pe o perioadă de timp.
               </p>
             </section>
 
             <section>
               <h2 className="text-lg font-bold text-slate-900 mb-3">
-                2. Cum Utilizează Platforma AiX Aceste Tehnologii?
+                2. Cum Utilizează Platforma SUBVENȚII Aceste Tehnologii?
               </h2>
               <p className="mb-3">
-                Platforma <strong>AiX Educational Intelligence</strong> adoptă o abordare strict axată pe confidențialitate și minimizarea datelor:
+                Platforma <strong>SUBVENȚII România</strong> adoptă o abordare strict axată pe confidențialitate și minimizarea datelor:
               </p>
               
               <div className="space-y-4">
                 <div className="rounded-xl border border-slate-200 p-4 bg-white">
                   <h3 className="text-sm font-bold text-slate-900 mb-1">
-                    A. Tehnologii Strict Necesare &amp; Funcționale (localStorage)
                   </h3>
                   <p className="text-xs text-slate-600">
                     Folosim memoria locală a browserului (<code>localStorage</code>) pentru funcționalitatea de <strong>Programe Salvate / Bookmarks</strong>. Aceste date rămân exclusiv în dispozitivul dumneavoastră, nu sunt transmise către servere externe și nu sunt asociate cu profiluri de utilizator.
