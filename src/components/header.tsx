@@ -63,7 +63,7 @@ export function Header() {
             <nav aria-label="Meniu principal desktop" className="flex items-center gap-5 text-xs font-semibold text-slate-800">
               <Link href="/programes" className="hover:text-emerald-800 transition-colors focus-visible:outline-emerald-700 rounded px-1">Subvenții &amp; Finanțări</Link>
               <Link href="/calendar" className="hover:text-emerald-800 transition-colors focus-visible:outline-emerald-700 rounded px-1">Calendar &amp; Termene</Link>
-              <Link href="/intelligence/regions" className="hover:text-emerald-800 transition-colors focus-visible:outline-emerald-700 rounded px-1">Județe (41)</Link>
+              <Link href="/intelligence/regions" className="hover:text-emerald-800 transition-colors focus-visible:outline-emerald-700 rounded px-1">Județe</Link>
               <Link href="/stiri" className="hover:text-emerald-800 transition-colors focus-visible:outline-emerald-700 rounded px-1">Știri APIA &amp; AFIR</Link>
               <Link href="/legislatie" className="hover:text-emerald-800 transition-colors focus-visible:outline-emerald-700 rounded px-1">Legislație</Link>
               <Link href="/resurse" className="hover:text-emerald-800 transition-colors focus-visible:outline-emerald-700 rounded px-1">Ghiduri &amp; Cereri</Link>
@@ -81,7 +81,7 @@ export function Header() {
           <nav aria-label="Meniu navigare mobil" className="lg:hidden border-b border-slate-200 bg-white px-4 pt-3 pb-6 space-y-3 text-sm font-medium text-slate-900 animate-in slide-in-from-top-2">
             <Link onClick={() => setMobileMenuOpen(false)} href="/programes" className="block py-1.5 hover:text-emerald-800">Subvenții &amp; Finanțări Nerambursabile</Link>
             <Link onClick={() => setMobileMenuOpen(false)} href="/calendar" className="block py-1.5 hover:text-emerald-800">Calendar Campanii &amp; Termene</Link>
-            <Link onClick={() => setMobileMenuOpen(false)} href="/intelligence/regions" className="block py-1.5 hover:text-emerald-800">Ghid Județe (Toate cele 41 Județe)</Link>
+            <Link onClick={() => setMobileMenuOpen(false)} href="/intelligence/regions" className="block py-1.5 hover:text-emerald-800">Ghid Județe</Link>
             <Link onClick={() => setMobileMenuOpen(false)} href="/stiri" className="block py-1.5 hover:text-emerald-800">Știri &amp; Noutăți Oficiale</Link>
             <Link onClick={() => setMobileMenuOpen(false)} href="/legislatie" className="block py-1.5 hover:text-emerald-800">Legislație &amp; Ordine MADR</Link>
             <Link onClick={() => setMobileMenuOpen(false)} href="/resurse" className="block py-1.5 hover:text-emerald-800">Ghiduri PDF &amp; Documente Tipizate</Link>
