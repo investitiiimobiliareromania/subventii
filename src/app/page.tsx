@@ -356,7 +356,7 @@ export default async function Home() {
                         {res.institution}
                       </span>
                       <span className="rounded bg-emerald-100 text-emerald-950 px-2 py-0.5 text-[10px] font-bold">
-                        {res.fileFormat} • {res.fileSizeMb} MB
+                        {res.fileFormat}{res.fileSizeMb ? ` • ${res.fileSizeMb} MB` : ""}
                       </span>
                     </div>
                     <h3 className="text-xs font-bold text-slate-900 mb-1 leading-snug">
@@ -375,7 +375,7 @@ export default async function Home() {
                       rel="noreferrer"
                       className="font-bold text-emerald-800 hover:underline"
                     >
-                      Descarcă Fișier 📥
+                      {res.isExternalPortal ? "Vezi documentele oficiale ↗" : `Descarcă ${res.fileFormat} 📥`}
                     </a>
                   </div>
                 </div>

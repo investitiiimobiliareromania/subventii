@@ -357,14 +357,14 @@ export default async function ProgramDetailPage({ params }: Props) {
               {relatedDocs.length > 0 && (
                 <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-xs">
                   <h2 className="mb-4 text-lg font-bold text-slate-900 border-b border-slate-100 pb-2">
-                    7. Ghiduri PDF &amp; Documente Descărcabile
+                    7. Ghiduri &amp; Documente Oficiale
                   </h2>
                   <div className="space-y-3">
                     {relatedDocs.map((doc) => (
                       <div key={doc.id} className="rounded-xl border border-slate-100 bg-slate-50/50 p-3.5 text-xs flex items-center justify-between gap-4">
                         <div>
                           <span className="font-bold text-slate-900 block">{doc.title}</span>
-                          <span className="text-slate-500 text-[11px]">{doc.category} • {doc.fileFormat} ({doc.fileSizeMb} MB)</span>
+                          <span className="text-slate-500 text-[11px]">{doc.category} • {doc.fileFormat}{doc.fileSizeMb ? ` (${doc.fileSizeMb} MB)` : ""}</span>
                         </div>
                         <a
                           href={doc.downloadUrl}
@@ -372,8 +372,8 @@ export default async function ProgramDetailPage({ params }: Props) {
                           rel="noopener noreferrer"
                           className="rounded-lg bg-emerald-800 px-3 py-1.5 font-bold text-white hover:bg-emerald-900 shrink-0 text-xs inline-flex items-center gap-1"
                         >
-                          <span>Descarcă</span>
-                          <span>📥</span>
+                          <span>{doc.isExternalPortal ? "Vezi documentele oficiale" : `Descarcă ${doc.fileFormat}`}</span>
+                          <span>{doc.isExternalPortal ? "↗" : "📥"}</span>
                         </a>
                       </div>
                     ))}

@@ -163,7 +163,7 @@ export default function ResourcesPage() {
                         rel="noopener noreferrer"
                         className="flex w-full items-center justify-center gap-1.5 rounded-xl bg-slate-900 px-4 py-2.5 font-bold text-white hover:bg-slate-800 transition-colors shadow-xs text-xs"
                       >
-                        <span>Vezi Documentul / Ghidul Oficial ({res.institution})</span>
+                        <span>Vezi documentele oficiale ({res.institution})</span>
                         <span>↗</span>
                       </a>
                     ) : (
@@ -172,7 +172,7 @@ export default function ResourcesPage() {
                         download
                         className="flex w-full items-center justify-center gap-1.5 rounded-xl bg-emerald-800 px-4 py-2.5 font-bold text-white hover:bg-emerald-900 transition-colors shadow-xs text-xs"
                       >
-                        <span>Descarcă Fișierul ({res.fileFormat})</span>
+                        <span>Descarcă {res.fileFormat}</span>
                         <span>📥</span>
                       </a>
                     )}
