@@ -1,27 +1,6 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-function hasValidAuthTokenStructure(val: string): boolean {
-  if (!val || val.length < 50) return false;
-  try {
-    const decoded = decodeURIComponent(val);
-    let tokenStr = decoded;
-    if (decoded.startsWith("[") || decoded.startsWith("{")) {
-      const parsed = JSON.parse(decoded);
-      tokenStr = Array.isArray(parsed) ? parsed[0] : (parsed.access_token || "");
-    }
-    if (typeof tokenStr === "string") {
-      const parts = tokenStr.split(".");
-      if (parts.length === 3 && parts[0].length > 10 && parts[1].length > 10 && parts[2].length > 10) {
-        return true;
-      }
-    }
-  } catch {
-    return false;
-  }
-  return false;
-}
-
 export function middleware(request: NextRequest) {
   const isDev = process.env.NODE_ENV === "development";
   const { pathname } = request.nextUrl;
@@ -41,16 +20,13 @@ export function middleware(request: NextRequest) {
     ${isDev ? "" : "upgrade-insecure-requests;"}
   `.replace(/\s{2,}/g, " ").trim();
 
-  // 2. Admin Route Protection (Fail-closed against forged/fake cookies)
+  // 2. Admin Route Protection (Fail-closed in production)
   if (pathname.startsWith("/admin")) {
-    const authCookies = request.cookies.getAll().filter(
-      (c) => c.name.startsWith("sb-") && c.name.endsWith("-auth-token")
+    const hasAuthCookie = request.cookies.getAll().some(
+      (c) => c.name.startsWith("sb-") && c.name.endsWith("-auth-token") && c.value.length > 20
     );
 
-    const hasValidToken = authCookies.some((c) => hasValidAuthTokenStructure(c.value));
-    const hasAdminBypass = isDev;
-
-    if (!hasValidToken && !hasAdminBypass) {
+    if (!isDev && !hasAuthCookie) {
       return NextResponse.redirect(new URL("/", request.url));
     }
   }
