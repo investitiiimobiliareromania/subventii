@@ -10,19 +10,19 @@ import { verifyBearerSecret } from "@/lib/security";
  * - Timing-safe comparison to prevent side-channel timing attacks.
  */
 export async function POST(req: Request) {
-  const secret = process.env.SUBVENTII_REFRESH_SECRET || process.env.CRON_SECRET;
-  if (!secret) {
-    return NextResponse.json(
-      { success: false, error: "Refresh secret not configured on server." },
-      { status: 500 }
-    );
-  }
-
   const authHeader = req.headers.get("authorization");
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
     return NextResponse.json(
       { success: false, error: "Missing Authorization Bearer header." },
       { status: 401 }
+    );
+  }
+
+  const secret = process.env.SUBVENTII_REFRESH_SECRET || process.env.CRON_SECRET;
+  if (!secret) {
+    return NextResponse.json(
+      { success: false, error: "Refresh secret not configured on server." },
+      { status: 500 }
     );
   }
 
