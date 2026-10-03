@@ -34,16 +34,16 @@ export default function ResourcesPage() {
           <nav className="mb-6 flex items-center gap-2 text-xs text-slate-500">
             <Link href="/" className="hover:text-emerald-800">Acasă</Link>
             <span>/</span>
-            <span className="font-semibold text-slate-800">Resurse Oficiale &amp; Ghiduri Solicitant</span>
+            <span className="font-semibold text-slate-800">Ghiduri &amp; Modele Documente</span>
           </nav>
 
           <div className="mb-8 border-b border-slate-200 pb-6">
             <span className="text-xs font-bold uppercase tracking-wider text-emerald-800">Biblioteca Oficială de Documente &amp; Instrumente Practice</span>
             <h1 className="mt-1 text-3xl font-extrabold text-slate-900 sm:text-4xl">
-              Ghiduri Oficiale, Modele de Lucru &amp; Instrumente Financiare
+              Ghiduri Oficiale, Modele de Plan de Afaceri &amp; Instrumente Financiare
             </h1>
             <p className="mt-2 text-sm text-slate-600 max-w-3xl leading-relaxed">
-              Accesează direct ghidurile oficiale publicate de AFIR, APIA, MADR și AFM sau descarcă instrumentele financiare și modelele orientative de lucru dezvoltate de platforma SUBVENȚII.
+              Accesează direct ghidurile oficiale publicate de autoritățile de management (AFIR, APIA, MADR, AFM) sau descarcă instrumentele financiare, machetele bugetare și modelele orientative de lucru dezvoltate pentru antreprenori și fermieri.
             </p>
           </div>
 
@@ -52,7 +52,7 @@ export default function ResourcesPage() {
             <div>
               <input
                 type="text"
-                placeholder="Caută în ghiduri, adeverințe, contracte, machete (ex: DR-14, DR-30, cashflow, arendă)..."
+                placeholder="Caută în ghiduri, planuri de afaceri, bugete, adeverințe, contracte (ex: DR-14, cashflow, buget, arendă)..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-xs text-slate-900 placeholder-slate-400 focus:border-emerald-600 focus:outline-hidden"

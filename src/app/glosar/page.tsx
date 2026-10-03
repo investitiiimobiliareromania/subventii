@@ -7,8 +7,8 @@ import { AiAssistantDrawer } from "@/components/ai-assistant-drawer";
 import { glossaryCatalog } from "@/lib/glossary-data";
 
 export const metadata: Metadata = {
-  title: "Glosar Subvenții Agricole, Termeni APIA, AFIR și Fonduri Europene",
-  description: "Dicționarul explicativ complet al termenilor agricoli și de finanțare: BISS, CRISS, eco-scheme, sprijin cuplat, Standard Output (SO), UVM, BGAO, IACS și IPA Online.",
+  title: "Glosar Finanțări Europene, Termeni Economici & Subvenții România",
+  description: "Dicționarul explicativ al termenilor de finanțare, granturi, fonduri structurale, ajutoare de stat, indicatori financiari și intervenții europene.",
   alternates: { canonical: "https://subventii.cristianvaduva.com/glosar" },
 };
 
@@ -16,7 +16,7 @@ export default function GlossaryPage() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "DefinedTermSet",
-    "name": "Glosar Agricol SUBVENȚII România",
+    "name": "Glosar Finanțări & Termeni Tehnici SUBVENȚII România",
     "url": "https://subventii.cristianvaduva.com/glosar",
   };
 

@@ -28,8 +28,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const profile = getCountyProfile(county);
 
   return {
-    title: `Subvenții APIA & Finanțări AFIR — Județul ${profile.name} 2026`,
-    description: `Ghidul complet al subvențiilor pe hectar, sprijinului zootehnic, centrelor județene APIA și intervențiilor AFIR pentru Județul ${profile.name} (${profile.region}).`,
+    title: `Finanțări, Programe & Subvenții — Județul ${profile.name} 2026`,
+    description: `Ghidul complet al oportunităților de finanțare, programelor regionale ADR, intervențiilor de investiții AFIR și plăților APIA pentru companii și fermieri din Județul ${profile.name} (${profile.region}).`,
     alternates: { canonical: `https://subventii.cristianvaduva.com/subventii/${encodeURIComponent(county.toLowerCase())}` },
   };
 }

@@ -7,8 +7,8 @@ import { AiAssistantDrawer } from "@/components/ai-assistant-drawer";
 import { legislationCatalog } from "@/lib/legislatie-data";
 
 export const metadata: Metadata = {
-  title: "Legislație Subvenții Agricole, Ordine MADR & Regulamente PAC 2026",
-  description: "Centralizatorul oficial al modificărilor legislative din agricultură: Ordinul MADR 80/2023, Regulamentul UE 2021/2115, OUG 34/2023 pajiști, derogări GAEC și ajutoare de stat.",
+  title: "Legislație Finanțări, Programe Europene, Scheme de Ajutor & Subvenții 2026",
+  description: "Centralizatorul actelor normative oficiale: regulamente UE, hotărâri de guvern, ordine de ministru (MADR, MIPE, MEAT) și proceduri de finanțare aplicabile în România.",
   alternates: { canonical: "https://subventii.cristianvaduva.com/legislatie" },
 };
 
@@ -16,9 +16,9 @@ export default function LegislationPage() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    "name": "Legislație Subvenții Agricole & Fonduri Europene",
+    "name": "Legislație Finanțări, Programe Europene & Subvenții România",
     "url": "https://subventii.cristianvaduva.com/legislatie",
-    "description": "Centralizator de acte normative, ordine de ministru și regulamente europene aplicabile în agricultură.",
+    "description": "Centralizator oficial de acte normative, ordine de ministru și regulamente europene aplicabile pentru finanțări și investiții.",
   };
 
   return (

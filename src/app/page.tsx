@@ -18,6 +18,65 @@ import { calendarEventsDataset } from "@/lib/calendar-data";
 import { downloadableResourcesCatalog } from "@/lib/resources-data";
 import { institutionsCatalog } from "@/lib/institutii-data";
 
+const OBJECTIVE_TRACKS = [
+  {
+    icon: "🚀",
+    title: "Start-up & Afaceri Noi",
+    desc: "Finanțări nerambursabile pentru deschiderea unei firme noi sau lansarea unei microîntreprinderi.",
+    href: "/finantari?q=start+up",
+    badge: "Start-up",
+  },
+  {
+    icon: "📈",
+    title: "Dezvoltare IMM & Producție",
+    desc: "Granturi de investiții pentru extinderea capacității de producție, spații și active productive.",
+    href: "/finantari?q=IMM",
+    badge: "Dezvoltare",
+  },
+  {
+    icon: "💻",
+    title: "Digitalizare & Tehnologie",
+    desc: "Finanțări pentru software, platforme e-commerce, automatizări industriale și echipamente IT.",
+    href: "/finantari?q=digitalizare",
+    badge: "Digitalizare",
+  },
+  {
+    icon: "⚙️",
+    title: "Echipamente & Utilaje",
+    desc: "Linii tehnologice, utilaje productive, echipamente moderne și retehnologizare industrială.",
+    href: "/finantari?q=utilaje",
+    badge: "Echipamente",
+  },
+  {
+    icon: "☀️",
+    title: "Energie & Sustenabilitate",
+    desc: "Panouri fotovoltaice, eficiență energetică, stocare, decarbonizare și producție verde.",
+    href: "/programe-guvernamentale/casa-verde",
+    badge: "Energie",
+  },
+  {
+    icon: "👥",
+    title: "Angajare & Resurse Umane",
+    desc: "Sprijin pentru crearea de locuri de muncă, formare profesională și dezvoltarea competențelor.",
+    href: "/finantari?q=angajare",
+    badge: "Ocupare",
+  },
+  {
+    icon: "🔬",
+    title: "Inovare & Cercetare",
+    desc: "Transfer tehnologic, brevete, dezvoltare de produse noi și parteneriate de cercetare.",
+    href: "/finantari?q=inovare",
+    badge: "Inovare",
+  },
+  {
+    icon: "🌾",
+    title: "Agricultură & Agro-Business",
+    desc: "Intervenții AFIR, plăți directe APIA pe hectar și cap de animal, procesare și modernizare ferme.",
+    href: "/finantari?q=agricultura",
+    badge: "Agro",
+  },
+];
+
 export default async function Home() {
   const programs = await getProgramsFromDb();
   const activeCount = await getActiveProgramsCount();
@@ -44,22 +103,38 @@ export default async function Home() {
             <div className="text-center max-w-4xl mx-auto">
               <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-emerald-950/90 px-4 py-1.5 text-xs font-bold text-emerald-400 border border-emerald-700/60 shadow-xs">
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" aria-hidden="true"></span>
-                <span>PLATFORMĂ NAȚIONALĂ DE INFORMARE • PAC 2023–2027</span>
+                <span>PLATFORMĂ NAȚIONALĂ DE INFORMARE • FONDURI EUROPENE &amp; NAȚIONALE</span>
               </div>
 
               <h1 className="mb-4 text-3xl font-black tracking-tight sm:text-5xl md:text-6xl leading-tight">
-                Ghidul Complet al Subvențiilor Agricole, APIA, AFIR și Fondurilor Europene
+                Găsește Finanțarea Potrivită pentru Afacerea Ta
               </h1>
 
               <p className="mx-auto mb-8 max-w-3xl text-sm leading-relaxed text-slate-300 sm:text-base">
-                Centralizator independent de informare privind plățile directe pe hectar (BISS, CRISS), eco-schemele, sprijinul cuplat zootehnic, intervențiile de investiții AFIR, ajutoarele de stat MADR și ghidurile solicitantului pentru toate cele 41 de județe.
+                Descoperă și filtrează programele europene și naționale prin care poți porni, dezvolta sau investi în business-ul tău: granturi pentru start-up-uri și IMM-uri, digitalizare, utilaje productive, eficiență energetică, intervenții agricole și scheme de ajutor de stat.
               </p>
+
+              {/* Action Buttons */}
+              <div className="flex flex-wrap items-center justify-center gap-3 mb-10">
+                <a
+                  href="#cauta-finantari"
+                  className="rounded-xl bg-emerald-700 px-6 py-3.5 text-xs font-bold text-white shadow-md hover:bg-emerald-600 transition-all hover:scale-105 active:scale-95"
+                >
+                  Explorează Finanțările Active →
+                </a>
+                <Link
+                  href="/calendar"
+                  className="rounded-xl bg-slate-800 border border-slate-700 px-5 py-3.5 text-xs font-bold text-slate-200 hover:bg-slate-700 hover:text-white transition-all"
+                >
+                  Calendar Apeluri 2026 ↗
+                </Link>
+              </div>
 
               {/* Platform Metrics */}
               <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 rounded-2xl border border-slate-800 bg-slate-950/80 p-5 text-center shadow-lg">
                 <div className="border-r border-slate-800/80 last:border-0">
                   <span className="block text-2xl sm:text-3xl font-black text-white">{activeCount}</span>
-                  <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Intervenții &amp; Programe</span>
+                  <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Programe &amp; Intervenții</span>
                 </div>
                 <div className="border-r border-slate-800/80 last:border-0">
                   <span className="block text-2xl sm:text-3xl font-black text-emerald-400">{openCount}</span>
@@ -78,8 +153,54 @@ export default async function Home() {
           </div>
         </section>
 
+        {/* Objective-Based Navigation ("Ce vrei să faci cu afacerea ta?") */}
+        <section aria-label="Explorare după obiectiv de afaceri" className="border-b border-slate-200 bg-white py-12">
+          <div className="mx-auto max-w-6xl px-4 sm:px-6">
+            <div className="mb-8 text-center max-w-3xl mx-auto">
+              <span className="text-xs font-bold uppercase tracking-wider text-emerald-800">
+                PROIECTUL TĂU • DIRECȚII DE FINANȚARE
+              </span>
+              <h2 className="mt-1 text-2xl font-black text-slate-900 sm:text-3xl">
+                Ce Vrei să Faci cu Afacerea Ta?
+              </h2>
+              <p className="text-xs text-slate-600 mt-1">
+                Selectează obiectivul investiției tale pentru a identifica rapid programele și ghidurile aplicabile.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              {OBJECTIVE_TRACKS.map((track, idx) => (
+                <a
+                  key={idx}
+                  href={track.href}
+                  className="rounded-2xl border border-slate-200 bg-slate-50/60 p-5 hover:bg-emerald-50/50 hover:border-emerald-300 transition-all flex flex-col justify-between group shadow-2xs"
+                >
+                  <div>
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="text-2xl" aria-hidden="true">{track.icon}</span>
+                      <span className="rounded bg-white px-2 py-0.5 text-[10px] font-bold text-slate-700 border border-slate-200 group-hover:border-emerald-200">
+                        {track.badge}
+                      </span>
+                    </div>
+                    <h3 className="text-sm font-bold text-slate-900 group-hover:text-emerald-900 transition-colors mb-1.5">
+                      {track.title}
+                    </h3>
+                    <p className="text-xs text-slate-600 leading-relaxed">
+                      {track.desc}
+                    </p>
+                  </div>
+                  <div className="mt-4 pt-2 border-t border-slate-200/60 flex items-center justify-between text-xs font-bold text-emerald-800">
+                    <span>Vezi oportunități</span>
+                    <span className="group-hover:translate-x-0.5 transition-transform">→</span>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* Live Deadlines & Calendar Banner */}
-        <section aria-label="Termene limită și campanii oficiale" className="border-b border-amber-200 bg-amber-50/80 py-4">
+        <section aria-label="Termene limită și apeluri active" className="border-b border-amber-200 bg-amber-50/80 py-4">
           <div className="mx-auto max-w-6xl px-4 sm:px-6">
             <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
               <div className="flex items-center gap-2 text-xs font-bold text-amber-950 shrink-0">
@@ -121,19 +242,19 @@ export default async function Home() {
           <FundingExplorer programs={programs} />
         </section>
 
-        {/* Agricultural Sectors Grid */}
-        <section aria-label="Sectoare agricole și economice" className="border-t border-slate-200 bg-slate-50/80 py-12">
+        {/* Economic & Sectorial Domains Grid */}
+        <section aria-label="Sectoare economice și domenii de activitate" className="border-t border-slate-200 bg-slate-50/80 py-12">
           <div className="mx-auto max-w-6xl px-4 sm:px-6">
             <div className="mb-8 flex flex-col sm:flex-row items-start sm:items-end justify-between gap-3 border-b border-slate-200 pb-4">
               <div>
                 <span className="text-xs font-bold uppercase tracking-wider text-emerald-800">
-                  STRUCTURĂ SECTORIALĂ NAȚIONALĂ
+                  STRUCTURĂ SECTORIALĂ &amp; DOMENII DE ACTIVITATE
                 </span>
                 <h2 className="mt-1 text-2xl font-black text-slate-900 sm:text-3xl">
-                  Sectoare Agricole &amp; Domenii de Finanțare
+                  Sectoare Economice &amp; Domenii de Finanțare
                 </h2>
                 <p className="text-xs text-slate-600 mt-1 max-w-2xl">
-                  Explorează condițiile de eligibilitate, sprijinul estimat pe hectar sau cap de animal și intervențiile active pe fiecare ramură.
+                  Explorează oportunitățile de finanțare, condițiile de eligibilitate și intervențiile active pe fiecare ramură de activitate.
                 </p>
               </div>
               <Link
@@ -194,10 +315,10 @@ export default async function Home() {
                   ACOPERIRE TERITORIALĂ COMPLETĂ
                 </span>
                 <h2 className="mt-1 text-2xl font-black text-slate-900 sm:text-3xl">
-                  Subvenții &amp; Centre APIA în Toate Cele 41 de Județe
+                  Finanțări &amp; Oportunități Locale în Toate Cele 41 de Județe
                 </h2>
                 <p className="text-xs text-slate-600 mt-1 max-w-2xl">
-                  Accesează profilul agricol, adresele centrelor județene APIA și OJFIR, suprafețele agricole și oportunitățile specifice județului tău.
+                  Accesează profilul economic, adresele centrelor județene de sprijin (APIA, OJFIR, ADR), suprafețele și oportunitățile specifice județului tău.
                 </p>
               </div>
               <Link
@@ -250,7 +371,7 @@ export default async function Home() {
                     <span className="text-xs font-bold uppercase tracking-wider text-emerald-800">
                       NEWSROOM &amp; COMUNICATE
                     </span>
-                    <h2 className="text-xl font-bold text-slate-900">Ultimele Noutăți APIA &amp; AFIR</h2>
+                    <h2 className="text-xl font-bold text-slate-900">Ultimele Noutăți &amp; Ghiduri de Finanțare</h2>
                   </div>
                   <Link href="/stiri" className="text-xs font-bold text-emerald-800 hover:underline">
                     Toate știrile →
@@ -284,7 +405,7 @@ export default async function Home() {
                     <span className="text-xs font-bold uppercase tracking-wider text-emerald-800">
                       MONITOR JURIDIC OFICIAL
                     </span>
-                    <h2 className="text-xl font-bold text-slate-900">Legislație &amp; Ordine MADR</h2>
+                    <h2 className="text-xl font-bold text-slate-900">Legislație Fiscală &amp; Ordine Oficiale</h2>
                   </div>
                   <Link href="/legislatie" className="text-xs font-bold text-emerald-800 hover:underline">
                     Toate actele →
@@ -333,13 +454,13 @@ export default async function Home() {
             <div className="mb-8 flex flex-col sm:flex-row items-start sm:items-end justify-between gap-3 border-b border-slate-200 pb-4">
               <div>
                 <span className="text-xs font-bold uppercase tracking-wider text-emerald-800">
-                  DESCĂRCĂRI &amp; FORMULARE OFICIALE
+                  DESCĂRCĂRI &amp; MODELE UTILE
                 </span>
                 <h2 className="mt-1 text-2xl font-black text-slate-900 sm:text-3xl">
-                  Ghidurile Solicitantului &amp; Cereri Tipizate
+                  Ghidurile Solicitantului &amp; Modele de Documente
                 </h2>
                 <p className="text-xs text-slate-600 mt-1 max-w-2xl">
-                  Descarcă gratuit modelele oficiale de adeverințe pentru Registrul Agricol, cereri de motorină, ghiduri PDF și machete de calcul financiar.
+                  Descarcă gratuit modele orientative de plan de afaceri, machete de calcul bugetar, contracte tipizate și ghidurile oficiale ale solicitantului.
                 </p>
               </div>
               <Link href="/resurse" className="text-xs font-bold text-emerald-800 hover:underline shrink-0">
@@ -430,7 +551,7 @@ export default async function Home() {
                 Standardul Editorial &amp; Calitatea Informațiilor Subvenții.ro
               </h2>
               <p className="text-xs text-slate-600 mt-1">
-                O platformă privată de educație și informare dedicată fermierilor și antreprenorilor români.
+                O platformă privată de educație și informare dedicată antreprenorilor, IMM-urilor și fermierilor din România.
               </p>
             </div>
 
@@ -439,7 +560,7 @@ export default async function Home() {
                 <span className="mb-2 block font-mono text-xs font-bold text-emerald-800">01</span>
                 <h3 className="mb-1 text-sm font-bold text-slate-900">Proveniență 100% Oficială</h3>
                 <p className="text-xs text-slate-700 leading-relaxed">
-                  Datele prezentate provin exclusiv din actele normative publicate în Monitorul Oficial și ghidurile emise de APIA, AFIR și MADR. Fără date inventate sau aproximări nefondate.
+                  Datele prezentate provin exclusiv din actele normative din Monitorul Oficial și ghidurile emise de autoritățile de management (MIPE, AFIR, APIA, MADR, AFM, ADR).
                 </p>
               </div>
 
@@ -455,7 +576,7 @@ export default async function Home() {
                 <span className="mb-2 block font-mono text-xs font-bold text-emerald-800">03</span>
                 <h3 className="mb-1 text-sm font-bold text-slate-900">Transparență și Acces Direct</h3>
                 <p className="text-xs text-slate-700 leading-relaxed">
-                  Fiecare fișă de intervenție conține legături directe către sursa oficială unde se depun cererile și actele normative conexe.
+                  Fiecare fișă conține legături directe către sursa oficială unde se depun proiectele și actele normative conexe.
                 </p>
               </div>
             </div>

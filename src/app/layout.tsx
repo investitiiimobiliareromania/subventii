@@ -5,9 +5,9 @@ import { AlwaysOnContact } from "@/components/always-on-contact";
 import { safeJsonLd } from "@/lib/security";
 import "./globals.css";
 
-const siteTitle = "SUBVENȚII România — Platforma Națională de Informare Subvenții Agricole, APIA & AFIR";
+const siteTitle = "SUBVENȚII România — Platforma Națională de Finanțări pentru Antreprenori, IMM-uri și Investiții";
 const siteDescription =
-  "Ghidul complet al subvențiilor agricole APIA, fondurilor nerambursabile AFIR, intervențiilor MADR, legislației oficiale și oportunităților de finanțare pentru toate cele 41 de județe din România.";
+  "Găsește finanțarea potrivită pentru afacerea ta: descoperă și filtrează granturi europene nerambursabile, fonduri pentru start-up-uri și IMM-uri, digitalizare, energie verde, echipamente, intervenții AFIR, plăți APIA și scheme naționale de ajutor de stat.";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://subventii.cristianvaduva.com"),
@@ -20,16 +20,20 @@ export const metadata: Metadata = {
     canonical: "https://subventii.cristianvaduva.com/",
   },
   keywords: [
+    "finantari firme",
+    "fonduri europene imm",
+    "granturi start-up",
+    "finantari antreprenori",
+    "digitalizare imm",
+    "fonduri nerambursabile",
+    "programe nationale finantare",
     "subventii agricole",
     "APIA",
     "AFIR",
     "MADR",
-    "plati directe",
-    "eco-scheme",
-    "tineri fermieri",
-    "fonduri europene agricultura",
-    "legislatie agricola",
-    "subventii judete romania",
+    "PNRR",
+    "schema ajutor de stat",
+    "finantari judete romania",
   ],
   authors: [{ name: "SUBVENȚII România" }],
   robots: {
@@ -86,7 +90,7 @@ export default function RootLayout({
         "@id": "https://subventii.cristianvaduva.com/#website",
         "url": "https://subventii.cristianvaduva.com",
         "name": "SUBVENȚII România",
-        "description": "Platformă națională de informare privind subvențiile agricole, fondurile europene și legislația de profil",
+        "description": "Platformă națională de informare și descoperire a oportunităților de finanțare pentru antreprenori, IMM-uri, start-up-uri și investiții",
         "potentialAction": [
           {
             "@type": "SearchAction",

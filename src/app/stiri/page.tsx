@@ -7,8 +7,8 @@ import { AiAssistantDrawer } from "@/components/ai-assistant-drawer";
 import { getArticlesFromDb } from "@/lib/db/repository";
 
 export const metadata: Metadata = {
-  title: "Știri & Comunicate Oficiale Subvenții Agricole, APIA & AFIR 2026",
-  description: "Noutăți verificate în timp real: deschiderea sesiunilor de depunere APIA, plăți în avans, calendare AFIR, ordine MADR, ajutoare de stat și fonduri europene.",
+  title: "Știri & Noutăți Finanțări Europene, IMM-uri și Programe Naționale 2026",
+  description: "Noutăți verificate în timp real: deschiderea apelurilor de proiecte, ghiduri de finanțare, calendare oficiale, decizii ministeriale și oportunități pentru afaceri.",
   alternates: { canonical: "https://subventii.cristianvaduva.com/stiri" },
 };
 
@@ -18,9 +18,9 @@ export default async function NewsroomPage() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    "name": "Newsroom Subvenții & Agricultură",
+    "name": "Newsroom Finanțări & Programe",
     "url": "https://subventii.cristianvaduva.com/stiri",
-    "description": "Comunicate oficiale și noutăți despre subvențiile APIA, proiectele AFIR și deciziile MADR.",
+    "description": "Comunicate oficiale și noutăți despre finanțările europene, programele naționale și oportunitățile economice.",
   };
 
   return (
@@ -33,7 +33,7 @@ export default async function NewsroomPage() {
           <nav aria-label="Navigare pe pagină" className="mb-6 flex items-center gap-2 text-xs text-slate-600">
             <Link href="/" className="hover:text-emerald-800 transition-colors">Acasă</Link>
             <span aria-hidden="true">/</span>
-            <span className="font-semibold text-slate-900">Newsroom &amp; Știri Oficiale</span>
+            <span className="font-semibold text-slate-900">Newsroom &amp; Știri Finanțări</span>
           </nav>
 
           <div className="mb-10 border-b border-slate-200 pb-6">
@@ -42,17 +42,17 @@ export default async function NewsroomPage() {
                 MONITORIZARE OFICIALĂ &amp; COMUNICATE
               </span>
               <span className="rounded bg-slate-100 px-2 py-0.5 text-[10px] font-bold text-slate-700 border border-slate-200 font-mono">
-                SURSE VERIFICATE (APIA • AFIR • MADR)
+                SURSE OFICIALE GUVERNAMENTALE &amp; EUROPENE
               </span>
               <span className="rounded bg-emerald-50 px-2 py-0.5 text-[10px] font-bold text-emerald-800 border border-emerald-200">
-                SEPTEMBRIE 2026
+                OCTOMBRIE 2026
               </span>
             </div>
             <h1 className="mt-1 text-3xl font-black text-slate-900 sm:text-4xl">
-              Noutăți Subvenții, Campanii APIA, Finanțări AFIR și Decizii MADR
+              Noutăți Finanțări, Ghiduri de Proiecte și Decizii Oficiale
             </h1>
             <p className="mt-2 text-sm text-slate-700 max-w-3xl leading-relaxed">
-              Analize structurate ale ghidurilor solicitantului, ordonanțelor de urgență, termenelor de depunere a cererilor unice de plată și fondurilor europene destinate agriculturii și dezvoltării rurale.
+              Analize structurate ale ghidurilor solicitantului, ordonanțelor de urgență, termenelor de depunere a proiectelor și fondurilor europene și naționale destinate dezvoltării economice.
             </p>
           </div>
 

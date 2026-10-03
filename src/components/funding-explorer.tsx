@@ -12,12 +12,13 @@ import {
 } from "@/lib/funding-data";
 
 const QUICK_CATEGORIES = [
-  { label: "Toate Programele", value: "Toate sursele" },
-  { label: "🌾 Subvenții APIA (FEGA)", value: "APIA" },
-  { label: "🚜 Intervenții AFIR (FEADR)", value: "AFIR" },
-  { label: "🏛️ Ajutoare de Stat MADR", value: "MADR" },
-  { label: "⚡ Energie & AFM", value: "AFM" },
-  { label: "💻 MIPE & PNRR", value: "PNRR" },
+  { label: "Toate Finanțările", value: "Toate sursele" },
+  { label: "🚀 Start-up & IMM", value: "MIPE" },
+  { label: "⚡ Energie & Sustenabilitate (AFM)", value: "AFM" },
+  { label: "💻 PNRR & Tehnologie", value: "PNRR" },
+  { label: "🚜 Investiții & AFIR", value: "AFIR" },
+  { label: "🌾 Plăți Directe APIA", value: "APIA" },
+  { label: "🏛️ Scheme Naționale MADR", value: "MADR" },
   { label: "🏢 Programe Regionale ADR", value: "ADR" },
 ];
 
@@ -134,7 +135,7 @@ export function FundingExplorer({ programs }: { programs: FundingProgram[] }) {
       {/* Search Input Bar */}
       <div className="relative mb-6">
         <label htmlFor="search-input" className="sr-only">
-          Caută subvenții după denumire, domeniu, cod sau instituție
+          Caută finanțări după denumire, domeniu, obiectiv sau instituție
         </label>
         <div className="relative flex items-center">
           <svg
@@ -156,7 +157,7 @@ export function FundingExplorer({ programs }: { programs: FundingProgram[] }) {
             type="search"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Caută după denumire (ex: BISS, SCZ Vaci de Lapte, DR-30 Tineri Fermieri, Motorină, Irigații)..."
+            placeholder="Caută după obiectiv, domeniu sau program (ex: digitalizare, utilaje, start-up, DR-14, energie, PNRR, BISS)..."
             className="w-full rounded-xl border border-slate-300 bg-white py-3.5 pl-12 pr-10 text-sm text-slate-900 placeholder-slate-500 shadow-xs transition-colors focus:border-emerald-700 focus:outline-none focus:ring-1 focus:ring-emerald-700"
           />
           {query && (
@@ -177,7 +178,7 @@ export function FundingExplorer({ programs }: { programs: FundingProgram[] }) {
         <div className="mb-4 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <span className="text-xs font-bold uppercase tracking-wider text-slate-700">
-              Filtrare Avansată Programe &amp; Subvenții
+              Filtrare Avansată Programe &amp; Finanțări
             </span>
             <span className="rounded bg-emerald-100 px-2 py-0.5 text-[10px] font-bold text-emerald-950">
               {filteredPrograms.length} din {programs.length} disponibile

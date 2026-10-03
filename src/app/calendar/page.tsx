@@ -29,16 +29,16 @@ export default function CalendarPage() {
           <nav className="mb-6 flex items-center gap-2 text-xs text-slate-500">
             <Link href="/" className="hover:text-emerald-800">Acasă</Link>
             <span>/</span>
-            <span className="font-semibold text-slate-800">Calendar Subvenții &amp; Finanțări</span>
+            <span className="font-semibold text-slate-800">Calendar Finanțări &amp; Termene</span>
           </nav>
 
           <div className="mb-8 border-b border-slate-200 pb-6">
             <span className="text-xs font-bold uppercase tracking-wider text-emerald-800">Termene Limită &amp; Lansări Oficiale 2026</span>
             <h1 className="mt-1 text-3xl font-extrabold text-slate-900 sm:text-4xl">
-              Calendarul Național al Apelurilor &amp; Campaniilor de Plată
+              Calendarul Național al Apelurilor de Finanțare &amp; Campaniilor Active
             </h1>
             <p className="mt-2 text-sm text-slate-600 max-w-3xl leading-relaxed">
-              Date oficiale sincronizate cu calendarele APIA, AFIR, MADR și AFM. Urmărește termenele limită de depunere a cererilor unice de plată, deschiderea sesiunilor de proiecte europene și etapele de debursare a avansurilor.
+              Date oficiale sincronizate cu calendarele MIPE, AFIR, APIA, MADR, AFM și ADR. Urmărește termenele limită de depunere a cererilor de finanțare, deschiderea sesiunilor de proiecte europene și etapele oficiale de evaluare și contractare.
             </p>
           </div>
 

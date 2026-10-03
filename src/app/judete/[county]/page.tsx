@@ -21,8 +21,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const profile = getCountyProfile(county);
 
   return {
-    title: `Subvenții Agricole & Fonduri Nerambursabile — Județul ${profile.name} 2026`,
-    description: `Ghidul complet al subvențiilor APIA, fondurilor AFIR, datelor Centrului Județean APIA ${profile.name} și oportunităților pentru fermieri.`,
+    title: `Finanțări, Programe & Subvenții — Județul ${profile.name} 2026`,
+    description: `Ghidul oportunităților de finanțare pentru afaceri, IMM-uri și agricultură în județul ${profile.name}: fonduri europene, datele centrelor județene și programe active.`,
     alternates: { canonical: `https://subventii.cristianvaduva.com/judete/${encodeURIComponent(county.toLowerCase())}` },
   };
 }
