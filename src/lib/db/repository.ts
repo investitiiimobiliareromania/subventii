@@ -341,6 +341,7 @@ function mapDbRowToFundingProgram(row: any): FundingProgram {
     minFundingRon: call.min_funding_ron ? Number(call.min_funding_ron) : 50000,
     source: row.institutions?.name || "Ministerul Economiei",
     sourceCategory: ((row.institutions as Record<string, string>)?.acronym || "Minister") as FundingProgram["sourceCategory"],
+    investmentTypes: (row.investment_types as any) || ["Software & Digitalizare", "Utilaje & Echipamente"],
     businessTypes: ["SRL", "PFA"],
     industries: ["IT & digital", "Servicii"],
     counties: row.national_coverage ? ["Național"] : ["Cluj", "București"],

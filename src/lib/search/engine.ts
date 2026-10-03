@@ -11,6 +11,7 @@ export type SearchQueryParams = {
   county?: string;
   businessType?: string;
   industry?: string;
+  investment?: string;
   status?: string;
   companyAge?: string;
   companySize?: string;
@@ -47,12 +48,17 @@ const SYNONYM_DICTIONARY: Record<string, string[]> = {
   "startup": ["start-up nation", "meat", "firma noua", "microintreprindere", "antreprenoriat", "fonduri start up", "granturi afaceri noi"],
   "imm": ["dezvoltare", "competitivitate", "microintreprindere", "adr", "fonduri imm", "granturi mici", "echipamente", "linii productie"],
   "digitalizare": ["software", "cloud", "it", "cybersecurity", "pocidif", "pnrr c9", "automatizare", "erp", "crm", "ai", "robotica", "transformare digitala"],
-  "energie": ["fotovoltaice", "panouri solare", "eolian", "baterii", "stocare", "autoconsum", "fondul modernizare", "afm", "casa verde", "eficienta energetica"],
+  "energie": ["fotovoltaice", "panouri solare", "eolian", "baterii", "stocare", "autoconsum", "fondul modernizare", "afm", "casa verde", "eficienta energetica", "bess"],
+  "fotovoltaice": ["panouri solare", "energie solara", "autoconsum", "prosumator", "afm", "casa verde", "fondul modernizare", "panouri fotovoltaice"],
+  "baterii": ["stocare", "bess", "acumulatori", "baterie", "sisteme de stocare", "stocare energie", "casa verde"],
+  "reciclare": ["deseuri", "colectare", "sortare", "economie circulara", "tratare deseuri", "afm", "pdd", "valorificare deseuri"],
+  "utilaje": ["echipamente", "linii tehnologice", "masini", "scule", "cnc", "robotica", "automatizare", "productie"],
+  "hale": ["constructie", "hale productie", "spatii productive", "extindere fabrica", "depozit", "cladire", "cladiri"],
   "casa verde": ["afm", "fotovoltaice", "baterii", "stocare", "energie curata", "prosumator"],
   "tranzitie justa": ["ptj", "gorj", "hunedoara", "dolj", "galati", "prahova", "mures", "minerit", "decarbonizare"],
   "femeia antreprenor": ["meat", "femei", "antreprenoriat feminin", "grant 200000"],
   "inovare": ["cercetare", "cdi", "eic", "horizon europe", "eurostars", "deep tech", "transfer tehnologic"],
-  "sanatate": ["programul sanatate", "medical", "cabinete", "clinici", "aparatura medicala", "ecografe", "stomatologie"],
+  "sanatate": ["programul sanatate", "medical", "cabinete", "clinici", "aparatura medicala", "ecografe", "stomatologie", "echipamente medicale"],
   "cadastru": ["ancpi", "e-terra", "carte funciara", "intabulare", "pncf"],
   "legislatie": ["ordin madr", "oug", "hg", "lege", "regulament ue", "monitorul oficial"],
 };
@@ -103,6 +109,8 @@ export function executeSearch(
         program.objective || "",
         program.fundingType || "",
         program.region || "",
+        ...(program.investmentTypes || []),
+        ...(program.eligibleExpenses || []),
         ...program.industries,
         ...program.businessTypes,
         ...program.counties,
@@ -115,6 +123,10 @@ export function executeSearch(
     }
 
     // Filters
+    if (params.investment && params.investment !== "Toate investițiile") {
+      if (!program.investmentTypes || !program.investmentTypes.includes(params.investment as any)) return false;
+    }
+
     if (params.businessType && params.businessType !== "Toate formele") {
       if (!program.businessTypes.includes(params.businessType) && !program.businessTypes.includes("Toate formele")) return false;
     }

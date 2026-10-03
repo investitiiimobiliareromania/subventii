@@ -61,9 +61,25 @@ export function FundingCard({ program }: { program: FundingProgram }) {
             {program.title}
           </Link>
         </h3>
-        <p className="mb-4 text-xs text-slate-600 line-clamp-3 leading-relaxed">
+        <p className="mb-3 text-xs text-slate-600 line-clamp-3 leading-relaxed">
           {program.summary}
         </p>
+
+        {/* Investment Tags */}
+        {program.investmentTypes && program.investmentTypes.length > 0 && (
+          <div className="mb-4 flex flex-wrap items-center gap-1">
+            {program.investmentTypes.slice(0, 3).map((inv) => (
+              <span key={inv} className="rounded bg-emerald-50 px-2 py-0.5 text-[10px] font-semibold text-emerald-800 border border-emerald-200/60">
+                {inv}
+              </span>
+            ))}
+            {program.investmentTypes.length > 3 && (
+              <span className="text-[10px] text-slate-500 font-medium">
+                +{program.investmentTypes.length - 3}
+              </span>
+            )}
+          </div>
+        )}
 
         {/* Program Meta Information */}
         <div className="space-y-1.5 border-t border-slate-100 pt-3 text-xs text-slate-600">
@@ -118,11 +134,33 @@ const QUICK_CATEGORIES = [
   { label: "📦 Arhivă Programe", value: "ARCHIVE" },
 ];
 
+const INVESTMENT_CHIPS = [
+  { label: "☀️ Panouri Fotovoltaice", value: "Panouri Fotovoltaice" },
+  { label: "🔋 Baterii & Stocare", value: "Baterii & Stocare" },
+  { label: "⚙️ Utilaje & Echipamente", value: "Utilaje & Echipamente" },
+  { label: "💻 Software & Digitalizare", value: "Software & Digitalizare" },
+  { label: "🤖 Inteligență Artificială (AI)", value: "Inteligență Artificială (AI)" },
+  { label: "♻️ Reciclare & Deșeuri", value: "Reciclare & Deșeuri" },
+  { label: "🏗️ Hală Producție / Clădire", value: "Construcție Hală & Clădire" },
+  { label: "🚀 Firmă Nouă / Start-up", value: "Firmă Nouă / Start-up" },
+  { label: "🏢 Eficiență Energetică", value: "Eficiență Energetică" },
+  { label: "👥 Angajați & Instruire", value: "Angajare & Instruire" },
+  { label: "🩺 Echipamente Medicale", value: "Echipamente Medicale" },
+  { label: "🏨 Turism & Pensiuni", value: "Turism & Cazare" },
+  { label: "🥫 Procesare Alimentară", value: "Procesare Alimentară" },
+  { label: "🚜 Echipamente Agricole", value: "Echipamente Agricole" },
+  { label: "💧 Sisteme de Irigații", value: "Sisteme de Irigații" },
+  { label: "🔬 Cercetare & Inovare", value: "Cercetare & Inovare" },
+  { label: "🤝 Economie Socială", value: "Economie Socială" },
+  { label: "🎨 Cultură & Creație", value: "Cultură & Creație" },
+];
+
 const ITEMS_PER_PAGE = 12;
 
 export function FundingExplorer({ programs }: { programs: FundingProgram[] }) {
   const [query, setQuery] = useState("");
   const [selectedQuickCategory, setSelectedQuickCategory] = useState("ALL");
+  const [investment, setInvestment] = useState(filterOptions.investment[0]);
   const [business, setBusiness] = useState(filterOptions.business[0]);
   const [industry, setIndustry] = useState(filterOptions.industry[0]);
   const [objective, setObjective] = useState(filterOptions.objective[0]);
@@ -137,6 +175,7 @@ export function FundingExplorer({ programs }: { programs: FundingProgram[] }) {
     let count = 0;
     if (query) count++;
     if (selectedQuickCategory !== "ALL") count++;
+    if (investment !== filterOptions.investment[0]) count++;
     if (business !== filterOptions.business[0]) count++;
     if (industry !== filterOptions.industry[0]) count++;
     if (objective !== filterOptions.objective[0]) count++;
@@ -146,7 +185,7 @@ export function FundingExplorer({ programs }: { programs: FundingProgram[] }) {
     if (sourceCategory !== filterOptions.sourceCategory[0]) count++;
     if (status !== filterOptions.status[0]) count++;
     return count;
-  }, [query, selectedQuickCategory, business, industry, objective, county, companyAge, companySize, sourceCategory, status]);
+  }, [query, selectedQuickCategory, investment, business, industry, objective, county, companyAge, companySize, sourceCategory, status]);
 
   const filteredPrograms = useMemo(() => {
     return programs.filter((program) => {
@@ -184,6 +223,11 @@ export function FundingExplorer({ programs }: { programs: FundingProgram[] }) {
         if (program.isArchived && !query) return false;
       }
 
+      // Investment Need Filter
+      const matchInvestment =
+        investment === filterOptions.investment[0] ||
+        (program.investmentTypes && program.investmentTypes.includes(investment as any));
+
       // Query Search
       const q = query.toLowerCase().trim();
       const matchQuery =
@@ -194,6 +238,7 @@ export function FundingExplorer({ programs }: { programs: FundingProgram[] }) {
         (program.authorityCode && program.authorityCode.toLowerCase().includes(q)) ||
         (program.objective && program.objective.toLowerCase().includes(q)) ||
         (program.region && program.region.toLowerCase().includes(q)) ||
+        (program.investmentTypes && program.investmentTypes.some((it) => it.toLowerCase().includes(q))) ||
         program.industries.some((i) => i.toLowerCase().includes(q)) ||
         program.businessTypes.some((b) => b.toLowerCase().includes(q));
 
@@ -230,6 +275,7 @@ export function FundingExplorer({ programs }: { programs: FundingProgram[] }) {
       const matchStatus = status === filterOptions.status[0] || program.status === status;
 
       return (
+        matchInvestment &&
         matchQuery &&
         matchBusiness &&
         matchIndustry &&
@@ -241,7 +287,7 @@ export function FundingExplorer({ programs }: { programs: FundingProgram[] }) {
         matchStatus
       );
     });
-  }, [programs, selectedQuickCategory, query, business, industry, objective, county, companyAge, companySize, sourceCategory, status]);
+  }, [programs, selectedQuickCategory, investment, query, business, industry, objective, county, companyAge, companySize, sourceCategory, status]);
 
   // Pagination calculation
   const totalPages = Math.max(1, Math.ceil(filteredPrograms.length / ITEMS_PER_PAGE));
@@ -253,6 +299,7 @@ export function FundingExplorer({ programs }: { programs: FundingProgram[] }) {
   const resetFilters = () => {
     setQuery("");
     setSelectedQuickCategory("ALL");
+    setInvestment(filterOptions.investment[0]);
     setBusiness(filterOptions.business[0]);
     setIndustry(filterOptions.industry[0]);
     setObjective(filterOptions.objective[0]);
@@ -269,8 +316,61 @@ export function FundingExplorer({ programs }: { programs: FundingProgram[] }) {
     setCurrentPage(1);
   };
 
+  const handleInvestmentChipClick = (invVal: string) => {
+    if (investment === invVal) {
+      setInvestment(filterOptions.investment[0]);
+    } else {
+      setInvestment(invVal);
+    }
+    setCurrentPage(1);
+  };
+
   return (
     <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6">
+      {/* "Am nevoie de bani pentru..." Investment Need Bar */}
+      <div className="mb-6 rounded-2xl border border-emerald-200/80 bg-gradient-to-r from-emerald-950 via-slate-900 to-slate-900 p-5 text-white shadow-sm">
+        <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
+          <div className="flex items-center gap-2">
+            <span className="flex h-2 w-2 rounded-full bg-emerald-400 animate-pulse" aria-hidden="true" />
+            <h2 className="text-xs font-bold uppercase tracking-wider text-emerald-300">
+              Am nevoie de bani pentru... • Alege tipul de investiție
+            </h2>
+          </div>
+          {investment !== filterOptions.investment[0] && (
+            <button
+              type="button"
+              onClick={() => {
+                setInvestment(filterOptions.investment[0]);
+                setCurrentPage(1);
+              }}
+              className="text-xs font-semibold text-emerald-400 hover:text-white underline cursor-pointer"
+            >
+              Arată toate tipurile de investiții ✕
+            </button>
+          )}
+        </div>
+
+        <div className="flex flex-wrap items-center gap-2">
+          {INVESTMENT_CHIPS.map((chip) => {
+            const isSelected = investment === chip.value;
+            return (
+              <button
+                key={chip.value}
+                type="button"
+                onClick={() => handleInvestmentChipClick(chip.value)}
+                className={`rounded-xl px-3 py-1.5 text-xs font-bold transition-all cursor-pointer ${
+                  isSelected
+                    ? "bg-emerald-500 text-slate-950 shadow-md scale-105"
+                    : "bg-slate-800/80 hover:bg-slate-700 text-slate-200 border border-slate-700/80"
+                }`}
+              >
+                {chip.label}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
       {/* Quick Category Chips */}
       <div className="mb-6 flex flex-wrap items-center gap-2">
         {QUICK_CATEGORIES.map((cat) => {
@@ -295,7 +395,7 @@ export function FundingExplorer({ programs }: { programs: FundingProgram[] }) {
       {/* Search Input Bar */}
       <div className="relative mb-6">
         <label htmlFor="search-input" className="sr-only">
-          Caută finanțări după obiectiv, domeniu, program sau autoritate
+          Caută finanțări după obiectiv, domeniu, investiție, program sau autoritate
         </label>
         <div className="relative flex items-center">
           <svg
@@ -320,7 +420,7 @@ export function FundingExplorer({ programs }: { programs: FundingProgram[] }) {
               setQuery(e.target.value);
               setCurrentPage(1);
             }}
-            placeholder="Caută după obiectiv, domeniu sau program (ex: digitalizare, utilaje, start-up, DR-14, energie, PNRR, BISS)..."
+            placeholder="Caută după investiție sau obiectiv (ex: fotovoltaice, baterii, reciclare, utilaje, digitalizare, start-up, DR-14, PNRR)..."
             className="w-full rounded-xl border border-slate-300 bg-white py-3.5 pl-12 pr-10 text-sm text-slate-900 placeholder-slate-500 shadow-xs transition-colors focus:border-emerald-700 focus:outline-none focus:ring-1 focus:ring-emerald-700"
           />
           {query && (
@@ -362,7 +462,29 @@ export function FundingExplorer({ programs }: { programs: FundingProgram[] }) {
           )}
         </div>
 
-        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {/* Tip Investiție */}
+          <div>
+            <label htmlFor="filter-investment" className="mb-1 block text-[11px] font-semibold text-slate-700">
+              Ce Vrei să Finanțezi? (Investiție)
+            </label>
+            <select
+              id="filter-investment"
+              value={investment}
+              onChange={(e) => {
+                setInvestment(e.target.value);
+                setCurrentPage(1);
+              }}
+              className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs text-slate-900 focus:border-emerald-700 focus:outline-none"
+            >
+              {filterOptions.investment.map((opt) => (
+                <option key={opt} value={opt}>
+                  {opt}
+                </option>
+              ))}
+            </select>
+          </div>
+
           {/* Obiectiv Finanțare */}
           <div>
             <label htmlFor="filter-objective" className="mb-1 block text-[11px] font-semibold text-slate-700">

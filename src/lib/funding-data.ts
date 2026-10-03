@@ -48,7 +48,31 @@ export type ObjectiveCategory =
   | "Angajare & Resurse Umane"
   | "Inovare & Cercetare"
   | "Agricultură & Agro-Business"
-  | "Sănătate & Servicii Sociale";
+  | "Sănătate & Servicii Sociale"
+  | "Turism & Agrement"
+  | "Mediu & Economie Circulară"
+  | "Cultură & Creație";
+
+export type InvestmentTypeCategory =
+  | "Panouri Fotovoltaice"
+  | "Baterii & Stocare"
+  | "Utilaje & Echipamente"
+  | "Software & Digitalizare"
+  | "Inteligență Artificială (AI)"
+  | "Eficiență Energetică"
+  | "Reciclare & Deșeuri"
+  | "Economie Circulară"
+  | "Construcție Hală & Clădire"
+  | "Firmă Nouă / Start-up"
+  | "Angajare & Instruire"
+  | "Echipamente Medicale"
+  | "Turism & Cazare"
+  | "Procesare Alimentară"
+  | "Echipamente Agricole"
+  | "Sisteme de Irigații"
+  | "Cercetare & Inovare"
+  | "Economie Socială"
+  | "Cultură & Creație";
 
 export type TimelineStep = {
   label: string;
@@ -71,10 +95,11 @@ export type FundingProgram = {
   minFundingRon?: number;
   minFundingEur?: number;
   source: string;
-  sourceCategory: "APIA" | "AFIR" | "MADR" | "MIPE" | "ADR" | "AFM" | "PNRR" | "Minister" | "Fondul pentru Modernizare" | "UE Direct";
+  sourceCategory: "APIA" | "AFIR" | "MADR" | "MIPE" | "ADR" | "AFM" | "PNRR" | "Minister" | "Fondul pentru Modernizare" | "UE Direct" | "AFCN";
   authorityCode?: string;
   fundingType?: FundingTypeCategory;
   objective?: ObjectiveCategory;
+  investmentTypes: InvestmentTypeCategory[];
   region?: string;
   callCode?: string;
   isArchived?: boolean;
@@ -101,6 +126,28 @@ export type FundingProgram = {
 };
 
 export const filterOptions = {
+  investment: [
+    "Toate investițiile",
+    "Panouri Fotovoltaice",
+    "Baterii & Stocare",
+    "Utilaje & Echipamente",
+    "Software & Digitalizare",
+    "Inteligență Artificială (AI)",
+    "Eficiență Energetică",
+    "Reciclare & Deșeuri",
+    "Economie Circulară",
+    "Construcție Hală & Clădire",
+    "Firmă Nouă / Start-up",
+    "Angajare & Instruire",
+    "Echipamente Medicale",
+    "Turism & Cazare",
+    "Procesare Alimentară",
+    "Echipamente Agricole",
+    "Sisteme de Irigații",
+    "Cercetare & Inovare",
+    "Economie Socială",
+    "Cultură & Creație",
+  ],
   business: [
     "Toate formele",
     "Persoană Fizică",
@@ -122,6 +169,9 @@ export const filterOptions = {
     "Energie Verde & Mediu",
     "Inovare & Cercetare",
     "Sănătate & Medical",
+    "Turism & Ospitalitate",
+    "Construcții & Imobiliare",
+    "Cultură & Media",
     "Cultura Plantelor & Arabil",
     "Zootehnie Bovine",
     "Zootehnie Ovine & Caprine",
@@ -141,10 +191,13 @@ export const filterOptions = {
     "Digitalizare & Tehnologie",
     "Echipamente & Utilaje",
     "Energie & Sustenabilitate",
+    "Mediu & Economie Circulară",
     "Angajare & Resurse Umane",
     "Inovare & Cercetare",
-    "Agricultură & Agro-Business",
+    "Turism & Agrement",
     "Sănătate & Servicii Sociale",
+    "Agricultură & Agro-Business",
+    "Cultură & Creație",
   ],
   county: [
     "Toate județele",
@@ -165,6 +218,7 @@ export const filterOptions = {
     "AFM",
     "PNRR",
     "UE Direct",
+    "AFCN",
     "AFIR",
     "APIA",
     "MADR"
@@ -198,6 +252,7 @@ export const FUNDING_PROGRAMS: FundingProgram[] = [
     authorityCode: "MEAT-SUN2025",
     fundingType: "Grant",
     objective: "Start-up & Afaceri Noi",
+    investmentTypes: ["Firmă Nouă / Start-up", "Utilaje & Echipamente", "Software & Digitalizare", "Angajare & Instruire"],
     verifiedStatus: "OFICIAL",
     verifiedAt: "04 Octombrie 2026, 01:00",
     businessTypes: ["SRL"],
@@ -260,6 +315,7 @@ export const FUNDING_PROGRAMS: FundingProgram[] = [
     authorityCode: "MEAT-FA2026",
     fundingType: "Ajutor de Minimis",
     objective: "Start-up & Afaceri Noi",
+    investmentTypes: ["Firmă Nouă / Start-up", "Utilaje & Echipamente", "Software & Digitalizare", "Eficiență Energetică"],
     verifiedStatus: "OFICIAL",
     verifiedAt: "04 Octombrie 2026, 01:00",
     businessTypes: ["SRL"],
@@ -313,10 +369,11 @@ export const FUNDING_PROGRAMS: FundingProgram[] = [
     authorityCode: "MEAT-MICROIND",
     fundingType: "Ajutor de Minimis",
     objective: "Echipamente & Utilaje",
+    investmentTypes: ["Utilaje & Echipamente", "Construcție Hală & Clădire", "Eficiență Energetică"],
     verifiedStatus: "OFICIAL",
     verifiedAt: "04 Octombrie 2026, 01:00",
     businessTypes: ["SRL"],
-    industries: ["Producție & Industrie", "Echipamente & Utilaje"],
+    industries: ["Producție & Industrie", "Utilaje & Mecanizare"],
     counties: ["Național"],
     companyAge: "Peste 1 an",
     companySize: "IMM",
@@ -365,6 +422,7 @@ export const FUNDING_PROGRAMS: FundingProgram[] = [
     authorityCode: "MEAT-COMERT",
     fundingType: "Ajutor de Minimis",
     objective: "IMM & Dezvoltare Business",
+    investmentTypes: ["Software & Digitalizare", "Utilaje & Echipamente", "Eficiență Energetică"],
     verifiedStatus: "OFICIAL",
     verifiedAt: "04 Octombrie 2026, 01:00",
     businessTypes: ["SRL"],
@@ -416,10 +474,11 @@ export const FUNDING_PROGRAMS: FundingProgram[] = [
     authorityCode: "MFIN-HG300",
     fundingType: "Ajutor de Stat",
     objective: "IMM & Dezvoltare Business",
+    investmentTypes: ["Construcție Hală & Clădire", "Utilaje & Echipamente", "Panouri Fotovoltaice", "Eficiență Energetică"],
     verifiedStatus: "OFICIAL",
     verifiedAt: "04 Octombrie 2026, 01:00",
     businessTypes: ["SRL"],
-    industries: ["Producție & Industrie", "Echipamente & Utilaje", "Energie Verde & Mediu"],
+    industries: ["Producție & Industrie", "Construcții & Imobiliare", "Energie Verde & Mediu"],
     counties: ["Național"],
     companyAge: "Orice vechime",
     companySize: "Toate mărimile",
@@ -471,6 +530,7 @@ export const FUNDING_PROGRAMS: FundingProgram[] = [
     authorityCode: "PTJ-IMM-2026",
     fundingType: "Fonduri Europene",
     objective: "IMM & Dezvoltare Business",
+    investmentTypes: ["Utilaje & Echipamente", "Construcție Hală & Clădire", "Panouri Fotovoltaice", "Eficiență Energetică", "Economie Circulară"],
     region: "Județele Tranziție Justă",
     callCode: "PTJ/2021-2027/IMM/P1",
     verifiedStatus: "OFICIAL",
@@ -530,6 +590,7 @@ export const FUNDING_PROGRAMS: FundingProgram[] = [
     authorityCode: "POCIDIF-AI-2026",
     fundingType: "Fonduri Europene",
     objective: "Digitalizare & Tehnologie",
+    investmentTypes: ["Inteligență Artificială (AI)", "Software & Digitalizare", "Cercetare & Inovare"],
     callCode: "PoCIDIF/1.2/DigitalizareAvansata",
     verifiedStatus: "OFICIAL",
     verifiedAt: "04 Octombrie 2026, 01:00",
@@ -571,6 +632,61 @@ export const FUNDING_PROGRAMS: FundingProgram[] = [
     ],
   },
   {
+    slug: "pdd-reciclare-deseuri-industriale",
+    title: "Programul Dezvoltare Durabilă (PDD) — Investiții în Reciclare & Managementul Deșeurilor",
+    summary: "Granturi mari pentru companii private care realizează instalații industriale de sortare, tratare și reciclare mecanică/chimică a deșeurilor în vederea reintroducerii în circuitul economic.",
+    status: "Deschis",
+    deadline: "2026-11-30",
+    maxFundingRon: 25000000,
+    maxFundingEur: 5000000,
+    minFundingRon: 5000000,
+    minFundingEur: 1000000,
+    source: "Ministerul Investițiilor și Proiectelor Europene (MIPE)",
+    sourceCategory: "MIPE",
+    authorityCode: "PDD-CIRCULAR-2026",
+    fundingType: "Fonduri Europene",
+    objective: "Mediu & Economie Circulară",
+    investmentTypes: ["Reciclare & Deșeuri", "Economie Circulară", "Utilaje & Echipamente", "Construcție Hală & Clădire"],
+    callCode: "PDD/P1/DeseuriReciclare",
+    verifiedStatus: "OFICIAL",
+    verifiedAt: "04 Octombrie 2026, 01:00",
+    businessTypes: ["SRL", "Cooperativă"],
+    industries: ["Energie Verde & Mediu", "Producție & Industrie"],
+    counties: ["Național"],
+    companyAge: "Peste 1 an",
+    companySize: "IMM",
+    eligibility: [
+      "Operator economic autorizat conform legislației de mediu pentru colectarea, tratarea sau valorificarea deșeurilor.",
+      "Instalația propusă asigură reciclarea efectivă a deșeurilor din plastic, sticlă, hârtie, textile, DEEE sau anvelope uzate.",
+      "Obținerea acordului de mediu înainte de contractare.",
+    ],
+    eligibleExpenses: [
+      "Linii automate de sortare optică și separare electrostatică",
+      "Instalații de mărunțire (shreddere), spălare și uscare a maselor plastice",
+      "Extrudere industriale de regranulare și producție materie primă secundară",
+      "Construcția halelor industriale betonate și a platformelor impermeabilizate de depozitare",
+    ],
+    documents: [
+      "Studiu de fezabilitate și bilanț de masă al materialelor reciclate",
+      "Autorizație integrată de mediu sau aviz de principiu APM",
+      "Situații financiare anuale",
+    ],
+    cofinancing: "30% – 50% cofinanțare proprie.",
+    supportIntensity: "50% – 70% nerambursabil",
+    officialUrl: "https://mfe.gov.ro/pdd-21-27/",
+    officialApplicationUrl: "https://mysmis2021.gov.ro",
+    timeline: [
+      { label: "Apel deschis", date: "Iunie 2026" },
+      { label: "Termen limită", date: "30 Noiembrie 2026" },
+    ],
+    faqs: [
+      {
+        question: "Pot aplica firme care produc materie primă secundară pentru export?",
+        answer: "Da, transformarea deșeurilor în granule reciclate sau materii prime secundare pentru industrie este pe deplin eligibilă.",
+      },
+    ],
+  },
+  {
     slug: "ps-investitii-centre-medicale",
     title: "Programul Sănătate (PS) — Dotare Cabinete & Centre Medicale Ambulatorii Private",
     summary: "Granturi europene dedicate furnizorilor privați de servicii medicale pentru achiziția de aparatură medicală de înaltă performanță, digitalizare și modernizare spații.",
@@ -585,6 +701,7 @@ export const FUNDING_PROGRAMS: FundingProgram[] = [
     authorityCode: "PS-MED-2026",
     fundingType: "Fonduri Europene",
     objective: "Sănătate & Servicii Sociale",
+    investmentTypes: ["Echipamente Medicale", "Software & Digitalizare", "Eficiență Energetică"],
     callCode: "PS/2021-2027/P1/Ambulatorii",
     verifiedStatus: "OFICIAL",
     verifiedAt: "04 Octombrie 2026, 01:00",
@@ -639,6 +756,7 @@ export const FUNDING_PROGRAMS: FundingProgram[] = [
     authorityCode: "PEO-TRAIN-2026",
     fundingType: "Fonduri Europene",
     objective: "Angajare & Resurse Umane",
+    investmentTypes: ["Angajare & Instruire", "Software & Digitalizare"],
     callCode: "PEO/1.1/CalificareIMM",
     verifiedStatus: "OFICIAL",
     verifiedAt: "04 Octombrie 2026, 01:00",
@@ -691,6 +809,7 @@ export const FUNDING_PROGRAMS: FundingProgram[] = [
     authorityCode: "POIDS-SOC-2026",
     fundingType: "Fonduri Europene",
     objective: "Start-up & Afaceri Noi",
+    investmentTypes: ["Economie Socială", "Firmă Nouă / Start-up", "Utilaje & Echipamente", "Angajare & Instruire"],
     callCode: "PoIDS/2.1/EconomieSociala",
     verifiedStatus: "OFICIAL",
     verifiedAt: "04 Octombrie 2026, 01:00",
@@ -746,6 +865,7 @@ export const FUNDING_PROGRAMS: FundingProgram[] = [
     authorityCode: "PRNV-1.1A",
     fundingType: "Fonduri Europene",
     objective: "Digitalizare & Tehnologie",
+    investmentTypes: ["Software & Digitalizare", "Inteligență Artificială (AI)", "Utilaje & Echipamente"],
     region: "Nord-Vest",
     callCode: "PRNV/2023/111.A/1",
     verifiedStatus: "OFICIAL",
@@ -799,12 +919,13 @@ export const FUNDING_PROGRAMS: FundingProgram[] = [
     authorityCode: "PRNV-1.3A",
     fundingType: "Fonduri Europene",
     objective: "Echipamente & Utilaje",
+    investmentTypes: ["Utilaje & Echipamente", "Panouri Fotovoltaice", "Eficiență Energetică"],
     region: "Nord-Vest",
     callCode: "PRNV/2024/131.A/1",
     verifiedStatus: "OFICIAL",
     verifiedAt: "04 Octombrie 2026, 01:00",
     businessTypes: ["SRL"],
-    industries: ["Producție & Industrie", "Echipamente & Utilaje", "Servicii & Comerț"],
+    industries: ["Producție & Industrie", "Utilaje & Mecanizare", "Servicii & Comerț"],
     counties: ["Bihor", "Bistrița-Năsăud", "Cluj", "Maramureș", "Satu Mare", "Sălaj"],
     companyAge: "Peste 1 an",
     companySize: "Microîntreprindere",
@@ -838,6 +959,60 @@ export const FUNDING_PROGRAMS: FundingProgram[] = [
     ],
   },
   {
+    slug: "adr-nord-vest-cladiri-hale-productie-14",
+    title: "ADR Nord-Vest — Dezvoltare & Construire Hale Industriale IMM (PR NV 1.4)",
+    summary: "Finanțare nerambursabilă de până la 1.500.000 EUR pentru construirea de hale industriale noi, extinderea capacităților de producție și achiziția de utilaje de construcții și industriale.",
+    status: "În curând",
+    deadline: "2026-12-15",
+    maxFundingRon: 7500000,
+    maxFundingEur: 1500000,
+    minFundingRon: 1000000,
+    minFundingEur: 200000,
+    source: "Agenția de Dezvoltare Regională Nord-Vest (ADR Nord-Vest)",
+    sourceCategory: "ADR",
+    authorityCode: "PRNV-1.4-HALE",
+    fundingType: "Fonduri Europene",
+    objective: "IMM & Dezvoltare Business",
+    investmentTypes: ["Construcție Hală & Clădire", "Utilaje & Echipamente", "Eficiență Energetică", "Panouri Fotovoltaice"],
+    region: "Nord-Vest",
+    callCode: "PRNV/1.4/Constructii/2026",
+    verifiedStatus: "OFICIAL",
+    verifiedAt: "04 Octombrie 2026, 01:00",
+    businessTypes: ["SRL"],
+    industries: ["Construcții & Imobiliare", "Producție & Industrie", "Utilaje & Mecanizare"],
+    counties: ["Bihor", "Bistrița-Năsăud", "Cluj", "Maramureș", "Satu Mare", "Sălaj"],
+    companyAge: "Peste 2 ani",
+    companySize: "IMM",
+    eligibility: [
+      "IMM activ în sectorul producției industriale sau construcțiilor cu activitate demonstrată în Regiunea Nord-Vest.",
+      "Deținerea terenului destinat construcției libere de sarcini.",
+      "Asigurarea cofinanțării private de minimum 35%.",
+    ],
+    eligibleExpenses: [
+      "Construire hală pe structură metalică sau prefabricate din beton",
+      "Utilaje grele pentru construcții și montaj industrial",
+      "Instalații fotovoltaice de acoperiș și pompe de căldură pentru climatizare",
+    ],
+    documents: [
+      "Autorizație de construire / Certificat de urbanism",
+      "Studiu de fezabilitate și deviz general",
+      "Situații financiare pe ultimii 2 ani",
+    ],
+    cofinancing: "35% – 50% contribuție proprie.",
+    supportIntensity: "50% – 65% nerambursabil",
+    officialUrl: "https://regionordvest.ro/pr-nv-2021-2027/",
+    timeline: [
+      { label: "Publicare ghid final", date: "August 2026" },
+      { label: "Termen limită depunere", date: "15 Decembrie 2026" },
+    ],
+    faqs: [
+      {
+        question: "Sunt eligibile firmele de construcții pentru achiziția de buldoexcavatoare și macarale?",
+        answer: "Da, achiziția de utilaje specializate de construcții este eligibilă dacă activitatea este autorizată pe cod CAEN specific.",
+      },
+    ],
+  },
+  {
     slug: "adr-centru-microintreprinderi-turism-servicii",
     title: "ADR Centru — Creșterea Competitivității Microîntreprinderilor (PR Centru 1.4)",
     summary: "Finanțare nerambursabilă pentru modernizarea microîntreprinderilor din Regiunea Centru care activează în domenii de servicii, industrii creative și producție.",
@@ -852,6 +1027,7 @@ export const FUNDING_PROGRAMS: FundingProgram[] = [
     authorityCode: "ADRCENTRU-1.4",
     fundingType: "Fonduri Europene",
     objective: "IMM & Dezvoltare Business",
+    investmentTypes: ["Utilaje & Echipamente", "Software & Digitalizare", "Eficiență Energetică"],
     region: "Centru",
     callCode: "PRC/1.4/Micro/2026",
     verifiedStatus: "OFICIAL",
@@ -891,6 +1067,59 @@ export const FUNDING_PROGRAMS: FundingProgram[] = [
     ],
   },
   {
+    slug: "adr-centru-turism-patrimoniu-privat",
+    title: "ADR Centru — Dezvoltarea Turismului Durabil & Facilități de Agrement IMM",
+    summary: "Granturi europene pentru construirea și modernizarea pensiunilor turistice, hotelurilor, centrelor SPA și parcurilor de aventură din județele Regiunii Centru.",
+    status: "Deschis",
+    deadline: "2026-11-15",
+    maxFundingRon: 5000000,
+    maxFundingEur: 1000000,
+    minFundingRon: 500000,
+    minFundingEur: 100000,
+    source: "Agenția de Dezvoltare Regională Centru (ADR Centru)",
+    sourceCategory: "ADR",
+    authorityCode: "PRC-TURISM-2026",
+    fundingType: "Fonduri Europene",
+    objective: "Turism & Agrement",
+    investmentTypes: ["Turism & Cazare", "Construcție Hală & Clădire", "Eficiență Energetică", "Panouri Fotovoltaice"],
+    region: "Centru",
+    callCode: "PRC/6.1/Turism/2026",
+    verifiedStatus: "OFICIAL",
+    verifiedAt: "04 Octombrie 2026, 01:00",
+    businessTypes: ["SRL"],
+    industries: ["Turism & Ospitalitate", "Servicii & Comerț"],
+    counties: ["Alba", "Brașov", "Covasna", "Harghita", "Mureș", "Sibiu"],
+    companyAge: "Peste 1 an",
+    companySize: "IMM",
+    eligibility: [
+      "IMM care activează sau înființează structuri de primire turistică clasificate (pensiuni, hoteluri, cabane) în Regiunea Centru.",
+      "Proiectul respectă principiile ecoturismului și accesibilității pentru toate categoriile de turiști.",
+    ],
+    eligibleExpenses: [
+      "Lucrări de construire, extindere și modernizare structuri de cazare turistică",
+      "Dotare cu mobilier hotelier, echipamente de bucătărie profesională și sisteme de climatizare eficiente",
+      "Facilități de agrement (piscine încălzite solar, saune, trasee de drumeție / ciclism)",
+    ],
+    documents: [
+      "Certificat de urbanism și autorizație de construire",
+      "Studiu de fezabilitate și plan de afaceri în turism",
+      "Certificat de clasificare sau angajament de clasificare de la Ministerul Turismului",
+    ],
+    cofinancing: "25% – 35% cofinanțare privată.",
+    supportIntensity: "65% – 75% nerambursabil",
+    officialUrl: "https://www.regiocentru.ro/programul-regio-centru/apeluri/",
+    timeline: [
+      { label: "Deschidere MySMIS", date: "Iunie 2026" },
+      { label: "Termen limită", date: "15 Noiembrie 2026" },
+    ],
+    faqs: [
+      {
+        question: "Sunt eligibile pensiunile din zone rurale și montane?",
+        answer: "Da, stațiunile turistice și zonele montane cu potențial turistic ridicat beneficiază de prioritate la finanțare.",
+      },
+    ],
+  },
+  {
     slug: "adr-vest-microintreprinderi-13a",
     title: "ADR Vest — Sprijin pentru Microîntreprinderi (PR Vest 1.3.A)",
     summary: "Granturi de investiții dedicate microîntreprinderilor din județele Timiș, Arad, Hunedoara și Caraș-Severin pentru utilaje, digitalizare și active productive.",
@@ -905,6 +1134,7 @@ export const FUNDING_PROGRAMS: FundingProgram[] = [
     authorityCode: "PRVEST-1.3A",
     fundingType: "Fonduri Europene",
     objective: "Echipamente & Utilaje",
+    investmentTypes: ["Utilaje & Echipamente", "Software & Digitalizare", "Panouri Fotovoltaice"],
     region: "Vest",
     callCode: "PRV/1.3A/2026",
     verifiedStatus: "OFICIAL",
@@ -958,6 +1188,7 @@ export const FUNDING_PROGRAMS: FundingProgram[] = [
     authorityCode: "PRVEST-1.3B",
     fundingType: "Fonduri Europene",
     objective: "IMM & Dezvoltare Business",
+    investmentTypes: ["Utilaje & Echipamente", "Construcție Hală & Clădire", "Cercetare & Inovare"],
     region: "Vest",
     callCode: "PRV/1.3B/2026",
     verifiedStatus: "OFICIAL",
@@ -1012,6 +1243,7 @@ export const FUNDING_PROGRAMS: FundingProgram[] = [
     authorityCode: "PRBI-P1-MICRO",
     fundingType: "Fonduri Europene",
     objective: "IMM & Dezvoltare Business",
+    investmentTypes: ["Software & Digitalizare", "Utilaje & Echipamente", "Eficiență Energetică"],
     region: "București-Ilfov",
     callCode: "PRBI/P1/1.1/2026",
     verifiedStatus: "OFICIAL",
@@ -1065,6 +1297,7 @@ export const FUNDING_PROGRAMS: FundingProgram[] = [
     authorityCode: "PRNE-P1-DIGIT",
     fundingType: "Fonduri Europene",
     objective: "Digitalizare & Tehnologie",
+    investmentTypes: ["Software & Digitalizare", "Utilaje & Echipamente"],
     region: "Nord-Est",
     callCode: "PRNE/1.2/Digit/2026",
     verifiedStatus: "OFICIAL",
@@ -1103,6 +1336,59 @@ export const FUNDING_PROGRAMS: FundingProgram[] = [
     ],
   },
   {
+    slug: "adr-nord-est-turism-balnear-ecoturism",
+    title: "ADR Nord-Est — Investiții în Turism Balnear & Ecoturism (PR NE Prioritatea 7)",
+    summary: "Granturi europene pentru modernizarea pensiunilor, hotelurilor balneare și bazelor de tratament din județele Neamț, Suceava, Bacău, Iași, Botoșani și Vaslui.",
+    status: "Deschis",
+    deadline: "2026-11-30",
+    maxFundingRon: 2500000,
+    maxFundingEur: 500000,
+    minFundingRon: 250000,
+    minFundingEur: 50000,
+    source: "Agenția de Dezvoltare Regională Nord-Est (ADR Nord-Est)",
+    sourceCategory: "ADR",
+    authorityCode: "PRNE-TURISM-2026",
+    fundingType: "Fonduri Europene",
+    objective: "Turism & Agrement",
+    investmentTypes: ["Turism & Cazare", "Construcție Hală & Clădire", "Eficiență Energetică", "Panouri Fotovoltaice"],
+    region: "Nord-Est",
+    callCode: "PRNE/7.1/Turism/2026",
+    verifiedStatus: "OFICIAL",
+    verifiedAt: "04 Octombrie 2026, 01:00",
+    businessTypes: ["SRL"],
+    industries: ["Turism & Ospitalitate", "Servicii & Comerț"],
+    counties: ["Bacău", "Botoșani", "Iași", "Neamț", "Suceava", "Vaslui"],
+    companyAge: "Peste 1 an",
+    companySize: "IMM",
+    eligibility: [
+      "IMM cu activitate în stațiuni balneare sau areale turistice atestate din Moldova / Bucovina.",
+      "Proiectul modernizează baza materială de cazare și tratament la standarde de 3-4 stele/margarete.",
+    ],
+    eligibleExpenses: [
+      "Renovare clădiri de cazare, băi termale, facilități de kinetoterapie și hidroterapie",
+      "Dotare cu mobilier hotelier de calitate, echipamente de agrement și wellness",
+      "Sisteme fotovoltaice și pompe de căldură pentru reducerea costurilor de operare",
+    ],
+    documents: [
+      "Certificat de urbanism și autorizație de construire",
+      "Plan de afaceri turistic și deviz estimativ",
+      "Situații financiare anuale",
+    ],
+    cofinancing: "20% – 30% cofinanțare privată.",
+    supportIntensity: "70% – 80% nerambursabil",
+    officialUrl: "https://www.adrnordest.ro/",
+    timeline: [
+      { label: "Apel deschis", date: "Iunie 2026" },
+      { label: "Închidere apel", date: "30 Noiembrie 2026" },
+    ],
+    faqs: [
+      {
+        question: "Pot aplica pensiunile din zona montană Neamț și Suceava?",
+        answer: "Da, pensiunile agroturistice și facilitățile de cazare din Bucovina și Ținutul Neamțului sunt pe deplin eligibile.",
+      },
+    ],
+  },
+  {
     slug: "adr-sud-muntenia-microintreprinderi",
     title: "ADR Sud-Muntenia — Microîntreprinderi Competitive și Inovatoare (PR SM Prioritatea 1)",
     summary: "Granturi europene pentru modernizarea tehnologică a microîntreprinderilor din județele Argeș, Călărași, Dâmbovița, Giurgiu, Ialomița, Prahova și Teleorman.",
@@ -1117,12 +1403,13 @@ export const FUNDING_PROGRAMS: FundingProgram[] = [
     authorityCode: "PRSM-P1-MICRO",
     fundingType: "Fonduri Europene",
     objective: "Echipamente & Utilaje",
+    investmentTypes: ["Utilaje & Echipamente", "Software & Digitalizare", "Eficiență Energetică"],
     region: "Sud-Muntenia",
     callCode: "PRSM/1.1/Micro/2026",
     verifiedStatus: "OFICIAL",
     verifiedAt: "04 Octombrie 2026, 01:00",
     businessTypes: ["SRL"],
-    industries: ["Producție & Industrie", "Servicii & Comerț", "Echipamente & Utilaje"],
+    industries: ["Producție & Industrie", "Servicii & Comerț", "Utilaje & Mecanizare"],
     counties: ["Argeș", "Călărași", "Dâmbovița", "Giurgiu", "Ialomița", "Prahova", "Teleorman"],
     companyAge: "Peste 1 an",
     companySize: "Microîntreprindere",
@@ -1170,6 +1457,7 @@ export const FUNDING_PROGRAMS: FundingProgram[] = [
     authorityCode: "PRSVO-P1-MICRO",
     fundingType: "Fonduri Europene",
     objective: "IMM & Dezvoltare Business",
+    investmentTypes: ["Utilaje & Echipamente", "Software & Digitalizare", "Panouri Fotovoltaice"],
     region: "Sud-Vest Oltenia",
     callCode: "PRSVO/1.1/Micro/2026",
     verifiedStatus: "OFICIAL",
@@ -1223,6 +1511,7 @@ export const FUNDING_PROGRAMS: FundingProgram[] = [
     authorityCode: "PRSE-P1-MICRO",
     fundingType: "Fonduri Europene",
     objective: "IMM & Dezvoltare Business",
+    investmentTypes: ["Utilaje & Echipamente", "Software & Digitalizare", "Panouri Fotovoltaice"],
     region: "Sud-Est",
     callCode: "PRSE/1.1/Micro/2026",
     verifiedStatus: "OFICIAL",
@@ -1262,12 +1551,12 @@ export const FUNDING_PROGRAMS: FundingProgram[] = [
   },
 
   // =========================================================================
-  // 4. FONDUL PENTRU MODERNIZARE & ENERGIE REGENERABILĂ
+  // 4. FONDUL PENTRU MODERNIZARE & ENERGIE REGENERABILĂ (FOTOVOLTAICE & BATERII)
   // =========================================================================
   {
     slug: "fond-modernizare-autoconsum-intreprinderi",
-    title: "Fondul pentru Modernizare — Energie Regenerabilă pentru Autoconsumul Întreprinderilor",
-    summary: "Sprijin financiar nerambursabil major pentru instalarea de capacități noi de producere a energiei electrice din surse solare (fotovoltaice) și eoliene destinate exclusiv consumului propriu al companiilor.",
+    title: "Fondul pentru Modernizare — Panouri Fotovoltaice & Eolian pentru Autoconsumul Întreprinderilor",
+    summary: "Sprijin financiar nerambursabil major pentru instalarea de capacități noi de producere a energiei solare (panouri fotovoltaice) și eoliene destinate exclusiv consumului propriu al companiilor.",
     status: "Deschis",
     deadline: "2026-10-31",
     maxFundingRon: 99400000,
@@ -1279,6 +1568,7 @@ export const FUNDING_PROGRAMS: FundingProgram[] = [
     authorityCode: "FM-AUTOCONSUM",
     fundingType: "Fonduri Europene",
     objective: "Energie & Sustenabilitate",
+    investmentTypes: ["Panouri Fotovoltaice", "Baterii & Stocare", "Eficiență Energetică"],
     callCode: "FM/2024/Autoconsum/P1",
     verifiedStatus: "OFICIAL",
     verifiedAt: "04 Octombrie 2026, 01:00",
@@ -1326,7 +1616,7 @@ export const FUNDING_PROGRAMS: FundingProgram[] = [
   },
   {
     slug: "fond-modernizare-stocare-energie-baterii",
-    title: "Fondul pentru Modernizare — Sisteme Industriale de Stocare a Energiei Electrice (BESS)",
+    title: "Fondul pentru Modernizare — Sisteme Industriale de Stocare a Energiei Electrice (Baterii BESS)",
     summary: "Finanțare nerambursabilă pentru instalarea de baterii de mare capacitate conectate la parcuri fotovoltaice și eoliene existente sau noi.",
     status: "În consultare",
     deadline: "2026-11-30",
@@ -1339,6 +1629,7 @@ export const FUNDING_PROGRAMS: FundingProgram[] = [
     authorityCode: "FM-STOCARE",
     fundingType: "Fonduri Europene",
     objective: "Energie & Sustenabilitate",
+    investmentTypes: ["Baterii & Stocare", "Panouri Fotovoltaice", "Eficiență Energetică"],
     callCode: "FM/2026/BESS/P1",
     verifiedStatus: "OFICIAL",
     verifiedAt: "04 Octombrie 2026, 01:00",
@@ -1377,11 +1668,11 @@ export const FUNDING_PROGRAMS: FundingProgram[] = [
   },
 
   // =========================================================================
-  // 5. AFM (ADMINISTRAȚIA FONDULUI PENTRU MEDIU)
+  // 5. AFM (ADMINISTRAȚIA FONDULUI PENTRU MEDIU — FOTOVOLTAICE, RECICLARE & EFICIENȚĂ)
   // =========================================================================
   {
     slug: "afm-casa-verde-fotovoltaice",
-    title: "AFM — Programul Casa Verde Fotovoltaice 2024–2026",
+    title: "AFM — Programul Casa Verde Fotovoltaice 2024–2026 (Panouri & Baterii)",
     summary: "Sprijin financiar nerambursabil pentru persoanele fizice și unitățile de cult pentru instalarea de panouri fotovoltaice și baterii de stocare a energiei.",
     status: "Deschis",
     deadline: "2026-10-31",
@@ -1393,6 +1684,7 @@ export const FUNDING_PROGRAMS: FundingProgram[] = [
     authorityCode: "AFM-CV2026",
     fundingType: "Grant",
     objective: "Energie & Sustenabilitate",
+    investmentTypes: ["Panouri Fotovoltaice", "Baterii & Stocare", "Eficiență Energetică"],
     verifiedStatus: "OFICIAL",
     verifiedAt: "04 Octombrie 2026, 01:00",
     businessTypes: ["Persoană Fizică"],
@@ -1432,6 +1724,59 @@ export const FUNDING_PROGRAMS: FundingProgram[] = [
     ],
   },
   {
+    slug: "afm-colectare-reciclare-deseuri-companii",
+    title: "AFM — Schema de Ajutor de Stat pentru Fabrici de Reciclare a Deșeurilor",
+    summary: "Granturi nerambursabile de până la 8.400.000 EUR pentru companii private care construiesc instalații noi de reciclare a deșeurilor din plastic, DEEE, sticlă, hârtie, lemn sau textile.",
+    status: "Deschis",
+    deadline: "2026-11-15",
+    maxFundingRon: 42000000,
+    maxFundingEur: 8400000,
+    minFundingRon: 2500000,
+    minFundingEur: 500000,
+    source: "Administrația Fondului pentru Mediu (AFM)",
+    sourceCategory: "AFM",
+    authorityCode: "AFM-RECICLARE-2026",
+    fundingType: "Ajutor de Stat",
+    objective: "Mediu & Economie Circulară",
+    investmentTypes: ["Reciclare & Deșeuri", "Economie Circulară", "Utilaje & Echipamente", "Construcție Hală & Clădire"],
+    verifiedStatus: "OFICIAL",
+    verifiedAt: "04 Octombrie 2026, 01:00",
+    businessTypes: ["SRL", "Cooperativă"],
+    industries: ["Energie Verde & Mediu", "Producție & Industrie"],
+    counties: ["Național"],
+    companyAge: "Peste 1 an",
+    companySize: "Toate mărimile",
+    eligibility: [
+      "Operator economic constituit conform Legii 31/1990 cu activitate în domeniul reciclării sau tratării deșeurilor.",
+      "Proiectul vizează construirea de fabrici noi sau extinderea capacităților de reciclare cu minimum 30%.",
+      "Asigurarea cofinanțării private de minimum 50% din cheltuielile eligibile.",
+    ],
+    eligibleExpenses: [
+      "Achiziționarea de utilaje industriale de spălare, tocare, sortare optică și regranulare",
+      "Linii de reciclare a anvelopelor uzate (producție granule de cauciuc și pudretă)",
+      "Construcția halelor industriale cu pardoseli speciale rezistente la agenți chimici",
+      "Sisteme de filtrare a emisiilor și recirculare a apei de spălare",
+    ],
+    documents: [
+      "Plan de afaceri și deviz general de investiție",
+      "Acord de mediu sau clasarea notificării emisă de APM",
+      "Bilanț contabil pe ultimul exercițiu financiar",
+    ],
+    cofinancing: "50% contribuție proprie a companiei.",
+    supportIntensity: "50% sprijin nerambursabil",
+    officialUrl: "https://www.afm.ro/",
+    timeline: [
+      { label: "Lansare sesiune de proiecte", date: "Iulie 2026" },
+      { label: "Termen limită depunere", date: "15 Noiembrie 2026" },
+    ],
+    faqs: [
+      {
+        question: "Se pot recicla deșeurile din construcții și demolări?",
+        answer: "Da, stațiile mobile sau fixe de concasare și sortare a molozului/betonului sunt pe deplin eligibile.",
+      },
+    ],
+  },
+  {
     slug: "afm-eficienta-energetica-cladiri",
     title: "AFM — Creșterea Eficienței Energetice în Clădiri Publice și Comerciale",
     summary: "Finanțare nerambursabilă pentru anvelopare termică, pompe de căldură și sisteme inteligente de management al clădirilor (BMS).",
@@ -1445,6 +1790,7 @@ export const FUNDING_PROGRAMS: FundingProgram[] = [
     authorityCode: "AFM-EFICIENTA",
     fundingType: "Grant",
     objective: "Energie & Sustenabilitate",
+    investmentTypes: ["Eficiență Energetică", "Panouri Fotovoltaice", "Construcție Hală & Clădire"],
     verifiedStatus: "OFICIAL",
     verifiedAt: "04 Octombrie 2026, 01:00",
     businessTypes: ["SRL"],
@@ -1494,6 +1840,7 @@ export const FUNDING_PROGRAMS: FundingProgram[] = [
     authorityCode: "AFM-TRACTOARE",
     fundingType: "Grant",
     objective: "Echipamente & Utilaje",
+    investmentTypes: ["Echipamente Agricole", "Utilaje & Echipamente"],
     verifiedStatus: "OFICIAL",
     verifiedAt: "04 Octombrie 2026, 01:00",
     businessTypes: ["Persoană Fizică", "PFA", "II", "IF"],
@@ -1531,7 +1878,64 @@ export const FUNDING_PROGRAMS: FundingProgram[] = [
   },
 
   // =========================================================================
-  // 6. PNRR (PLANUL NAȚIONAL DE REDRESARE ȘI REZILIENȚĂ)
+  // 6. AFCN (CULTURĂ & INDUSTRII CREATIVE)
+  // =========================================================================
+  {
+    slug: "afcn-proiecte-culturale-creative",
+    title: "AFCN — Finanțarea Proiectelor Culturale & Industriilor Creative (Sesiunea 2026)",
+    summary: "Granturi nerambursabile acordate de Administrația Fondului Cultural Național pentru producție audiovizuală, design, arte vizuale, patrimoniu digital și inițiative culturale independente.",
+    status: "Deschis",
+    deadline: "2026-10-31",
+    maxFundingRon: 150000,
+    maxFundingEur: 30000,
+    minFundingRon: 25000,
+    source: "Administrația Fondului Cultural Național (AFCN)",
+    sourceCategory: "AFCN",
+    authorityCode: "AFCN-CULT-2026",
+    fundingType: "Grant",
+    objective: "Cultură & Creație",
+    investmentTypes: ["Cultură & Creație", "Software & Digitalizare", "Software & Digitalizare"],
+    verifiedStatus: "OFICIAL",
+    verifiedAt: "04 Octombrie 2026, 01:00",
+    businessTypes: ["SRL", "ONG / Întreprindere Socială", "PFA"],
+    industries: ["Cultură & Media", "IT & Digitalizare", "Servicii & Comerț"],
+    counties: ["Național"],
+    companyAge: "Orice vechime",
+    companySize: "Microîntreprindere",
+    eligibility: [
+      "Persoană juridică de drept privat (SRL, Asociație, Fundație) sau PFA care desfășoară activități culturale conform statutului.",
+      "Nu are datorii restante la bugetul general consolidat.",
+      "Proiectul are o durată de implementare clar definită și impact public cultural.",
+    ],
+    eligibleExpenses: [
+      "Drepturi de autor și onorarii artiști / creatori de conținut",
+      "Închiriere echipamente audio-video, lumini, spații expoziționale și scenotehnică",
+      "Dezvoltare platforme web culturale, aplicații interactive și digitizare opere",
+      "Tipar cataloage, promovare media și distribuție",
+    ],
+    documents: [
+      "Formular de candidatură completat în platforma AFCN",
+      "Buget detaliat pe linii de cheltuieli",
+      "CV-urile echipei de proiect și portofoliul cultural",
+    ],
+    cofinancing: "10% cofinanțare proprie din bugetul total.",
+    supportIntensity: "90% nerambursabil",
+    officialUrl: "https://www.afcn.ro/",
+    timeline: [
+      { label: "Deschidere sesiune depuneri", date: "1 Septembrie 2026" },
+      { label: "Termen limită", date: "31 Octombrie 2026" },
+      { label: "Afișare rezultate selecție", date: "Decembrie 2026" },
+    ],
+    faqs: [
+      {
+        question: "Pot aplica companiile private de producție media/film?",
+        answer: "Da, societățile comerciale cu CAEN în producție video, design sau spectacole sunt pe deplin eligibile.",
+      },
+    ],
+  },
+
+  // =========================================================================
+  // 7. PNRR (PLANUL NAȚIONAL DE REDRESARE ȘI REZILIENȚĂ)
   // =========================================================================
   {
     slug: "pnrr-c9-digitalizare-imm",
@@ -1548,6 +1952,7 @@ export const FUNDING_PROGRAMS: FundingProgram[] = [
     authorityCode: "PNRR-C9-I3",
     fundingType: "Ajutor de Minimis",
     objective: "Digitalizare & Tehnologie",
+    investmentTypes: ["Software & Digitalizare", "Inteligență Artificială (AI)", "Utilaje & Echipamente"],
     callCode: "PNRR/2023/C9/MCID/I3",
     verifiedStatus: "OFICIAL",
     verifiedAt: "04 Octombrie 2026, 01:00",
@@ -1603,6 +2008,7 @@ export const FUNDING_PROGRAMS: FundingProgram[] = [
     authorityCode: "PNRR-C9-I4",
     fundingType: "Fonduri Europene",
     objective: "Inovare & Cercetare",
+    investmentTypes: ["Inteligență Artificială (AI)", "Software & Digitalizare", "Cercetare & Inovare"],
     callCode: "PNRR/C9/I4/Consortii",
     verifiedStatus: "OFICIAL",
     verifiedAt: "04 Octombrie 2026, 01:00",
@@ -1641,7 +2047,7 @@ export const FUNDING_PROGRAMS: FundingProgram[] = [
   },
 
   // =========================================================================
-  // 7. PROGRAME EUROPENE DIRECTE (EIC / EUROSTARS / LIFE)
+  // 8. PROGRAME EUROPENE DIRECTE (EIC / EUROSTARS / LIFE)
   // =========================================================================
   {
     slug: "eic-accelerator-deep-tech-europe",
@@ -1658,6 +2064,7 @@ export const FUNDING_PROGRAMS: FundingProgram[] = [
     authorityCode: "EIC-ACCEL-2026",
     fundingType: "Fonduri Europene",
     objective: "Inovare & Cercetare",
+    investmentTypes: ["Cercetare & Inovare", "Inteligență Artificială (AI)", "Software & Digitalizare", "Firmă Nouă / Start-up"],
     callCode: "HORIZON-EIC-2026-ACCELERATOR",
     verifiedStatus: "OFICIAL",
     verifiedAt: "04 Octombrie 2026, 01:00",
@@ -1712,6 +2119,7 @@ export const FUNDING_PROGRAMS: FundingProgram[] = [
     authorityCode: "EUREKA-EUROSTARS",
     fundingType: "Fonduri Europene",
     objective: "Inovare & Cercetare",
+    investmentTypes: ["Cercetare & Inovare", "Utilaje & Echipamente", "Software & Digitalizare"],
     callCode: "EUROSTARS-3/Call6",
     verifiedStatus: "OFICIAL",
     verifiedAt: "04 Octombrie 2026, 01:00",
@@ -1763,7 +2171,8 @@ export const FUNDING_PROGRAMS: FundingProgram[] = [
     sourceCategory: "UE Direct",
     authorityCode: "LIFE-CIRC-2026",
     fundingType: "Fonduri Europene",
-    objective: "Energie & Sustenabilitate",
+    objective: "Mediu & Economie Circulară",
+    investmentTypes: ["Economie Circulară", "Reciclare & Deșeuri", "Eficiență Energetică", "Utilaje & Echipamente"],
     callCode: "LIFE-2026-SAP-ENV",
     verifiedStatus: "OFICIAL",
     verifiedAt: "04 Octombrie 2026, 01:00",
@@ -1803,11 +2212,11 @@ export const FUNDING_PROGRAMS: FundingProgram[] = [
   },
 
   // =========================================================================
-  // 8. AFIR & PAC 2023–2027 (INVESTIȚII AGRO-INDUSTRIALE & RURALE)
+  // 9. AFIR & PAC 2023–2027 (INVESTIȚII AGRO-INDUSTRIALE & RURALE)
   // =========================================================================
   {
     slug: "afir-dr-30-instalare-tineri-fermieri",
-    title: "AFIR DR-30: Sprijin pentru Instalarea Tinerilor Fermieri",
+    title: "AFIR DR-30: Sprijin pentru Instalarea Tinerilor Fermieri (70.000 EUR)",
     summary: "Grant forfetar de 70.000 EUR, 100% nerambursabil, acordat tinerilor fermieri sub 40 de ani pentru preluarea sau înființarea unei exploatații agricole comerciale viabile.",
     status: "Deschis",
     deadline: "2026-10-31",
@@ -1820,6 +2229,7 @@ export const FUNDING_PROGRAMS: FundingProgram[] = [
     authorityCode: "AFIR-DR30",
     fundingType: "Fonduri Europene",
     objective: "Start-up & Afaceri Noi",
+    investmentTypes: ["Firmă Nouă / Start-up", "Echipamente Agricole", "Utilaje & Echipamente", "Construcție Hală & Clădire"],
     callCode: "PS-PAC/DR-30/2026",
     verifiedStatus: "OFICIAL",
     verifiedAt: "04 Octombrie 2026, 01:00",
@@ -1881,6 +2291,7 @@ export const FUNDING_PROGRAMS: FundingProgram[] = [
     authorityCode: "AFIR-DR14",
     fundingType: "Fonduri Europene",
     objective: "Echipamente & Utilaje",
+    investmentTypes: ["Echipamente Agricole", "Utilaje & Echipamente", "Sisteme de Irigații", "Panouri Fotovoltaice"],
     callCode: "PS-PAC/DR-14/2026",
     verifiedStatus: "OFICIAL",
     verifiedAt: "04 Octombrie 2026, 01:00",
@@ -1933,6 +2344,7 @@ export const FUNDING_PROGRAMS: FundingProgram[] = [
     authorityCode: "AFIR-DR15",
     fundingType: "Fonduri Europene",
     objective: "Echipamente & Utilaje",
+    investmentTypes: ["Echipamente Agricole", "Utilaje & Echipamente", "Construcție Hală & Clădire", "Software & Digitalizare"],
     callCode: "PS-PAC/DR-15/2026",
     verifiedStatus: "OFICIAL",
     verifiedAt: "04 Octombrie 2026, 01:00",
@@ -1983,6 +2395,7 @@ export const FUNDING_PROGRAMS: FundingProgram[] = [
     authorityCode: "AFIR-DR20",
     fundingType: "Fonduri Europene",
     objective: "IMM & Dezvoltare Business",
+    investmentTypes: ["Construcție Hală & Clădire", "Utilaje & Echipamente", "Echipamente Agricole", "Eficiență Energetică"],
     callCode: "PS-PAC/DR-20/2026",
     verifiedStatus: "OFICIAL",
     verifiedAt: "04 Octombrie 2026, 01:00",
@@ -2035,6 +2448,7 @@ export const FUNDING_PROGRAMS: FundingProgram[] = [
     authorityCode: "AFIR-DR22",
     fundingType: "Fonduri Europene",
     objective: "IMM & Dezvoltare Business",
+    investmentTypes: ["Procesare Alimentară", "Utilaje & Echipamente", "Construcție Hală & Clădire"],
     callCode: "PS-PAC/DR-22/2026",
     verifiedStatus: "OFICIAL",
     verifiedAt: "04 Octombrie 2026, 01:00",
@@ -2087,6 +2501,7 @@ export const FUNDING_PROGRAMS: FundingProgram[] = [
     authorityCode: "AFIR-DR25",
     fundingType: "Fonduri Europene",
     objective: "Agricultură & Agro-Business",
+    investmentTypes: ["Sisteme de Irigații", "Utilaje & Echipamente", "Eficiență Energetică"],
     callCode: "PS-PAC/DR-25/2026",
     verifiedStatus: "OFICIAL",
     verifiedAt: "04 Octombrie 2026, 01:00",
@@ -2139,6 +2554,7 @@ export const FUNDING_PROGRAMS: FundingProgram[] = [
     authorityCode: "AFIR-DR26",
     fundingType: "Fonduri Europene",
     objective: "Agricultură & Agro-Business",
+    investmentTypes: ["Sisteme de Irigații", "Echipamente Agricole", "Panouri Fotovoltaice"],
     callCode: "PS-PAC/DR-26/2026",
     verifiedStatus: "OFICIAL",
     verifiedAt: "04 Octombrie 2026, 01:00",
@@ -2191,6 +2607,7 @@ export const FUNDING_PROGRAMS: FundingProgram[] = [
     authorityCode: "AFIR-DR27",
     fundingType: "Fonduri Europene",
     objective: "Agricultură & Agro-Business",
+    investmentTypes: ["Echipamente Agricole", "Sisteme de Irigații", "Utilaje & Echipamente", "Procesare Alimentară"],
     callCode: "PS-PAC/DR-27/2026",
     verifiedStatus: "OFICIAL",
     verifiedAt: "04 Octombrie 2026, 01:00",
@@ -2242,6 +2659,7 @@ export const FUNDING_PROGRAMS: FundingProgram[] = [
     authorityCode: "AFIR-DR28",
     fundingType: "Fonduri Europene",
     objective: "Agricultură & Agro-Business",
+    investmentTypes: ["Construcție Hală & Clădire", "Echipamente Agricole", "Sisteme de Irigații", "Procesare Alimentară"],
     callCode: "PS-PAC/DR-28/2026",
     verifiedStatus: "OFICIAL",
     verifiedAt: "04 Octombrie 2026, 01:00",
@@ -2294,6 +2712,7 @@ export const FUNDING_PROGRAMS: FundingProgram[] = [
     authorityCode: "AFIR-DR12",
     fundingType: "Fonduri Europene",
     objective: "Start-up & Afaceri Noi",
+    investmentTypes: ["Echipamente Agricole", "Utilaje & Echipamente", "Firmă Nouă / Start-up"],
     callCode: "PS-PAC/DR-12/2026",
     verifiedStatus: "OFICIAL",
     verifiedAt: "04 Octombrie 2026, 01:00",
@@ -2331,7 +2750,7 @@ export const FUNDING_PROGRAMS: FundingProgram[] = [
   },
 
   // =========================================================================
-  // 9. APIA & PLĂȚI DIRECTE PAC 2023–2027
+  // 10. APIA & PLĂȚI DIRECTE PAC 2023–2027
   // =========================================================================
   {
     slug: "apia-biss-pd-01",
@@ -2347,6 +2766,7 @@ export const FUNDING_PROGRAMS: FundingProgram[] = [
     authorityCode: "APIA-PD01",
     fundingType: "Subvenție Directă",
     objective: "Agricultură & Agro-Business",
+    investmentTypes: ["Echipamente Agricole"],
     verifiedStatus: "OFICIAL",
     verifiedAt: "04 Octombrie 2026, 01:00",
     businessTypes: ["Persoană Fizică", "PFA", "II", "IF", "SRL", "Cooperativă"],
@@ -2397,6 +2817,7 @@ export const FUNDING_PROGRAMS: FundingProgram[] = [
     authorityCode: "APIA-PD02",
     fundingType: "Subvenție Directă",
     objective: "Agricultură & Agro-Business",
+    investmentTypes: ["Echipamente Agricole"],
     verifiedStatus: "OFICIAL",
     verifiedAt: "04 Octombrie 2026, 01:00",
     businessTypes: ["Persoană Fizică", "PFA", "II", "IF", "SRL"],
@@ -2442,6 +2863,7 @@ export const FUNDING_PROGRAMS: FundingProgram[] = [
     authorityCode: "APIA-PD03",
     fundingType: "Subvenție Directă",
     objective: "Start-up & Afaceri Noi",
+    investmentTypes: ["Firmă Nouă / Start-up", "Echipamente Agricole"],
     verifiedStatus: "OFICIAL",
     verifiedAt: "04 Octombrie 2026, 01:00",
     businessTypes: ["PFA", "II", "IF", "SRL"],
@@ -2490,6 +2912,7 @@ export const FUNDING_PROGRAMS: FundingProgram[] = [
     authorityCode: "APIA-PD04",
     fundingType: "Subvenție Directă",
     objective: "Energie & Sustenabilitate",
+    investmentTypes: ["Echipamente Agricole"],
     verifiedStatus: "OFICIAL",
     verifiedAt: "04 Octombrie 2026, 01:00",
     businessTypes: ["Persoană Fizică", "PFA", "II", "IF", "SRL", "Cooperativă"],
@@ -2537,6 +2960,7 @@ export const FUNDING_PROGRAMS: FundingProgram[] = [
     authorityCode: "APIA-PD05",
     fundingType: "Subvenție Directă",
     objective: "Energie & Sustenabilitate",
+    investmentTypes: ["Echipamente Agricole"],
     verifiedStatus: "OFICIAL",
     verifiedAt: "04 Octombrie 2026, 01:00",
     businessTypes: ["Persoană Fizică", "PFA", "II", "IF", "SRL", "Cooperativă"],
@@ -2583,6 +3007,7 @@ export const FUNDING_PROGRAMS: FundingProgram[] = [
     authorityCode: "APIA-PD21",
     fundingType: "Subvenție Directă",
     objective: "Agricultură & Agro-Business",
+    investmentTypes: ["Echipamente Agricole", "Procesare Alimentară"],
     verifiedStatus: "OFICIAL",
     verifiedAt: "04 Octombrie 2026, 01:00",
     businessTypes: ["Persoană Fizică", "PFA", "II", "IF", "SRL", "Cooperativă"],
@@ -2634,6 +3059,7 @@ export const FUNDING_PROGRAMS: FundingProgram[] = [
     authorityCode: "APIA-PD22",
     fundingType: "Subvenție Directă",
     objective: "Agricultură & Agro-Business",
+    investmentTypes: ["Echipamente Agricole"],
     verifiedStatus: "OFICIAL",
     verifiedAt: "04 Octombrie 2026, 01:00",
     businessTypes: ["Persoană Fizică", "PFA", "II", "IF", "SRL", "Cooperativă"],
@@ -2680,6 +3106,7 @@ export const FUNDING_PROGRAMS: FundingProgram[] = [
     authorityCode: "APIA-PD24",
     fundingType: "Subvenție Directă",
     objective: "Agricultură & Agro-Business",
+    investmentTypes: ["Echipamente Agricole"],
     verifiedStatus: "OFICIAL",
     verifiedAt: "04 Octombrie 2026, 01:00",
     businessTypes: ["Persoană Fizică", "PFA", "II", "IF", "SRL", "Cooperativă"],
@@ -2728,6 +3155,7 @@ export const FUNDING_PROGRAMS: FundingProgram[] = [
     authorityCode: "APIA-PD09",
     fundingType: "Subvenție Directă",
     objective: "Agricultură & Agro-Business",
+    investmentTypes: ["Echipamente Agricole"],
     verifiedStatus: "OFICIAL",
     verifiedAt: "04 Octombrie 2026, 01:00",
     businessTypes: ["Persoană Fizică", "PFA", "II", "IF", "SRL", "Cooperativă"],
@@ -2774,6 +3202,7 @@ export const FUNDING_PROGRAMS: FundingProgram[] = [
     authorityCode: "APIA-PD10",
     fundingType: "Subvenție Directă",
     objective: "Agricultură & Agro-Business",
+    investmentTypes: ["Echipamente Agricole"],
     verifiedStatus: "OFICIAL",
     verifiedAt: "04 Octombrie 2026, 01:00",
     businessTypes: ["Persoană Fizică", "PFA", "II", "IF", "SRL", "Cooperativă"],
@@ -2820,6 +3249,7 @@ export const FUNDING_PROGRAMS: FundingProgram[] = [
     authorityCode: "MADR-MOTORINA",
     fundingType: "Ajutor de Stat",
     objective: "Agricultură & Agro-Business",
+    investmentTypes: ["Echipamente Agricole", "Utilaje & Echipamente"],
     verifiedStatus: "OFICIAL",
     verifiedAt: "04 Octombrie 2026, 01:00",
     businessTypes: ["PFA", "II", "IF", "SRL", "Persoană Fizică"],
@@ -2857,7 +3287,7 @@ export const FUNDING_PROGRAMS: FundingProgram[] = [
   },
 
   // =========================================================================
-  // 10. ARHIVĂ PROGRAME ANTERIOARE (PENTRU ISTORIC & MONITORIZARE CICLURI)
+  // 11. ARHIVĂ PROGRAME ANTERIOARE (PENTRU ISTORIC & MONITORIZARE CICLURI)
   // =========================================================================
   {
     slug: "pocu-romania-start-up-plus-arhiva",
@@ -2873,6 +3303,7 @@ export const FUNDING_PROGRAMS: FundingProgram[] = [
     authorityCode: "POCU-SUP-ARCHIVE",
     fundingType: "Fonduri Europene",
     objective: "Start-up & Afaceri Noi",
+    investmentTypes: ["Firmă Nouă / Start-up"],
     isArchived: true,
     verifiedStatus: "OFICIAL",
     verifiedAt: "04 Octombrie 2026, 01:00",
@@ -2912,6 +3343,7 @@ export const FUNDING_PROGRAMS: FundingProgram[] = [
     authorityCode: "PNDR-6.1-ARCHIVE",
     fundingType: "Fonduri Europene",
     objective: "Start-up & Afaceri Noi",
+    investmentTypes: ["Firmă Nouă / Start-up", "Echipamente Agricole"],
     isArchived: true,
     verifiedStatus: "OFICIAL",
     verifiedAt: "04 Octombrie 2026, 01:00",
