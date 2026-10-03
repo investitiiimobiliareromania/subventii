@@ -49,10 +49,24 @@ const OBJECTIVE_TRACKS = [
   },
   {
     icon: "☀️",
-    title: "Energie & Sustenabilitate",
-    desc: "Panouri fotovoltaice, eficiență energetică, stocare, decarbonizare și producție verde.",
+    title: "Energie & Fotovoltaice",
+    desc: "Panouri fotovoltaice, baterii și stocare BESS, eficiență energetică, decarbonizare și producție verde.",
     href: "/programe-guvernamentale/casa-verde",
     badge: "Energie",
+  },
+  {
+    icon: "🏗️",
+    title: "Hale, Clădiri & Imobiliare",
+    desc: "Construcție hale producție, modernizări spații, eficiență energetică și statistici oficiale de tranzacții ANCPI.",
+    href: "/rapoarte-ancpi",
+    badge: "Imobiliare & ANCPI",
+  },
+  {
+    icon: "♻️",
+    title: "Mediu & Reciclare Deșeuri",
+    desc: "Instalații de colectare, tratare și reciclare deșeuri, economie circulară și tehnologii verzi.",
+    href: "/finantari?q=reciclare",
+    badge: "Reciclare",
   },
   {
     icon: "👥",
@@ -356,6 +370,92 @@ export default async function Home() {
                   </Link>
                 );
               })}
+            </div>
+          </div>
+        </section>
+
+        {/* Real Estate & ANCPI Data Hub Section */}
+        <section aria-label="Piața imobiliară și statistici ANCPI" className="border-t border-slate-200 bg-white py-12">
+          <div className="mx-auto max-w-6xl px-4 sm:px-6">
+            <div className="mb-8 flex flex-col sm:flex-row items-start sm:items-end justify-between gap-3 border-b border-slate-200 pb-4">
+              <div>
+                <span className="text-xs font-bold uppercase tracking-wider text-emerald-800">
+                  DATE OFICIALE ANCPI • REAL ESTATE &amp; INVESTIȚII
+                </span>
+                <h2 className="mt-1 text-2xl font-black text-slate-900 sm:text-3xl">
+                  Piața Imobiliară, Tranzacții ANCPI &amp; Finanțări pentru Construcții
+                </h2>
+                <p className="text-xs text-slate-600 mt-1 max-w-2xl">
+                  Centralizare lunară a contractelor de vânzare-cumpărare înregistrate în cartea funciară (ANCPI), indici de creditare BNR și oportunități de granturi pentru hale de producție și spații industriale.
+                </p>
+              </div>
+              <div className="flex items-center gap-3 shrink-0">
+                <Link
+                  href="/rapoarte-ancpi"
+                  className="rounded-xl bg-slate-900 px-4 py-2 text-xs font-bold text-white hover:bg-emerald-800 transition-colors"
+                >
+                  Rapoarte ANCPI 41 Județe →
+                </Link>
+                <Link
+                  href="/piata-imobiliara"
+                  className="rounded-xl border border-slate-300 bg-white px-3 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition-colors"
+                >
+                  Piața Imobiliară ↗
+                </Link>
+              </div>
+            </div>
+
+            {/* ANCPI National Grid Preview */}
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6 mb-6">
+              <div className="rounded-xl border border-slate-200 bg-slate-50 p-3.5 text-center">
+                <span className="block text-[10px] font-bold text-slate-500 uppercase">Total Național</span>
+                <span className="block text-xl font-black text-slate-900 mt-0.5">51.808</span>
+                <span className="text-[10px] font-semibold text-emerald-800">+5,3% YoY</span>
+              </div>
+              <div className="rounded-xl border border-slate-200 bg-slate-50 p-3.5 text-center">
+                <span className="block text-[10px] font-bold text-slate-500 uppercase">București</span>
+                <span className="block text-xl font-black text-slate-900 mt-0.5">10.398</span>
+                <span className="text-[10px] font-semibold text-emerald-800">+35,7% YoY</span>
+              </div>
+              <div className="rounded-xl border border-slate-200 bg-slate-50 p-3.5 text-center">
+                <span className="block text-[10px] font-bold text-slate-500 uppercase">Ilfov</span>
+                <span className="block text-xl font-black text-slate-900 mt-0.5">3.971</span>
+                <span className="text-[10px] font-semibold text-slate-600">−1,0% YoY</span>
+              </div>
+              <div className="rounded-xl border border-slate-200 bg-slate-50 p-3.5 text-center">
+                <span className="block text-[10px] font-bold text-slate-500 uppercase">Timiș</span>
+                <span className="block text-xl font-black text-slate-900 mt-0.5">3.165</span>
+                <span className="text-[10px] font-semibold text-emerald-800">+33,5% YoY</span>
+              </div>
+              <div className="rounded-xl border border-slate-200 bg-slate-50 p-3.5 text-center">
+                <span className="block text-[10px] font-bold text-slate-500 uppercase">Iași</span>
+                <span className="block text-xl font-black text-slate-900 mt-0.5">2.540</span>
+                <span className="text-[10px] font-semibold text-emerald-800">+9,8% YoY</span>
+              </div>
+              <div className="rounded-xl border border-slate-200 bg-slate-50 p-3.5 text-center">
+                <span className="block text-[10px] font-bold text-slate-500 uppercase">Cluj</span>
+                <span className="block text-xl font-black text-slate-900 mt-0.5">2.074</span>
+                <span className="text-[10px] font-semibold text-slate-600">−6,4% YoY</span>
+              </div>
+            </div>
+
+            {/* Sinergy Banner */}
+            <div className="rounded-2xl border border-emerald-200/80 bg-gradient-to-r from-slate-900 via-slate-900 to-emerald-950 p-5 text-white flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+              <div className="space-y-1 max-w-2xl">
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-800/80 px-2.5 py-0.5 text-[10px] font-bold text-emerald-200">
+                  🏗️ INVESTIȚII ÎN ACTIVE IMOBILIARE PRODUCTIVE
+                </span>
+                <h3 className="text-sm font-bold text-white">Ai nevoie de spațiu pentru producție, hală sau extindere?</h3>
+                <p className="text-xs text-slate-300 leading-relaxed">
+                  Programele Regionale ADR (Nord-Vest, Centru, Vest, Sud-Muntenia) oferă granturi nerambursabile de până la 1.500.000 € pentru construirea de spații productive, extinderea capacităților și eficientizarea energetică a clădirilor.
+                </p>
+              </div>
+              <Link
+                href="/finantari?investitie=Construc%C8%9Bie+Hal%C4%83+%26+Cl%C4%83dire"
+                className="shrink-0 rounded-xl bg-emerald-500 px-5 py-2.5 text-xs font-bold text-slate-950 hover:bg-emerald-400 transition-colors shadow-sm"
+              >
+                Vezi Finanțări Hale &amp; Spații →
+              </Link>
             </div>
           </div>
         </section>
