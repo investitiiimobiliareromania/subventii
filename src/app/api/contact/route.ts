@@ -93,6 +93,29 @@ export async function POST(req: Request) {
       console.warn("[Contact API] Telegram delivery notice (processed successfully).");
     }
 
+    // 5. Record Analytics Conversion (No PII stored in analytics tables)
+    try {
+      const { recordAnalyticsEvent } = await import("@/lib/analytics/repository");
+      const { sanitizeVisitorId, sanitizeSessionId } = await import("@/lib/analytics/id");
+      const vId = sanitizeVisitorId(body.visitorId);
+      const sId = sanitizeSessionId(body.sessionId);
+      await recordAnalyticsEvent({
+        id: crypto.randomUUID(),
+        visitorId: vId,
+        sessionId: sId,
+        eventType: "CONTACT_SUBMIT",
+        pathname: "/contact",
+        pageTitle: "Contact & Consultanță",
+        metadata: {
+          county,
+          interest: programInterest || "General",
+        },
+        createdAt: new Date().toISOString(),
+      });
+    } catch (analyticsErr) {
+      console.warn("[Analytics Contact Log Error]:", analyticsErr);
+    }
+
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error("Contact API error:", error);
