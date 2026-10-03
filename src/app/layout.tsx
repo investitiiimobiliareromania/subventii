@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { VisitorTracker } from "@/components/visitor-tracker";
+import { safeJsonLd } from "@/lib/security";
 import "./globals.css";
 
 const siteTitle = "SUBVENȚII România — Platforma Națională de Informare Subvenții Agricole, APIA & AFIR";
@@ -113,7 +114,7 @@ export default function RootLayout({
       <head>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }}
         />
       </head>
       <body className="antialiased text-slate-900 bg-white min-h-screen">

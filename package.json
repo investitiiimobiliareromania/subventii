@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test:security": "npx tsx scripts/security-audit.test.ts"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.109.0",

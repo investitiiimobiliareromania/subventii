@@ -1,45 +1,73 @@
-// src/app/api/refresh/route.ts
-import { NextResponse } from 'next/server';
+import { NextResponse } from "next/server";
+import { verifyBearerSecret } from "@/lib/security";
 
 /**
  * POST /api/refresh
- * Triggers a server‑side refresh of ingestion data.
+ * Triggers a server-side refresh of ingestion data.
  *
  * Security:
- * - Requires an Authorization header with a Bearer token.
- * - The token must match the secret stored in `process.env.SUBVENTII_REFRESH_SECRET`.
- * - No secret is exposed to client‑side code, logs, or URLs.
+ * - Requires an Authorization header with a Bearer token matching SUBVENTII_REFRESH_SECRET or CRON_SECRET.
+ * - Timing-safe comparison to prevent side-channel timing attacks.
  */
 export async function POST(req: Request) {
-  const secret = process.env.SUBVENTII_REFRESH_SECRET;
+  const secret = process.env.SUBVENTII_REFRESH_SECRET || process.env.CRON_SECRET;
   if (!secret) {
-    return NextResponse.json({ success: false, error: 'Refresh secret not configured on server.' }, { status: 500 });
+    return NextResponse.json(
+      { success: false, error: "Refresh secret not configured on server." },
+      { status: 500 }
+    );
   }
 
-  // Validate authentication
-  const authHeader = req.headers.get('authorization');
-  const vercelCronId = req.headers.get('x-vercel-cron-id');
-  if (vercelCronId) {
-    // Vercel Cron request, authorized automatically
-  } else if (authHeader && authHeader.startsWith('Bearer ')) {
-    const token = authHeader.replace('Bearer ', '').trim();
-    if (token !== secret) {
-      return NextResponse.json({ success: false, error: 'Invalid token.' }, { status: 403 });
-    }
-  } else {
-    return NextResponse.json({ success: false, error: 'Missing Authorization header.' }, { status: 401 });
+  const authHeader = req.headers.get("authorization");
+  if (!authHeader || !authHeader.startsWith("Bearer ")) {
+    return NextResponse.json(
+      { success: false, error: "Missing Authorization Bearer header." },
+      { status: 401 }
+    );
+  }
+
+  // Validate authentication securely
+  const isAuthorized = verifyBearerSecret(req, secret);
+  if (!isAuthorized) {
+    return NextResponse.json(
+      { success: false, error: "Invalid authorization token (403 Forbidden)." },
+      { status: 403 }
+    );
   }
 
   // ---------------------------------------------------------------------
   // Ingestion pipeline – calls the shared fetcher for each source.
   // ---------------------------------------------------------------------
-  const { fetchIngestionFromSource } = await import('@/lib/ingestion/fetchers');
-  type IngestionSource = 'MIPE' | 'AFIR' | 'AFM' | 'MEAT' | 'Monitorul Oficial' | 'ANCPI';
-  const sources: IngestionSource[] = ['MIPE', 'AFIR', 'AFM', 'MEAT', 'Monitorul Oficial', 'ANCPI'];
-  const results: Record<string, { discovered: number; parsed: number; imported: number; skipped_duplicate: number; skipped_invalid: number; failed: number }> = {};
+  const { fetchIngestionFromSource } = await import("@/lib/ingestion/fetchers");
+  type IngestionSource =
+    | "MIPE"
+    | "AFIR"
+    | "AFM"
+    | "MEAT"
+    | "Monitorul Oficial"
+    | "ANCPI";
+  const sources: IngestionSource[] = [
+    "MIPE",
+    "AFIR",
+    "AFM",
+    "MEAT",
+    "Monitorul Oficial",
+    "ANCPI",
+  ];
+  const results: Record<
+    string,
+    {
+      discovered: number;
+      parsed: number;
+      imported: number;
+      skipped_duplicate: number;
+      skipped_invalid: number;
+      failed: number;
+    }
+  > = {};
 
-  // Lazy‑load DB client only if configured.
-  const { supabase, isDatabaseConfigured } = await import('@/lib/db/client');
+  // Lazy-load DB client only if configured.
+  const { supabase, isDatabaseConfigured } = await import("@/lib/db/client");
 
   for (const source of sources) {
     try {
@@ -52,28 +80,31 @@ export async function POST(req: Request) {
       let failed = 0;
 
       if (isDatabaseConfigured()) {
-        const dbRows = items.map(item => ({
+        const dbRows = items.map((item) => ({
           id: item.id,
           sourceAuthority: item.source,
-          itemType: 'itemType' in item ? String((item as Record<string, unknown>).itemType) : 'Programme',
+          itemType:
+            "itemType" in item
+              ? String((item as Record<string, unknown>).itemType)
+              : "Programme",
           rawTitle: item.rawTitle,
           sourceUrl: item.sourceUrl,
           detectedChanges: item.detectedChanges,
-          status: 'Pending Approval',
+          status: "Pending Approval",
           created_at: new Date().toISOString(),
         }));
-        const { error } = await supabase.from('ingestion_queue').insert(dbRows);
+        const { error } = await supabase.from("ingestion_queue").insert(dbRows);
         if (error) {
-          console.warn('Ingestion insert error for', source, error.message);
+          console.warn("Ingestion insert error for", source, error.message);
           failed = discovered;
         } else {
           imported = discovered;
         }
       } else {
-        imported = discovered; // mock success when DB not configured
+        imported = discovered;
       }
 
-      results[source.toLowerCase().replace(/\s+/g, '_')] = {
+      results[source.toLowerCase().replace(/\s+/g, "_")] = {
         discovered,
         parsed,
         imported,
@@ -82,8 +113,8 @@ export async function POST(req: Request) {
         failed,
       };
     } catch (e) {
-      console.error('Ingestion error for', source, e);
-      results[source.toLowerCase().replace(/\s+/g, '_')] = {
+      console.error("Ingestion error for", source, e);
+      results[source.toLowerCase().replace(/\s+/g, "_")] = {
         discovered: 0,
         parsed: 0,
         imported: 0,
@@ -97,18 +128,9 @@ export async function POST(req: Request) {
   return NextResponse.json({ success: true, sources: results });
 }
 
-/**
- * Reject all other HTTP methods with 405 Method Not Allowed.
- */
 export async function GET() {
-  return NextResponse.json({ success: false, error: 'Method not allowed.' }, { status: 405 });
-}
-export async function PUT() {
-  return NextResponse.json({ success: false, error: 'Method not allowed.' }, { status: 405 });
-}
-export async function PATCH() {
-  return NextResponse.json({ success: false, error: 'Method not allowed.' }, { status: 405 });
-}
-export async function DELETE() {
-  return NextResponse.json({ success: false, error: 'Method not allowed.' }, { status: 405 });
+  return NextResponse.json(
+    { success: false, error: "Method Not Allowed" },
+    { status: 405, headers: { Allow: "POST" } }
+  );
 }

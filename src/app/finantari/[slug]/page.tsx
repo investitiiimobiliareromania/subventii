@@ -1,3 +1,4 @@
+import { safeJsonLd } from "@/lib/security";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -568,11 +569,11 @@ export default async function ProgramDetailPage({ params }: Props) {
       {/* JSON-LD Scripts */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdGrant) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLdGrant) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdFaq) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLdFaq) }}
       />
     </div>
   );

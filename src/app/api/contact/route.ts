@@ -1,51 +1,79 @@
 import { NextResponse } from "next/server";
-import { headers } from "next/headers";
-import crypto from "crypto";
 import { notifyTelegram } from "@/lib/telegram/notify";
-
-const rateLimitMap = new Map<string, number>();
-const RATE_LIMIT_WINDOW_MS = 60 * 1000; // 1 minute
-const MAX_REQUESTS_PER_WINDOW = 5;
+import {
+  checkRateLimit,
+  getClientIpHash,
+  sanitizeString,
+  sanitizeMultilineText,
+  isValidEmail,
+  isValidPhone,
+} from "@/lib/security";
 
 export async function POST(req: Request) {
   try {
-    const headersList = await headers();
-    
-    let ip = headersList.get("x-forwarded-for") || "unknown";
-    if (ip.includes(",")) {
-      ip = ip.split(",")[0].trim();
-    }
-    const ipHash = crypto.createHash("sha256").update(ip).digest("hex");
+    // 1. IP-Based Rate Limiting (5 requests per 60 seconds)
+    const ipKey = getClientIpHash(req, "contact");
+    const rateLimit = checkRateLimit(ipKey, 5, 60 * 1000);
 
-    const now = Date.now();
-    const lastRequest = rateLimitMap.get(ipHash) || 0;
-
-    if (now - lastRequest < RATE_LIMIT_WINDOW_MS) {
-      const recentRequests = Array.from(rateLimitMap.values()).filter(time => now - time < RATE_LIMIT_WINDOW_MS).length;
-      if (recentRequests >= MAX_REQUESTS_PER_WINDOW) {
-        return NextResponse.json(
-          { success: false, error: "Ai trimis prea multe solicitări. Te rugăm să încerci din nou peste câteva minute." },
-          { status: 429 }
-        );
-      }
+    if (!rateLimit.allowed) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: "Ai trimis prea multe solicitări. Te rugăm să încerci din nou peste un minut.",
+        },
+        {
+          status: 429,
+          headers: {
+            "Retry-After": String(rateLimit.resetInSeconds),
+          },
+        }
+      );
     }
 
-    rateLimitMap.set(ipHash, now);
+    // 2. Body Payload Parsing & Size Protection
+    const body = await req.json().catch(() => null);
+    if (!body || typeof body !== "object") {
+      return NextResponse.json(
+        { success: false, error: "Formatul cererii este invalid." },
+        { status: 400 }
+      );
+    }
 
-    const body = await req.json();
-    const { name, company, email, phone, county, caen, programInterest, message, gdpr, referrer, utm } = body;
+    const name = sanitizeString(body.name, 100);
+    const company = sanitizeString(body.company, 150);
+    const email = sanitizeString(body.email, 254).toLowerCase();
+    const phone = sanitizeString(body.phone, 30);
+    const county = sanitizeString(body.county, 50);
+    const caen = sanitizeString(body.caen, 50);
+    const programInterest = sanitizeString(body.programInterest, 150);
+    const message = sanitizeMultilineText(body.message, 3000);
+    const gdpr = Boolean(body.gdpr);
+    const referrer = sanitizeString(body.referrer, 255);
+    const utm = sanitizeString(body.utm, 255);
 
-    // Server Validation
+    // 3. Strict Server-Side Validation
     if (!name || !company || !email || !phone || !county || !message || !gdpr) {
-      return NextResponse.json({ success: false, error: "Te rugăm să completezi toate câmpurile obligatorii." }, { status: 400 });
+      return NextResponse.json(
+        { success: false, error: "Te rugăm să completezi toate câmpurile obligatorii." },
+        { status: 400 }
+      );
     }
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      return NextResponse.json({ success: false, error: "Adresa de email nu este validă." }, { status: 400 });
+    if (!isValidEmail(email)) {
+      return NextResponse.json(
+        { success: false, error: "Adresa de email nu este validă." },
+        { status: 400 }
+      );
     }
 
-    // Trigger Telegram Notification (server-side, fail-safe)
+    if (!isValidPhone(phone)) {
+      return NextResponse.json(
+        { success: false, error: "Numărul de telefon nu este valid." },
+        { status: 400 }
+      );
+    }
+
+    // 4. Trigger Telegram Notification (Fail-safe)
     const telegramSent = await notifyTelegram("CONTACT_REQUEST", {
       formName: "Contact & Consultanță",
       name,
@@ -62,12 +90,22 @@ export async function POST(req: Request) {
     });
 
     if (!telegramSent) {
-      console.warn("[Contact API] Telegram delivery warning, but lead processed successfully.");
+      console.warn("[Contact API] Telegram delivery notice (processed successfully).");
     }
 
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error("Contact API error:", error);
-    return NextResponse.json({ success: false, error: "A apărut o eroare la procesarea solicitării." }, { status: 500 });
+    return NextResponse.json(
+      { success: false, error: "A apărut o eroare la procesarea solicitării." },
+      { status: 500 }
+    );
   }
+}
+
+export async function GET() {
+  return NextResponse.json(
+    { success: false, error: "Method Not Allowed" },
+    { status: 405, headers: { Allow: "POST" } }
+  );
 }

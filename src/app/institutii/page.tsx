@@ -1,3 +1,4 @@
+import { safeJsonLd } from "@/lib/security";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Header } from "@/components/header";
@@ -21,7 +22,7 @@ export default function InstitutionsDirectoryPage() {
 
   return (
     <div className="min-h-screen flex flex-col bg-white">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }} />
       <Header />
 
       <main className="flex-1 py-10">

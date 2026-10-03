@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { sampleIngestionQueue } from "@/lib/ingestion-data";
+import { verifyServerSessionOrToken, sanitizeString } from "@/lib/security";
 
 export async function GET() {
   return NextResponse.json({
@@ -10,13 +11,46 @@ export async function GET() {
 }
 
 export async function POST(req: Request) {
+  // 1. Strict Server-Side Authentication & Authorization Check
+  const auth = await verifyServerSessionOrToken(req);
+  if (!auth.authenticated) {
+    return NextResponse.json(
+      { success: false, error: "Autentificare obligatorie (401 Unauthorized)." },
+      { status: 401 }
+    );
+  }
+
+  if (!auth.isAuthorized) {
+    return NextResponse.json(
+      { success: false, error: "Acces interzis: permisiuni administrative insuficiente (403 Forbidden)." },
+      { status: 403 }
+    );
+  }
+
   try {
-    const body = await req.json();
-    const { sourceAuthority, itemType, rawTitle, sourceUrl, detectedChanges } = body;
+    const body = await req.json().catch(() => null);
+    if (!body || typeof body !== "object") {
+      return NextResponse.json(
+        { success: false, error: "Format payload invalid." },
+        { status: 400 }
+      );
+    }
+
+    const sourceAuthority = sanitizeString(body.sourceAuthority, 100);
+    const itemType = sanitizeString(body.itemType, 50) || "Programme";
+    const rawTitle = sanitizeString(body.rawTitle, 255);
+    const sourceUrl = sanitizeString(body.sourceUrl, 500);
+    const detectedChanges = body.detectedChanges || {
+      changeType: "New Call",
+      details: "Detectat prin pipeline-ul oficial.",
+    };
 
     if (!sourceAuthority || !rawTitle || !sourceUrl) {
       return NextResponse.json(
-        { success: false, error: "Date incomplete pentru introducerea în coada de validare." },
+        {
+          success: false,
+          error: "Date incomplete pentru introducerea în coada de validare.",
+        },
         { status: 400 }
       );
     }
@@ -24,10 +58,10 @@ export async function POST(req: Request) {
     const newItem = {
       id: `ing-${Date.now()}`,
       sourceAuthority,
-      itemType: itemType || "Programme",
+      itemType: itemType as "Programme" | "Legislation" | "Document",
       rawTitle,
       sourceUrl,
-      detectedChanges: detectedChanges || { changeType: "New Call", details: "Detectat prin pipeline-ul oficial." },
+      detectedChanges,
       detectedAt: new Date().toISOString(),
       status: "Pending Approval" as const,
     };
@@ -38,7 +72,24 @@ export async function POST(req: Request) {
       item: newItem,
     });
   } catch (error) {
-    console.error("Ingestion API Error:", error);
-    return NextResponse.json({ success: false, error: "Eroare de procesare server." }, { status: 500 });
+    console.error("[Ingestion API Error]:", error);
+    return NextResponse.json(
+      { success: false, error: "Eroare la procesarea cererii de ingestie." },
+      { status: 500 }
+    );
   }
+}
+
+export async function PUT() {
+  return NextResponse.json(
+    { success: false, error: "Method Not Allowed" },
+    { status: 405, headers: { Allow: "GET, POST" } }
+  );
+}
+
+export async function DELETE() {
+  return NextResponse.json(
+    { success: false, error: "Method Not Allowed" },
+    { status: 405, headers: { Allow: "GET, POST" } }
+  );
 }
