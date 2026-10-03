@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { VisitorTracker } from "@/components/visitor-tracker";
+import { TopTicker } from "@/components/top-ticker";
+import { AlwaysOnContact } from "@/components/always-on-contact";
 import { safeJsonLd } from "@/lib/security";
 import "./globals.css";
 
@@ -118,7 +120,9 @@ export default function RootLayout({
         />
       </head>
       <body className="antialiased text-slate-900 bg-white min-h-screen">
+        <TopTicker />
         <VisitorTracker />
+        <AlwaysOnContact />
         {children}
       </body>
     </html>
