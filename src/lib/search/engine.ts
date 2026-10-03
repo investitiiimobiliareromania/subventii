@@ -15,11 +15,13 @@ export type SearchQueryParams = {
   companyAge?: string;
   companySize?: string;
   sourceCategory?: string;
+  objective?: string;
+  fundingType?: string;
 };
 
 export type UnifiedSearchResult = {
   id: string;
-  type: "SUBVENȚIE" | "INTERVENȚIE AFIR" | "ȘTIRE" | "LEGISLAȚIE" | "JUDEȚ" | "SECTOR" | "DOCUMENT";
+  type: "FINANȚARE IMM" | "GRANT & FONDURI EU" | "ENERGIE & MEDIU" | "SUBVENȚIE" | "INTERVENȚIE AFIR" | "ȘTIRE" | "LEGISLAȚIE" | "JUDEȚ" | "SECTOR" | "DOCUMENT";
   title: string;
   summary: string;
   url: string;
@@ -30,7 +32,7 @@ export type UnifiedSearchResult = {
 const SYNONYM_DICTIONARY: Record<string, string[]> = {
   "subventie": ["apia", "fega", "plata directa", "biss", "criss", "scz", "sprijin cuplat", "eco-schema", "fonduri agricole"],
   "apia": ["subventie", "biss", "criss", "teren arabil", "pasune", "scz", "ipa online", "adeverinta primarie"],
-  "afir": ["feadr", "fonduri europene", "investitii", "dr-14", "dr-15", "dr-20", "dr-25", "dr-30", "tineri fermieri", "utilaje"],
+  "afir": ["feadr", "fonduri europene", "investitii", "dr-14", "dr-15", "dr-20", "dr-22", "dr-25", "dr-26", "dr-27", "dr-28", "dr-30", "tineri fermieri", "utilaje"],
   "vaci": ["bovine", "scz", "lapte", "carne", "taurine", "baltata", "pd-21", "pd-22", "zootehnie"],
   "oi": ["ovine", "caprine", "scz", "turcana", "karakul", "pd-24", "pasune", "uvm", "berbeci"],
   "tractor": ["utilaje", "mecanizare", "afm", "rabla tractoare", "dr-14", "dr-15", "combine", "semanatoare"],
@@ -39,11 +41,18 @@ const SYNONYM_DICTIONARY: Record<string, string[]> = {
   "motorina": ["acciza", "ajutor de stat", "madr", "restituire acciza", "litru motorina"],
   "soia": ["pd-09", "leguminoase", "proteina vegetala", "sprijin cuplat soia"],
   "lucerna": ["pd-10", "furaje", "fan", "sprijin cuplat lucerna"],
-  "livezi": ["pomicultura", "dr-16", "mere", "prune", "cirese", "pd-15", "fructe"],
+  "livezi": ["pomicultura", "dr-27", "mere", "prune", "cirese", "fructe"],
   "vii": ["viticultura", "vinuri", "reconversie", "doc", "crama", "onvpv"],
-  "sere": ["legumicultura", "solarii", "tomata", "pd-12", "pd-13", "matca", "izbiceni"],
-  "startup": ["start-up nation", "meat", "firma noua", "microintreprindere", "antreprenoriat"],
+  "sere": ["legumicultura", "solarii", "tomata", "dr-28", "matca", "izbiceni"],
+  "startup": ["start-up nation", "meat", "firma noua", "microintreprindere", "antreprenoriat", "fonduri start up", "granturi afaceri noi"],
+  "imm": ["dezvoltare", "competitivitate", "microintreprindere", "adr", "fonduri imm", "granturi mici", "echipamente", "linii productie"],
+  "digitalizare": ["software", "cloud", "it", "cybersecurity", "pocidif", "pnrr c9", "automatizare", "erp", "crm", "ai", "robotica", "transformare digitala"],
+  "energie": ["fotovoltaice", "panouri solare", "eolian", "baterii", "stocare", "autoconsum", "fondul modernizare", "afm", "casa verde", "eficienta energetica"],
   "casa verde": ["afm", "fotovoltaice", "baterii", "stocare", "energie curata", "prosumator"],
+  "tranzitie justa": ["ptj", "gorj", "hunedoara", "dolj", "galati", "prahova", "mures", "minerit", "decarbonizare"],
+  "femeia antreprenor": ["meat", "femei", "antreprenoriat feminin", "grant 200000"],
+  "inovare": ["cercetare", "cdi", "eic", "horizon europe", "eurostars", "deep tech", "transfer tehnologic"],
+  "sanatate": ["programul sanatate", "medical", "cabinete", "clinici", "aparatura medicala", "ecografe", "stomatologie"],
   "cadastru": ["ancpi", "e-terra", "carte funciara", "intabulare", "pncf"],
   "legislatie": ["ordin madr", "oug", "hg", "lege", "regulament ue", "monitorul oficial"],
 };
@@ -91,6 +100,9 @@ export function executeSearch(
         program.source,
         program.sourceCategory,
         program.authorityCode || "",
+        program.objective || "",
+        program.fundingType || "",
+        program.region || "",
         ...program.industries,
         ...program.businessTypes,
         ...program.counties,
@@ -138,6 +150,10 @@ export function executeSearch(
       if (program.sourceCategory !== params.sourceCategory) return false;
     }
 
+    if (params.objective && params.objective !== "Toate obiectivele") {
+      if (program.objective !== params.objective) return false;
+    }
+
     return true;
   });
 }
@@ -156,11 +172,16 @@ export function executeUnifiedSearch(query: string): UnifiedSearchResult[] {
 
   // 1. Search Programs & Subsidies
   for (const prog of FUNDING_PROGRAMS) {
-    if (checkMatch([prog.title, prog.summary, prog.source, prog.sourceCategory, ...prog.industries])) {
-      const isAfir = prog.sourceCategory === "AFIR";
+    if (checkMatch([prog.title, prog.summary, prog.source, prog.sourceCategory, prog.objective || "", ...prog.industries])) {
+      let badgeType: UnifiedSearchResult["type"] = "FINANȚARE IMM";
+      if (prog.sourceCategory === "AFIR") badgeType = "INTERVENȚIE AFIR";
+      else if (prog.sourceCategory === "APIA" || prog.sourceCategory === "MADR") badgeType = "SUBVENȚIE";
+      else if (prog.sourceCategory === "AFM" || prog.sourceCategory === "Fondul pentru Modernizare") badgeType = "ENERGIE & MEDIU";
+      else if (prog.sourceCategory === "UE Direct" || prog.sourceCategory === "PNRR") badgeType = "GRANT & FONDURI EU";
+
       results.push({
         id: `prog-${prog.slug}`,
-        type: isAfir ? "INTERVENȚIE AFIR" : "SUBVENȚIE",
+        type: badgeType,
         title: prog.title,
         summary: prog.summary,
         url: `/finantari/${prog.slug}`,

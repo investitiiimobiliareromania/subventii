@@ -11,42 +11,180 @@ import {
   formatCurrencyRon,
 } from "@/lib/funding-data";
 
+export function FundingCard({ program }: { program: FundingProgram }) {
+  const daysLeft = calculateDaysRemaining(program.deadline);
+  const isOpen = program.status === "Deschis";
+  const isSoon =
+    program.status === "În curând" ||
+    program.status === "În consultare" ||
+    program.status === "În pregătire";
+
+  return (
+    <article className="group relative flex flex-col justify-between rounded-2xl border border-slate-200 bg-white p-6 shadow-xs transition-all hover:-translate-y-0.5 hover:border-emerald-400 hover:shadow-md">
+      <div>
+        {/* Card Header Badges */}
+        <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
+          <div className="flex flex-wrap items-center gap-1.5">
+            <span className="rounded bg-slate-900 px-2 py-0.5 text-[10px] font-bold text-white font-mono">
+              {program.sourceCategory}
+            </span>
+            {program.fundingType && (
+              <span className="rounded bg-emerald-100 px-2 py-0.5 text-[10px] font-bold text-emerald-900">
+                {program.fundingType}
+              </span>
+            )}
+            {program.objective && (
+              <span className="rounded bg-slate-100 px-2 py-0.5 text-[10px] font-semibold text-slate-700">
+                {program.objective}
+              </span>
+            )}
+          </div>
+          <div className="flex items-center gap-1.5">
+            <BookmarkButton slug={program.slug} />
+            <span
+              className={`inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-bold ${
+                isOpen
+                  ? "bg-emerald-100 text-emerald-950"
+                  : isSoon
+                  ? "bg-amber-100 text-amber-950"
+                  : "bg-slate-100 text-slate-700"
+              }`}
+            >
+              {program.status}
+            </span>
+          </div>
+        </div>
+
+        {/* Title & Summary */}
+        <h3 className="mb-2 text-base font-bold text-slate-900 group-hover:text-emerald-800 transition-colors leading-snug">
+          <Link href={`/finantari/${program.slug}`} className="focus:outline-none">
+            {program.title}
+          </Link>
+        </h3>
+        <p className="mb-4 text-xs text-slate-600 line-clamp-3 leading-relaxed">
+          {program.summary}
+        </p>
+
+        {/* Program Meta Information */}
+        <div className="space-y-1.5 border-t border-slate-100 pt-3 text-xs text-slate-600">
+          <div className="flex items-center justify-between">
+            <span className="text-slate-500 font-medium">Finanțare maximă:</span>
+            <span className="font-bold text-slate-900">
+              {program.maxFundingEur
+                ? `${formatCurrencyEur(program.maxFundingEur)} (${formatCurrencyRon(program.maxFundingRon)})`
+                : formatCurrencyRon(program.maxFundingRon)}
+            </span>
+          </div>
+          <div className="flex items-center justify-between">
+            <span className="text-slate-500 font-medium">Intensitate sprijin:</span>
+            <span className="font-semibold text-emerald-800">
+              {program.supportIntensity || program.cofinancing}
+            </span>
+          </div>
+          <div className="flex items-center justify-between">
+            <span className="text-slate-500 font-medium">Termen limită:</span>
+            <span className="font-mono text-slate-800">
+              {program.deadline === "2026-12-31" && program.status === "Permanent"
+                ? "Permanent"
+                : `${program.deadline} (${daysLeft} zile)`}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      {/* Card Action Button */}
+      <div className="mt-5 border-t border-slate-100 pt-4">
+        <Link
+          href={`/finantari/${program.slug}`}
+          className="flex w-full items-center justify-center rounded-xl bg-slate-900 py-2.5 text-xs font-bold text-white transition-colors hover:bg-emerald-800"
+        >
+          Ghid &amp; Criterii de Eligibilitate →
+        </Link>
+      </div>
+    </article>
+  );
+}
+
 const QUICK_CATEGORIES = [
-  { label: "Toate Finanțările", value: "Toate sursele" },
-  { label: "🚀 Start-up & IMM", value: "MIPE" },
-  { label: "⚡ Energie & Sustenabilitate (AFM)", value: "AFM" },
-  { label: "💻 PNRR & Tehnologie", value: "PNRR" },
-  { label: "🚜 Investiții & AFIR", value: "AFIR" },
-  { label: "🌾 Plăți Directe APIA", value: "APIA" },
-  { label: "🏛️ Scheme Naționale MADR", value: "MADR" },
+  { label: "Toate Finanțările", value: "ALL" },
+  { label: "🚀 Start-up & IMM", value: "STARTUP_IMM" },
+  { label: "💻 Digitalizare & Tehnologie", value: "DIGITALIZARE" },
+  { label: "⚡ Energie & Sustenabilitate", value: "ENERGIE" },
   { label: "🏢 Programe Regionale ADR", value: "ADR" },
+  { label: "🔬 Inovare & Cercetare", value: "INOVARE" },
+  { label: "🚜 Investiții AFIR", value: "AFIR" },
+  { label: "🌾 Plăți Directe APIA", value: "APIA" },
+  { label: "🏛️ Scheme Naționale", value: "MINISTER" },
+  { label: "📦 Arhivă Programe", value: "ARCHIVE" },
 ];
+
+const ITEMS_PER_PAGE = 12;
 
 export function FundingExplorer({ programs }: { programs: FundingProgram[] }) {
   const [query, setQuery] = useState("");
+  const [selectedQuickCategory, setSelectedQuickCategory] = useState("ALL");
   const [business, setBusiness] = useState(filterOptions.business[0]);
   const [industry, setIndustry] = useState(filterOptions.industry[0]);
+  const [objective, setObjective] = useState(filterOptions.objective[0]);
   const [county, setCounty] = useState(filterOptions.county[0]);
   const [companyAge, setCompanyAge] = useState(filterOptions.companyAge[0]);
   const [companySize, setCompanySize] = useState(filterOptions.companySize[0]);
   const [sourceCategory, setSourceCategory] = useState(filterOptions.sourceCategory[0]);
   const [status, setStatus] = useState(filterOptions.status[0]);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const activeFilterCount = useMemo(() => {
     let count = 0;
     if (query) count++;
+    if (selectedQuickCategory !== "ALL") count++;
     if (business !== filterOptions.business[0]) count++;
     if (industry !== filterOptions.industry[0]) count++;
+    if (objective !== filterOptions.objective[0]) count++;
     if (county !== filterOptions.county[0]) count++;
     if (companyAge !== filterOptions.companyAge[0]) count++;
     if (companySize !== filterOptions.companySize[0]) count++;
     if (sourceCategory !== filterOptions.sourceCategory[0]) count++;
     if (status !== filterOptions.status[0]) count++;
     return count;
-  }, [query, business, industry, county, companyAge, companySize, sourceCategory, status]);
+  }, [query, selectedQuickCategory, business, industry, objective, county, companyAge, companySize, sourceCategory, status]);
 
   const filteredPrograms = useMemo(() => {
     return programs.filter((program) => {
+      // Quick Category Filter
+      if (selectedQuickCategory === "ARCHIVE") {
+        if (!program.isArchived && program.status !== "Închis") return false;
+      } else if (selectedQuickCategory === "STARTUP_IMM") {
+        const isTarget =
+          program.objective === "Start-up & Afaceri Noi" ||
+          program.objective === "IMM & Dezvoltare Business" ||
+          program.sourceCategory === "MIPE" ||
+          program.sourceCategory === "Minister";
+        if (!isTarget) return false;
+      } else if (selectedQuickCategory === "DIGITALIZARE") {
+        if (program.objective !== "Digitalizare & Tehnologie" && program.sourceCategory !== "PNRR") return false;
+      } else if (selectedQuickCategory === "ENERGIE") {
+        if (
+          program.objective !== "Energie & Sustenabilitate" &&
+          program.sourceCategory !== "AFM" &&
+          program.sourceCategory !== "Fondul pentru Modernizare"
+        )
+          return false;
+      } else if (selectedQuickCategory === "ADR") {
+        if (program.sourceCategory !== "ADR") return false;
+      } else if (selectedQuickCategory === "INOVARE") {
+        if (program.objective !== "Inovare & Cercetare" && program.sourceCategory !== "UE Direct") return false;
+      } else if (selectedQuickCategory === "AFIR") {
+        if (program.sourceCategory !== "AFIR") return false;
+      } else if (selectedQuickCategory === "APIA") {
+        if (program.sourceCategory !== "APIA" && program.sourceCategory !== "MADR") return false;
+      } else if (selectedQuickCategory === "MINISTER") {
+        if (program.sourceCategory !== "Minister" && program.sourceCategory !== "MADR") return false;
+      } else if (selectedQuickCategory === "ALL") {
+        // By default exclude archived items unless explicitly queried
+        if (program.isArchived && !query) return false;
+      }
+
+      // Query Search
       const q = query.toLowerCase().trim();
       const matchQuery =
         !q ||
@@ -54,7 +192,10 @@ export function FundingExplorer({ programs }: { programs: FundingProgram[] }) {
         program.summary.toLowerCase().includes(q) ||
         program.source.toLowerCase().includes(q) ||
         (program.authorityCode && program.authorityCode.toLowerCase().includes(q)) ||
-        program.industries.some((i) => i.toLowerCase().includes(q));
+        (program.objective && program.objective.toLowerCase().includes(q)) ||
+        (program.region && program.region.toLowerCase().includes(q)) ||
+        program.industries.some((i) => i.toLowerCase().includes(q)) ||
+        program.businessTypes.some((b) => b.toLowerCase().includes(q));
 
       const matchBusiness =
         business === filterOptions.business[0] ||
@@ -63,6 +204,9 @@ export function FundingExplorer({ programs }: { programs: FundingProgram[] }) {
 
       const matchIndustry =
         industry === filterOptions.industry[0] || program.industries.includes(industry);
+
+      const matchObjective =
+        objective === filterOptions.objective[0] || program.objective === objective;
 
       const matchCounty =
         county === filterOptions.county[0] ||
@@ -89,6 +233,7 @@ export function FundingExplorer({ programs }: { programs: FundingProgram[] }) {
         matchQuery &&
         matchBusiness &&
         matchIndustry &&
+        matchObjective &&
         matchCounty &&
         matchAge &&
         matchSize &&
@@ -96,17 +241,32 @@ export function FundingExplorer({ programs }: { programs: FundingProgram[] }) {
         matchStatus
       );
     });
-  }, [programs, query, business, industry, county, companyAge, companySize, sourceCategory, status]);
+  }, [programs, selectedQuickCategory, query, business, industry, objective, county, companyAge, companySize, sourceCategory, status]);
+
+  // Pagination calculation
+  const totalPages = Math.max(1, Math.ceil(filteredPrograms.length / ITEMS_PER_PAGE));
+  const currentPrograms = useMemo(() => {
+    const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+    return filteredPrograms.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+  }, [filteredPrograms, currentPage]);
 
   const resetFilters = () => {
     setQuery("");
+    setSelectedQuickCategory("ALL");
     setBusiness(filterOptions.business[0]);
     setIndustry(filterOptions.industry[0]);
+    setObjective(filterOptions.objective[0]);
     setCounty(filterOptions.county[0]);
     setCompanyAge(filterOptions.companyAge[0]);
     setCompanySize(filterOptions.companySize[0]);
     setSourceCategory(filterOptions.sourceCategory[0]);
     setStatus(filterOptions.status[0]);
+    setCurrentPage(1);
+  };
+
+  const handleQuickCategoryClick = (catVal: string) => {
+    setSelectedQuickCategory(catVal);
+    setCurrentPage(1);
   };
 
   return (
@@ -114,13 +274,13 @@ export function FundingExplorer({ programs }: { programs: FundingProgram[] }) {
       {/* Quick Category Chips */}
       <div className="mb-6 flex flex-wrap items-center gap-2">
         {QUICK_CATEGORIES.map((cat) => {
-          const isSelected = sourceCategory === cat.value;
+          const isSelected = selectedQuickCategory === cat.value;
           return (
             <button
               key={cat.value}
               type="button"
-              onClick={() => setSourceCategory(cat.value)}
-              className={`rounded-full px-3.5 py-1.5 text-xs font-bold transition-all ${
+              onClick={() => handleQuickCategoryClick(cat.value)}
+              className={`rounded-full px-3.5 py-1.5 text-xs font-bold transition-all cursor-pointer ${
                 isSelected
                   ? "bg-emerald-800 text-white shadow-xs"
                   : "bg-slate-100 text-slate-700 hover:bg-slate-200 border border-slate-200/80"
@@ -135,7 +295,7 @@ export function FundingExplorer({ programs }: { programs: FundingProgram[] }) {
       {/* Search Input Bar */}
       <div className="relative mb-6">
         <label htmlFor="search-input" className="sr-only">
-          Caută finanțări după denumire, domeniu, obiectiv sau instituție
+          Caută finanțări după obiectiv, domeniu, program sau autoritate
         </label>
         <div className="relative flex items-center">
           <svg
@@ -156,14 +316,20 @@ export function FundingExplorer({ programs }: { programs: FundingProgram[] }) {
             id="search-input"
             type="search"
             value={query}
-            onChange={(e) => setQuery(e.target.value)}
+            onChange={(e) => {
+              setQuery(e.target.value);
+              setCurrentPage(1);
+            }}
             placeholder="Caută după obiectiv, domeniu sau program (ex: digitalizare, utilaje, start-up, DR-14, energie, PNRR, BISS)..."
             className="w-full rounded-xl border border-slate-300 bg-white py-3.5 pl-12 pr-10 text-sm text-slate-900 placeholder-slate-500 shadow-xs transition-colors focus:border-emerald-700 focus:outline-none focus:ring-1 focus:ring-emerald-700"
           />
           {query && (
             <button
               type="button"
-              onClick={() => setQuery("")}
+              onClick={() => {
+                setQuery("");
+                setCurrentPage(1);
+              }}
               className="absolute right-3 rounded-md p-1 text-slate-500 hover:text-slate-800 focus-visible:outline-emerald-700"
               aria-label="Șterge textul de căutare"
             >
@@ -188,7 +354,7 @@ export function FundingExplorer({ programs }: { programs: FundingProgram[] }) {
             <button
               type="button"
               onClick={resetFilters}
-              className="text-xs font-bold text-emerald-800 hover:underline focus-visible:outline-emerald-700"
+              className="text-xs font-bold text-emerald-800 hover:underline focus-visible:outline-emerald-700 cursor-pointer"
               aria-label={`Resetează toate filtrele (${activeFilterCount} active)`}
             >
               Resetează filtrele ({activeFilterCount})
@@ -197,7 +363,29 @@ export function FundingExplorer({ programs }: { programs: FundingProgram[] }) {
         </div>
 
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          {/* Tip Firmă */}
+          {/* Obiectiv Finanțare */}
+          <div>
+            <label htmlFor="filter-objective" className="mb-1 block text-[11px] font-semibold text-slate-700">
+              Obiectivul Afacerii
+            </label>
+            <select
+              id="filter-objective"
+              value={objective}
+              onChange={(e) => {
+                setObjective(e.target.value);
+                setCurrentPage(1);
+              }}
+              className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs text-slate-900 focus:border-emerald-700 focus:outline-none"
+            >
+              {filterOptions.objective.map((opt) => (
+                <option key={opt} value={opt}>
+                  {opt}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          {/* Formă Juridică */}
           <div>
             <label htmlFor="filter-business" className="mb-1 block text-[11px] font-semibold text-slate-700">
               Formă Juridică
@@ -205,7 +393,10 @@ export function FundingExplorer({ programs }: { programs: FundingProgram[] }) {
             <select
               id="filter-business"
               value={business}
-              onChange={(e) => setBusiness(e.target.value)}
+              onChange={(e) => {
+                setBusiness(e.target.value);
+                setCurrentPage(1);
+              }}
               className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs text-slate-900 focus:border-emerald-700 focus:outline-none"
             >
               {filterOptions.business.map((opt) => (
@@ -216,15 +407,18 @@ export function FundingExplorer({ programs }: { programs: FundingProgram[] }) {
             </select>
           </div>
 
-          {/* Domeniu */}
+          {/* Sector / Domeniu */}
           <div>
             <label htmlFor="filter-industry" className="mb-1 block text-[11px] font-semibold text-slate-700">
-              Sector / Domeniu Agricol
+              Sector / Industrie
             </label>
             <select
               id="filter-industry"
               value={industry}
-              onChange={(e) => setIndustry(e.target.value)}
+              onChange={(e) => {
+                setIndustry(e.target.value);
+                setCurrentPage(1);
+              }}
               className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs text-slate-900 focus:border-emerald-700 focus:outline-none"
             >
               {filterOptions.industry.map((opt) => (
@@ -243,7 +437,10 @@ export function FundingExplorer({ programs }: { programs: FundingProgram[] }) {
             <select
               id="filter-county"
               value={county}
-              onChange={(e) => setCounty(e.target.value)}
+              onChange={(e) => {
+                setCounty(e.target.value);
+                setCurrentPage(1);
+              }}
               className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs text-slate-900 focus:border-emerald-700 focus:outline-none"
             >
               {filterOptions.county.map((opt) => (
@@ -262,7 +459,10 @@ export function FundingExplorer({ programs }: { programs: FundingProgram[] }) {
             <select
               id="filter-status"
               value={status}
-              onChange={(e) => setStatus(e.target.value)}
+              onChange={(e) => {
+                setStatus(e.target.value);
+                setCurrentPage(1);
+              }}
               className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs text-slate-900 focus:border-emerald-700 focus:outline-none"
             >
               {filterOptions.status.map((opt) => (
@@ -273,15 +473,40 @@ export function FundingExplorer({ programs }: { programs: FundingProgram[] }) {
             </select>
           </div>
 
+          {/* Sursă Fonduri */}
+          <div>
+            <label htmlFor="filter-source" className="mb-1 block text-[11px] font-semibold text-slate-700">
+              Sursă Finanțare
+            </label>
+            <select
+              id="filter-source"
+              value={sourceCategory}
+              onChange={(e) => {
+                setSourceCategory(e.target.value);
+                setCurrentPage(1);
+              }}
+              className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs text-slate-900 focus:border-emerald-700 focus:outline-none"
+            >
+              {filterOptions.sourceCategory.map((opt) => (
+                <option key={opt} value={opt}>
+                  {opt}
+                </option>
+              ))}
+            </select>
+          </div>
+
           {/* Vârstă Firmă */}
           <div>
             <label htmlFor="filter-company-age" className="mb-1 block text-[11px] font-semibold text-slate-700">
-              Vechime Exploatație
+              Vechime Firmă
             </label>
             <select
               id="filter-company-age"
               value={companyAge}
-              onChange={(e) => setCompanyAge(e.target.value)}
+              onChange={(e) => {
+                setCompanyAge(e.target.value);
+                setCurrentPage(1);
+              }}
               className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs text-slate-900 focus:border-emerald-700 focus:outline-none"
             >
               {filterOptions.companyAge.map((opt) => (
@@ -292,15 +517,18 @@ export function FundingExplorer({ programs }: { programs: FundingProgram[] }) {
             </select>
           </div>
 
-          {/* Dimensiune */}
+          {/* Dimensiune Firmă */}
           <div>
             <label htmlFor="filter-company-size" className="mb-1 block text-[11px] font-semibold text-slate-700">
-              Dimensiune Exploatație
+              Dimensiune Firmă
             </label>
             <select
               id="filter-company-size"
               value={companySize}
-              onChange={(e) => setCompanySize(e.target.value)}
+              onChange={(e) => {
+                setCompanySize(e.target.value);
+                setCurrentPage(1);
+              }}
               className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs text-slate-900 focus:border-emerald-700 focus:outline-none"
             >
               {filterOptions.companySize.map((opt) => (
@@ -310,164 +538,75 @@ export function FundingExplorer({ programs }: { programs: FundingProgram[] }) {
               ))}
             </select>
           </div>
-
-          {/* Sursă */}
-          <div>
-            <label htmlFor="filter-source-category" className="mb-1 block text-[11px] font-semibold text-slate-700">
-              Instituție Emitentă
-            </label>
-            <select
-              id="filter-source-category"
-              value={sourceCategory}
-              onChange={(e) => setSourceCategory(e.target.value)}
-              className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs text-slate-900 focus:border-emerald-700 focus:outline-none"
-            >
-              {filterOptions.sourceCategory.map((opt) => (
-                <option key={opt} value={opt}>
-                  {opt}
-                </option>
-              ))}
-            </select>
-          </div>
         </div>
       </div>
 
-      {/* Results Header Summary */}
-      <div className="mb-6 flex items-center justify-between border-b border-slate-200 pb-3">
-        <p className="text-sm font-medium text-slate-700">
-          Rezultate: <strong className="text-slate-900">{filteredPrograms.length}</strong>{" "}
-          {filteredPrograms.length === 1 ? "intervenție / program găsit" : "intervenții / programe găsite"}
-        </p>
-        <span className="text-xs text-slate-600">Sincronizate din surse publice oficiale (APIA, AFIR, MADR, AFM)</span>
-      </div>
-
-      {/* Cards Grid */}
-      {filteredPrograms.length > 0 ? (
-        <div className="card-grid">
-          {filteredPrograms.map((program) => (
+      {/* Program Cards Grid */}
+      {currentPrograms.length > 0 ? (
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {currentPrograms.map((program) => (
             <FundingCard key={program.slug} program={program} />
           ))}
         </div>
       ) : (
-        <div className="rounded-2xl border border-dashed border-slate-300 bg-slate-50/50 p-12 text-center">
-          <p className="mb-2 text-base font-semibold text-slate-800">
-            Nu a fost găsit niciun program conform criteriilor selectate.
-          </p>
-          <p className="mb-4 text-xs text-slate-600">
-            Încearcă să elimini din filtre sau să cauți un termen agricol (ex: &quot;vaci&quot;, &quot;teren arabil&quot;, &quot;tineri fermieri&quot;, &quot;irigații&quot;).
+        <div className="rounded-2xl border border-slate-200 bg-white p-12 text-center">
+          <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-slate-100 text-slate-500">
+            🔍
+          </div>
+          <h3 className="text-base font-bold text-slate-900">Nu am găsit finanțări conform filtrelor alese</h3>
+          <p className="mt-1 text-xs text-slate-500 max-w-md mx-auto">
+            Încearcă să resetezi o parte din filtre sau să cauți după termeni generali precum „start-up”, „digitalizare”, „utilaje” sau „energie”.
           </p>
           <button
             type="button"
             onClick={resetFilters}
-            className="rounded-lg bg-emerald-800 px-4 py-2 text-xs font-semibold text-white hover:bg-emerald-900 transition-colors focus-visible:outline-emerald-700"
-            aria-label="Șterge toate filtrele active"
+            className="mt-4 inline-flex items-center rounded-xl bg-emerald-800 px-4 py-2 text-xs font-bold text-white hover:bg-emerald-900 cursor-pointer"
           >
-            Șterge toate filtrele
+            Resetează Toate Filtrele
           </button>
         </div>
       )}
+
+      {/* Pagination Controls */}
+      {totalPages > 1 && (
+        <nav aria-label="Paginare finanțări" className="mt-8 flex items-center justify-between border-t border-slate-200 pt-5">
+          <div className="text-xs text-slate-500">
+            Afișate <strong>{(currentPage - 1) * ITEMS_PER_PAGE + 1}</strong> – <strong>{Math.min(currentPage * ITEMS_PER_PAGE, filteredPrograms.length)}</strong> din <strong>{filteredPrograms.length}</strong> oportunități
+          </div>
+          <div className="flex items-center gap-1">
+            <button
+              type="button"
+              onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+              disabled={currentPage === 1}
+              className="rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-xs font-semibold text-slate-700 hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
+            >
+              ← Înapoi
+            </button>
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map((pg) => (
+              <button
+                key={pg}
+                type="button"
+                onClick={() => setCurrentPage(pg)}
+                className={`rounded-lg px-3 py-1.5 text-xs font-bold transition-colors cursor-pointer ${
+                  currentPage === pg
+                    ? "bg-slate-900 text-white"
+                    : "border border-slate-200 bg-white text-slate-700 hover:bg-slate-50"
+                }`}
+              >
+                {pg}
+              </button>
+            ))}
+            <button
+              type="button"
+              onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+              disabled={currentPage === totalPages}
+              className="rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-xs font-semibold text-slate-700 hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
+            >
+              Înainte →
+            </button>
+          </div>
+        </nav>
+      )}
     </div>
-  );
-}
-
-export function FundingCard({ program }: { program: FundingProgram }) {
-  const daysLeft = calculateDaysRemaining(program.deadline);
-
-  const getStatusBadge = (status: string) => {
-    switch (status) {
-      case "Deschis":
-        return "badge-status badge-status-open";
-      case "În curând":
-        return "badge-status badge-status-upcoming";
-      case "Permanent":
-        return "badge-status bg-blue-100 text-blue-900 border-blue-200";
-      case "Închis":
-        return "badge-status badge-status-closed";
-      default:
-        return "badge-status badge-status-suspended";
-    }
-  };
-
-  return (
-    <article className="grant-card flex flex-col justify-between">
-      <div>
-        {/* Top Header */}
-        <div className="mb-3 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <span className={getStatusBadge(program.status)}>{program.status}</span>
-            {program.authorityCode && (
-              <span className="rounded bg-slate-900 px-2 py-0.5 text-[10px] font-bold text-white font-mono">
-                {program.authorityCode}
-              </span>
-            )}
-          </div>
-          <span className="rounded-md bg-slate-100 px-2 py-0.5 text-[11px] font-bold text-slate-700 border border-slate-200">
-            {program.sourceCategory}
-          </span>
-        </div>
-
-        {/* Title */}
-        <h3 className="mb-2 text-lg font-bold leading-snug text-slate-900 hover:text-emerald-800">
-          <Link href={`/finantari/${program.slug}`}>{program.title}</Link>
-        </h3>
-
-        {/* Summary */}
-        <p className="mb-4 line-clamp-3 text-xs leading-relaxed text-slate-700">
-          {program.summary}
-        </p>
-      </div>
-
-      <div>
-        {/* Key Metrics */}
-        <div className="mb-4 grid grid-cols-2 gap-2 border-y border-slate-100 py-3 text-xs">
-          <div>
-            <span className="block text-[10px] font-semibold uppercase text-slate-600">
-              Sprijin / Finanțare
-            </span>
-            <span className="font-bold text-slate-900">
-              {formatCurrencyRon(program.maxFundingRon)}
-            </span>
-            {program.maxFundingEur && (
-              <span className="block text-[11px] text-slate-600">
-                (~{formatCurrencyEur(program.maxFundingEur)})
-              </span>
-            )}
-          </div>
-
-          <div>
-            <span className="block text-[10px] font-semibold uppercase text-slate-600">
-              Termen depunere
-            </span>
-            <span className="font-semibold text-slate-800">
-              {program.status === "Permanent"
-                ? "Permanent"
-                : new Intl.DateTimeFormat("ro-RO", {
-                    day: "numeric",
-                    month: "short",
-                    year: "numeric",
-                  }).format(new Date(`${program.deadline}T12:00:00`))}
-            </span>
-            {program.status === "Deschis" && (
-              <span className="block text-[11px] font-bold text-amber-800">
-                {daysLeft > 0 ? `${daysLeft} zile rămase` : "Ultima zi"}
-              </span>
-            )}
-          </div>
-        </div>
-
-        {/* Bottom Actions */}
-        <div className="flex items-center justify-between gap-2 pt-1">
-          <BookmarkButton slug={program.slug} />
-          <Link
-            href={`/finantari/${program.slug}`}
-            className="inline-flex items-center gap-1 text-xs font-bold text-emerald-800 hover:underline"
-            aria-label={`Vezi detalii complete despre programul: ${program.title}`}
-          >
-            <span>Fișă completă</span>
-            <span aria-hidden="true">→</span>
-          </Link>
-        </div>
-      </div>
-    </article>
   );
 }
