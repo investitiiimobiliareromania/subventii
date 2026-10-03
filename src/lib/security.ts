@@ -270,6 +270,61 @@ export async function verifyServerSessionOrToken(req: Request): Promise<ServerAu
 }
 
 // =====================================================================
+// SERVER-SIDE CRYPTOGRAPHIC ADMIN AUTHENTICATION FOR LAYOUTS / PAGES
+// =====================================================================
+export async function validateAdminServerSession(): Promise<{ authorized: boolean; email?: string }> {
+  const isDev = process.env.NODE_ENV === "development";
+
+  try {
+    const { cookies } = await import("next/headers");
+    const cookieStore = await cookies();
+    const allCookies = cookieStore.getAll();
+    const authCookie = allCookies.find((c) => c.name.startsWith("sb-") && c.name.endsWith("-auth-token"));
+
+    if (authCookie) {
+      const rawVal = authCookie.value;
+      let accessToken = "";
+      try {
+        const decoded = decodeURIComponent(rawVal);
+        if (decoded.startsWith("[") || decoded.startsWith("{")) {
+          const parsed = JSON.parse(decoded);
+          accessToken = Array.isArray(parsed) ? parsed[0] : (parsed?.access_token || "");
+        } else {
+          accessToken = decoded;
+        }
+      } catch {
+        accessToken = rawVal;
+      }
+
+      if (accessToken && typeof accessToken === "string" && accessToken.length > 20) {
+        const { supabase, isDatabaseConfigured } = await import("@/lib/db/client");
+        if (isDatabaseConfigured()) {
+          // Cryptographically verify token with Supabase Auth servers
+          const { data: { user }, error } = await supabase.auth.getUser(accessToken);
+          if (!error && user) {
+            const role = (user.app_metadata?.role || user.user_metadata?.role || "user") as string;
+            const isPrivileged = role === "admin" || role === "editor" || user.email?.endsWith("@cristianvaduva.com");
+            if (isPrivileged) {
+              return { authorized: true, email: user.email };
+            }
+            return { authorized: false };
+          }
+        }
+      }
+    }
+  } catch (err) {
+    console.warn("[Admin Auth Server Check Exception]:", err);
+  }
+
+  // Allow preview in development mode only
+  if (isDev) {
+    return { authorized: true, email: "dev-local-admin@cristianvaduva.com" };
+  }
+
+  return { authorized: false };
+}
+
+// =====================================================================
 // SAFE JSON-LD SERIALIZATION (ANTI-XSS SCRIPT INJECTION)
 // =====================================================================
 export function safeJsonLd(data: unknown): string {

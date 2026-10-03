@@ -1,6 +1,15 @@
 import Link from "next/link";
+import { redirect } from "next/navigation";
+import { validateAdminServerSession } from "@/lib/security";
 
-export default function AdminLayout({ children }: { children: React.ReactNode }) {
+export const dynamic = "force-dynamic";
+
+export default async function AdminLayout({ children }: { children: React.ReactNode }) {
+  const auth = await validateAdminServerSession();
+  if (!auth.authorized) {
+    redirect("/");
+  }
+
   return (
     <div className="min-h-screen bg-slate-100 flex flex-col font-sans">
       <header className="bg-slate-900 text-white px-6 py-4 flex items-center justify-between shadow-md">
