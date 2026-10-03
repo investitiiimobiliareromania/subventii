@@ -167,7 +167,7 @@ export function AlwaysOnContact() {
       {/* Modal / Slide-over Overlay */}
       {isOpen && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center sm:justify-end bg-slate-950/70 backdrop-blur-xs p-3 sm:p-6 animate-in fade-in-50 duration-150"
+          className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-6 pt-16 sm:pt-20 pb-6 overflow-y-auto bg-slate-950/75 backdrop-blur-xs animate-in fade-in-50 duration-150"
           role="dialog"
           aria-modal="true"
           aria-labelledby="contact-modal-title"
@@ -177,7 +177,7 @@ export function AlwaysOnContact() {
         >
           <div
             ref={dialogRef}
-            className="w-full max-w-lg max-h-[90vh] overflow-y-auto rounded-2xl bg-white border border-slate-200 p-6 sm:p-8 shadow-2xl animate-in zoom-in-95 slide-in-from-bottom-3 duration-200 text-slate-900"
+            className="w-full max-w-lg max-h-[min(85dvh,calc(100dvh-5rem))] overflow-y-auto rounded-2xl bg-white border border-slate-200 p-6 sm:p-8 shadow-2xl animate-in zoom-in-95 duration-200 text-slate-900 my-auto"
           >
             {/* Header */}
             <div className="flex items-start justify-between border-b border-slate-100 pb-4 mb-5">
