@@ -73,15 +73,16 @@ export function Footer() {
 
           <div>
             <span className="block font-bold text-white uppercase tracking-wider mb-3 text-[11px]">
-              Inteligență Financiară
+              Inteligență &amp; Date Naționale
             </span>
             <ul className="space-y-2 text-slate-300">
-              <li><Link href="/legislatie" className="hover:text-white transition-colors py-0.5 inline-block min-h-[24px]">Legislație Fiscală &amp; IMM</Link></li>
-              <li><Link href="/credite" className="hover:text-white transition-colors py-0.5 inline-block min-h-[24px]">Credite &amp; Calculator IRCC</Link></li>
+              <li><Link href="/economie" className="hover:text-white transition-colors py-0.5 inline-block min-h-[24px]">Economia României (INSSE/BNR)</Link></li>
+              <li><Link href="/guvern" className="hover:text-white transition-colors py-0.5 inline-block min-h-[24px]">Guvern &amp; Ministere</Link></li>
+              <li><Link href="/infrastructura" className="hover:text-white transition-colors py-0.5 inline-block min-h-[24px]">Infrastructură &amp; SEAP</Link></li>
+              <li><Link href="/date-statistici" className="hover:text-white transition-colors py-0.5 inline-block min-h-[24px]">Registru Datasets Publice</Link></li>
               <li><Link href="/piata-imobiliara" className="hover:text-white transition-colors py-0.5 inline-block min-h-[24px]">Piața Imobiliară</Link></li>
-              <li><Link href="/asigurari" className="hover:text-white transition-colors py-0.5 inline-block min-h-[24px]">Asigurări PAD &amp; IMM</Link></li>
               <li><Link href="/rapoarte-ancpi" className="hover:text-white transition-colors py-0.5 inline-block min-h-[24px]">Rapoarte Tranzacții ANCPI</Link></li>
-              <li><Link href="/compara" className="hover:text-white transition-colors py-0.5 inline-block min-h-[24px]">Comparator Programe</Link></li>
+              <li><Link href="/credite" className="hover:text-white transition-colors py-0.5 inline-block min-h-[24px]">Credite &amp; Calculator IRCC</Link></li>
             </ul>
           </div>
 
@@ -91,6 +92,7 @@ export function Footer() {
             </span>
             <ul className="space-y-2 text-slate-300">
               <li><Link href="/stiri" className="hover:text-white transition-colors py-0.5 inline-block min-h-[24px]">Știri &amp; Newsroom</Link></li>
+              <li><Link href="/legislatie" className="hover:text-white transition-colors py-0.5 inline-block min-h-[24px]">Legislație Fiscală &amp; IMM</Link></li>
               <li><Link href="/institutii" className="hover:text-white transition-colors py-0.5 inline-block min-h-[24px]">Instituții Publice</Link></li>
               <li><Link href="/resurse" className="hover:text-white transition-colors py-0.5 inline-block min-h-[24px]">Ghiduri PDF &amp; Formulare</Link></li>
               <li><Link href="/glosar" className="hover:text-white transition-colors py-0.5 inline-block min-h-[24px]">Glosar Finanțări</Link></li>

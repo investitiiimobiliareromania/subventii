@@ -163,6 +163,26 @@ export default async function Home() {
                   <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Instituții Monitorizate</span>
                 </div>
               </div>
+
+              {/* National Data Hubs Quick Bar */}
+              <div className="mt-8 flex flex-wrap items-center justify-center gap-2 text-xs">
+                <span className="text-slate-400 font-semibold mr-1">HUB-URI NAȚIONALE:</span>
+                <Link href="/economie" className="rounded-lg bg-slate-800/90 border border-slate-700 px-3 py-1.5 text-slate-200 hover:bg-emerald-950 hover:border-emerald-500 hover:text-white transition-all font-medium">
+                  📊 Economia României
+                </Link>
+                <Link href="/guvern" className="rounded-lg bg-slate-800/90 border border-slate-700 px-3 py-1.5 text-slate-200 hover:bg-emerald-950 hover:border-emerald-500 hover:text-white transition-all font-medium">
+                  🏛️ Guvern &amp; Ministere
+                </Link>
+                <Link href="/infrastructura" className="rounded-lg bg-slate-800/90 border border-slate-700 px-3 py-1.5 text-slate-200 hover:bg-emerald-950 hover:border-emerald-500 hover:text-white transition-all font-medium">
+                  🏗️ Infrastructură &amp; SEAP
+                </Link>
+                <Link href="/rapoarte-ancpi" className="rounded-lg bg-slate-800/90 border border-slate-700 px-3 py-1.5 text-slate-200 hover:bg-emerald-950 hover:border-emerald-500 hover:text-white transition-all font-medium">
+                  🏘️ Imobiliare &amp; ANCPI
+                </Link>
+                <Link href="/date-statistici" className="rounded-lg bg-slate-800/90 border border-slate-700 px-3 py-1.5 text-slate-200 hover:bg-emerald-950 hover:border-emerald-500 hover:text-white transition-all font-medium">
+                  📁 Seturi de Date Publice
+                </Link>
+              </div>
             </div>
           </div>
         </section>

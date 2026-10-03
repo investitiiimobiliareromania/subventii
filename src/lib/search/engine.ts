@@ -4,6 +4,10 @@ import { legislationCatalog } from "@/lib/legislatie-data";
 import { downloadableResourcesCatalog } from "@/lib/resources-data";
 import { countyProfilesCatalog } from "@/lib/county-data";
 import { SECTORS_CATALOG } from "@/lib/sectoare-data";
+import { ROMANIAN_GOVERNMENT_MINISTRIES, ROMANIAN_NATIONAL_AGENCIES } from "@/lib/guvern-data";
+import { MACRO_ECONOMIC_DATASET } from "@/lib/economie-data";
+import { MAJOR_INFRASTRUCTURE_PROJECTS } from "@/lib/infrastructura-data";
+import { OPEN_DATASETS_REGISTRY } from "@/lib/datasets-data";
 
 export type SearchQueryParams = {
   q?: string;
@@ -22,7 +26,7 @@ export type SearchQueryParams = {
 
 export type UnifiedSearchResult = {
   id: string;
-  type: "FINANȚARE IMM" | "GRANT & FONDURI EU" | "ENERGIE & MEDIU" | "SUBVENȚIE" | "INTERVENȚIE AFIR" | "ȘTIRE" | "LEGISLAȚIE" | "JUDEȚ" | "SECTOR" | "DOCUMENT";
+  type: "FINANȚARE IMM" | "GRANT & FONDURI EU" | "ENERGIE & MEDIU" | "SUBVENȚIE" | "INTERVENȚIE AFIR" | "ȘTIRE" | "LEGISLAȚIE" | "JUDEȚ" | "SECTOR" | "DOCUMENT" | "GUVERN & INSTITUȚIE" | "ECONOMIE & MACRO" | "INFRASTRUCTURĂ" | "DATASET";
   title: string;
   summary: string;
   url: string;
@@ -59,7 +63,11 @@ const SYNONYM_DICTIONARY: Record<string, string[]> = {
   "femeia antreprenor": ["meat", "femei", "antreprenoriat feminin", "grant 200000"],
   "inovare": ["cercetare", "cdi", "eic", "horizon europe", "eurostars", "deep tech", "transfer tehnologic"],
   "sanatate": ["programul sanatate", "medical", "cabinete", "clinici", "aparatura medicala", "ecografe", "stomatologie", "echipamente medicale"],
-  "cadastru": ["ancpi", "e-terra", "carte funciara", "intabulare", "pncf"],
+  "cadastru": ["ancpi", "e-terra", "carte funciara", "intabulare", "pncf", "tranzactii"],
+  "ancpi": ["cadastru", "e-terra", "carte funciara", "tranzactii", "imobile vandute", "ipoteci"],
+  "economie": ["pib", "inflatie", "insse", "bnr", "ircc", "salarii", "exporturi", "isd", "somaj"],
+  "infrastructura": ["autostrazi", "drumuri", "a7", "a8", "cnair", "cfr", "seap", "sicap", "licitatii"],
+  "guvern": ["ministere", "madr", "mipe", "meat", "energie", "mediu", "finante", "anaf", "onrc"],
   "legislatie": ["ordin madr", "oug", "hg", "lege", "regulament ue", "monitorul oficial"],
 };
 
@@ -184,7 +192,7 @@ export function executeUnifiedSearch(query: string): UnifiedSearchResult[] {
 
   // 1. Search Programs & Subsidies
   for (const prog of FUNDING_PROGRAMS) {
-    if (checkMatch([prog.title, prog.summary, prog.source, prog.sourceCategory, prog.objective || "", ...prog.industries])) {
+    if (checkMatch([prog.title, prog.summary, prog.source, prog.sourceCategory, prog.objective || "", ...(prog.investmentTypes || []), ...prog.industries])) {
       let badgeType: UnifiedSearchResult["type"] = "FINANȚARE IMM";
       if (prog.sourceCategory === "AFIR") badgeType = "INTERVENȚIE AFIR";
       else if (prog.sourceCategory === "APIA" || prog.sourceCategory === "MADR") badgeType = "SUBVENȚIE";
@@ -203,7 +211,67 @@ export function executeUnifiedSearch(query: string): UnifiedSearchResult[] {
     }
   }
 
-  // 2. Search News
+  // 2. Search Government Entities
+  for (const g of [...ROMANIAN_GOVERNMENT_MINISTRIES, ...ROMANIAN_NATIONAL_AGENCIES]) {
+    if (checkMatch([g.name, g.acronym, g.role, g.domain, ...g.keyPrograms])) {
+      results.push({
+        id: `gov-${g.id}`,
+        type: "GUVERN & INSTITUȚIE",
+        title: `${g.name} (${g.acronym})`,
+        summary: g.role,
+        url: `/guvern`,
+        badge: g.type,
+        highlightMeta: `Domeniu: ${g.domain}`,
+      });
+    }
+  }
+
+  // 3. Search Macroeconomic Indicators
+  for (const eco of MACRO_ECONOMIC_DATASET) {
+    if (checkMatch([eco.name, eco.category, eco.description, eco.sourceName])) {
+      results.push({
+        id: `eco-${eco.id}`,
+        type: "ECONOMIE & MACRO",
+        title: eco.name,
+        summary: `${eco.value} (${eco.period}) — ${eco.description}`,
+        url: `/economie`,
+        badge: eco.category,
+        highlightMeta: `Valoare: ${eco.value} • Sursă: ${eco.sourceName}`,
+      });
+    }
+  }
+
+  // 4. Search Infrastructure Projects
+  for (const inf of MAJOR_INFRASTRUCTURE_PROJECTS) {
+    if (checkMatch([inf.name, inf.sector, inf.description, ...inf.countiesInvolved])) {
+      results.push({
+        id: `inf-${inf.id}`,
+        type: "INFRASTRUCTURĂ",
+        title: inf.name,
+        summary: inf.description,
+        url: `/infrastructura`,
+        badge: inf.sector,
+        highlightMeta: `Buget: ${inf.totalBudgetRon} • Status: ${inf.status}`,
+      });
+    }
+  }
+
+  // 5. Search Datasets
+  for (const ds of OPEN_DATASETS_REGISTRY) {
+    if (checkMatch([ds.title, ds.institution, ds.category, ds.description])) {
+      results.push({
+        id: `ds-${ds.id}`,
+        type: "DATASET",
+        title: ds.title,
+        summary: ds.description,
+        url: `/date-statistici`,
+        badge: ds.category,
+        highlightMeta: `Instituție: ${ds.institution} • Frecvență: ${ds.frequency}`,
+      });
+    }
+  }
+
+  // 6. Search News
   for (const news of newsroomArticles) {
     if (checkMatch([news.headline, news.summary, news.content, news.institution])) {
       results.push({
@@ -218,7 +286,7 @@ export function executeUnifiedSearch(query: string): UnifiedSearchResult[] {
     }
   }
 
-  // 3. Search Legislation
+  // 7. Search Legislation
   for (const leg of legislationCatalog) {
     if (checkMatch([leg.title, leg.summary, leg.actNumber, ...leg.affectedSectors])) {
       results.push({
@@ -233,7 +301,7 @@ export function executeUnifiedSearch(query: string): UnifiedSearchResult[] {
     }
   }
 
-  // 4. Search Sectors
+  // 8. Search Sectors
   for (const sec of Object.values(SECTORS_CATALOG)) {
     if (checkMatch([sec.name, sec.shortDesc, sec.fullDesc, ...sec.keyInterventions])) {
       results.push({
@@ -248,14 +316,14 @@ export function executeUnifiedSearch(query: string): UnifiedSearchResult[] {
     }
   }
 
-  // 5. Search Counties
+  // 9. Search Counties
   for (const [key, county] of Object.entries(countyProfilesCatalog)) {
     if (checkMatch([county.name, county.region, county.capital, ...county.topCrops, ...county.topLivestock])) {
       results.push({
         id: `county-${key}`,
         type: "JUDEȚ",
         title: `Județul ${county.name} (${county.code})`,
-        summary: `Profil agricol și subvenții pentru Județul ${county.name} (${county.region}) — ${county.agriculturalSurfaceHa}`,
+        summary: `Profil economic, investiții și subvenții pentru Județul ${county.name} (${county.region}) — ${county.agriculturalSurfaceHa}`,
         url: `/subventii/${key}`,
         badge: `Județ ${county.code}`,
         highlightMeta: `Centru APIA: ${county.capital}`,
@@ -263,7 +331,7 @@ export function executeUnifiedSearch(query: string): UnifiedSearchResult[] {
     }
   }
 
-  // 6. Search Documents & Resources
+  // 10. Search Documents & Resources
   for (const doc of downloadableResourcesCatalog) {
     if (checkMatch([doc.title, doc.description, doc.category, doc.institution])) {
       results.push({
@@ -278,5 +346,5 @@ export function executeUnifiedSearch(query: string): UnifiedSearchResult[] {
     }
   }
 
-  return results.slice(0, 30);
+  return results.slice(0, 35);
 }
