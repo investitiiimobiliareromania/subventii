@@ -4,7 +4,8 @@ import Link from "next/link";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { AiAssistantDrawer } from "@/components/ai-assistant-drawer";
-import { getArticlesFromDb } from "@/lib/db/repository";
+import { NewsroomFilter } from "@/components/newsroom-filter";
+import { newsroomArticles } from "@/lib/newsroom-data";
 
 export const metadata: Metadata = {
   title: "Știri & Noutăți Finanțări Europene, IMM-uri și Programe Naționale 2026",
@@ -12,9 +13,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "https://subventii.cristianvaduva.com/stiri" },
 };
 
-export default async function NewsroomPage() {
-  const articles = await getArticlesFromDb();
-
+export default function NewsroomPage() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
@@ -56,46 +55,7 @@ export default async function NewsroomPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {articles.map((art) => (
-              <article key={art.slug} className="grant-card flex flex-col justify-between">
-                <div>
-                  <div className="mb-3 flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <span className="rounded-md bg-emerald-100 px-2.5 py-0.5 text-[11px] font-bold text-emerald-900">
-                        {art.category}
-                      </span>
-                      <span className="rounded bg-slate-100 px-1.5 py-0.5 text-[9px] font-bold text-slate-600 border border-slate-200">
-                        Sursă Oficială
-                      </span>
-                    </div>
-                    <span className="text-[11px] font-medium text-slate-600">{art.readingTimeMin} min lectură</span>
-                  </div>
-
-                  <h2 className="mb-2 text-lg font-bold text-slate-900 hover:text-emerald-800 leading-snug">
-                    <Link href={`/stiri/${art.slug}`}>{art.title}</Link>
-                  </h2>
-
-                  <p className="mb-4 text-xs leading-relaxed text-slate-700 line-clamp-3">
-                    {art.summary}
-                  </p>
-                </div>
-
-                <div className="border-t border-slate-100 pt-3 flex items-center justify-between text-xs">
-                  <span className="font-semibold text-slate-600 truncate max-w-[180px]">
-                    {art.publishedAt}
-                  </span>
-                  <Link
-                    href={`/stiri/${art.slug}`}
-                    className="font-bold text-emerald-800 hover:underline shrink-0"
-                    aria-label={`Citește articolul complet: ${art.title}`}
-                  >
-                    Citește articol →
-                  </Link>
-                </div>
-              </article>
-            ))}
-          </div>
+          <NewsroomFilter articles={newsroomArticles} />
         </div>
       </main>
 

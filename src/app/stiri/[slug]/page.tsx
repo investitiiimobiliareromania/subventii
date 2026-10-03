@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { AiAssistantDrawer } from "@/components/ai-assistant-drawer";
+import { FormattedArticleContent } from "@/components/formatted-article-content";
 import { newsroomArticles } from "@/lib/newsroom-data";
 import { FUNDING_PROGRAMS } from "@/lib/funding-data";
 
@@ -102,11 +103,7 @@ export default async function NewsArticlePage({ params }: Props) {
                 </div>
               </div>
 
-              <div className="space-y-4 text-slate-800">
-                {article.content.split("\n\n").map((p, idx) => (
-                  <p key={idx} className="leading-relaxed">{p}</p>
-                ))}
-              </div>
+              <FormattedArticleContent content={article.content} className="space-y-4" />
 
               {/* Related Programs Section */}
               {relatedProgs.length > 0 && (
