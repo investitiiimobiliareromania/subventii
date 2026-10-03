@@ -50,6 +50,26 @@ export function AlwaysOnContact() {
     }
   }, [isOpen]);
 
+  // Global custom event to open contact modal with optional prefilled context
+  useEffect(() => {
+    function handleOpenContact(e: Event) {
+      const customEvent = e as CustomEvent<{ programInterest?: string; message?: string }>;
+      if (customEvent.detail) {
+        setFormData((prev) => ({
+          ...prev,
+          programInterest: customEvent.detail.programInterest || prev.programInterest,
+          message: customEvent.detail.message || prev.message,
+        }));
+      }
+      setIsSuccess(false);
+      setErrorMsg(null);
+      setIsOpen(true);
+    }
+
+    window.addEventListener("open-contact-modal", handleOpenContact);
+    return () => window.removeEventListener("open-contact-modal", handleOpenContact);
+  }, []);
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
