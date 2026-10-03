@@ -20,13 +20,9 @@ export function middleware(request: NextRequest) {
     ${isDev ? "" : "upgrade-insecure-requests;"}
   `.replace(/\s{2,}/g, " ").trim();
 
-  // 2. Admin Route Protection (Fail-closed in production)
+  // 2. Admin Route Protection (Fail-closed at Edge in production)
   if (pathname.startsWith("/admin")) {
-    const hasAuthCookie = request.cookies.getAll().some(
-      (c) => c.name.startsWith("sb-") && c.name.endsWith("-auth-token") && c.value.length > 20
-    );
-
-    if (!isDev && !hasAuthCookie) {
+    if (!isDev) {
       return NextResponse.redirect(new URL("/", request.url));
     }
   }
