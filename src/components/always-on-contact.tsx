@@ -153,7 +153,7 @@ export function AlwaysOnContact() {
           setErrorMsg(null);
           setIsOpen(true);
         }}
-        className="fixed bottom-5 right-5 z-40 group flex items-center gap-2 rounded-full bg-slate-900 px-4 py-2.5 text-xs font-bold text-white shadow-2xl border border-slate-700/80 hover:bg-slate-800 hover:border-emerald-500/60 transition-all cursor-pointer hover:scale-105 active:scale-95 focus-visible:outline-emerald-500"
+        className="fixed bottom-24 right-5 z-40 group flex items-center gap-2 rounded-full bg-slate-900 px-4 py-2.5 text-xs font-bold text-white shadow-2xl border border-slate-700/80 hover:bg-slate-800 hover:border-emerald-500/60 transition-all cursor-pointer hover:scale-105 active:scale-95 focus-visible:outline-emerald-500"
         aria-label="Deschide formularul de contact direct"
         aria-haspopup="dialog"
       >
