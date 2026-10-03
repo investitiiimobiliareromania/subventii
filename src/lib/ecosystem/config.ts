@@ -111,6 +111,17 @@ export const AIX_ECOSYSTEM: EcosystemNode[] = [
     badge: "Luxury",
     cta: "Explore AiX Luxury →",
   },
+  {
+    id: "constructions",
+    name: "CONSTRUCTIONS",
+    category: "REAL_ESTATE",
+    categoryLabel: "Real Estate",
+    description: "Proiecte și servicii de construcții și dezvoltare imobiliară.",
+    href: "https://constructions.cristianvaduva.com",
+    external: true,
+    badge: "Build",
+    cta: "Explore Constructions →",
+  },
 
   // MEDIA
   {
@@ -136,6 +147,17 @@ export const AIX_ECOSYSTEM: EcosystemNode[] = [
     external: true,
     badge: "Advisory",
     cta: "Visit Cristian Văduva →",
+  },
+  {
+    id: "fly",
+    name: "FLY",
+    category: "PERSONAL",
+    categoryLabel: "Aviation",
+    description: "Servicii de aviație privată, chartere și mobilitate aeriană.",
+    href: "https://fly.cristianvaduva.com",
+    external: true,
+    badge: "Aviation",
+    cta: "Explore FLY →",
   },
 ];
 

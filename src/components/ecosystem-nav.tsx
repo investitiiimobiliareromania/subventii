@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { getEcosystemByCategory } from "@/lib/ecosystem/config";
+import { getEcosystemByCategory, AIX_ECOSYSTEM } from "@/lib/ecosystem/config";
 
 export function EcosystemNav() {
   const [isOpen, setIsOpen] = useState(false);
@@ -78,7 +78,7 @@ export function EcosystemNav() {
               <h4 className="text-xs font-bold text-white">Rețeaua de Inteligență Financiară &amp; Imobiliară</h4>
             </div>
             <span className="rounded bg-emerald-950 px-2 py-0.5 text-[10px] font-bold text-emerald-400 border border-emerald-800/40 shrink-0">
-              10 Platforms
+              {AIX_ECOSYSTEM.length} Platforms
             </span>
           </div>
 
